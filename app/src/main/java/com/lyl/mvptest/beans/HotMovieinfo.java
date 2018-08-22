@@ -1,4 +1,4 @@
-package com.lyl.mvptest.Movie;
+package com.lyl.mvptest.beans;
 
 import java.util.List;
 

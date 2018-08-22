@@ -9,14 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.lyl.mvptest.Movie.HotMovieinfo;
+import com.lyl.mvptest.beans.HotMovieinfo;
 import com.lyl.mvptest.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder>  {
     private Context mContext;
-    private List<HotMovieinfo.SubjectsBean> mList;
+    private List<HotMovieinfo.SubjectsBean> mList=new ArrayList<>();
 
     private List<MyViewHolder> mListHolder ;
 

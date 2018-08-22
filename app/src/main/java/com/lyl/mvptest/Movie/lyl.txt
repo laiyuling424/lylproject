@@ -1,0 +1,30 @@
+    public void loadMoive(){
+        OkhttpUtil.GetOkhttp("https://api.douban.com/v2/movie/in_theaters", new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("lyll","e--"+e.toString());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //Log.d("lyll","response--"+response.toString());
+                String responseData=response.body().string();
+                Gson gson=new Gson();
+                HotMovieinfo hotMovieinfo=gson.fromJson(responseData,HotMovieinfo.class);
+                list=hotMovieinfo.getSubjects();
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        MoiveAdapter moiveAdapter=new MoiveAdapter(getActivity().getApplicationContext(),list);
+                        recyclerView.setAdapter(moiveAdapter);
+                    }
+                });
+                //String image=hotMovieinfo.getSubjects().get(0).getImages().getLarge();
+                //Log.d("lyll","data01--"+hotMovieinfo.toString());
+                //Log.d("lyll","data02--"+hotMovieinfo.getSubjects().toString());
+                for (HotMovieinfo.SubjectsBean list:hotMovieinfo.getSubjects()){
+                    Log.d("lyll","name--"+list.getOriginal_title());
+                }
+            }
+        });
+    }
