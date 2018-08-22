@@ -2,6 +2,7 @@ package com.lyl.mvptest.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +19,12 @@ import java.util.List;
 public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder>  {
     private Context mContext;
     private List<HotMovieinfo.SubjectsBean> mList=new ArrayList<>();
+    private MovieAdapterSelectCallback movieAdapterSelectCallback;
 
-    private List<MyViewHolder> mListHolder ;
-
-
-    public MoiveAdapter(Context mContext, List<HotMovieinfo.SubjectsBean> mList) {
+    public MoiveAdapter(Context mContext, List<HotMovieinfo.SubjectsBean> mList,MovieAdapterSelectCallback callback) {
         this.mContext = mContext;
         this.mList = mList;
+        movieAdapterSelectCallback=callback;
     }
 
 
@@ -37,14 +37,21 @@ public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder
 
 
     @Override
-    public void onBindViewHolder(MoiveAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MoiveAdapter.MyViewHolder holder, final int position) {
         Glide.with(mContext).load(mList.get(position).getImages().getMedium()).into(holder.image);
         holder.name.setText(mList.get(position).getOriginal_title());
         holder.rating.setText(String.valueOf(mList.get(position).getRating().getAverage()));
         holder.directors.setText(mList.get(position).getDirectors().get(0).getName());
         holder.durations.setText(mList.get(position).getYear());
         holder.casts.setText(mList.get(position).getCasts().get(0).getName());
-
+        holder.itemDetailView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Log.d("lyll","position01--"+position);
+                //Log.d("lyll","position02--"+holder.getAdapterPosition());
+                movieAdapterSelectCallback.onItemSelected(mList,holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -58,10 +65,12 @@ public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder
      *希望读者有良好的编码习惯，将ViewHolder类写成静态的.
      **/
     static class MyViewHolder extends RecyclerView.ViewHolder{
+        View itemDetailView;
         ImageView image;
         TextView name,rating,directors,casts,durations;
         public MyViewHolder(View itemView) {
             super(itemView);
+            itemDetailView=itemView;
             image=itemView.findViewById(R.id.image);
             name=itemView.findViewById(R.id.name);
             rating=itemView.findViewById(R.id.rating);
@@ -70,5 +79,7 @@ public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder
             durations=itemView.findViewById(R.id.durations);
         }
     }
+
+
 
 }
