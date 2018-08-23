@@ -9,8 +9,17 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#00BB00"/>
+        android:layout_height="48dp"
+        android:background="#00BB00" >
+        <TextView
+            android:id="@+id/common_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="xy app"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+    </android.support.v7.widget.Toolbar>
 
 
     <android.support.design.widget.TabLayout

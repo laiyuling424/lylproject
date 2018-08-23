@@ -29,10 +29,9 @@ public class mainFragment extends Fragment {
         viewPager=(ViewPager)view.findViewById(R.id.viewpager);
 
 
-      mToolbar.setNavigationIcon(R.mipmap.ic_launcher);
+        mToolbar.setNavigationIcon(R.drawable.ic_me);
         mToolbar.setContentInsetsAbsolute(0, 0);
         mToolbar.setContentInsetStartWithNavigation(0);
-     //((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
 
 
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
