@@ -14,4 +14,5 @@ public interface BaseView<T> {
     void finishLoading();
     void show(List<HotMovieinfo.SubjectsBean> list);
     void showNo(String error);
+    void showMore(List<HotMovieinfo.SubjectsBean> list);
 }

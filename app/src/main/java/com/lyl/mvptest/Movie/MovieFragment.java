@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -49,6 +50,7 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
     private List<HotMovieinfo.SubjectsBean> mList=new ArrayList<>();
     private MoiveAdapter moiveAdapter;
     private LoadMoreWrapper loadMoreWrapper;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,13 +66,8 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
         button=(Button)getView().findViewById(R.id.btn01);
         textView=(TextView)getView().findViewById(R.id.error);
 
+        swipeRefreshLayout=(SwipeRefreshLayout)getView().findViewById(R.id.swipeRefreshLayout);
 
-        /**
-         * LoadMoreWrapperAdapter loadMoreWrapperAdapter = new LoadMoreWrapperAdapter(dataList);
-         LoadMoreWrapper loadMoreWrapper = new LoadMoreWrapper(loadMoreWrapperAdapter);
-         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-         recyclerView.setAdapter(loadMoreWrapper);
-         */
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity().getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -79,20 +76,36 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
         recyclerView.setAdapter(loadMoreWrapper);
 
 
-        new MoviePresenter(this);
-        moviePresenter.start();
+
         init();
     }
 
     private void init() {
+        new MoviePresenter(this);
+        moviePresenter.start();
+        swipeRefreshLayout.setRefreshing(false);
+        // 设置颜色属性的时候一定要注意是引用了资源文件还是直接设置16进制的颜色，因为都是int值容易搞混
+        // 设置下拉进度的背景颜色，默认就是白色的
+        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(android.R.color.white);
+        // 设置下拉进度的主题颜色
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimaryDark);
+        // 下拉时触发SwipeRefreshLayout的下拉动画，动画完毕之后就会回调这个方法
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                moviePresenter.getMovieData();
+            }
+        });
+
         // 设置加载更多监听
         recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
             @Override
             public void onLoadMore() {
                 loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING);
 
-                if (mList.size() < 45) {
-                    OkhttpUtil.GetOkhttp("https://api.douban.com/v2/movie/in_theaters?start=20", new Callback() {
+                if (mList.size() < 39) {
+                    moviePresenter.loadMore(20);
+/*                    OkhttpUtil.GetOkhttp("https://api.douban.com/v2/movie/in_theaters?start=20", new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
                             Log.d("lyll","fragment e--"+e.toString());
@@ -113,7 +126,7 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
                                 }
                             });
                         }
-                    });
+                    });*/
                 } else {
                     // 显示加载到底的提示
                     loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING_END);
@@ -121,7 +134,6 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
             }
         });
     }
-
 
 
 
@@ -167,15 +179,45 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
 
     @Override
     public void show(final List list) {
-        recyclerView.post(new Runnable() {
+        getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mList.addAll(list);
-                recyclerView.setVisibility(View.VISIBLE);
-                //moiveAdapter.notifyDataSetChanged();
-                loadMoreWrapper.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+        List<HotMovieinfo.SubjectsBean> relist=list;
+        if(mList.size()==0){
+            recyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    mList.addAll(list);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    //moiveAdapter.notifyDataSetChanged();
+                    loadMoreWrapper.notifyDataSetChanged();
+                }
+            });
+        }else {
+            if(relist.get(0).getId().equals(mList.get(0).getId())){
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity().getApplicationContext(),"木有新数据",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }else {
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mList.addAll(list);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        //moiveAdapter.notifyDataSetChanged();
+                        loadMoreWrapper.notifyDataSetChanged();
+                    }
+                });
+            }
+        }
+
     }
 
     @Override
@@ -206,5 +248,16 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
         intent.putExtra("MovieDetail",(Serializable) list);
         intent.putExtra("position",postion);
         startActivity(intent);
+    }
+
+    @Override
+    public void showMore(List list) {
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                mList.addAll(list);
+                loadMoreWrapper.notifyDataSetChanged();
+            }
+        });
     }
 }

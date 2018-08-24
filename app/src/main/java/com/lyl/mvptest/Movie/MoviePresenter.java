@@ -52,4 +52,22 @@ public class MoviePresenter implements BasePresenter{
         });
     }
 
+    @Override
+    public void loadMore(int start) {
+        OkhttpUtil.GetOkhttp("https://api.douban.com/v2/movie/in_theaters?start="+"20", new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("lyll","fragment e--"+e.toString());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseData=response.body().string();
+                Gson gson=new Gson();
+                HotMovieinfo hotMovieinfo=gson.fromJson(responseData,HotMovieinfo.class);
+                List <HotMovieinfo.SubjectsBean> addlist=hotMovieinfo.getSubjects();
+                view.showMore(addlist);
+            }
+        });
+    }
 }
