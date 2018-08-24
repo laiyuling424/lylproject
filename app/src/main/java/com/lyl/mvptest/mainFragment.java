@@ -13,7 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lyl.mvptest.adapter.MainFragmentAdapter;
-
+/**
+ * create 2018/8/21
+ * author lyl
+ */
 public class mainFragment extends Fragment {
     protected TabLayout mTabLayout;
     protected Toolbar mToolbar;

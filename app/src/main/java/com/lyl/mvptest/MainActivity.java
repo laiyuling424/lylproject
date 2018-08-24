@@ -5,7 +5,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
-
+/**
+ * create 2018/8/21
+ * author lyl
+ */
 public class MainActivity extends FragmentActivity {
     private FragmentManager mSupportFragmentManager;
     mainFragment ainFragment=new mainFragment();

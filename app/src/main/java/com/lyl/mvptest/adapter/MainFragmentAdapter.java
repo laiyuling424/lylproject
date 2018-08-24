@@ -6,7 +6,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.lyl.mvptest.Book.Bookfragment;
 import com.lyl.mvptest.Movie.MovieFragment;
-
+/**
+ * create 2018/8/21
+ * author lyl
+ */
 public class MainFragmentAdapter extends FragmentPagerAdapter {
     private  String[] TABLAYOUT_ID={"movie","book"};
     public MainFragmentAdapter(FragmentManager fm) {

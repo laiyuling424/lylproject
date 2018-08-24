@@ -16,7 +16,10 @@ import com.lyl.mvptest.R;
 import com.lyl.mvptest.beans.HotMovieinfo;
 
 import java.util.List;
-
+/**
+ * create 2018/8/23
+ * author lyl
+ */
 public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.MyViewHolder> {
     private Context context;
     private List<HotMovieinfo.SubjectsBean> list;
@@ -32,7 +35,6 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.MyViewHolder
     @Override
     public ActorAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.casts_item_layout,parent,false);
-        Log.d("lyll","666666666");
         return new MyViewHolder(view);
     }
 

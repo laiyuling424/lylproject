@@ -14,7 +14,10 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-
+/**
+ * create 2018/8/22
+ * author lyl
+ */
 public class MoviePresenter implements BasePresenter{
     private BaseView view;
 

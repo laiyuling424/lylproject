@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lyl.mvptest.R;
@@ -21,7 +22,10 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * create 2018/8/23
+ * author lyl
+ */
 public class MovieDetailActivity extends AppCompatActivity {
     private TextView nameCN,nameUS,genres,year,directors,rating,collect_count;
     private Button like,see;
@@ -58,11 +62,10 @@ public class MovieDetailActivity extends AppCompatActivity {
                 Log.d("lyll", "like onclick");
             }
         });
-        see.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("lyll", "see onclick");
-            }
+
+        see.setOnClickListener(v -> {
+            Toast.makeText(MovieDetailActivity.this,"see onclick",Toast.LENGTH_SHORT).show();
+            Log.d("lyll", "see onclick");
         });
 
         slidingUpPanelLayout=(SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
@@ -124,16 +127,13 @@ public class MovieDetailActivity extends AppCompatActivity {
         list.clear();
 
         Glide.with(MovieDetailActivity.this).load(mlist.get(position).getImages().getLarge()).into(imageView);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (slidingUpPanelLayout != null) {
-                    if (slidingUpPanelLayout.getPanelState() != SlidingUpPanelLayout.PanelState.HIDDEN) {
-                        slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
-                    } else {
-                        slidingUpPanelLayout.animate().translationY(0).setDuration(200);
-                        slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-                    }
+        imageView.setOnClickListener(v -> {
+            if (slidingUpPanelLayout != null) {
+                if (slidingUpPanelLayout.getPanelState() != SlidingUpPanelLayout.PanelState.HIDDEN) {
+                    slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
+                } else {
+                    slidingUpPanelLayout.animate().translationY(0).setDuration(200);
+                    slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
                 }
             }
         });

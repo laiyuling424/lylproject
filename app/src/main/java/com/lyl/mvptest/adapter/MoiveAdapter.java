@@ -15,7 +15,10 @@ import com.lyl.mvptest.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * create 2018/8/22
+ * author lyl
+ */
 public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder>  {
     private Context mContext;
     private List<HotMovieinfo.SubjectsBean> mList=new ArrayList<>();
@@ -43,7 +46,14 @@ public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder
         holder.rating.setText(String.valueOf(mList.get(position).getRating().getAverage()));
         holder.directors.setText(mList.get(position).getDirectors().get(0).getName());
         holder.durations.setText(mList.get(position).getYear());
-        holder.casts.setText(mList.get(position).getCasts().get(0).getName());
+
+        List<String> list=new ArrayList<>();
+        for(int i=0;i<mList.get(position).getCasts().size();i++){
+            list.add(mList.get(position).getCasts().get(i).getName());
+        }
+        holder.casts.setText(list.toString());
+        list.clear();
+
         holder.itemDetailView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
