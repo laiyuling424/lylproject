@@ -20,6 +20,7 @@ import okhttp3.Response;
  */
 public class MoviePresenter implements BasePresenter{
     private BaseView view;
+    private Call call;
 
     public MoviePresenter(BaseView View) {
         view =View;
@@ -27,10 +28,16 @@ public class MoviePresenter implements BasePresenter{
     }
 
     @Override
+    public void cancelOkhttp() {
+        call.cancel();
+    }
+
+    @Override
     public void start() {
         view.loading();
         getMovieData();
     }
+
     public void getMovieData(){
         OkhttpUtil.GetOkhttp("https://api.douban.com/v2/movie/in_theaters", new Callback() {
             @Override

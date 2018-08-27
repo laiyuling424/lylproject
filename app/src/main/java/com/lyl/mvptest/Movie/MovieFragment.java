@@ -260,4 +260,10 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
             }
         });
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        moviePresenter.cancelOkhttp();
+    }
 }
