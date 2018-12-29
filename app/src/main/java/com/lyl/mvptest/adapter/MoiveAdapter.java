@@ -72,7 +72,7 @@ public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder
 
 
     /**
-     *希望读者有良好的编码习惯，将ViewHolder类写成静态的.
+     *将ViewHolder类写成静态的.
      **/
     static class MyViewHolder extends RecyclerView.ViewHolder{
         View itemDetailView;

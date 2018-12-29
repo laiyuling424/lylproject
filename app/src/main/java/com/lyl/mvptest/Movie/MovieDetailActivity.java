@@ -98,10 +98,10 @@ public class MovieDetailActivity extends AppCompatActivity {
         ActorAdapter actorAdapter=new ActorAdapter(MovieDetailActivity.this,mlist,position);
         recyclerView.setAdapter(actorAdapter);
 
-        this.toolbar.setNavigationIcon(R.drawable.ic_toolbar_back);
-        this.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationIcon(R.drawable.ic_toolbar_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View paramAnonymousView) {
+            public void onClick(View v) {
                 finish();
             }
         });
