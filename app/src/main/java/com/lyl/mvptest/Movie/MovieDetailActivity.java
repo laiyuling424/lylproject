@@ -78,6 +78,12 @@ public class MovieDetailActivity extends AppCompatActivity {
             @Override
             public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
                 Log.i("lyll", "onPanelStateChanged, newState" + newState);
+//                if (toolbar.getVisibility()==View.VISIBLE){
+//                    toolbar.setVisibility(View.INVISIBLE);
+//                }else if (toolbar.getVisibility()==View.INVISIBLE){
+//                    toolbar.setVisibility(View.VISIBLE);
+//                }
+
             }
         });
         slidingUpPanelLayout.setFadeOnClickListener(new View.OnClickListener() {

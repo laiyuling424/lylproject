@@ -18,25 +18,29 @@
     <!-- MAIN CONTENT -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <android.support.v7.widget.Toolbar
-            xmlns:sothree="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/main_toolbar"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            sothree:theme="@style/ActionBar"
-            android:layout_width="match_parent"
-            app:navigationIcon="@drawable/ic_toolbar_back"/>
-        <ImageView
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:id="@+id/image"
-            android:transitionName="wallpaper_thumb"
-            app:layout_collapseParallaxMultiplier="0.7"
-            app:layout_scrollFlags="scroll"/>
+            android:orientation="vertical">
+            <android.support.v7.widget.Toolbar
+                xmlns:sothree="http://schemas.android.com/apk/res-auto"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/main_toolbar"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                sothree:theme="@style/ActionBar"
+                android:layout_width="match_parent"
+                app:navigationIcon="@drawable/ic_toolbar_back"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:id="@+id/image"
+                android:transitionName="wallpaper_thumb"
+                app:layout_collapseParallaxMultiplier="0.7"
+                app:layout_scrollFlags="scroll"/>
+        </LinearLayout>
     </FrameLayout>
 
     <!-- SLIDING LAYOUT -->
