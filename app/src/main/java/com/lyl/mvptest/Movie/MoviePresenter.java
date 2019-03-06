@@ -21,10 +21,20 @@ import okhttp3.Response;
 public class MoviePresenter implements BasePresenter{
     private BaseView view;
     private Call call;
+    List <HotMovieinfo.SubjectsBean> list;
+    int hotMovieinfoCount=0;
 
     public MoviePresenter(BaseView View) {
         view =View;
         view.setPresenter(this);
+    }
+
+    public int getHotMovieinfoCount(){
+        return  hotMovieinfoCount;
+    }
+
+    public int getHotMovieinfoLenght(){
+        return  list.size();
     }
 
     @Override
@@ -52,7 +62,8 @@ public class MoviePresenter implements BasePresenter{
                 String responseData=response.body().string();
                 Gson gson=new Gson();
                 HotMovieinfo hotMovieinfo=gson.fromJson(responseData,HotMovieinfo.class);
-                List <HotMovieinfo.SubjectsBean> list=hotMovieinfo.getSubjects();
+                hotMovieinfoCount=hotMovieinfo.getTotal();
+                list=hotMovieinfo.getSubjects();
                 view.show(list);
                 view.finishLoading();
             }
@@ -61,7 +72,7 @@ public class MoviePresenter implements BasePresenter{
 
     @Override
     public void loadMore(int start) {
-        OkhttpUtil.GetOkhttp("https://api.douban.com/v2/movie/in_theaters?start="+"20", new Callback() {
+        OkhttpUtil.GetOkhttp("https://api.douban.com/v2/movie/in_theaters?start="+start, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d("lyll","fragment e--"+e.toString());
@@ -72,8 +83,9 @@ public class MoviePresenter implements BasePresenter{
                 String responseData=response.body().string();
                 Gson gson=new Gson();
                 HotMovieinfo hotMovieinfo=gson.fromJson(responseData,HotMovieinfo.class);
-                List <HotMovieinfo.SubjectsBean> addlist=hotMovieinfo.getSubjects();
-                view.showMore(addlist);
+//                hotMovieinfoCount=hotMovieinfoCount+hotMovieinfo.getCount();
+                list.addAll(hotMovieinfo.getSubjects());
+                view.showMore(list);
             }
         });
     }

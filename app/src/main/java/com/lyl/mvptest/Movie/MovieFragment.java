@@ -103,8 +103,8 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
             public void onLoadMore() {
                 loadMoreWrapper.setLoadState(loadMoreWrapper.LOADING);
 
-                if (mList.size() < 39) {
-                    moviePresenter.loadMore(20);
+                if (mList.size() < moviePresenter.getHotMovieinfoCount()) {
+                    moviePresenter.loadMore(moviePresenter.getHotMovieinfoLenght());
 /*                    OkhttpUtil.GetOkhttp("https://api.douban.com/v2/movie/in_theaters?start=20", new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
@@ -255,6 +255,7 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
         recyclerView.post(new Runnable() {
             @Override
             public void run() {
+                mList.clear();
                 mList.addAll(list);
                 loadMoreWrapper.notifyDataSetChanged();
             }
