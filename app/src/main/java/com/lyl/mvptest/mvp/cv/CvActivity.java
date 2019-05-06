@@ -1,14 +1,14 @@
-package com.lyl.mvptest;
+package com.lyl.mvptest.mvp.cv;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Main2Activity extends AppCompatActivity {
+public class CvActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_cv);
     }
 }

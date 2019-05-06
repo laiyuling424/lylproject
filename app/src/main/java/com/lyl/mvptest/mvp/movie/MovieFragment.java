@@ -72,7 +72,7 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
         loadMoreWrapper=new LoadMoreWrapper(moiveAdapter);
         recyclerView.setAdapter(loadMoreWrapper);
 
-        if (mList.size()==0)  init();
+        if (mList.size()==0)   init();
     }
 
     private void init() {
