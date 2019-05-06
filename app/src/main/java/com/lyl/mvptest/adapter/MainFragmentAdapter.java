@@ -1,39 +1,35 @@
 package com.lyl.mvptest.adapter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import java.util.List;
 
-import com.lyl.mvptest.Book.Bookfragment;
-import com.lyl.mvptest.Movie.MovieFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+
 /**
  * create 2018/8/21
  * author lyl
  */
 public class MainFragmentAdapter extends FragmentPagerAdapter {
     private  String[] TABLAYOUT_ID={"movie","book"};
-    public MainFragmentAdapter(FragmentManager fm) {
+    List<Fragment> list;
+    private FragmentManager fragmetnmanager;
+    public MainFragmentAdapter(FragmentManager fm,List<Fragment> list) {
         super(fm);
+        this.list = list;
+        fragmetnmanager=fm;
     }
 
     @Override
-    public Fragment getItem(int position) {
-        Fragment fragment=null;
-        switch (position){
-            case  0:
-                fragment=new MovieFragment();
-                break;
-            case  1:
-                fragment=new Bookfragment();
-                break;
-
-        }
-        return fragment;
+    public Fragment getItem(int arg0) {
+        // TODO Auto-generated method stub
+        return list.get(arg0);
     }
 
     @Override
     public int getCount() {
-        return TABLAYOUT_ID.length;
+        // TODO Auto-generated method stub
+        return list.size();
     }
 
     @Override

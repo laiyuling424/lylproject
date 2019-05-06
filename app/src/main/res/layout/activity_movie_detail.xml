@@ -12,7 +12,7 @@
     sothree:umanoParallaxOffset="100dp"
     sothree:umanoDragView="@+id/dragView"
     sothree:umanoOverlay="true"
-    sothree:umanoScrollableView="@+id/list">
+   >
 
 
     <!-- MAIN CONTENT -->
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 xmlns:sothree="http://schemas.android.com/apk/res-auto"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/main_toolbar"
@@ -188,11 +188,11 @@
                 android:text="演員"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"/>
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/casts">
-            </android.support.v7.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 

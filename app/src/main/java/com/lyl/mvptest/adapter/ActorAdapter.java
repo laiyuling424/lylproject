@@ -2,9 +2,6 @@ package com.lyl.mvptest.adapter;
 
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +13,10 @@ import com.lyl.mvptest.R;
 import com.lyl.mvptest.beans.HotMovieinfo;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * create 2018/8/23
  * author lyl

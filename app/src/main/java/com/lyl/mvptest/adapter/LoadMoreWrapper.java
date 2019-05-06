@@ -1,7 +1,6 @@
 package com.lyl.mvptest.adapter;
 
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.lyl.mvptest.R;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * create 2018/8/24
  * author lyl

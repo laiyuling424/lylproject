@@ -1,7 +1,9 @@
 package com.lyl.mvptest.adapter;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * create 2018/8/24
  * author lyl
