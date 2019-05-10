@@ -6,4 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".mvp.cv.CvTest1Activity">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/rectangle_bg"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn1"
+        app:layout_constraintTop_toBottomOf="@+id/image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="btn1"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn2"
+        app:layout_constraintTop_toBottomOf="@+id/btn1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="btn2"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

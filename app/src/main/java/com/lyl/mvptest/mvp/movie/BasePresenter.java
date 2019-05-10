@@ -1,4 +1,4 @@
-package com.lyl.mvptest.movie;
+package com.lyl.mvptest.mvp.movie;
 /**
  * create 2018/8/22
  * author lyl

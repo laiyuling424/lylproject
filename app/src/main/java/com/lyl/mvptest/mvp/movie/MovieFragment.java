@@ -1,4 +1,4 @@
-package com.lyl.mvptest.movie;
+package com.lyl.mvptest.mvp.movie;
 
 
 import android.annotation.SuppressLint;

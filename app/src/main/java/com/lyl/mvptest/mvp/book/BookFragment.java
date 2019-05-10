@@ -1,4 +1,4 @@
-package com.lyl.mvptest.book;
+package com.lyl.mvptest.mvp.book;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

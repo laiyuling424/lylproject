@@ -12,4 +12,12 @@
         android:text="小猪佩琦"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn2"
+        android:textAllCaps="false"
+        android:text="cv activity"
+        app:layout_constraintTop_toBottomOf="@+id/btn1"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

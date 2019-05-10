@@ -1,4 +1,4 @@
-package com.lyl.mvptest.animation;
+package com.lyl.mvptest.mvp.animation;
 
 /**
  * User: lyl

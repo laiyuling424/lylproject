@@ -1,4 +1,4 @@
-package com.lyl.mvptest.encrypt;
+package com.lyl.mvptest.utils.encrypt;
 
 public class encrypt {
     public static void main(String[] args) {

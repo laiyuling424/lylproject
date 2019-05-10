@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
 import com.lyl.mvptest.adapter.MainFragmentAdapter;
-import com.lyl.mvptest.book.BookFragment;
-import com.lyl.mvptest.movie.MovieFragment;
+import com.lyl.mvptest.mvp.book.BookFragment;
+import com.lyl.mvptest.mvp.movie.MovieFragment;
 
 import java.util.ArrayList;
 import java.util.List;

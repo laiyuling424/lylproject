@@ -1,4 +1,4 @@
-package com.lyl.mvptest.animation;
+package com.lyl.mvptest.mvp.animation;
 
 import android.app.Activity;
 import android.os.Bundle;
