@@ -17,7 +17,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn2"
         android:textAllCaps="false"
-        android:text="cv activity"
+        android:text="cv collection"
         app:layout_constraintTop_toBottomOf="@+id/btn1"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn3"
+        android:textAllCaps="false"
+        android:text="surfaceview activity"
+        app:layout_constraintTop_toBottomOf="@+id/btn2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
