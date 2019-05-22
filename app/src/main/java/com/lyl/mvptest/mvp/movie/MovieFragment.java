@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.lyl.mvptest.R;
 import com.lyl.mvptest.adapter.EndlessRecyclerOnScrollListener;
 import com.lyl.mvptest.adapter.LoadMoreWrapper;
@@ -43,7 +45,7 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
     private Button button;
     private MoviePresenter moviePresenter;
     private TextView textView;
-    private List<HotMovieinfo.SubjectsBean> mList=new ArrayList<>();
+    private List<HotMovieinfo.SubjectsBean> mList;
     private MoiveAdapter moiveAdapter;
     private LoadMoreWrapper loadMoreWrapper;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -62,6 +64,7 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
         progressBar=(ProgressBar)getView().findViewById(R.id.progressBar);
         button=(Button)getView().findViewById(R.id.btn01);
         textView=(TextView)getView().findViewById(R.id.error);
+        mList=new ArrayList<>();
 
         swipeRefreshLayout=(SwipeRefreshLayout)getView().findViewById(R.id.swipeRefreshLayout);
 

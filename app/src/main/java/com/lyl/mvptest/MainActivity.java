@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.lyl.mvptest.adapter.ViewPagerAdapter;
+import com.lyl.mvptest.config.TestConfig;
+import com.lyl.mvptest.test.annotation.test.TestAnnotation;
 import com.lyl.mvptest.view.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -16,11 +18,7 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -43,7 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
+//        if (TestConfig.outputTestAnnotationLog)  testAnnotation();
+    }
 
+    private void testAnnotation() {
+        TestAnnotation testAnnotation=new TestAnnotation();
+        testAnnotation.aa();
+        testAnnotation.gg();
     }
 
     private void init() {

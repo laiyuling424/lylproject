@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".mvp.suefaceview.DrawActivity"></activity>
+        <activity android:name=".mvp.cv.CvTest2Activity"></activity>
+        <activity android:name=".mvp.suefaceview.DrawActivity" />
         <activity android:name=".mvp.suefaceview.MainActivity" />
         <activity android:name=".mvp.cv.CvTest1Activity" />
         <activity android:name=".mvp.cv.CvActivity" />

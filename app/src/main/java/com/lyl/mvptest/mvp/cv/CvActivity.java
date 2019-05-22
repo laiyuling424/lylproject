@@ -1,6 +1,7 @@
 package com.lyl.mvptest.mvp.cv;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -17,9 +18,6 @@ import java.nio.Buffer;
 
 public class CvActivity extends Activity {
 
-    @BindView(R.id.cv1)
-    Button cv1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +26,14 @@ public class CvActivity extends Activity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.cv1})
-    public void onClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.cv1, R.id.cv1kt})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.cv1:
-                startActivity(new Intent(CvActivity.this,CvTest1Activity.class));
+                startActivity(new Intent(CvActivity.this, CvTest1Activity.class));
+                break;
+            case R.id.cv1kt:
+                startActivity(new Intent(CvActivity.this, CvTest2Activity.class));
                 break;
         }
     }

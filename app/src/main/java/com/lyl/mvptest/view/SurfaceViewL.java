@@ -21,7 +21,7 @@ public class SurfaceViewL extends SurfaceView implements SurfaceHolder.Callback,
     // 画布
     private Canvas mCanvas;
     // 子线程标志位
-    private boolean isDrawing;
+    public boolean isDrawing;
     // 画笔
     Paint mPaint;
     // 路径
@@ -88,6 +88,7 @@ public class SurfaceViewL extends SurfaceView implements SurfaceHolder.Callback,
     private void drawing() {
         try {
             mCanvas = mSurfaceHolder.lockCanvas();
+            if (mCanvas==null) return;
             mCanvas.drawColor(Color.WHITE);
             mCanvas.drawPath(mPath,mPaint);
         } finally {
@@ -118,6 +119,10 @@ public class SurfaceViewL extends SurfaceView implements SurfaceHolder.Callback,
                 mLastY = y;
                 break;
             case MotionEvent.ACTION_UP:
+                break;
+
+            case MotionEvent.BUTTON_BACK:
+                isDrawing=false;
                 break;
         }
         return true;

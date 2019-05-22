@@ -14,4 +14,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cv1kt"
+        android:id="@+id/cv1kt"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/cv1"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
