@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -220,6 +221,8 @@ public class PageView extends View {
         viewPath.moveTo(pointHead.x, pointHead.y);
         viewPath.curveTo(dp2px(-100), dp2px(80), dp2px(130), dp2px(330), dp2px(170), dp2px(170));
         viewPath.quadTo(dp2px(210), dp2px(170), dp2px(240), dp2px(155));
+//        Log.d("lyll","size="+viewPath.getPoints().size());
+//        Log.d("lyll","toArray="+viewPath.getPoints().toArray().toString());
         animHead = ValueAnimator.ofObject(new ViewPathEvaluator(), viewPath.getPoints().toArray());
         animHead.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
