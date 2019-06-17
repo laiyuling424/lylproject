@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".mvp.suefaceview.DrawActivity">
 
-    <com.lyl.mvptest.view.SurfaceViewL
+    <com.lyl.mvptest.widget.SurfaceViewL
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"

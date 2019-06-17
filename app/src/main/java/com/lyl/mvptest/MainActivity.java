@@ -11,7 +11,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.lyl.mvptest.adapter.ViewPagerAdapter;
 import com.lyl.mvptest.config.TestConfig;
 import com.lyl.mvptest.test.annotation.test.TestAnnotation;
-import com.lyl.mvptest.view.NoScrollViewPager;
+import com.lyl.mvptest.widget.NoScrollViewPager;
 
 import java.util.ArrayList;
 import java.util.List;

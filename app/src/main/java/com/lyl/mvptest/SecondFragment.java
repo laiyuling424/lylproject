@@ -9,9 +9,8 @@ import android.widget.Button;
 
 import com.lyl.mvptest.mvp.animation.AnimationActivity;
 import com.lyl.mvptest.mvp.cv.CvActivity;
+import com.lyl.mvptest.mvp.radar_view.RadarViewActivity;
 import com.lyl.mvptest.mvp.suefaceview.DrawActivity;
-
-import java.nio.Buffer;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,7 +70,7 @@ public class SecondFragment extends Fragment {
 
     }
 
-    @OnClick({R.id.btn1,R.id.btn2,R.id.btn3})
+    @OnClick({R.id.btn1,R.id.btn2,R.id.btn3,R.id.btn4})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn1:
@@ -82,6 +81,9 @@ public class SecondFragment extends Fragment {
                 break;
             case R.id.btn3:
                 startActivity(new Intent(getContext(), DrawActivity.class));
+                break;
+            case R.id.btn4:
+                startActivity(new Intent(getContext(), RadarViewActivity.class));
                 break;
         }
     }

@@ -36,12 +36,12 @@
             android:textSize="16sp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <com.lyl.mvptest.view.NoScrollViewPager
+    <com.lyl.mvptest.widget.NoScrollViewPager
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/viewpager">
-    </com.lyl.mvptest.view.NoScrollViewPager>
+    </com.lyl.mvptest.widget.NoScrollViewPager>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"

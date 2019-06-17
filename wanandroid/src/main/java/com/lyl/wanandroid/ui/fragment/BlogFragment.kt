@@ -7,4 +7,3 @@ import androidx.fragment.app.Fragment
  * Date: 2019-06-11 15:45
  */
 
-class BlogFragment:Fragment

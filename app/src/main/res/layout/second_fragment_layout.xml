@@ -28,4 +28,12 @@
         android:text="surfaceview activity"
         app:layout_constraintTop_toBottomOf="@+id/btn2"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn4"
+        android:textAllCaps="false"
+        android:text="radarView activity"
+        app:layout_constraintTop_toBottomOf="@+id/btn3"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

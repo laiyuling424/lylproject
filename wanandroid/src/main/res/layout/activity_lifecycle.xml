@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.test_jetpack.LifecycleActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/tv1"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="viewmodel btn_change"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/tv1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/btn_change"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LiveData btn_change1"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/btn_change"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/btnA"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LiveData btn_change2"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/btnA"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/btnB"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="to Paging"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/btnB"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/btnC"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

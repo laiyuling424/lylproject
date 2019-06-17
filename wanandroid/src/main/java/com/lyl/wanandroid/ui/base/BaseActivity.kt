@@ -79,7 +79,7 @@ open class BaseActivity : AppCompatActivity(), RequestLifecycle {
         activity = this
         weakRefActivity = WeakReference(this)
         ActivityCollector.add(weakRefActivity)
-        EventBus.getDefault().register(this)
+//        EventBus.getDefault().register(this)
     }
 
     override fun onResume() {
@@ -163,7 +163,7 @@ open class BaseActivity : AppCompatActivity(), RequestLifecycle {
                 manager.hideSoftInputFromWindow(binder, InputMethodManager.HIDE_NOT_ALWAYS)
             }
         } catch (e: Exception) {
-            MyLog.Logw(TAG, e.message, e)
+            MyLog.Logw(TAG, e.message)
         }
 
     }
@@ -179,7 +179,7 @@ open class BaseActivity : AppCompatActivity(), RequestLifecycle {
                 manager.showSoftInput(editText, 0)
             }
         } catch (e: Exception) {
-            MyLog.Logw(TAG, e.message, e)
+            MyLog.Logw(TAG, e.message)
         }
 
     }
@@ -190,18 +190,18 @@ open class BaseActivity : AppCompatActivity(), RequestLifecycle {
      * @param tip
      * 界面中的提示信息
      */
-    protected fun showLoadErrorView(tip: String) {
-        if (loadErrorView != null) {
-            loadErrorView?.visibility = View.VISIBLE
-            return
-        }
-        val viewStub = findViewById<ViewStub>(R.id.loadErrorView)
-        if (viewStub != null) {
-            loadErrorView = viewStub.inflate()
-            val loadErrorText = loadErrorView?.findViewById<TextView>(R.id.loadErrorText)
-            loadErrorText?.text = tip
-        }
-    }
+//    protected fun showLoadErrorView(tip: String) {
+//        if (loadErrorView != null) {
+//            loadErrorView?.visibility = View.VISIBLE
+//            return
+//        }
+//        val viewStub = findViewById<ViewStub>(R.id.loadErrorView)
+//        if (viewStub != null) {
+//            loadErrorView = viewStub.inflate()
+//            val loadErrorText = loadErrorView?.findViewById<TextView>(R.id.loadErrorText)
+//            loadErrorText?.text = tip
+//        }
+//    }
 
     /**
      * 当Activity中的内容因为网络原因无法显示的时候，通过此方法显示提示界面给用户。
@@ -209,36 +209,36 @@ open class BaseActivity : AppCompatActivity(), RequestLifecycle {
      * @param listener
      * 重新加载点击事件回调
      */
-    protected fun showBadNetworkView(listener: View.OnClickListener) {
-        if (badNetworkView != null) {
-            badNetworkView?.visibility = View.VISIBLE
-            return
-        }
-        val viewStub = findViewById<ViewStub>(R.id.badNetworkView)
-        if (viewStub != null) {
-            badNetworkView = viewStub.inflate()
-            val badNetworkRootView = badNetworkView?.findViewById<View>(R.id.badNetworkRootView)
-            badNetworkRootView?.setOnClickListener(listener)
-        }
-    }
+//    protected fun showBadNetworkView(listener: View.OnClickListener) {
+//        if (badNetworkView != null) {
+//            badNetworkView?.visibility = View.VISIBLE
+//            return
+//        }
+//        val viewStub = findViewById<ViewStub>(R.id.badNetworkView)
+//        if (viewStub != null) {
+//            badNetworkView = viewStub.inflate()
+//            val badNetworkRootView = badNetworkView?.findViewById<View>(R.id.badNetworkRootView)
+//            badNetworkRootView?.setOnClickListener(listener)
+//        }
+//    }
 
     /**
      * 当Activity中没有任何内容的时候，通过此方法显示提示界面给用户。
      * @param tip
      * 界面中的提示信息
      */
-    protected fun showNoContentView(tip: String) {
-        if (noContentView != null) {
-            noContentView?.visibility = View.VISIBLE
-            return
-        }
-        val viewStub = findViewById<ViewStub>(R.id.noContentView)
-        if (viewStub != null) {
-            noContentView = viewStub.inflate()
-            val noContentText = noContentView?.findViewById<TextView>(R.id.noContentText)
-            noContentText?.text = tip
-        }
-    }
+//    protected fun showNoContentView(tip: String) {
+//        if (noContentView != null) {
+//            noContentView?.visibility = View.VISIBLE
+//            return
+//        }
+//        val viewStub = findViewById<ViewStub>(R.id.noContentView)
+//        if (viewStub != null) {
+//            noContentView = viewStub.inflate()
+//            val noContentText = noContentView?.findViewById<TextView>(R.id.noContentText)
+//            noContentText?.text = tip
+//        }
+//    }
 
     /**
      * 将load error view进行隐藏。

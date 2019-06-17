@@ -5,7 +5,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.lyl.mvptest.R;
-import com.lyl.mvptest.view.SurfaceViewL;
+import com.lyl.mvptest.widget.SurfaceViewL;
 
 import butterknife.BindView;
 
