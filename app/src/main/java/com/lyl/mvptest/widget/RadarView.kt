@@ -60,7 +60,7 @@ class RadarView @JvmOverloads constructor(
         paint!!.style = Paint.Style.STROKE
         paint!!.strokeWidth = 0f
 
-        initAttributes(context!!, attrs)
+        initAttributes(context, attrs)
 
         //关闭硬件加速
         setLayerType(View.LAYER_TYPE_SOFTWARE, null)
@@ -75,8 +75,8 @@ class RadarView @JvmOverloads constructor(
         try {
             a?.run {
                 radius = a.getDimension(com.lyl.mvptest.R.styleable.RadarView_radius, context.dpf2pxf(100f))
-                score = a.getDimension(com.lyl.mvptest.R.styleable.RadarView_score, context.dpf2pxf(100f))
-                lineWidth = a.getDimension(com.lyl.mvptest.R.styleable.RadarView_lineWidth, context.dpf2pxf(100f))
+                score = a.getDimension(com.lyl.mvptest.R.styleable.RadarView_score, context.dpf2pxf(1.5f))
+                lineWidth = a.getDimension(com.lyl.mvptest.R.styleable.RadarView_lineWidth, context.dpf2pxf(3f))
 
                 scoreLineColor = a.getColor(com.lyl.mvptest.R.styleable.RadarView_scoreLineColor, Color.BLUE)
                 scoreColor = a.getColor(com.lyl.mvptest.R.styleable.RadarView_scoreColor, Color.BLUE)
@@ -132,17 +132,17 @@ class RadarView @JvmOverloads constructor(
         val radiuss = radius / later
         for (i in 1..later + 1) {
             radius = radiuss * i
-            for (j in 0..n - 1) {
+            for (j in 0 until n) {
                 pointXY.set(j, PointF(radius * cos(anglez * j), radius * sin(anglez * j)))
 //                Log.d("lyll", "index:" + j + "  point(" + radius * cos(angle * j) + "," + radius * sin(angle * j) + ")")
             }
-            for (j in 0..n - 1) {
+            for (j in 0 until n) {
                 if (j == n - 1) canvas.drawLine(pointXY[0]!!.x, pointXY[0]!!.y, pointXY[n - 1]!!.x, pointXY[n - 1]!!.y, paint)
                 else canvas.drawLine(pointXY[j]!!.x, pointXY[j]!!.y, pointXY[j + 1]!!.x, pointXY[j + 1]!!.y, paint)
             }
         }
 
-        for (j in 0..n - 1) {
+        for (j in 0 until n) {
             paint!!.pathEffect = DashPathEffect(floatArrayOf(4f, 4f), 0f)
             canvas.drawLine(0f, 0f, pointXY[j]!!.x, pointXY[j]!!.y, paint)
         }
@@ -177,14 +177,14 @@ class RadarView @JvmOverloads constructor(
 //            Log.d("lyll", "point=" + nRadius.size+"   "+j)
 //            Log.d("lyll", "point=" + pointScoreXY[j]!!.toString())
             if (j == 0) mPath.moveTo(pointScoreXY[0]!!.x, pointScoreXY[0]!!.y)
-//            else if (j == nRadius.size-1) mPath.lineTo(pointScoreXY[0]!!.x, pointScoreXY[0]!!.y)
+//            else if (j == nRadius.size-1) mPath.lineTo(pointScoreXY[0]!!.x, pointScoreXY[0]!!.y) //好像不需要 会自动连接成封闭区域
             else mPath.lineTo(pointScoreXY[j]!!.x, pointScoreXY[j]!!.y)
 
             if (j == nRadius.size-1) {
                 mPath.close()
             }
 
-//            canvas.drawPath(mPath, paint)
+            canvas.drawPath(mPath, paint)
 
 //            //绘制区域路径
 //            paint!!.utilReset()
@@ -201,23 +201,22 @@ class RadarView @JvmOverloads constructor(
 //            mPath.reset()
 //            paint!!.utilReset()
 //
-            paint!!.color = Color.BLACK
-            if (j == n - 1) canvas.drawLine(pointScoreXY[0]!!.x, pointScoreXY[0]!!.y, pointScoreXY[nRadius.size - 1]!!.x, pointScoreXY[nRadius.size - 1]!!.y, paint)
-            else canvas.drawLine(pointScoreXY[j]!!.x, pointScoreXY[j]!!.y, pointScoreXY[j + 1]!!.x, pointScoreXY[j + 1]!!.y, paint)
+//            paint!!.color = Color.BLACK
+//            if (j == n - 1) canvas.drawLine(pointScoreXY[0]!!.x, pointScoreXY[0]!!.y, pointScoreXY[nRadius.size - 1]!!.x, pointScoreXY[nRadius.size - 1]!!.y, paint)
+//            else canvas.drawLine(pointScoreXY[j]!!.x, pointScoreXY[j]!!.y, pointScoreXY[j + 1]!!.x, pointScoreXY[j + 1]!!.y, paint)
         }
 
     }
 
-    /**
-     * 辅助绿幕背景
-     */
+
+    //辅助绿幕背景
     fun Canvas.helpGreenCurtain(debug: Boolean) {
         if (debug) {
             this.drawColor(Color.GREEN)
         }
     }
 
-    fun Context.dpf2pxf(dpValue: Float): Float {
+    private fun Context.dpf2pxf(dpValue: Float): Float {
         if (dpValue == 0f) return 0f
         val scale = resources.displayMetrics.density
         return (dpValue * scale + 0.5f)
@@ -225,7 +224,6 @@ class RadarView @JvmOverloads constructor(
 
     fun Paint.utilReset(colorString: String? = null, @ColorInt color: Int? = null) {
         this.reset()
-        //这里默认值使用白色，可处理掉系统渲染抗锯齿时，人眼可观察到像素颜色
         this.color = color ?: Color.parseColor(colorString ?: "#FFFFFF")
         this.isAntiAlias = true
         this.style = Paint.Style.FILL

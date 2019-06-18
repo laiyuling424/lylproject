@@ -36,4 +36,12 @@
         android:text="radarView activity"
         app:layout_constraintTop_toBottomOf="@+id/btn3"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn5"
+        android:textAllCaps="false"
+        android:text="textClock activity"
+        app:layout_constraintTop_toBottomOf="@+id/btn4"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

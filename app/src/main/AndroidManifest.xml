@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".mvp.radar_view.RadarViewActivity"></activity>
+        <activity android:name=".mvp.textclock_view.TextClockViewActivity"></activity>
+        <activity android:name=".mvp.radar_view.RadarViewActivity" />
         <activity android:name=".mvp.cv.CvTest2Activity" />
         <activity android:name=".mvp.suefaceview.DrawActivity" />
         <activity android:name=".mvp.cv.CvTest1Activity" />
