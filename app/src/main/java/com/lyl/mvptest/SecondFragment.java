@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.lyl.mvptest.mvp.animation.AnimationActivity;
 import com.lyl.mvptest.mvp.cv.CvActivity;
 import com.lyl.mvptest.mvp.radar_view.RadarViewActivity;
+import com.lyl.mvptest.mvp.recycleview.RecycleViewActivity;
 import com.lyl.mvptest.mvp.suefaceview.DrawActivity;
 import com.lyl.mvptest.mvp.textclock_view.TextClockViewActivity;
 import com.lyl.mvptest.widget.TextClockView;
@@ -72,7 +73,7 @@ public class SecondFragment extends Fragment {
 
     }
 
-    @OnClick({R.id.btn1,R.id.btn2,R.id.btn3,R.id.btn4,R.id.btn5})
+    @OnClick({R.id.btn1,R.id.btn2,R.id.btn3,R.id.btn4,R.id.btn5,R.id.btn6})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn1:
@@ -89,6 +90,9 @@ public class SecondFragment extends Fragment {
                 break;
             case R.id.btn5:
                 startActivity(new Intent(getContext(), TextClockViewActivity.class));
+                break;
+            case R.id.btn6:
+                startActivity(new Intent(getContext(), RecycleViewActivity.class));
                 break;
         }
     }

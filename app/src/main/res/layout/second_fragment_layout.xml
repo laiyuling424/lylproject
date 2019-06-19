@@ -44,4 +44,12 @@
         android:text="textClock activity"
         app:layout_constraintTop_toBottomOf="@+id/btn4"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn6"
+        android:textAllCaps="false"
+        android:text="RecycleView activity"
+        app:layout_constraintTop_toBottomOf="@+id/btn5"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

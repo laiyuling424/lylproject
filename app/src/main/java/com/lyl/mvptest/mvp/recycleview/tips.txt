@@ -1,0 +1,10 @@
+RecycleView的补充
+
+    运用ItemTouchHelper  bolg：https://www.jianshu.com/p/abedfa1d6dd1
+
+
+
+    1.可以侧滑delete
+
+
+    2.侧滑delete和长按移动
