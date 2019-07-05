@@ -42,7 +42,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -71,6 +71,23 @@ dependencies {
     api "androidx.core:core-ktx:+"
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0-beta01"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //paging
+    def paging_version = "1.0.0"
+    implementation "android.arch.paging:runtime:$paging_version"
+
+    // ViewModel and LiveData
+    def lifecycle_version = "1.1.1"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:2.2.2"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.4.0"
+    implementation "com.squareup.retrofit2:retrofit:2.4.0"
 }
 repositories {
     mavenCentral()

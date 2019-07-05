@@ -52,4 +52,12 @@
         android:text="RecycleView activity"
         app:layout_constraintTop_toBottomOf="@+id/btn5"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn7"
+        android:textAllCaps="false"
+        android:text="JetPack activity"
+        app:layout_constraintTop_toBottomOf="@+id/btn6"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
