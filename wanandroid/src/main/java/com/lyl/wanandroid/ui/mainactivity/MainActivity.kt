@@ -9,6 +9,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager.widget.ViewPager
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseActivity
+import com.lyl.wanandroid.ui.fragment.FirstFragment
+import com.lyl.wanandroid.ui.fragment.SecondFragment
+import com.lyl.wanandroid.ui.fragment.Thirdfragment
+import com.lyl.wanandroid.ui.fragment.first.wechatpublic.WeChatPublicFragment
 import com.lyl.wanandroid.util.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
@@ -34,7 +38,19 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupViewPager(viewpager: ViewPager?) {
+//        var fragmentList:ArrayList<Fragment>?=null
+//        var mWeChatPublicFragment=WeChatPublicFragment()
+//        fragmentList!!.add(mWeChatPublicFragment)
 
+        var adapter=Adapter(this@MainActivity.supportFragmentManager)
+
+        adapter.addFragment(FirstFragment(),"FirstFragment")
+        adapter.addFragment(SecondFragment(),"SecondFragment")
+        adapter.addFragment(Thirdfragment(),"Thirdfragment")
+
+        viewpager!!.adapter=adapter
+
+        viewpager.currentItem=0
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

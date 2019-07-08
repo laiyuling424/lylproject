@@ -1,8 +1,11 @@
 package com.lyl.wanandroid.http
 
+import com.lyl.wanandroid.ui.bean.HttpResponse
+import com.lyl.wanandroid.ui.fragment.first.wechatpublic.WeChatContentBean
+import com.lyl.wanandroid.ui.fragment.first.wechatpublic.WeChatContentListBean
 import com.lyl.wanandroid.ui.fragment.first.wechatpublic.WeChatPublicListBean
+import com.lyl.wanandroid.ui.fragment.first.wechatpublic.WeChatPublicListBeanResponse
 import io.reactivex.Observable
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -14,7 +17,7 @@ interface Api {
 
     //公众号列表
     @GET("wxarticle/chapters/json")
-    fun getWeChatPublicList():Observable<List<WeChatPublicListBean>>
+    fun getWeChatPublicList():Observable<WeChatPublicListBeanResponse>
 
     //某个公众号历史数据
     /**
@@ -22,5 +25,5 @@ interface Api {
      * @param page 页码
      */
     @GET("wxarticle/list/{id}/{page}/json")
-    fun getWeChatPublicHistoryData(@Path("id") id: Int,@Path("page") page: Int):Observable<List<WeChatPublicListBean>>
+    fun getWeChatPublicHistoryData(@Path("id") id: Int,@Path("page") page: Int):Observable<HttpResponse<WeChatContentListBean>>
 }
