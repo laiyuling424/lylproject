@@ -1,5 +1,6 @@
 package com.lyl.wanandroid.ui.fragment.first.wechatpublic
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,7 @@ class WeChatPublicFragment:BaseFragment(),OnItemClickListener<WeChatPublicListBe
         return view
     }
 
+    @SuppressLint("WrongConstant")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -50,19 +52,31 @@ class WeChatPublicFragment:BaseFragment(),OnItemClickListener<WeChatPublicListBe
         mWeChatTitleAdapter.let { it.itemClickListener = this }
         wechatTitle.adapter=mWeChatTitleAdapter
 
-
-
         var viewModelWechatTitle=ViewModelProviders.of(this).get(ViewModelWeChatTitle::class.java)
         viewModelWechatTitle.titleLists.observe(this,  Observer(mWeChatTitleAdapter::submitList))
 
-        var viewModelWechatContent=ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+
+
+        val linearLayoutManager=LinearLayoutManager(this@WeChatPublicFragment.activity)
+        linearLayoutManager.orientation=LinearLayout.VERTICAL
+        wechatContent.layoutManager=linearLayoutManager
+
+        var mWeChatContentAdapter=WeChatContentAdapter()
+//        mWeChatContentAdapter.let { it.itemClickListener = this }
+        wechatContent.adapter=mWeChatContentAdapter
+
+        var viewModelWechatContent= getViewModelWeChatContent(id!!)
+        viewModelWechatContent.contentLists.observe(this,  Observer(mWeChatContentAdapter::submitList))
+
+    }
+
+    private fun getViewModelWeChatContent(id:Int):ViewModelWeChatContent{
+        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val api = ApiServer.getApiServer()
-                val mWeChatContentResposity = WeChatContentRepository(api, id!!)
-                return ViewModelWeChatContent(mWeChatContentResposity) as T
+//                val mWeChatContentResposity = WeChatContentRepository(id!!)
+                return ViewModelWeChatContent(id) as T
             }
         })[ViewModelWeChatContent::class.java]
-
     }
 
 }
