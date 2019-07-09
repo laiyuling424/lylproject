@@ -1,10 +1,8 @@
 package com.lyl.wanandroid.http
 
 import com.lyl.wanandroid.ui.bean.HttpResponse
-import com.lyl.wanandroid.ui.fragment.first.wechatpublic.WeChatContentBean
-import com.lyl.wanandroid.ui.fragment.first.wechatpublic.WeChatContentListBean
-import com.lyl.wanandroid.ui.fragment.first.wechatpublic.WeChatPublicListBean
-import com.lyl.wanandroid.ui.fragment.first.wechatpublic.WeChatPublicListBeanResponse
+import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatContentListBean
+import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicListBeanResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

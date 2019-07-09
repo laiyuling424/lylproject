@@ -1,4 +1,4 @@
-package com.lyl.wanandroid.ui.fragment.first.wechatpublic
+package com.lyl.wanandroid.ui.fragment.wechatpublic
 
 /**
  * User: lyl

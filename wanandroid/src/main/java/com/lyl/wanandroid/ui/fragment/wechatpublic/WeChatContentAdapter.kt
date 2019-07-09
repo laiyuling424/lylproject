@@ -1,4 +1,4 @@
-package com.lyl.wanandroid.ui.fragment.first.wechatpublic
+package com.lyl.wanandroid.ui.fragment.wechatpublic
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lyl.wanandroid.R
-import com.lyl.wanandroid.listener.OnItemClickListener
+import com.lyl.wanandroid.listener.OnItemClickListenerTwo
 
 /**
  * User: lyl
@@ -17,7 +17,7 @@ import com.lyl.wanandroid.listener.OnItemClickListener
  */
 class WeChatContentAdapter : PagedListAdapter<WeChatContentBean, WeChatContentAdapter.ProvinceViewHolder>(diffCallback) {
 
-    var itemClickListener: OnItemClickListener<WeChatContentBean>? = null
+    var itemClickListenerTwo: OnItemClickListenerTwo<WeChatContentBean>? = null
 
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<WeChatContentBean>() {
@@ -32,24 +32,28 @@ class WeChatContentAdapter : PagedListAdapter<WeChatContentBean, WeChatContentAd
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProvinceViewHolder {
-        return ProvinceViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.wechat_list_itemview, parent, false))
+        return ProvinceViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.wechat_content_list_itemview, parent, false))
     }
 
     override fun onBindViewHolder(holder: ProvinceViewHolder, position: Int) {
         holder.bindTo(getItem(position))
 
         holder.itemView.setOnClickListener {
-            itemClickListener?.itemClick(getItem(position)!!, position)
+            itemClickListenerTwo?.itemClickTwo(getItem(position)!!, position)
         }
     }
 
     class ProvinceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val tv: TextView = itemView.findViewById(R.id.wechat_title_name)
+        val name: TextView = itemView.findViewById(R.id.name)
+        val title: TextView = itemView.findViewById(R.id.title)
+        val time: TextView = itemView.findViewById(R.id.time)
 
         fun bindTo(account: WeChatContentBean?) {
             account?.let {
-                tv.text = it.link
+                name.text=it.author
+                time.text=it.niceDate
+                title.text=it.title
             }
         }
     }

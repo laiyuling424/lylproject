@@ -1,6 +1,5 @@
-package com.lyl.wanandroid.ui.fragment.first.wechatpublic
+package com.lyl.wanandroid.ui.fragment.wechatpublic
 
-import android.util.Log
 import androidx.paging.ItemKeyedDataSource
 import com.lyl.wanandroid.http.ApiServer
 import com.lyl.wanandroid.ui.base.ExecuteOnceObserver
@@ -23,13 +22,13 @@ class WeChatContentItemDataSouce(val id : Int): ItemKeyedDataSource<Int,WeChatCo
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
-                    Log.d("lyll","next")
-                    Log.d("lyll","data="+ it.data!!.datas!![0].link)
+//                    Log.d("lyll","next")
+//                    Log.d("lyll","data="+ it.data!!.datas!![0].link)
                     callback.onResult(it.data!!.datas!!)
                 },onExecuteOnceError = {
-                    Log.d("lyll","error")
+//                    Log.d("lyll","error")
                 },onExecuteOnceComplete = {
-                    Log.d("lyll","complete")
+//                    Log.d("lyll","complete")
                 }))
     }
 
@@ -38,13 +37,13 @@ class WeChatContentItemDataSouce(val id : Int): ItemKeyedDataSource<Int,WeChatCo
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
-                    Log.d("lyll","next")
+//                    Log.d("lyll","next")
 
                     callback.onResult(it.data!!.datas!!)
                 },onExecuteOnceError = {
-                    Log.d("lyll","error")
+//                    Log.d("lyll","error")
                 },onExecuteOnceComplete = {
-                    Log.d("lyll","complete")
+//                    Log.d("lyll","complete")
                 }))
     }
 

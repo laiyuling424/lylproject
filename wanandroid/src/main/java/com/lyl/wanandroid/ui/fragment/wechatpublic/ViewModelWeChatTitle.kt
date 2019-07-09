@@ -1,4 +1,4 @@
-package com.lyl.wanandroid.ui.fragment.first.wechatpublic
+package com.lyl.wanandroid.ui.fragment.wechatpublic
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
@@ -6,13 +6,12 @@ import androidx.paging.PagedList
 
 /**
  * User: lyl
- * Date: 2019-07-08 17:42
+ * Date: 2019-07-08 15:00
  */
-class ViewModelWeChatContent(id:Int) : ViewModel() {
+class ViewModelWeChatTitle:ViewModel(){
 
-    val contentLists = LivePagedListBuilder(WeChatContentItemDataSouceFactory(id),
+    val titleLists = LivePagedListBuilder(WeChatTitleItemDataSouceFactory(),
             PagedList.Config.Builder()
                     .setPageSize(10)
                     .setEnablePlaceholders(false).build()).build()
-
 }

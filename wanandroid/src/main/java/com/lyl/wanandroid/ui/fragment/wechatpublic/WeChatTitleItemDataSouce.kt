@@ -1,10 +1,9 @@
-package com.lyl.wanandroid.ui.fragment.first.wechatpublic
+package com.lyl.wanandroid.ui.fragment.wechatpublic
 
 import android.util.Log
 import androidx.paging.ItemKeyedDataSource
 import com.lyl.wanandroid.http.ApiServer
 import com.lyl.wanandroid.ui.base.ExecuteOnceObserver
-import com.lyl.wanandroid.ui.test_jetpack.paging.ApiGenerate
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
