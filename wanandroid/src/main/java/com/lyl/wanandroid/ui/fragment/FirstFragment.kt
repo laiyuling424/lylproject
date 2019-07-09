@@ -11,7 +11,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseFragment
-import com.lyl.wanandroid.ui.fragment.first.home.HomeFragment
+import com.lyl.wanandroid.ui.fragment.first.main.MainFragment
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicFragment
 import java.util.ArrayList
 
@@ -29,19 +29,19 @@ class FirstFragment: BaseFragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        var adapter=Adapter(this@FirstFragment.childFragmentManager)
-//
-//        adapter.addFragment(WeChatPublicFragment(),"home")
-//
-//        var viewPager:ViewPager=view!!.findViewById(R.id.viewpager)
-//        var tablayout:TabLayout=view!!.findViewById(R.id.tablayout)
-//
-//        viewPager.adapter=adapter
-//        viewPager.currentItem=0
-//
-//        tablayout.tabMode = TabLayout.MODE_SCROLLABLE//设置TabLayout的模式为滚动模式
-//        //与viepager进行绑定,TabLayout的标签页通过PagerAdapter的getPagerTitle方法获取
-//        tablayout.setupWithViewPager(viewPager)
+        var adapter=Adapter(this@FirstFragment.childFragmentManager)
+
+        adapter.addFragment(MainFragment(),"首页")
+
+        var viewPager:ViewPager=view!!.findViewById(R.id.viewpager)
+        var tablayout:TabLayout=view!!.findViewById(R.id.tablayout)
+
+        viewPager.adapter=adapter
+        viewPager.currentItem=0
+
+        tablayout.tabMode = TabLayout.MODE_SCROLLABLE//设置TabLayout的模式为滚动模式
+        //与viepager进行绑定,TabLayout的标签页通过PagerAdapter的getPagerTitle方法获取
+        tablayout.setupWithViewPager(viewPager)
     }
 
     internal class Adapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
