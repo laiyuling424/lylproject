@@ -5,14 +5,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.Lifecycle
 import androidx.viewpager.widget.ViewPager
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseActivity
 import com.lyl.wanandroid.ui.fragment.FirstFragment
-import com.lyl.wanandroid.ui.fragment.SecondFragment
 import com.lyl.wanandroid.ui.fragment.Thirdfragment
-import com.lyl.wanandroid.ui.fragment.first.wechatpublic.WeChatPublicFragment
+import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicFragment
 import com.lyl.wanandroid.util.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
@@ -45,7 +43,8 @@ class MainActivity : BaseActivity() {
         var adapter=Adapter(this@MainActivity.supportFragmentManager)
 
         adapter.addFragment(FirstFragment(),"FirstFragment")
-        adapter.addFragment(SecondFragment(),"SecondFragment")
+//        adapter.addFragment(SecondFragment(),"SecondFragment")
+        adapter.addFragment(WeChatPublicFragment(),"微信公众号")
         adapter.addFragment(Thirdfragment(),"Thirdfragment")
 
         viewpager!!.adapter=adapter
@@ -56,15 +55,15 @@ class MainActivity : BaseActivity() {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-
+                viewpager.currentItem=0
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-
+                viewpager.currentItem=1
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-
+                viewpager.currentItem=2
                 return@OnNavigationItemSelectedListener true
             }
         }

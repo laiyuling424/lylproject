@@ -1,6 +1,10 @@
 package com.lyl.wanandroid.ui.base
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Bundle
 import android.view.View
 import android.view.ViewStub
 import android.widget.Button
@@ -44,6 +48,10 @@ open class BaseFragment : Fragment(), RequestLifecycle {
      * Fragment中显示加载等待的控件。
      */
     protected var loading: ProgressBar? = null
+
+    protected lateinit var mActivity: Activity
+
+    protected var mContext: Context? = null
 
     /**
      * 当Fragment中的加载内容服务器返回失败，通过此方法显示提示界面给用户。
@@ -242,5 +250,38 @@ open class BaseFragment : Fragment(), RequestLifecycle {
     @CallSuper
     override fun loadFailed(msg: String?) {
         loading?.visibility = View.GONE
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        mActivity = context as Activity
+        mContext = context
+    }
+
+    /**
+     * [页面跳转]
+     *
+     * @param clz    要跳转的Activity
+     * @param intent intent
+     */
+    fun startActivity(clz: Class<*>, intent: Intent) {
+        intent.setClass(mActivity, clz)
+        startActivity(intent)
+    }
+
+    /**
+     * [携带数据的页面跳转]
+     *
+     * @param clz    要跳转的Activity
+     * @param bundle bundel数据
+     */
+    fun startActivity(clz: Class<*>, bundle: Bundle?) {
+        val intent = Intent()
+        intent.setClass(mContext, clz)
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
+        startActivity(intent)
+
     }
 }

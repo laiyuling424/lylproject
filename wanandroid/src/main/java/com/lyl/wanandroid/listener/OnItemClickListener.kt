@@ -10,3 +10,10 @@ interface OnItemClickListener<T> {
      */
     fun itemClick(t: T, position: Int)
 }
+
+interface OnItemClickListenerTwo<T> {
+    /**
+     *单击事件
+     */
+    fun itemClickTwo(t: T, position: Int)
+}

@@ -11,7 +11,8 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseFragment
-import com.lyl.wanandroid.ui.fragment.first.wechatpublic.WeChatPublicFragment
+import com.lyl.wanandroid.ui.fragment.first.main.MainFragment
+import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicFragment
 import java.util.ArrayList
 
 /**
@@ -30,7 +31,7 @@ class FirstFragment: BaseFragment(){
         super.onActivityCreated(savedInstanceState)
         var adapter=Adapter(this@FirstFragment.childFragmentManager)
 
-        adapter.addFragment(WeChatPublicFragment(),"微信公众号")
+        adapter.addFragment(MainFragment(),"首页")
 
         var viewPager:ViewPager=view!!.findViewById(R.id.viewpager)
         var tablayout:TabLayout=view!!.findViewById(R.id.tablayout)

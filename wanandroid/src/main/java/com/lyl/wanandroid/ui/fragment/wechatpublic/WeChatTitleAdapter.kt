@@ -1,6 +1,5 @@
-package com.lyl.wanandroid.ui.fragment.first.wechatpublic
+package com.lyl.wanandroid.ui.fragment.wechatpublic
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

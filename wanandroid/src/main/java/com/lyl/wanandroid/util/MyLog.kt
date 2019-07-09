@@ -27,7 +27,7 @@ object MyLog {
     }
 
     //调试
-    fun Logd(TAG: String, msg: Any?) {
+    fun Logd(msg: Any?) {
         if (Config.outputLog && msg != null) {
             Log.d(TAG, msg.toString())
         }
