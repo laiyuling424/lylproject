@@ -39,7 +39,7 @@ class MainFragment:BaseFragment(){
         }
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
-            var view= LayoutInflater.from(context).inflate(R.layout.banner_viewpager,null);
+            var view= LayoutInflater.from(context).inflate(R.layout.banner_viewpager,null)
             var img= view.findViewById<ImageView>(R.id.img_banner)
             Glide.with(context).load("url").into(img)
             container.addView(view)
