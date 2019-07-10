@@ -1,6 +1,5 @@
 package com.lyl.wanandroid.ui.base
 
-import android.util.Log
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -23,19 +22,18 @@ class ExecuteOnceObserver<T>(val onExecuteOnceNext: (T) -> Unit = {},
     }
 
     override fun onNext(t: T) {
-        try {
+//        try {
             onExecuteOnceNext(t)
             this.onComplete()
-        } catch (e: Throwable) {
-            this.onError(e)
-        } finally {
-            if (mDisposable != null && !mDisposable!!.isDisposed) {
-                mDisposable!!.dispose()
-            }
-        }
+//        } catch (e: Throwable) {
+//            this.onError(e)
+//        } finally {
+//            if (mDisposable != null && !mDisposable!!.isDisposed) {
+//                mDisposable!!.dispose()
+//            }
+//        }
     }
     override fun onError(e: Throwable) {
         onExecuteOnceError(e)
-        Log.d("lyll"," onExecuteOnceError="+e.message)
     }
 }

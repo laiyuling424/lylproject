@@ -15,9 +15,9 @@ import androidx.viewpager.widget.ViewPager
 class NoScrollViewPager : ViewPager {
     private var isScroll = false
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    constructor(context: Context) : super(context) {}
+    constructor(context: Context) : super(context)
 
     /**
      * 1.dispatchTouchEvent一般情况不做处理

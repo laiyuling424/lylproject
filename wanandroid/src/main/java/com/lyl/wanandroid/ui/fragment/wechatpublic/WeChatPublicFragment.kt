@@ -14,6 +14,7 @@ import com.lyl.wanandroid.Constants
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.listener.OnItemClickListener
 import com.lyl.wanandroid.listener.OnItemClickListenerTwo
+import com.lyl.wanandroid.ui.activity.WebViewDetailActivity
 import com.lyl.wanandroid.ui.base.BaseFragment
 import com.lyl.wanandroid.util.MyLog
 
@@ -45,7 +46,7 @@ class WeChatPublicFragment : BaseFragment(), OnItemClickListener<WeChatPublicLis
         intent.putExtra(Constants.CONTENT_CHAPTER, t.chapterName)
         intent.putExtra(Constants.CONTENT_CHAPTER_ID, t.chapterId)
 
-        startActivity(WeChatDetailActivity::class.java, intent)
+        startActivity(WebViewDetailActivity::class.java, intent)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

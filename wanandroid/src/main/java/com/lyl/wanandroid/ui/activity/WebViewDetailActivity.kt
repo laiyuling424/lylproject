@@ -1,4 +1,4 @@
-package com.lyl.wanandroid.ui.fragment.wechatpublic
+package com.lyl.wanandroid.ui.activity
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +13,7 @@ import com.lyl.wanandroid.R
 import com.lyl.wanandroid.util.MyLog
 import kotlinx.android.synthetic.main.activity_we_chat_detail.*
 
-class WeChatDetailActivity : AppCompatActivity() {
+class WebViewDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
