@@ -1,4 +1,4 @@
-package com.lyl.wanandroid.ui.mainactivity
+package com.lyl.wanandroid.ui.activity
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseActivity
 import com.lyl.wanandroid.ui.fragment.FirstFragment
 import com.lyl.wanandroid.ui.fragment.Thirdfragment
@@ -14,6 +13,11 @@ import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicFragment
 import com.lyl.wanandroid.util.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
+import android.widget.Toast
+import android.view.KeyEvent.KEYCODE_BACK
+import android.R
+import android.view.KeyEvent
+
 
 class MainActivity : BaseActivity() {
 
@@ -24,8 +28,8 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        setContentView(com.lyl.wanandroid.R.layout.activity_main)
+        val navView: BottomNavigationView = findViewById(com.lyl.wanandroid.R.id.nav_view)
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
@@ -40,7 +44,7 @@ class MainActivity : BaseActivity() {
 //        var mWeChatPublicFragment=WeChatPublicFragment()
 //        fragmentList!!.add(mWeChatPublicFragment)
 
-        var adapter=Adapter(this@MainActivity.supportFragmentManager)
+        var adapter= Adapter(this@MainActivity.supportFragmentManager)
 
         adapter.addFragment(FirstFragment(),"FirstFragment")
 //        adapter.addFragment(SecondFragment(),"SecondFragment")
@@ -54,15 +58,15 @@ class MainActivity : BaseActivity() {
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_home -> {
+            com.lyl.wanandroid.R.id.navigation_home -> {
                 viewpager.currentItem=0
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
+            com.lyl.wanandroid.R.id.navigation_dashboard -> {
                 viewpager.currentItem=1
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_notifications -> {
+            com.lyl.wanandroid.R.id.navigation_notifications -> {
                 viewpager.currentItem=2
                 return@OnNavigationItemSelectedListener true
             }
@@ -71,17 +75,18 @@ class MainActivity : BaseActivity() {
     }
 
 
-
-    override fun onBackPressed() {
-
-        val now = System.currentTimeMillis()
-        if (now - backPressTime > 2000) {
-            showToast("再按一次退出")
-            backPressTime = now
-        } else {
-            super.onBackPressed()
+    private var mExitTime: Long = 0
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (System.currentTimeMillis() - mExitTime > 2000) {
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show()
+                mExitTime = System.currentTimeMillis()
+            } else {
+                System.exit(0)
+            }
+            return true
         }
-
+        return super.onKeyDown(keyCode, event)
     }
 
     internal class Adapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {

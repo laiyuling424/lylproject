@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linearLayout">
 
-    <androidx.viewpager.widget.ViewPager
+    <com.lyl.wanandroid.widget.SlideShowView
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:id="@+id/banner">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/slideshowView">
 
-    </androidx.viewpager.widget.ViewPager>
+    </com.lyl.wanandroid.widget.SlideShowView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recycle_view">
-
     </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

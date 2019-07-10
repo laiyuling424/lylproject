@@ -1,6 +1,8 @@
 package com.lyl.wanandroid.http
 
 import com.lyl.wanandroid.ui.bean.HttpResponse
+import com.lyl.wanandroid.ui.fragment.first.main.MainArticleBodyBean
+import com.lyl.wanandroid.ui.fragment.first.main.MianBannerBean
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatContentListBean
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicListBeanResponse
 import io.reactivex.Observable
@@ -24,4 +26,12 @@ interface Api {
      */
     @GET("wxarticle/list/{id}/{page}/json")
     fun getWeChatPublicHistoryData(@Path("id") id: Int,@Path("page") page: Int):Observable<HttpResponse<WeChatContentListBean>>
+
+    //公众号列表
+    @GET("banner/json")
+    fun getMainBanner():Observable<HttpResponse<List<MianBannerBean>>>
+
+    //首页文章列表
+    @GET("article/list/{page}/json")
+    fun getMainArticleList(@Path("page") page: Int):Observable<HttpResponse<MainArticleBodyBean>>
 }

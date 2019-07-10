@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,7 +124,7 @@ public class BannerView extends FrameLayout implements ViewPager.OnPageChangeLis
                 params = new LinearLayout.LayoutParams(mIndicatorDotWidth, mIndicatorDotWidth);
                 params.setMargins(mIndicatorDotWidth, 0, 0, dip2px(10));
                 dot.setLayoutParams(params);
-                dot.setBackgroundResource(R.drawable.basiclib_dot_bg_selector);
+                dot.setBackgroundResource(R.drawable.dot_black);
                 dot.setEnabled(false);//默认设为非选中
                 mIndecatorLayout.addView(dot);
             }

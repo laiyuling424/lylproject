@@ -10,7 +10,6 @@ import com.lyl.wanandroid.util.MyLog
 
 class WeChatContentItemDataSouceFactory(var id:Int) : DataSource.Factory<Int, WeChatContentBean>() {
     override fun create(): DataSource<Int, WeChatContentBean> {
-        MyLog.Logd("ididididid")
         return WeChatContentItemDataSouce(id)
     }
 }
