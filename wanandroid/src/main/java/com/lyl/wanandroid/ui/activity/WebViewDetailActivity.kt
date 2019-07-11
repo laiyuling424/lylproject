@@ -24,6 +24,10 @@ class WebViewDetailActivity : AppCompatActivity() {
         init(url)
     }
 
+    fun img_back(view:View){
+        finish()
+    }
+
     fun init(url:String) {
         webview.loadUrl(url)
         val webSettings = webview.settings

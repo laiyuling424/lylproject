@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.lyl.wanandroid.widget.NestedLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="5000dp"
     android:id="@+id/linearLayout">
 
     <com.lyl.wanandroid.widget.SlideShowView
@@ -16,7 +16,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recycle_view">
+        android:id="@+id/recycle_view"
+        android:layout_below="@id/slideshowView">
     </androidx.recyclerview.widget.RecyclerView>
 
-</LinearLayout>
+</com.lyl.wanandroid.widget.NestedLayout>

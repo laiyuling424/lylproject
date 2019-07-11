@@ -15,7 +15,7 @@
         android:background="@color/colorPrimaryDark">
 
         <ImageView
-            android:id="@+id/img_back"
+            android:onClick="img_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:padding="5dp"

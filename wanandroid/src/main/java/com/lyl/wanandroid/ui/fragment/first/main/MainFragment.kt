@@ -3,6 +3,7 @@ package com.lyl.wanandroid.ui.fragment.first.main
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,10 +66,6 @@ class MainFragment:BaseFragment(),OnItemClickListener<MainArticleBean>{
 
         getBanner()
 
-//        linearLayout.post {
-//            Log.d("lyll","top=="+linearLayout.getChildAt(0).top)
-//            Log.d("lyll","bottom=="+linearLayout.getChildAt(0).bottom)
-//        }
     }
 
 
@@ -79,7 +76,8 @@ class MainFragment:BaseFragment(),OnItemClickListener<MainArticleBean>{
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
                     var bannerList:ArrayList<String>?= ArrayList()
-                    for (i in 0 until it.data!!.size-1){
+                    for (i in 0 until it.data!!.size){
+
                         bannerList!!.add(it.data!![i].imagePath!!)
                     }
                     slideshowView.setUrlList(bannerList)
@@ -98,27 +96,5 @@ class MainFragment:BaseFragment(),OnItemClickListener<MainArticleBean>{
             }
         })[ViewModelMainArticle::class.java]
     }
-
-//    internal class Adapter : PagerAdapter() {
-//        override fun isViewFromObject(view: View, `object`: Any): Boolean {
-//            return view==`object`
-//        }
-//
-//        override fun getCount(): Int {
-//           return Int.MAX_VALUE
-//        }
-//
-//        override fun instantiateItem(container: ViewGroup, position: Int): Any {
-//            var view= LayoutInflater.from(context).inflate(R.layout.banner_viewpager,null)
-//            var img= view.findViewById<ImageView>(R.id.img_banner)
-//            Glide.with(context).load("url").into(img)
-//            container.addView(view)
-//            return view
-//        }
-//
-//        override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-//            container.removeView(`object` as View)
-//        }
-//    }
 }
 

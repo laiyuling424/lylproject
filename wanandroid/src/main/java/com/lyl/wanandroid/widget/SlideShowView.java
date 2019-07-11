@@ -2,6 +2,8 @@ package com.lyl.wanandroid.widget;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +15,7 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -34,10 +37,6 @@ import com.lyl.wanandroid.util.MyLog;
 
 public class SlideShowView extends FrameLayout {
 
-    //轮播图图片数量
-    private final static int IMAGE_COUNT = 5;
-    //自动轮播的时间间隔
-    private final static int TIME_INTERVAL = 5;
     //自动轮播启用开关
     private final static boolean isAutoPlay = true;
 
@@ -59,6 +58,8 @@ public class SlideShowView extends FrameLayout {
     private List<String> urlList;
 
     private Context mContext;
+
+    Timer timer;
 
     //Handler
     private Handler handler = new Handler() {
@@ -99,7 +100,7 @@ public class SlideShowView extends FrameLayout {
      */
     private void startPlay() {
         scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        scheduledExecutorService.scheduleAtFixedRate(new SlideShowTask(), 1, 4, TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleAtFixedRate(new SlideShowTask(), 1, 3, TimeUnit.SECONDS);
     }
 
     /**
@@ -254,6 +255,27 @@ public class SlideShowView extends FrameLayout {
 
     }
 
+    //TODO 没有用 点击banner停止轮播 放开后3秒在轮播
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                MyLog.INSTANCE.Logd("index===");
+                stopPlay();
+                return true;
+            case MotionEvent.ACTION_UP:
+                timer=new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        startPlay();
+                    }
+                },3000);
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
+
     /**
      * 执行轮播图切换任务
      *
@@ -279,7 +301,7 @@ public class SlideShowView extends FrameLayout {
      */
     private void destoryBitmaps() {
 
-        for (int i = 0; i < IMAGE_COUNT; i++) {
+        for (int i = 0; i < urlList.size(); i++) {
             ImageView imageView = imageViewsList.get(i);
             Drawable drawable = imageView.getDrawable();
             if (drawable != null) {

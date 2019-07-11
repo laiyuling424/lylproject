@@ -7,15 +7,14 @@ import android.view.MotionEvent
 import android.view.MotionEvent.ACTION_DOWN
 import android.view.MotionEvent.ACTION_MOVE
 import android.widget.LinearLayout
-import android.R.attr.y
-import android.R.attr.x
-import androidx.core.view.get
 import com.lyl.wanandroid.util.MyLog
 
 
 /**
  * User: lyl
  * Date: 2019-07-10 17:07
+ *
+ * 失败了 应该要用NestedcollingParent来实现
  */
 class SlidingLinearLayout : LinearLayout {
 
