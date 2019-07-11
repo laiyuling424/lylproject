@@ -5,8 +5,11 @@
 /.idea/modules.xml
 /.idea/workspace.xml
 .DS_Store
-/build
 /captures
 .externalNativeBuild
 .idea
+
+/.app/build
+/.cv410/build
+/.wanandroid/build
 
