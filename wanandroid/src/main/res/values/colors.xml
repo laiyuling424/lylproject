@@ -5,4 +5,21 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="bg_blue">#2e92ef</color>
+    <color name="translucent">#00000000</color>
+    <color name="btn_bluebg">#1282eb</color>
+
+    <color name="aa">#2e92ef</color>
+    <color name="ab">#f3313c</color>
+    <color name="ac">#f66d00</color>
+    <color name="ad">#fdd060</color>
+    <color name="ae">#03c983</color>
+    <color name="af">#ed4a9a</color>
+    <color name="ag">#feb618</color>
+    <color name="ah">#eb675a</color>
+    <color name="ai">#db32c8</color>
+    <color name="aj">#57cdd1</color>
+    <color name="ak">#fc6aa4</color>
+    <color name="aq">#e38442</color>
+    <color name="aw">#516ce0</color>
+    <color name="ar">#f35690</color>
 </resources>

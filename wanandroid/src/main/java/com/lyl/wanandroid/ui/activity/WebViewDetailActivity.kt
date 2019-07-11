@@ -19,16 +19,16 @@ class WebViewDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_we_chat_detail)
 
-        title_name.text=intent.getStringExtra(Constants.CONTENT_TITLE)
-        var url:String=intent.getStringExtra(Constants.CONTENT_URL)
+        title_name.text = intent.getStringExtra(Constants.CONTENT_TITLE)
+        var url: String = intent.getStringExtra(Constants.CONTENT_URL)
         init(url)
     }
 
-    fun img_back(view:View){
+    fun img_back(view: View) {
         finish()
     }
 
-    fun init(url:String) {
+    fun init(url: String) {
         webview.loadUrl(url)
         val webSettings = webview.settings
         //打开js支持

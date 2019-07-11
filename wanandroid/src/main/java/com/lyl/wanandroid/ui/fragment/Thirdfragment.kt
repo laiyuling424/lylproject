@@ -16,16 +16,26 @@ import java.util.ArrayList
  * Date: 2019-07-08 14:12
  */
 class Thirdfragment: BaseFragment(){
+    override val layoutId: Int
+        get() = R.layout.third_fragment_layout
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.third_fragment_layout, container, false)
-        return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun loadData() {
 
     }
+
+    override fun initView() {
+
+    }
+
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        val view = inflater.inflate(R.layout.third_fragment_layout, container, false)
+//        return view
+//    }
+//
+//    override fun onActivityCreated(savedInstanceState: Bundle?) {
+//        super.onActivityCreated(savedInstanceState)
+//
+//    }
 
     internal class Adapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         private val mFragments = ArrayList<Fragment>()

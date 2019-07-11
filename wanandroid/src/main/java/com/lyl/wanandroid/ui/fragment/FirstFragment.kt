@@ -12,6 +12,7 @@ import com.google.android.material.tabs.TabLayout
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseFragment
 import com.lyl.wanandroid.ui.fragment.first.main.MainFragment
+import com.lyl.wanandroid.ui.fragment.first.usefulweb.UsefulWebFragment
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicFragment
 import java.util.ArrayList
 
@@ -19,25 +20,37 @@ import java.util.ArrayList
  * User: lyl
  * Date: 2019-07-08 14:11
  */
-class FirstFragment: BaseFragment(){
+class FirstFragment : BaseFragment() {
 
+    override fun loadData() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-         val view = inflater.inflate(R.layout.first_fragment_layout, container, false)
-        return view
     }
+
+    override fun initView() {
+
+    }
+
+    override val layoutId: Int
+        get() = R.layout.first_fragment_layout
+
+
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//         val view = inflater.inflate(R.layout.first_fragment_layout, container, false)
+//        return view
+//    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        var adapter=Adapter(this@FirstFragment.childFragmentManager)
+        var adapter = Adapter(this@FirstFragment.childFragmentManager)
 
-        adapter.addFragment(MainFragment(),"首页")
+        adapter.addFragment(MainFragment(), "首页")
+        adapter.addFragment(UsefulWebFragment(), "常用网站")
 
-        var viewPager:ViewPager=view!!.findViewById(R.id.viewpager)
-        var tablayout:TabLayout=view!!.findViewById(R.id.tablayout)
+        var viewPager: ViewPager = view!!.findViewById(R.id.viewpager)
+        var tablayout: TabLayout = view!!.findViewById(R.id.tablayout)
 
-        viewPager.adapter=adapter
-        viewPager.currentItem=0
+        viewPager.adapter = adapter
+        viewPager.currentItem = 0
 
         tablayout.tabMode = TabLayout.MODE_SCROLLABLE//设置TabLayout的模式为滚动模式
         //与viepager进行绑定,TabLayout的标签页通过PagerAdapter的getPagerTitle方法获取

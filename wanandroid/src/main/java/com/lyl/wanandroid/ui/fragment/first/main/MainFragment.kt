@@ -31,6 +31,17 @@ import kotlinx.android.synthetic.main.main_fragment_layout.*
  * Date: 2019-06-11 15:45
  */
 class MainFragment:BaseFragment(),OnItemClickListener<MainArticleBean>{
+    override val layoutId: Int
+        get() = R.layout.main_fragment_layout
+
+    override fun loadData() {
+
+    }
+
+    override fun initView() {
+
+    }
+
     override fun itemClick(t: MainArticleBean, position: Int) {
         val intent = Intent()
 
@@ -45,9 +56,9 @@ class MainFragment:BaseFragment(),OnItemClickListener<MainArticleBean>{
 
     var viewModelMainArticle:ViewModelMainArticle?=null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.main_fragment_layout, container, false)
-    }
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        return inflater.inflate(R.layout.main_fragment_layout, container, false)
+//    }
 
     @SuppressLint("WrongConstant")
     override fun onActivityCreated(savedInstanceState: Bundle?) {

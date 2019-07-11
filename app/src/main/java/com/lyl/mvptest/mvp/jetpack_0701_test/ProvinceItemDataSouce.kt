@@ -21,13 +21,9 @@ class ProvinceItemDataSouce :ItemKeyedDataSource<Long,ProvinceBean>() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
-                    Log.d("lyll","next")
-                    Log.d("lyll","data="+it.get(0).name)
                     callback.onResult(it)
                 },onExecuteOnceError = {
-                    Log.d("lyll","error")
                 },onExecuteOnceComplete = {
-                    Log.d("lyll","complete")
                 }))
     }
 
@@ -36,12 +32,9 @@ class ProvinceItemDataSouce :ItemKeyedDataSource<Long,ProvinceBean>() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
-                    Log.d("lyll","next")
                     callback.onResult(it)
                 },onExecuteOnceError = {
-                    Log.d("lyll","error")
                 },onExecuteOnceComplete = {
-                    Log.d("lyll","complete")
                 }))
     }
 

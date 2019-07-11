@@ -24,14 +24,25 @@ import com.lyl.wanandroid.util.MyLog
  */
 class WeChatPublicFragment : BaseFragment(), OnItemClickListener<WeChatPublicListBean>, OnItemClickListenerTwo<WeChatContentBean> {
 
-    private var viewModelWechatContent:ViewModelWeChatContent?=null
+    override fun loadData() {
 
-    private var mWeChatContentAdapter:WeChatContentAdapter?=null
+    }
+
+    override fun initView() {
+
+    }
+
+    override val layoutId: Int
+        get() = R.layout.wechat_fragment_layout
+
+    private var viewModelWechatContent: ViewModelWeChatContent? = null
+
+    private var mWeChatContentAdapter: WeChatContentAdapter? = null
 
     private var id: Int? = null
 
     override fun itemClick(t: WeChatPublicListBean, position: Int) {
-        MyLog.Logd("id==>"+t.id)
+        MyLog.Logd("id==>" + t.id)
         id = t.id!!
         getWeChatContentData()
     }
@@ -49,10 +60,10 @@ class WeChatPublicFragment : BaseFragment(), OnItemClickListener<WeChatPublicLis
         startActivity(WebViewDetailActivity::class.java, intent)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.wechat_fragment_layout, container, false)
-        return view
-    }
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        val view = inflater.inflate(R.layout.wechat_fragment_layout, container, false)
+//        return view
+//    }
 
     @SuppressLint("WrongConstant")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -85,11 +96,11 @@ class WeChatPublicFragment : BaseFragment(), OnItemClickListener<WeChatPublicLis
 
         getWeChatContentData()
 
-        var adapter= this@WeChatPublicFragment.childFragmentManager
+        var adapter = this@WeChatPublicFragment.childFragmentManager
 
     }
 
-    private fun getWeChatContentData(){
+    private fun getWeChatContentData() {
         viewModelWechatContent = getViewModelWeChatContent(id!!)
         viewModelWechatContent!!.contentLists.observe(this, Observer(mWeChatContentAdapter!!::submitList))
     }

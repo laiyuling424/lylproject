@@ -3,6 +3,7 @@ package com.lyl.wanandroid.http
 import com.lyl.wanandroid.ui.bean.HttpResponse
 import com.lyl.wanandroid.ui.fragment.first.main.MainArticleBodyBean
 import com.lyl.wanandroid.ui.fragment.first.main.MianBannerBean
+import com.lyl.wanandroid.ui.fragment.first.usefulweb.UsefulWebBean
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatContentListBean
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicListBeanResponse
 import io.reactivex.Observable
@@ -34,4 +35,9 @@ interface Api {
     //首页文章列表
     @GET("article/list/{page}/json")
     fun getMainArticleList(@Path("page") page: Int):Observable<HttpResponse<MainArticleBodyBean>>
+
+
+    //常用网站
+    @GET("friend/json")
+    fun getUsefulWebList():Observable<HttpResponse<List<UsefulWebBean>>>
 }

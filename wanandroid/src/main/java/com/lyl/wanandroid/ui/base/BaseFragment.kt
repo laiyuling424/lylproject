@@ -5,12 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.CallSuper
+import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.lyl.wanandroid.R
@@ -20,7 +23,7 @@ import java.util.ArrayList
  * User: lyl
  * Date: 2019-07-05 15:52
  */
-open class BaseFragment : Fragment(), RequestLifecycle {
+abstract class BaseFragment : Fragment(), RequestLifecycle {
 
     private var mListener: PermissionListener? = null
 
@@ -52,6 +55,24 @@ open class BaseFragment : Fragment(), RequestLifecycle {
     protected lateinit var mActivity: Activity
 
     protected var mContext: Context? = null
+
+    @get:LayoutRes
+    abstract val layoutId: Int
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(layoutId, container, false)
+    }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initView()
+        loadData()
+    }
+
+    abstract fun loadData()
+
+    abstract fun initView()
 
     /**
      * 当Fragment中的加载内容服务器返回失败，通过此方法显示提示界面给用户。
