@@ -7,7 +7,8 @@
 .DS_Store
 /captures
 .externalNativeBuild
-.idea
+/.idea
+/.idea/caches
 
 /.app/build
 /.cv410/build

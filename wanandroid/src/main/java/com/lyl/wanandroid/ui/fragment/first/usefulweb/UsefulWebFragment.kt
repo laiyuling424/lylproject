@@ -1,11 +1,8 @@
 package com.lyl.wanandroid.ui.fragment.first.usefulweb
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.lyl.wanandroid.Constants
 import com.lyl.wanandroid.R
-import com.lyl.wanandroid.http.Api
 import com.lyl.wanandroid.http.ApiServer
 import com.lyl.wanandroid.listener.OnItemClickListener
 import com.lyl.wanandroid.ui.activity.WebViewDetailActivity
@@ -14,7 +11,6 @@ import com.lyl.wanandroid.ui.base.ExecuteOnceObserver
 import com.lyl.wanandroid.util.MyLog
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.main_fragment_layout.*
 import kotlinx.android.synthetic.main.useful_fragment_layout.*
 
 /**
@@ -39,20 +35,14 @@ class UsefulWebFragment : BaseFragment() , OnItemClickListener<String> {
         get() = R.layout.useful_fragment_layout
 
     override fun loadData() {
-//        var viewModelUsefulWeb=getViewModel()
         getBanner()
     }
 
     override fun initView() {
         recycle_list_view.let { it!!.onItemClickListener = this }
-
-//        var layoutManager= StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
-
     }
 
-//    fun getViewModel():ViewModelUsefulWeb{
-//        return ViewModelProviders.of(this).get(ViewModelUsefulWeb::class.java)
-//    }
+
 
     private fun getBanner() {
         ApiServer.getApiServer()

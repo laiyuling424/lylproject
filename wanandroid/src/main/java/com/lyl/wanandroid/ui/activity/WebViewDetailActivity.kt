@@ -10,14 +10,25 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.lyl.wanandroid.Constants
 import com.lyl.wanandroid.R
+import com.lyl.wanandroid.ui.base.BaseActivity
 import com.lyl.wanandroid.util.MyLog
 import kotlinx.android.synthetic.main.activity_we_chat_detail.*
 
-class WebViewDetailActivity : AppCompatActivity() {
+class WebViewDetailActivity : BaseActivity() {
+    override val layoutId: Int
+        get() =R.layout.activity_we_chat_detail
+
+    override fun loadData() {
+
+    }
+
+    override fun initView() {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_we_chat_detail)
+//        setContentView(R.layout.activity_we_chat_detail)
 
         title_name.text = intent.getStringExtra(Constants.CONTENT_TITLE)
         var url: String = intent.getStringExtra(Constants.CONTENT_URL)

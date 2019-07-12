@@ -1,5 +1,7 @@
 package com.lyl.wanandroid.ui.activity
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
@@ -10,25 +12,61 @@ import com.lyl.wanandroid.ui.base.BaseActivity
 import com.lyl.wanandroid.ui.fragment.FirstFragment
 import com.lyl.wanandroid.ui.fragment.Thirdfragment
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicFragment
-import com.lyl.wanandroid.util.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
 import android.widget.Toast
-import android.view.KeyEvent.KEYCODE_BACK
-import android.R
 import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.widget.Toolbar
+import com.lyl.wanandroid.R
+import com.lyl.wanandroid.ui.activity.search.SearchActivity
 
 
 class MainActivity : BaseActivity() {
 
+    var toolbar: Toolbar? = null
 
     private lateinit var pagerAdapter: Adapter
 
     private var backPressTime = 0L
 
+    override val layoutId: Int
+        get() = com.lyl.wanandroid.R.layout.activity_main
+
+    override fun loadData() {
+
+    }
+
+    override fun initView() {
+        setupToolbar()
+    }
+
+    protected fun setupToolbar() {
+        toolbar = findViewById(com.lyl.wanandroid.R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_search -> {
+                startActivity(Intent(this, SearchActivity::class.java))
+            }
+        }
+        return true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.lyl.wanandroid.R.layout.activity_main)
+//        setContentView(com.lyl.wanandroid.R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(com.lyl.wanandroid.R.id.nav_view)
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)

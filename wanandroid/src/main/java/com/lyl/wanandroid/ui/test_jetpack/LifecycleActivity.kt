@@ -13,12 +13,22 @@ import com.lyl.wanandroid.ui.test_jetpack.paging.ByItemActivity
 import kotlinx.android.synthetic.main.activity_lifecycle.*
 
 class LifecycleActivity : BaseActivity(), LifecycleOwner {
+    override val layoutId: Int
+        get() = R.layout.activity_lifecycle
+
+    override fun loadData() {
+
+    }
+
+    override fun initView() {
+
+    }
 
     lateinit var lifecycle: LifecycleRegistry
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lifecycle)
+//        setContentView(R.layout.activity_lifecycle)
 
 
         //lifecycle

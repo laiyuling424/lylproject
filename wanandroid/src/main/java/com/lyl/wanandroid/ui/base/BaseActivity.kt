@@ -3,6 +3,7 @@ package com.lyl.wanandroid.ui.base
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -15,6 +16,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toolbar
 import androidx.annotation.CallSuper
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -34,7 +36,7 @@ import java.util.ArrayList
  */
 
 
-open class BaseActivity : AppCompatActivity(), RequestLifecycle {
+abstract class BaseActivity : AppCompatActivity(), RequestLifecycle {
 
     /**
      * 判断当前Activity是否在前台。
@@ -68,6 +70,9 @@ open class BaseActivity : AppCompatActivity(), RequestLifecycle {
 
     private var weakRefActivity: WeakReference<Activity>? = null
 
+    @get:LayoutRes
+    abstract val layoutId: Int
+
 //    var toolbar: Toolbar? = null
 
     private var progressDialog: ProgressDialog? = null
@@ -76,11 +81,18 @@ open class BaseActivity : AppCompatActivity(), RequestLifecycle {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(layoutId)
         activity = this
         weakRefActivity = WeakReference(this)
         ActivityCollector.add(weakRefActivity)
 //        EventBus.getDefault().register(this)
+        initView()
+        loadData()
     }
+
+    abstract fun loadData()
+
+    abstract fun initView()
 
     override fun onResume() {
         super.onResume()
@@ -351,5 +363,32 @@ open class BaseActivity : AppCompatActivity(), RequestLifecycle {
     companion object {
 
         private const val TAG = "BaseActivity"
+    }
+
+    /**
+     * [页面跳转]
+     *
+     * @param clz    要跳转的Activity
+     * @param intent intent
+     */
+    fun startActivity(clz: Class<*>, intent: Intent) {
+        intent.setClass(activity, clz)
+        startActivity(intent)
+    }
+
+    /**
+     * [携带数据的页面跳转]
+     *
+     * @param clz    要跳转的Activity
+     * @param bundle bundel数据
+     */
+    fun startActivity(clz: Class<*>, bundle: Bundle?) {
+        val intent = Intent()
+        intent.setClass(activity, clz)
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
+        startActivity(intent)
+
     }
 }

@@ -1,4 +1,4 @@
-package com.lyl.wanandroid.ui.fragment.first.usefulweb
+package com.lyl.wanandroid.ui.activity.search
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
@@ -8,10 +8,10 @@ import androidx.paging.PagedList
  * User: lyl
  * Date: 2019-07-11 15:41
  */
-class ViewModelUsefulWeb:ViewModel(){
+class ViewModelSearch:ViewModel(){
 
-    var usefulWebList=LivePagedListBuilder(
-            UsefulWebDataSouceFactory(),
+    var searchList=LivePagedListBuilder(
+            SearchDataSouceFactory(),
             PagedList.Config.Builder()
                     .setPageSize(10)
                     .setEnablePlaceholders(false).build()
