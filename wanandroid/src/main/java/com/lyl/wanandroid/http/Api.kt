@@ -5,6 +5,7 @@ import com.lyl.wanandroid.ui.activity.search.SearchWordBean
 import com.lyl.wanandroid.ui.bean.HttpResponse
 import com.lyl.wanandroid.ui.fragment.first.main.MainArticleBodyBean
 import com.lyl.wanandroid.ui.fragment.first.main.MianBannerBean
+import com.lyl.wanandroid.ui.fragment.first.tixi.TixiBean
 import com.lyl.wanandroid.ui.fragment.first.usefulweb.UsefulWebBean
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatContentListBean
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicListBeanResponse
@@ -53,6 +54,14 @@ interface Api {
     //搜索
     @POST("article/query/{page}/json")
     fun getSearchResponseList(@Path("page") page: Int, @Query("k") k: String): Observable<HttpResponse<SearchResponseListBean>>
+
+    //体系
+    @GET("tree/json")
+    fun getTixiList(): Observable<HttpResponse<List<TixiBean>>>
+
+    //体系文章列表
+    @GET("article/list/{page}/json")
+    fun getTixiArticleList(@Path("page") page: Int,@Query("cid") cid:Int): Observable<HttpResponse<MainArticleBodyBean>>
 
 
 }

@@ -2,8 +2,6 @@ package com.lyl.wanandroid.widget
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.content.res.TypedArray
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -13,8 +11,8 @@ import android.widget.TextView
 
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.listener.OnItemClickListener
-import com.lyl.wanandroid.ui.fragment.first.main.MainArticleBean
-import com.lyl.wanandroid.util.MyLog
+import com.lyl.wanandroid.ui.fragment.first.tixi.TixiBean
+import com.lyl.wanandroid.ui.fragment.first.tixi.TixiChildBean
 
 import java.util.ArrayList
 import java.util.Random
@@ -22,9 +20,9 @@ import java.util.Random
 
 /**
  * User: lyl
- * Date: 2019-07-10 11:55
+ * Date: 2019-07-13 11:55
  */
-class RecycleListView : ViewGroup, View.OnClickListener {
+class RecycleListView2 : ViewGroup {
 
     private var mContext: Context? = null
     var labelTextSize: Float = 0.toFloat()
@@ -61,13 +59,15 @@ class RecycleListView : ViewGroup, View.OnClickListener {
             }
         }
 
-    private val mList = ArrayList<String>()
+    private val mList: ArrayList<String> = ArrayList()
     internal var colors: MutableList<Int> = ArrayList()
 
     private val mTextColor: ColorStateList? = null
     private val mLabelBg: Drawable? = null
 
-    var onItemClickListener: OnItemClickListener<String>? = null
+    var onItemClickListener: OnItemClickListener<Any>? = null
+
+    var mList1: ArrayList<Any>? = ArrayList()
 
     constructor(context: Context) : super(context) {
         mContext = context
@@ -211,7 +211,7 @@ class RecycleListView : ViewGroup, View.OnClickListener {
         addView(textView)
         textView.text = data
 
-        textView.setOnClickListener { onItemClickListener!!.itemClick(data, pos) }
+        textView.setOnClickListener { onItemClickListener!!.itemClick(this!!.mList1!![pos], pos) }
     }
 
     fun setListText(list: ArrayList<String>?) {
@@ -227,14 +227,27 @@ class RecycleListView : ViewGroup, View.OnClickListener {
         }
     }
 
+    fun setListBean(list1: List<TixiChildBean>?) {
+        removeAllViews()
+        mList.clear()
+        mList1!!.clear()
+        if (list1 != null) {
+            mList1!!.addAll(list1)
+            for (i in 0 until list1.size) {
+                if (list1[i] is TixiChildBean) {
+                    mList.add(list1[i].name!!)
+                }
+            }
+            for (i in 0 until list1.size) {
+                addViewText(mList[i], i)
+            }
+        }
+    }
+
     fun <T> getListText(): List<T> {
         return mList as List<T>
     }
 
-
-    override fun onClick(v: View) {
-
-    }
 
     fun setLabelTextPadding(left: Int, top: Int, right: Int, bottom: Int) {
         if (textPaddingLeft != left || textPaddingTop != top

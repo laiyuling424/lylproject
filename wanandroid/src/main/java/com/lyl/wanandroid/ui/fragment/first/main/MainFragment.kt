@@ -50,6 +50,7 @@ class MainFragment:BaseFragment(),OnItemClickListener<MainArticleBean>{
         intent.putExtra(Constants.CONTENT_AUTHOR, t.author)
         intent.putExtra(Constants.CONTENT_CHAPTER, t.chapterName)
         intent.putExtra(Constants.CONTENT_CHAPTER_ID, t.chapterId)
+        intent.putExtra(Constants.CONTENT_TITLE, t.title)
 
         startActivity(WebViewDetailActivity::class.java, intent)
     }

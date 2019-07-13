@@ -51,7 +51,7 @@ class UsefulWebFragment : BaseFragment() , OnItemClickListener<String> {
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(
                         ExecuteOnceObserver(onExecuteOnceNext = {
-                            var list: java.util.ArrayList<String>? = ArrayList()
+                            var list: ArrayList<String>? = ArrayList()
                             for (i in 0 until it.data!!.size) {
                                 list!!.add(it.data!![i].name!!)
                             }

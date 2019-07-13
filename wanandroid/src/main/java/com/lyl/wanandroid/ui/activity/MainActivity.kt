@@ -46,7 +46,7 @@ class MainActivity : BaseActivity() {
         toolbar = findViewById(com.lyl.wanandroid.R.id.toolbar)
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

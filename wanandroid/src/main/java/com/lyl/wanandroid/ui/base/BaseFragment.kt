@@ -59,8 +59,11 @@ abstract class BaseFragment : Fragment(), RequestLifecycle {
     @get:LayoutRes
     abstract val layoutId: Int
 
+    var mView: View? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(layoutId, container, false)
+        mView=inflater.inflate(layoutId, container, false)
+        return mView
     }
 
 

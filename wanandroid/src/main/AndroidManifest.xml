@@ -15,10 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/WanAndroid">
-        <activity android:name=".ui.activity.search.SearchActivity"
-            android:theme="@style/WanAndroid.SearchActivity">
-
-        </activity>
+        <activity android:name=".ui.activity.tixi_detail.TixiDetailActivity"></activity>
+        <activity
+            android:name=".ui.activity.search.SearchActivity"
+            android:theme="@style/WanAndroid.SearchActivity" />
         <activity android:name=".ui.activity.WebViewDetailActivity" />
         <activity android:name=".ui.test_jetpack.paging.ByItemActivity" />
         <activity android:name=".ui.test_jetpack.LifecycleActivity" />
