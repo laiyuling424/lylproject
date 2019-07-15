@@ -2,7 +2,7 @@
 <com.lyl.wanandroid.widget.NestedLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="5000dp"
+    android:layout_height="match_parent"
     android:id="@+id/linearLayout">
 
     <com.lyl.wanandroid.widget.SlideShowView
@@ -15,7 +15,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/recycle_view"
         android:layout_below="@id/slideshowView">
     </androidx.recyclerview.widget.RecyclerView>

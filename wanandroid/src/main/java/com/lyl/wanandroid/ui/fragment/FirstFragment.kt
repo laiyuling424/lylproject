@@ -1,9 +1,6 @@
 package com.lyl.wanandroid.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -12,9 +9,9 @@ import com.google.android.material.tabs.TabLayout
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseFragment
 import com.lyl.wanandroid.ui.fragment.first.main.MainFragment
+import com.lyl.wanandroid.ui.fragment.first.navigation.NavigationFragment
 import com.lyl.wanandroid.ui.fragment.first.tixi.TixiFragment
 import com.lyl.wanandroid.ui.fragment.first.usefulweb.UsefulWebFragment
-import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicFragment
 import java.util.ArrayList
 
 /**
@@ -47,6 +44,7 @@ class FirstFragment : BaseFragment() {
         adapter.addFragment(MainFragment(), "首页")
         adapter.addFragment(UsefulWebFragment(), "常用网站")
         adapter.addFragment(TixiFragment(), "体系")
+        adapter.addFragment(NavigationFragment(), "导航")
 
         var viewPager: ViewPager = view!!.findViewById(R.id.viewpager)
         var tablayout: TabLayout = view!!.findViewById(R.id.tablayout)

@@ -11,6 +11,7 @@ import android.widget.TextView
 
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.listener.OnItemClickListener
+import com.lyl.wanandroid.ui.fragment.first.tixi.NavigationBean
 import com.lyl.wanandroid.ui.fragment.first.tixi.TixiBean
 import com.lyl.wanandroid.ui.fragment.first.tixi.TixiChildBean
 
@@ -227,7 +228,7 @@ class RecycleListView2 : ViewGroup {
         }
     }
 
-    fun setListBean(list1: List<TixiChildBean>?) {
+    fun setListBean(list1: List<Any>?) {
         removeAllViews()
         mList.clear()
         mList1!!.clear()
@@ -235,7 +236,9 @@ class RecycleListView2 : ViewGroup {
             mList1!!.addAll(list1)
             for (i in 0 until list1.size) {
                 if (list1[i] is TixiChildBean) {
-                    mList.add(list1[i].name!!)
+                    mList.add((list1[i] as TixiChildBean).name!!)
+                } else if (list1[i] is NavigationBean) {
+                    mList.add((list1[i] as NavigationBean).title!!)
                 }
             }
             for (i in 0 until list1.size) {

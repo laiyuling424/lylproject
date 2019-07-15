@@ -1,4 +1,4 @@
-package com.lyl.wanandroid.ui.fragment.first.tixi
+package com.lyl.wanandroid.ui.fragment.first.navigation
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,15 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseFragment
 import android.graphics.drawable.Drawable
+import com.lyl.wanandroid.ui.fragment.first.tixi.ViewModelNavigation
 
 
 /**
  * User: lyl
  * Date: 2019-07-13 09:05
  */
-class TixiFragment : BaseFragment() {
+class NavigationFragment : BaseFragment() {
 
-    var adapter: TixiAdapter? = null
+    var adapter: NavigationAdapter? = null
 
     var recyclerView: RecyclerView? = null
 
@@ -29,8 +30,8 @@ class TixiFragment : BaseFragment() {
         get() = R.layout.tixi_fragment_layout
 
     override fun loadData() {
-        var viewModelTixi = getViewModel()
-        viewModelTixi.tixiList.observe(this, Observer(adapter!!::submitList))
+        var viewModelNavigation = getViewModel()
+        viewModelNavigation.navigationList.observe(this, Observer(adapter!!::submitList))
     }
 
     @SuppressLint("WrongConstant")
@@ -42,7 +43,7 @@ class TixiFragment : BaseFragment() {
 
         recyclerView!!.layoutManager = linearLayoutManager
 
-        adapter = TixiAdapter(this.context!!)
+        adapter = NavigationAdapter(this.context!!)
         recyclerView!!.adapter = adapter
 
         var tixiItemDecoration = TixiItemDecoration(this.context!!)
@@ -50,8 +51,8 @@ class TixiFragment : BaseFragment() {
         recyclerView!!.addItemDecoration(tixiItemDecoration)
     }
 
-    private fun getViewModel(): ViewModelTixi {
-        return ViewModelProviders.of(this@TixiFragment)[ViewModelTixi::class.java]
+    private fun getViewModel(): ViewModelNavigation {
+        return ViewModelProviders.of(this@NavigationFragment)[ViewModelNavigation::class.java]
     }
 
     class TixiItemDecoration(context: Context) : RecyclerView.ItemDecoration() {

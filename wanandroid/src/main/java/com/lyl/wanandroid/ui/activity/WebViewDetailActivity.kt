@@ -15,8 +15,11 @@ import com.lyl.wanandroid.util.MyLog
 import kotlinx.android.synthetic.main.activity_we_chat_detail.*
 
 class WebViewDetailActivity : BaseActivity() {
+
+    var url: String? = null
+
     override val layoutId: Int
-        get() =R.layout.activity_we_chat_detail
+        get() = R.layout.activity_we_chat_detail
 
     override fun loadData() {
 
@@ -31,12 +34,14 @@ class WebViewDetailActivity : BaseActivity() {
 //        setContentView(R.layout.activity_we_chat_detail)
 
         title_name.text = intent.getStringExtra(Constants.CONTENT_TITLE)
-        var url: String = intent.getStringExtra(Constants.CONTENT_URL)
-        init(url)
+        url = intent.getStringExtra(Constants.CONTENT_URL)
+        init(url!!)
     }
 
     fun img_back(view: View) {
-        finish()
+        if (webview.url.equals(url))
+            finish()
+        else webview.goBack()
     }
 
     fun init(url: String) {
