@@ -60,4 +60,12 @@
         android:text="JetPack activity"
         app:layout_constraintTop_toBottomOf="@+id/btn6"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn8"
+        android:textAllCaps="false"
+        android:text="LiveDataBus activity"
+        app:layout_constraintTop_toBottomOf="@+id/btn7"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
