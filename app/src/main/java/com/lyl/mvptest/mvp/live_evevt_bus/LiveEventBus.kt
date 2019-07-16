@@ -1,6 +1,10 @@
 package com.lyl.mvptest.mvp.live_evevt_bus
 
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import java.util.Map
 
 /**
  * User: lyl
@@ -8,23 +12,71 @@ import androidx.lifecycle.MutableLiveData
  */
 
 class LiveEventBus {
+    private val liveEventBus = LiveEventBus()
 
-    companion object {
-        private var instance: LiveEventBus? = null
-            get() {
-                if (field == null) {
-                    field = LiveEventBus()
-                }
-                return field
-            }
+    private var bus: MutableMap<String, BusMutableLiveData<Any>>? = null
 
-        fun get(): LiveEventBus {
-            //细心的小伙伴肯定发现了，这里不用getInstance作为为方法名，是因为在伴生对象声明时，内部已有getInstance方法，所以只能取其他名字
-            return instance!!
-        }
+    fun getInstance() {
+        return liveEventBus
     }
 
-    var map: Map<String, MutableLiveData<Any>>? = HashMap()
+    private fun LiveEventBus() {
+        bus = HashMap<String, BusMutableLiveData<Any>>()
+    }
+
+    @Synchronized
+    fun <T> with(key: String, type: Class<T>): BusMutableLiveData<T> {
+        if (!bus!!.containsKey(key)) {
+            bus!!.put(key, BusMutableLiveData<Any>())
+        }
+        return (bus!!.get(key) as BusMutableLiveData<T>?)!!
+    }
+
+    class BusMutableLiveData<T> : MutableLiveData<T>() {
+        override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
+            super.observe(owner, observer)
+            try {
+                hook(observer)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        @Throws(Exception::class)
+        private fun hook(observer: Observer<*>) {
+            val liveDataClass = LiveData::class.java
+            val mObservers = liveDataClass!!.getDeclaredField("mObservers")
+            mObservers.setAccessible(true)
+
+            val mObserversClass = mObservers.get(this).javaClass
+
+            val mapget = mObserversClass.getDeclaredMethod("get", Any::class.java!!)
+            mapget.setAccessible(true)
+
+            val invokeEntry = mapget.invoke(mObservers.get(this), observer)
+
+            var mapvalue: Any? = null
+            if (invokeEntry != null && invokeEntry is Map.Entry<*, *>) {
+                mapvalue = (invokeEntry as Map.Entry<*, *>).value
+            }
+
+            if (mapvalue == null) {
+                throw NullPointerException("null")
+            }
+
+            val calss = mapvalue!!.javaClass.getSuperclass()
+
+            val mLastVersion = calss!!.getDeclaredField("mLastVersion")
+            mLastVersion.setAccessible(true)
+
+            val mVersion = liveDataClass!!.getDeclaredField("mVersion")
+            mVersion.setAccessible(true)
+            val o = mVersion.get(this)
+
+            mLastVersion.set(mapvalue, o)
+        }
+
+    }
 
 
 }

@@ -14,7 +14,7 @@ class LiveEventBusActivity1 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_live_event_bus1)
         LiveDataBus.getInstance().with("dabaicai", Dabaicai::class.java).observe(
-                this@LiveEventBusActivity1, Observer {
+                this@LiveEventBusActivity1, Observer<Dabaicai> {
             Toast.makeText(this@LiveEventBusActivity1, it.name+" "+it.age, Toast.LENGTH_SHORT).show()
         }
         )

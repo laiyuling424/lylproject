@@ -19,7 +19,7 @@ public class LiveDataBus {
 
     private static LiveDataBus liveDataBus = new LiveDataBus();
 
-    private Map<String, MutableLiveData<Object>> bus;
+    private Map<String, BusMutableLiveData<Object>> bus;
 
     public static LiveDataBus getInstance() {
         return liveDataBus;
@@ -29,11 +29,11 @@ public class LiveDataBus {
         bus = new HashMap<>();
     }
 
-    public synchronized <T> MutableLiveData<T> with(String key, Class<T> type) {
+    public synchronized <T> BusMutableLiveData<T> with(String key, Class<T> type) {
         if (!bus.containsKey(key)) {
-            bus.put(key, new MutableLiveData<>());
+            bus.put(key, new BusMutableLiveData<>());
         }
-        return (MutableLiveData<T>) bus.get(key);
+        return (BusMutableLiveData<T>) bus.get(key);
     }
 
     public static class BusMutableLiveData<T> extends MutableLiveData {
@@ -48,47 +48,37 @@ public class LiveDataBus {
         }
 
         private void hook(Observer observer) throws Exception {
+            Class liveDataClass = LiveData.class;
+            Field mObservers = liveDataClass.getDeclaredField("mObservers");
+            mObservers.setAccessible(true);
 
-            Class<LiveData> liveDataClass = LiveData.class;
+            Class<?> mObserversClass = mObservers.get(this).getClass();
 
-            Field mObserverField = liveDataClass.getDeclaredField("mObservers");
+            Method mapget = mObserversClass.getDeclaredMethod("get", Object.class);
+            mapget.setAccessible(true);
 
-            mObserverField.setAccessible(true);
+            Object invokeEntry = mapget.invoke(mObservers.get(this), observer);
 
-            Object mObservers = mObserverField.get(this);
-
-            Class<?> aClass = mObservers.getClass();
-
-            Method get = aClass.getDeclaredMethod("get", Object.class);
-
-            get.setAccessible(true);
-
-            Object invokeEntry = get.invoke(mObservers, observer);
-
-            Object observrtWrapper = null;
-
+            Object mapvalue = null;
             if (invokeEntry != null && invokeEntry instanceof Map.Entry) {
-                observrtWrapper = ((Map.Entry) invokeEntry).getValue();
+                mapvalue=((Map.Entry)invokeEntry).getValue();
             }
 
-            if (observrtWrapper == null) {
-                throw new NullPointerException("observrtWrapper 不能为空");
+            if (mapvalue==null){
+                throw new NullPointerException("null");
             }
 
-            Class<?> superclass = observrtWrapper.getClass().getSuperclass();
+            //todo 不知道为什么要getSuperclass
+            Class<?> calss=mapvalue.getClass().getSuperclass();
 
-            Field mLastVersion = superclass.getDeclaredField("mLastVersion");
-
+            Field mLastVersion=calss.getDeclaredField("mLastVersion");
             mLastVersion.setAccessible(true);
 
-            Field mVersion = liveDataClass.getDeclaredField("mVersion");
-
+            Field mVersion=liveDataClass.getDeclaredField("mVersion");
             mVersion.setAccessible(true);
+            Object o=mVersion.get(this);
 
-            Object o = mVersion.get(this);
-
-            mLastVersion.set(observrtWrapper, o);
-
+            mLastVersion.set(mapvalue,o);
         }
 
     }
