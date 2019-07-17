@@ -1,11 +1,10 @@
-package com.lyl.mvptest.mvp.live_evevt_bus;
+package com.lyl.mvptest.mvp.live_data_bus;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.lyl.mvptest.R;
 

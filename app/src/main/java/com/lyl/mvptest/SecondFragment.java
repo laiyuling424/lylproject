@@ -9,14 +9,13 @@ import android.widget.Button;
 
 import com.lyl.mvptest.mvp.animation.AnimationActivity;
 import com.lyl.mvptest.mvp.cv.CvActivity;
+import com.lyl.mvptest.mvp.eventbus.EventBusActivity;
 import com.lyl.mvptest.mvp.jetpack_0701_test.JetPackActivity;
-import com.lyl.mvptest.mvp.live_evevt_bus.AAAActivity;
-import com.lyl.mvptest.mvp.live_evevt_bus.LiveEventBusActivity1;
+import com.lyl.mvptest.mvp.live_data_bus.LiveEventBusActivity1;
 import com.lyl.mvptest.mvp.radar_view.RadarViewActivity;
 import com.lyl.mvptest.mvp.recycleview.RecycleViewActivity;
 import com.lyl.mvptest.mvp.suefaceview.DrawActivity;
 import com.lyl.mvptest.mvp.textclock_view.TextClockViewActivity;
-import com.lyl.mvptest.widget.TextClockView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -76,7 +75,7 @@ public class SecondFragment extends Fragment {
 
     }
 
-    @OnClick({R.id.btn1,R.id.btn2,R.id.btn3,R.id.btn4,R.id.btn5,R.id.btn6,R.id.btn7,R.id.btn8})
+    @OnClick({R.id.btn1,R.id.btn2,R.id.btn3,R.id.btn4,R.id.btn5,R.id.btn6,R.id.btn7,R.id.btn8,R.id.btn9})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn1:
@@ -102,6 +101,9 @@ public class SecondFragment extends Fragment {
                 break;
             case R.id.btn8:
                 startActivity(new Intent(getContext(), LiveEventBusActivity1.class));
+                break;
+            case R.id.btn9:
+                startActivity(new Intent(getContext(), EventBusActivity.class));
                 break;
         }
     }

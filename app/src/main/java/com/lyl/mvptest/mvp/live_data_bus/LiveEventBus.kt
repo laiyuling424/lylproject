@@ -1,4 +1,4 @@
-package com.lyl.mvptest.mvp.live_evevt_bus
+package com.lyl.mvptest.mvp.live_data_bus
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

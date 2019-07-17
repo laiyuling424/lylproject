@@ -17,9 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".mvp.live_evevt_bus.AAAActivity"></activity>
-        <activity android:name=".mvp.live_evevt_bus.LiveEventBusActivity2" />
-        <activity android:name=".mvp.live_evevt_bus.LiveEventBusActivity1" />
+        <activity android:name=".mvp.eventbus.EventBusActivity2"></activity>
+        <activity android:name=".mvp.eventbus.EventBusActivity" />
+        <activity android:name=".mvp.live_data_bus.AAAActivity" />
+        <activity android:name=".mvp.live_data_bus.LiveEventBusActivity2" />
+        <activity android:name=".mvp.live_data_bus.LiveEventBusActivity1" />
         <activity android:name=".mvp.jetpack_0701_test.JetPackActivity" />
         <activity android:name=".mvp.recycleview.RecycleViewActivity" />
         <activity android:name=".mvp.textclock_view.TextClockViewActivity" />
