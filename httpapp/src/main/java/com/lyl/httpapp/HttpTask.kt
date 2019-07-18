@@ -1,12 +1,16 @@
 package com.lyl.httpapp
 
 import com.alibaba.fastjson.JSON
+import java.lang.Exception
+import java.util.concurrent.Delayed
+import java.util.concurrent.TimeUnit
 
 /**
  * User: lyl
  * Date: 2019-07-18 10:09
  */
-class HttpTask<T> : Runnable {
+class HttpTask<T> : Runnable, Delayed {
+
 
     private var mIHttpRequest: IHttpRequest? = null
 
@@ -19,6 +23,43 @@ class HttpTask<T> : Runnable {
     }
 
     override fun run() {
-        mIHttpRequest!!.execute()
+        try {
+            mIHttpRequest!!.execute()
+        }catch (e:Exception){
+            ThreadPoolManager.getInstance().addDelayTask(this)
+        }
+
+    }
+
+    override fun compareTo(other: Delayed?): Int {
+        return 0
+    }
+
+    override fun getDelay(unit: TimeUnit?): Long {
+        return unit!!.convert(this.delayTime!! -System.currentTimeMillis(),TimeUnit.MILLISECONDS)
+    }
+
+
+    //    data class DCgongshi(
+//            private var delayTime: Long? = null,
+//            private var retryCount: Int? = null
+//    )
+    private var delayTime: Long? = 0
+    private var retryCount: Int? = 0
+
+    public fun getDelayTime(): Long? {
+        return this!!.delayTime!!
+    }
+
+    public fun getRetryCount(): Int? {
+        return this!!.retryCount
+    }
+
+    public fun setDelayTime(delayTime: Long) {
+        this!!.delayTime = delayTime + System.currentTimeMillis()
+    }
+
+    public fun setRetryCount(retryCount: Int) {
+        this!!.retryCount = retryCount
     }
 }

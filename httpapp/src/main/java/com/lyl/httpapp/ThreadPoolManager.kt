@@ -1,11 +1,7 @@
 package com.lyl.httpapp
 
-import java.util.*
-import java.util.concurrent.ArrayBlockingQueue
-import java.util.concurrent.LinkedBlockingQueue
-import java.util.concurrent.RejectedExecutionHandler
-import java.util.concurrent.ThreadPoolExecutor
-import java.util.concurrent.TimeUnit
+import android.util.Log
+import java.util.concurrent.*
 
 /**
  * User: lyl
@@ -16,12 +12,14 @@ class ThreadPoolManager {
     companion object {
         private var threadPoolManager = ThreadPoolManager()
 
-        public fun getInstance(): ThreadPoolManager {
+        public fun getInstance(): ThreadPoolManager{
             return threadPoolManager
         }
     }
 
-    public var mQueue: LinkedBlockingQueue<Runnable>? = null
+    private var mQueue: LinkedBlockingQueue<Runnable>? = null
+
+    private var mDelayQueue = DelayQueue<HttpTask<*>>()
 
     public var mThreadPoolExecutor: ThreadPoolExecutor? = null
 
@@ -43,12 +41,38 @@ class ThreadPoolManager {
             }
         }
 
+        var delayThread = object : Runnable {
+            var ht: HttpTask<*>? = null
+            override fun run() {
+                while (true) {
+                    ht = mDelayQueue!!.take() as HttpTask<*>?
+
+                    if (ht!!.getRetryCount()!! < 3) {
+                        mThreadPoolExecutor!!.execute(ht)
+                        ht!!.setRetryCount(ht!!.getRetryCount()!! + 1)
+                        Log.d("lyll", "========重试机制=======>" + ht!!.getRetryCount()!! + "       " + System.currentTimeMillis())
+                    } else {
+                        Log.d("lyll", "重试超过3次 不再执行")
+                    }
+
+                }
+            }
+        }
+
         mThreadPoolExecutor!!.execute(coreThread)
+        mThreadPoolExecutor!!.execute(delayThread)
     }
 
     public fun addTask(runnable: Runnable) {
         if (runnable != null) {
             mQueue!!.add(runnable)
+        }
+    }
+
+    public fun addDelayTask(ht: HttpTask<*>) {
+        if (ht != null) {
+            ht.setDelayTime(3000)
+            mDelayQueue.offer(ht)
         }
     }
 

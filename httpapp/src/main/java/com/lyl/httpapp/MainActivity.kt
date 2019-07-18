@@ -11,11 +11,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         getdata()
-
+        geterrordata()
     }
 
     private fun getdata() {
-        NetUtil.sendJsonRequest("https://www.wanandroid.com/banner/json", null, WeChatPublicListBeanResponse::class.java,
+        NetUtil.sendJsonRequest("https://www.wanandroid.com/wxarticle/chapters/json", null, WeChatPublicListBeanResponse::class.java,
+                object : IJsonDataListener<WeChatPublicListBeanResponse> {
+                    override fun onSuccess(t: WeChatPublicListBeanResponse?) {
+                        Log.d("lyll", "response====>$t")
+                    }
+                    override fun onFailure() {
+
+                    }
+                })
+    }
+
+    private fun geterrordata() {
+        NetUtil.sendJsonRequest("https://xxxxxxxxx", null, WeChatPublicListBeanResponse::class.java,
                 object : IJsonDataListener<WeChatPublicListBeanResponse> {
                     override fun onSuccess(t: WeChatPublicListBeanResponse?) {
                         Log.d("lyll", "response====>$t")
