@@ -2,15 +2,26 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
+
+def config = rootProject.ext
+
 android {
-    compileSdkVersion 28
+    compileSdkVersion config.android.compileSdkVersion
+    buildToolsVersion config.android.buildToolsVersion
     defaultConfig {
         applicationId "com.lyl.mvptest"
-        minSdkVersion 23
-        targetSdkVersion 28
+        minSdkVersion config.android.minSdkVersion
+        targetSdkVersion config.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
     buildTypes {
         release {
@@ -39,6 +50,7 @@ android {
     }
 
 }
+
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -88,6 +100,18 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
     implementation "com.squareup.retrofit2:retrofit:2.4.0"
+
+
+    //组件化
+    implementation project(path: ':baselibrary')
+    if (!httpappSingleRun.toBoolean()) {
+        implementation project(path: ':httpapp')
+    }
+
+    //ARouter
+    implementation config.dependencies["router-api"]
+    annotationProcessor config.dependencies["router-compiler"]
+
 }
 repositories {
     mavenCentral()

@@ -1,14 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
+def config = rootProject.ext
+
 android {
-    compileSdkVersion 28
-
-
+    compileSdkVersion config.android.compileSdkVersion
+    buildToolsVersion config.android.buildToolsVersion
     defaultConfig {
         applicationId "com.lyl.wanandroid"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion config.android.minSdkVersion
+        targetSdkVersion config.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
 

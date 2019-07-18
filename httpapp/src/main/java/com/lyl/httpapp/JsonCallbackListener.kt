@@ -51,7 +51,7 @@ class JsonCallbackListener<T> : CallBackListener {
 //        }
 //        inputStream.close()
 
-        var line: String? = null
+        var line: String
         var reader: BufferedReader = BufferedReader(InputStreamReader(inputStream))
         var sb = StringBuffer()
         do {

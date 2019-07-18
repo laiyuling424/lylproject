@@ -3,7 +3,11 @@ package com.lyl.httpapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.lyl.baselibrary.ARouterMap
+import com.qudaox.myapplication.R
 
+@Route(path = ARouterMap.httpapp_mainactivity)
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

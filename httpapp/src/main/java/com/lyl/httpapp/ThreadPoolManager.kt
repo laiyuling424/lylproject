@@ -26,7 +26,7 @@ class ThreadPoolManager {
     init {
         mQueue = LinkedBlockingQueue()
         mThreadPoolExecutor = ThreadPoolExecutor(3, 10, 15, TimeUnit.SECONDS, mQueue,
-                RejectedExecutionHandler { r, executor ->
+                RejectedExecutionHandler { r, _ ->
                     //将拒绝的线程重新放入
                     addTask(r!!)
                 })
@@ -45,7 +45,7 @@ class ThreadPoolManager {
             var ht: HttpTask<*>? = null
             override fun run() {
                 while (true) {
-                    ht = mDelayQueue!!.take() as HttpTask<*>?
+                    ht = mDelayQueue.take()
 
                     if (ht!!.getRetryCount()!! < 3) {
                         mThreadPoolExecutor!!.execute(ht)
@@ -64,16 +64,16 @@ class ThreadPoolManager {
     }
 
     public fun addTask(runnable: Runnable) {
-        if (runnable != null) {
+//        if (runnable != null) {
             mQueue!!.add(runnable)
-        }
+//        }
     }
 
     public fun addDelayTask(ht: HttpTask<*>) {
-        if (ht != null) {
+//        if (ht != null) {
             ht.setDelayTime(3000)
             mDelayQueue.offer(ht)
-        }
+//        }
     }
 
 

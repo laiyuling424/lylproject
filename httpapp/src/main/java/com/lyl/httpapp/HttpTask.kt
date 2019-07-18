@@ -48,18 +48,18 @@ class HttpTask<T> : Runnable, Delayed {
     private var retryCount: Int? = 0
 
     public fun getDelayTime(): Long? {
-        return this!!.delayTime!!
+        return this.delayTime!!
     }
 
     public fun getRetryCount(): Int? {
-        return this!!.retryCount
+        return this.retryCount
     }
 
     public fun setDelayTime(delayTime: Long) {
-        this!!.delayTime = delayTime + System.currentTimeMillis()
+        this.delayTime = delayTime + System.currentTimeMillis()
     }
 
     public fun setRetryCount(retryCount: Int) {
-        this!!.retryCount = retryCount
+        this.retryCount = retryCount
     }
 }
