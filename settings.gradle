@@ -1,1 +1,1 @@
-include ':app', ':cv410', ':wanandroid'
+include ':app', ':cv410', ':wanandroid', ':httpapp'

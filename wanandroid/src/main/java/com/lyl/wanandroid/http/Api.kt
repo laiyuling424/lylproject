@@ -34,7 +34,7 @@ interface Api {
     @GET("wxarticle/list/{id}/{page}/json")
     fun getWeChatPublicHistoryData(@Path("id") id: Int, @Path("page") page: Int): Observable<HttpResponse<WeChatContentListBean>>
 
-    //公众号列表
+    //banner
     @GET("banner/json")
     fun getMainBanner(): Observable<HttpResponse<List<MianBannerBean>>>
 
