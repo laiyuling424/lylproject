@@ -22,6 +22,7 @@ import butterknife.OnClick;
  * User: lyl
  * Date: 2019/5/5 5:37 PM
  */
+
 public class ThirdFragment extends Fragment {
 
     @BindView(R.id.httpapp_MainActivity)
@@ -45,7 +46,7 @@ public class ThirdFragment extends Fragment {
     public void onClick(View view){
         switch (view.getId()){
             case R.id.httpapp_MainActivity:
-                ARouter.getInstance().build(ARouterMap.httpapp_mainactivity).navigation();
+                ARouter.getInstance().build(ARouterMap.httpapp_mainactivity2).navigation();
                 break;
         }
     }

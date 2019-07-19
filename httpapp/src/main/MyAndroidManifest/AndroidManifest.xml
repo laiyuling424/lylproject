@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.qudaox.myapplication">
+    package="com.lyll.httpapp">
 
     <application>
-        <activity android:name="com.lyl.httpapp.MainActivity"/>
+        <activity android:name="com.lyl.httpapp.Main2Activity"></activity>
+        <activity android:name="com.lyl.httpapp.MainActivity" ></activity>
     </application>
 
 </manifest>

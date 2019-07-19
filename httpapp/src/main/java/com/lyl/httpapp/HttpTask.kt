@@ -1,5 +1,6 @@
 package com.lyl.httpapp
 
+import android.util.Log
 import com.alibaba.fastjson.JSON
 import java.lang.Exception
 import java.util.concurrent.Delayed
@@ -25,7 +26,8 @@ class HttpTask<T> : Runnable, Delayed {
     override fun run() {
         try {
             mIHttpRequest!!.execute()
-        }catch (e:Exception){
+        } catch (e: Exception) {
+            Log.d("lyll", "e===${e.toString()}")
             ThreadPoolManager.getInstance().addDelayTask(this)
         }
 
@@ -36,7 +38,7 @@ class HttpTask<T> : Runnable, Delayed {
     }
 
     override fun getDelay(unit: TimeUnit?): Long {
-        return unit!!.convert(this.delayTime!! -System.currentTimeMillis(),TimeUnit.MILLISECONDS)
+        return unit!!.convert(this.delayTime!! - System.currentTimeMillis(), TimeUnit.MILLISECONDS)
     }
 
 

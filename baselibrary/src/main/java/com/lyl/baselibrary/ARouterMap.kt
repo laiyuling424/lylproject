@@ -15,6 +15,7 @@ class ARouterMap{
 
         //httpapp app路径
         const val httpapp_mainactivity:String="/httpapp/mainactivity"
+        const val httpapp_mainactivity2:String="/httpapp/mainactivity2"
 
         //wanandroid app路径
 

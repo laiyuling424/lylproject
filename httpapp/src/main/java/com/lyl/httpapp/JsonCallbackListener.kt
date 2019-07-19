@@ -56,9 +56,11 @@ class JsonCallbackListener<T> : CallBackListener {
         var sb = StringBuffer()
         do {
             line = reader.readLine()
+            Log.d("lyll","line===$line")
             if (line == null) break
             sb.append(line + "\n")
         } while (true)
+        inputStream.close()
         return sb.toString()
     }
 }

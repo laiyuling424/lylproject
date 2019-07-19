@@ -1,6 +1,6 @@
-if (httpappSingleRun.toBoolean()){
+if (httpappSingleRun.toBoolean()) {
     apply plugin: 'com.android.application'
-}else {
+} else {
     apply plugin: 'com.android.library'
 }
 apply plugin: 'kotlin-android'
@@ -18,7 +18,7 @@ android {
     compileSdkVersion config.android.compileSdkVersion
     buildToolsVersion config.android.buildToolsVersion
     defaultConfig {
-        if (httpappSingleRun.toBoolean()){
+        if (httpappSingleRun.toBoolean()) {
             applicationId "com.lyl.httpapp"
         }
         minSdkVersion config.android.minSdkVersion
@@ -36,11 +36,11 @@ android {
         }
     }
 
-    sourceSets{
-        main{
-            if (httpappSingleRun.toBoolean()){
+    sourceSets {
+        main {
+            if (httpappSingleRun.toBoolean()) {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
-            }else{
+            } else {
                 manifest.srcFile 'src/main/MyAndroidManifest/AndroidManifest.xml'
             }
         }
