@@ -10,6 +10,7 @@ import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseFragment
 import com.lyl.wanandroid.ui.fragment.first.main.MainFragment
 import com.lyl.wanandroid.ui.fragment.first.navigation.NavigationFragment
+import com.lyl.wanandroid.ui.fragment.first.project.ProjectFragment
 import com.lyl.wanandroid.ui.fragment.first.tixi.TixiFragment
 import com.lyl.wanandroid.ui.fragment.first.usefulweb.UsefulWebFragment
 import java.util.ArrayList
@@ -45,6 +46,7 @@ class FirstFragment : BaseFragment() {
         adapter.addFragment(UsefulWebFragment(), "常用网站")
         adapter.addFragment(TixiFragment(), "体系")
         adapter.addFragment(NavigationFragment(), "导航")
+        adapter.addFragment(ProjectFragment(), "项目")
 
         var viewPager: ViewPager = view!!.findViewById(R.id.viewpager)
         var tablayout: TabLayout = view!!.findViewById(R.id.tablayout)

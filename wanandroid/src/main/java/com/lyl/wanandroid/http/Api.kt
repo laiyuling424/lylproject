@@ -5,6 +5,8 @@ import com.lyl.wanandroid.ui.activity.search.SearchWordBean
 import com.lyl.wanandroid.ui.bean.HttpResponse
 import com.lyl.wanandroid.ui.fragment.first.main.MainArticleBodyBean
 import com.lyl.wanandroid.ui.fragment.first.main.MianBannerBean
+import com.lyl.wanandroid.ui.fragment.first.project.KindBean
+import com.lyl.wanandroid.ui.fragment.first.project.KindContentListBean
 import com.lyl.wanandroid.ui.fragment.first.tixi.NavigationListBean
 import com.lyl.wanandroid.ui.fragment.first.tixi.TixiBean
 import com.lyl.wanandroid.ui.fragment.first.usefulweb.UsefulWebBean
@@ -67,4 +69,12 @@ interface Api {
     //导航
     @GET("navi/json")
     fun getNavigationList(): Observable<HttpResponse<List<NavigationListBean>>>
+
+    //项目列表
+    @GET("project/tree/json")
+    fun getkindList(): Observable<HttpResponse<List<KindBean>>>
+
+    //项目列表详情列表
+    @GET("project/list/{page}/json")
+    fun getkindContentList(@Path("page") page: Int,@Query("cid") cid:Int): Observable<HttpResponse<KindContentListBean>>
 }

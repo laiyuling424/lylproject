@@ -104,7 +104,7 @@ dependencies {
 
     //组件化
     implementation project(path: ':baselibrary')
-    if (!httpappSingleRun.toBoolean()) {
+    if (!config.httpappSingleRun.toBoolean()) {
         implementation project(path: ':httpapp')
     }
 

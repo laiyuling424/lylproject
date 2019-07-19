@@ -1,4 +1,6 @@
-if (httpappSingleRun.toBoolean()) {
+def config = rootProject.ext
+
+if (config.httpappSingleRun.toBoolean()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -12,13 +14,11 @@ kapt {
     }
 }
 
-def config = rootProject.ext
-
 android {
     compileSdkVersion config.android.compileSdkVersion
     buildToolsVersion config.android.buildToolsVersion
     defaultConfig {
-        if (httpappSingleRun.toBoolean()) {
+        if (config.httpappSingleRun.toBoolean()) {
             applicationId "com.lyl.httpapp"
         }
         minSdkVersion config.android.minSdkVersion
@@ -38,7 +38,7 @@ android {
 
     sourceSets {
         main {
-            if (httpappSingleRun.toBoolean()) {
+            if (config.httpappSingleRun.toBoolean()) {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/MyAndroidManifest/AndroidManifest.xml'

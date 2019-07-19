@@ -43,8 +43,8 @@ class WeChatPublicFragment : BaseFragment(), OnItemClickListener<WeChatPublicLis
 
     override fun itemClick(t: WeChatPublicListBean, position: Int) {
         MyLog.Logd("id==>" + t.id)
+        idd!!.postValue(t.id)
         id = t.id!!
-        getWeChatContentData()
     }
 
     override fun itemClickTwo(t: WeChatContentBean, position: Int) {
@@ -70,6 +70,7 @@ class WeChatPublicFragment : BaseFragment(), OnItemClickListener<WeChatPublicLis
         super.onActivityCreated(savedInstanceState)
 
         id = 408
+        idd!!.value = id
 
         var wechatTitle: RecyclerView = view!!.findViewById(R.id.wechat_title)
         var wechatContent: RecyclerView = view!!.findViewById(R.id.wechat_content)
@@ -112,6 +113,10 @@ class WeChatPublicFragment : BaseFragment(), OnItemClickListener<WeChatPublicLis
                 return ViewModelWeChatContent(id) as T
             }
         })[ViewModelWeChatContent::class.java]
+    }
+
+    companion object {
+        val idd: MutableLiveData<Int>? = MutableLiveData()
     }
 
 }

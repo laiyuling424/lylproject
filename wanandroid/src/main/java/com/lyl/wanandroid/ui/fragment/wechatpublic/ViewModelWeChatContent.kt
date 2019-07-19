@@ -15,4 +15,5 @@ class ViewModelWeChatContent(id:Int) : ViewModel() {
                     .setPageSize(10)
                     .setEnablePlaceholders(false).build()).build()
 
+
 }
