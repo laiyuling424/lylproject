@@ -1,4 +1,4 @@
-package com.lyl.wanandroid.ui.bean
+package com.lyl.wanandroid.ui.base
 
 
 /**

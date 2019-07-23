@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +19,7 @@ import com.lyl.wanandroid.listener.OnItemClickListener
 
 import com.lyl.wanandroid.ui.base.BaseFragment
 import com.lyl.wanandroid.ui.base.ExecuteOnceObserver
+import com.lyl.wanandroid.util.MyLog
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.project_fragment_layout.*
@@ -30,6 +33,7 @@ class ProjectFragment : BaseFragment(), OnItemClickListener<KindBean> {
     override fun itemClick(t: KindBean, position: Int) {
         adapter!!.setSelect(t)
         loadKindContext(t.id)
+        drawerlayout.closeDrawer(GravityCompat.END)
     }
 
     var viewModel:ViewModelKind?=null
@@ -50,6 +54,11 @@ class ProjectFragment : BaseFragment(), OnItemClickListener<KindBean> {
         ButterKnife.bind(this, this!!.mView!!)
 
         initRecycle()
+
+        tvKind.setOnClickListener{
+            MyLog.Logd("aaaaaaaaaa")
+            drawerlayout.openDrawer(GravityCompat.END)
+        }
     }
 
     @SuppressLint("WrongConstant")
@@ -68,14 +77,15 @@ class ProjectFragment : BaseFragment(), OnItemClickListener<KindBean> {
 
     }
 
-    @OnClick(R.id.tvKind)
-    public fun onClick(view:View){
-        when(view.id){
-            R.id.tvKind->{
-
-            }
-        }
-    }
+//    @OnClick(R.id.tvKind)
+//    public fun onClick(view:View){
+//        when(view.id){
+//            R.id.tvKind->{
+//                MyLog.Logd("aaaaaaaaaa")
+//                drawerlayout.openDrawer(GravityCompat.END)
+//            }
+//        }
+//    }
 
     private fun loadKindContext(id: Int?) {
         ApiServer.getApiServer().getkindContentList(1, id!!)

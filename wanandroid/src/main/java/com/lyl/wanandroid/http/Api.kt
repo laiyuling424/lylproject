@@ -2,7 +2,7 @@ package com.lyl.wanandroid.http
 
 import com.lyl.wanandroid.ui.activity.search.SearchResponseListBean
 import com.lyl.wanandroid.ui.activity.search.SearchWordBean
-import com.lyl.wanandroid.ui.bean.HttpResponse
+import com.lyl.wanandroid.ui.base.HttpResponse
 import com.lyl.wanandroid.ui.fragment.first.main.MainArticleBodyBean
 import com.lyl.wanandroid.ui.fragment.first.main.MianBannerBean
 import com.lyl.wanandroid.ui.fragment.first.project.KindBean

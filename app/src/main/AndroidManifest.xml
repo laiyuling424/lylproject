@@ -39,6 +39,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".mvp.movie.MovieDetailActivity" />
+        <receiver android:name=".mvp.appWidgetProvider.MyAppWidgetProvider" >
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_provider_info" >
+            </meta-data>
+
+            <intent-filter>
+                <action android:name="com.ryg.chapter_5.action.CLICK" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -54,7 +54,7 @@ class KindItemDataSource : ItemKeyedDataSource<Int, KindBean>() {
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<KindBean>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun getKey(item: KindBean): Int {
