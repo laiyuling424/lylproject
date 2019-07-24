@@ -76,4 +76,12 @@
         android:text="EventBus activity"
         app:layout_constraintTop_toBottomOf="@+id/btn8"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn10"
+        android:textAllCaps="false"
+        android:text="grow tree activity"
+        app:layout_constraintTop_toBottomOf="@+id/btn9"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

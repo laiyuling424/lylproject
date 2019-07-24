@@ -56,7 +56,6 @@ class ProjectFragment : BaseFragment(), OnItemClickListener<KindBean> {
         initRecycle()
 
         tvKind.setOnClickListener{
-            MyLog.Logd("aaaaaaaaaa")
             drawerlayout.openDrawer(GravityCompat.END)
         }
     }

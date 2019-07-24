@@ -16,6 +16,7 @@ import com.lyl.mvptest.mvp.radar_view.RadarViewActivity;
 import com.lyl.mvptest.mvp.recycleview.RecycleViewActivity;
 import com.lyl.mvptest.mvp.suefaceview.DrawActivity;
 import com.lyl.mvptest.mvp.textclock_view.TextClockViewActivity;
+import com.lyl.mvptest.mvp.tree.TreeActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,7 +76,7 @@ public class SecondFragment extends Fragment {
 
     }
 
-    @OnClick({R.id.btn1,R.id.btn2,R.id.btn3,R.id.btn4,R.id.btn5,R.id.btn6,R.id.btn7,R.id.btn8,R.id.btn9})
+    @OnClick({R.id.btn1,R.id.btn2,R.id.btn3,R.id.btn4,R.id.btn5,R.id.btn6,R.id.btn7,R.id.btn8,R.id.btn9,R.id.btn10})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn1:
@@ -104,6 +105,9 @@ public class SecondFragment extends Fragment {
                 break;
             case R.id.btn9:
                 startActivity(new Intent(getContext(), EventBusActivity.class));
+                break;
+            case R.id.btn10:
+                startActivity(new Intent(getContext(), TreeActivity.class));
                 break;
         }
     }
