@@ -1,20 +1,43 @@
 ext {
 
-    httpappSingleRun=false
+    httpappSingleRun = false
 
     android = [
-            compileSdkVersion : 28,
-            buildToolsVersion : "29.0.0",
-            minSdkVersion : 23,
+            compileSdkVersion: 28,
+            buildToolsVersion: "29.0.0",
+            minSdkVersion    : 23,
             targetSdkVersion : 28
     ]
     dependencies = [
-            //都应该依赖的
-            "junit" : 'junit:junit:4.12',
+
+            "junit"               : 'junit:junit:4.12',
+
+            //butterknife  java:annotationProcessor  kotlin:kapt
+            "butterknife"         : 'com.jakewharton:butterknife:10.1.0',
+            "butterknife-compiler": 'com.jakewharton:butterknife-compiler:10.1.0',
+
+            // Glide
+            "glide:"              : 'com.github.bumptech.glide:glide:4.9.0',
+            "glide-compiler"      : 'com.github.bumptech.glide:compiler:4.9.0',
+
+            // RxJava
+            "rxjava2"             : "io.reactivex.rxjava2:rxjava:2.2.2",
+            "rxandroid2"          : "io.reactivex.rxjava2:rxandroid:2.1.0",
+
+            // Retrofit
+            "adapter-rxjava2"     : "com.squareup.retrofit2:adapter-rxjava2:2.4.0",
+            "converter-gson"      : "com.squareup.retrofit2:converter-gson:2.4.0",
+            "retrofit"            : "com.squareup.retrofit2:retrofit:2.4.0",
 
             //ARouter 业务组件依赖
-            "router-api"  : "com.alibaba:arouter-api:1.5.0",
-            "router-compiler"  : "com.alibaba:arouter-compiler:1.2.2",
+            "router-api"          : "com.alibaba:arouter-api:1.5.0",
+            "router-compiler"     : "com.alibaba:arouter-compiler:1.2.2",
+
+            //Paging
+            "paging-runtime"      : "android.arch.paging:runtime:1.0.0",
+            "paging-common"       : "android.arch.paging:common:1.0.0",
+            //Paging对RxJava2的原生支持
+            "paging-rxjava2"      : "android.arch.paging:rxjava2:1.0.0-rc1",
 
     ]
 }
