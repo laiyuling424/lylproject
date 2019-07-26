@@ -4,12 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.listener.OnItemClickListener
+import com.lyl.wanandroid.util.MyLog
 
 /**
  * User: lyl
@@ -40,7 +42,7 @@ class KindAdapter : PagedListAdapter<KindBean, KindAdapter.ProvinceViewHolder>(d
     override fun onBindViewHolder(holder: ProvinceViewHolder, position: Int) {
         holder.bindTo(getItem(position), this!!.kindBean!!)
 
-        holder.itemView.setOnClickListener {
+        holder.view.setOnClickListener {
             itemClickListener?.itemClick(getItem(position)!!, position)
         }
     }
@@ -49,6 +51,7 @@ class KindAdapter : PagedListAdapter<KindBean, KindAdapter.ProvinceViewHolder>(d
 
         val name: TextView = itemView.findViewById(R.id.kind_name)
         var checkBox: CheckBox = itemView.findViewById(R.id.checkbox)
+        var view:LinearLayout=itemView.findViewById(R.id.view)
 
         fun bindTo(account: KindBean?, kindBean: KindBean) {
             account?.let {

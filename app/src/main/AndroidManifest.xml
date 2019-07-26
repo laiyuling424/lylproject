@@ -17,7 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".mvp.tree.TreeActivity"></activity>
+        <activity android:name=".mvp.heart_tree.HeartTreeActivity"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity android:name=".mvp.tree.TreeActivity" />
         <activity android:name=".mvp.eventbus.EventBusActivity2" />
         <activity android:name=".mvp.eventbus.EventBusActivity" />
         <activity android:name=".mvp.live_data_bus.AAAActivity" />
@@ -44,7 +47,7 @@
         <receiver android:name=".mvp.appWidgetProvider.MyAppWidgetProvider">
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/appwidget_provider_info"></meta-data>
+                android:resource="@xml/appwidget_provider_info" />
 
             <intent-filter>
                 <action android:name="com.ryg.chapter_5.action.CLICK" />
