@@ -64,7 +64,60 @@ class Tree {
     }
 
     public fun draw(canvas: Canvas?) {
+        canvas!!.drawColor(0xffffee)
+        canvas.save()
+        canvas.translate(snapShotDx!! + xoffset!!,0f)
+        when(step){
+            Step.BRANCHES_GROWING->{
+                drawBranches()
+                drawSnapshot(canvas)
+            }
+            Step.BLOOMS_GROWING->{
 
+            }
+            Step.MOVING_SNAPSHOT->{
+
+            }
+            Step.BLOOMS_FALLING->{
+
+            }
+        }
+        canvas.restore()
+    }
+
+    private fun drawSnapshot(canvas: Canvas) {
+        canvas.drawBitmap(treeSnapShot!!.bitmap,0f,0f, snapShotPaint)
+
+    }
+
+    private fun drawBranches() {
+        if (!growingBranches!!.isEmpty()){
+            var temPBranches:LinkedList<Branch>?= LinkedList()
+            treeSnapShot!!.canvas!!.save()
+            treeSnapShot!!.canvas!!.translate(branchesDx!!, branchesDy!!)
+            var iterator= growingBranches!!.iterator()
+            while (iterator.hasNext()){
+                val branch = iterator.next()
+                if (!branch.grow(treeSnapShot!!.canvas!!, BRANCHES_FACTOR* resolutionFactor!!)){
+                    iterator.remove()
+                    if (branch.childList!=null){
+                        if (temPBranches==null){
+                            temPBranches=branch.childList
+                        }else{
+                            temPBranches.addAll(branch.childList!!)
+                        }
+                    }
+                }
+            }
+            treeSnapShot!!.canvas!!.restore()
+            if (temPBranches!=null){
+                growingBranches!!.addAll(temPBranches)
+            }
+        }
+        if (growingBranches!!.isEmpty()){
+            //绘制树干完成
+            step=Step.BLOOMS_GROWING
+        }
     }
 
 
