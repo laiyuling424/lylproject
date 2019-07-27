@@ -50,8 +50,8 @@ class Tree {
     public constructor(canvasWidth: Int,canvasHeight: Int){
         //数据初始化
         resolutionFactor=canvasHeight/1080f
-        TreeMaker.init(canvasHeight, CROWN_RADIUS_FACTOR)
-        Bloom.initDisPlayParam(resolutionFactor)
+//        TreeMaker.init(canvasHeight, CROWN_RADIUS_FACTOR)
+//        Bloom.initDisPlayParam(resolutionFactor)
         //snapshot
         var snapshotWidth=816f* STAND_FACTOR* resolutionFactor!!
         treeSnapShot= SnapShot(Bitmap.createBitmap(Math.round(snapshotWidth),canvasHeight,Bitmap.Config.ARGB_8888))

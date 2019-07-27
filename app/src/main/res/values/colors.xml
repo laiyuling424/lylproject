@@ -3,4 +3,63 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorPrimarya">#ED5E32</color>
+    <color name="colorPrimaryDarka">#D45129</color>
+    <color name="colorAccenta">#FF9B07</color>
+    <color name="colorDivider">#BDBDBD</color>
+    <color name="scrim">#99323232</color>
+    <color name="light_scrim">#11323232</color>
+    <color name="black_scrim">#C0000000</color>
+    <color name="invisible_scrim">#00000000</color>
+    <color name="loading">#e2e2e2</color>
+
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
+    <color name="black_text">#444444</color>
+    <color name="text_primary_dark">#de000000</color>
+    <color name="white_text">#FFF</color>
+    <color name="white_translucent_light">#66FFFFFF</color>
+    <color name="white_translucent_dark">#99FFFFFF</color>
+    <color name="primary_text">#444444</color>
+    <color name="secondary_text">#757575</color>
+
+    <color name="orange_button">#FF9B07</color>
+    <color name="liked">#ED5E32</color>
+    <color name="ripple_light">#77ffffff</color>
+    <color name="ripple_light_grey">#77bbbbbb</color>
+    <color name="ripple_dark_grey">#77555555</color>
+    <color name="ripple_dark_grey_pressed">#77333333</color>
+    <color name="split">#e6e6e6</color>
+    <color name="refeed_bg">#f7f7f7</color>
+    <color name="refeed_nickname">#507daf</color>
+    <color name="button_pressed">#f0f0f0</color>
+
+    <color name="qq_blue">#39a3cc</color>
+    <color name="wechat_green">#4cc154</color>
+    <color name="weibo_orange">#f15e3f</color>
+
+    <color name="wall">#fff5f5f5</color>
+    <color name="light_grey">#fff5f5f5</color>
+    <color name="feed_detail_background">#fafafa</color>
+    <color name="searchback_stroke_color">#fff</color>
+
+    <color name="bg_blue">#2e92ef</color>
+    <color name="translucent">#00000000</color>
+    <color name="btn_bluebg">#1282eb</color>
+
+    <color name="aa">#2e92ef</color>
+    <color name="ab">#f3313c</color>
+    <color name="ac">#f66d00</color>
+    <color name="ad">#fdd060</color>
+    <color name="ae">#03c983</color>
+    <color name="af">#ed4a9a</color>
+    <color name="ag">#feb618</color>
+    <color name="ah">#eb675a</color>
+    <color name="ai">#db32c8</color>
+    <color name="aj">#57cdd1</color>
+    <color name="ak">#fc6aa4</color>
+    <color name="aq">#e38442</color>
+    <color name="aw">#516ce0</color>
+    <color name="ar">#f35690</color>
 </resources>
