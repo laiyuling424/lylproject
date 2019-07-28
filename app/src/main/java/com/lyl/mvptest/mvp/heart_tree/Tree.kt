@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * User: lyl
@@ -40,6 +41,10 @@ class Tree {
         //snapshot
         private var treeSnapShot:SnapShot?=null
         private var snapShotPaint=Paint()
+
+        //Bloom params
+        private final var BLOOM_NUM=20
+        private final var BLOOMING_NUM= BLOOM_NUM/8
     }
 
     //offset
@@ -47,11 +52,22 @@ class Tree {
     private var xoffset:Float?=null
     private var maxoffset:Float?=null
 
+    //falling bloom
+    private var fMaxY:Float?=null
+    private var fallingBlooms:ArrayList<FallingBloom>?= ArrayList()
+
+    //crown of a tree
+    private var bloomDx:Float?=null
+    private var bloomDy:Float?=null
+    private var growingBlooms:LinkedList<Bloom>?= LinkedList()
+    private var cacheBlooms:LinkedList<Bloom>?=LinkedList()
+
+
     public constructor(canvasWidth: Int,canvasHeight: Int){
         //数据初始化
         resolutionFactor=canvasHeight/1080f
-//        TreeMaker.init(canvasHeight, CROWN_RADIUS_FACTOR)
-//        Bloom.initDisPlayParam(resolutionFactor)
+        TreeMaker.init(canvasHeight, CROWN_RADIUS_FACTOR)
+        Bloom.initDisplayParam(resolutionFactor!!)
         //snapshot
         var snapshotWidth=816f* STAND_FACTOR* resolutionFactor!!
         treeSnapShot= SnapShot(Bitmap.createBitmap(Math.round(snapshotWidth),canvasHeight,Bitmap.Config.ARGB_8888))
@@ -62,6 +78,17 @@ class Tree {
         branchesDx=(snapshotWidth-branchesWidth)/2f-40f* STAND_FACTOR
         branchesDy=canvasHeight-branchesHeight
         growingBranches!!.add(TreeMaker.getBranches())
+        //Blooms
+        bloomDx=snapshotWidth/2f
+        bloomDy=435f* STAND_FACTOR* resolutionFactor!!
+        TreeMaker.fillBloom(cacheBlooms!!, BLOOM_NUM)
+
+        //Moving snapshot
+        maxoffset=(canvasWidth-snapshotWidth)/2f-40f
+
+        //Falling blooms
+        fMaxY=canvasHeight- bloomDy!!
+        TreeMaker.fillFallingBloom(fallingBlooms!!,3)
     }
 
     public fun draw(canvas: Canvas?) {
@@ -74,16 +101,63 @@ class Tree {
                 drawSnapshot(canvas)
             }
             Step.BLOOMS_GROWING->{
-
+                drawBlooms()
+                drawSnapshot(canvas)
             }
             Step.MOVING_SNAPSHOT->{
-
+                movingSnapshot()
+                drawSnapshot(canvas)
             }
             Step.BLOOMS_FALLING->{
-
+                drawFallingBloom(canvas)
+                drawSnapshot(canvas)
             }
         }
         canvas.restore()
+    }
+
+    private fun drawFallingBloom(canvas: Canvas) {
+        var iterator= fallingBlooms!!.iterator()
+        canvas.save()
+        canvas.translate(bloomDx!!,bloomDy!!)
+        while (iterator.hasNext()){
+            val bloom = iterator.next()
+            if (!bloom.fall(canvas, fMaxY!!)){
+                iterator.remove()
+                TreeMaker.recycleBloom(bloom)
+            }
+        }
+        canvas.restore()
+        if (fallingBlooms!!.size<3){
+            TreeMaker.fillFallingBloom(fallingBlooms!!,CommonUtil.random(1,2))
+        }
+    }
+
+    private fun movingSnapshot() {
+        if (xoffset!!>maxoffset!!){
+            step=Step.BLOOMS_FALLING
+        }else{
+            xoffset=xoffset!!+4f
+        }
+    }
+
+    private fun drawBlooms() {
+       while (growingBlooms!!.size< BLOOMING_NUM&&!cacheBlooms!!.isEmpty()){
+            growingBlooms!!.add(cacheBlooms!!.pop())
+       }
+        var iterator=growingBlooms!!.iterator()
+        treeSnapShot!!.canvas!!.save()
+        treeSnapShot!!.canvas!!.translate(branchesDx!!,branchesDy!!)
+        while (iterator.hasNext()){
+            var bloom=iterator.next()
+            if (!bloom.grow(treeSnapShot!!.canvas!!)){
+                iterator.remove()
+            }
+        }
+        treeSnapShot!!.canvas!!.restore()
+        if(growingBranches!!.isEmpty()&& cacheBlooms!!.isEmpty()){
+            step=Step.MOVING_SNAPSHOT
+        }
     }
 
     private fun drawSnapshot(canvas: Canvas) {

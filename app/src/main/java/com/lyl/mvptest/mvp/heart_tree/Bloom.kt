@@ -7,11 +7,11 @@ import android.graphics.Color
  * User: lyl
  * Date: 2019/7/26 21:05
  */
-class Bloom {
+open class Bloom {
 
     companion object {
         var sMaxScale = 0.2f
-//        var sMaxRadius = Math.round(sMaxScale * Heart.getRadius())
+        var sMaxRadius = Math.round(sMaxScale * Heart.getRadius())
         var sFactor: Float? = null
 
         /**
@@ -22,7 +22,7 @@ class Bloom {
         public fun initDisplayParam(resolutionFactor: Float) {
             sFactor = resolutionFactor
             sMaxScale = 0.2f * resolutionFactor
-//            sMaxRadius = Math.round(sMaxScale * Heart.getRadius())
+            sMaxRadius = Math.round(sMaxScale * Heart.getRadius())
         }
     }
 
@@ -38,7 +38,7 @@ class Bloom {
         this.angle = CommonUtil.random(360).toFloat()
     }
 
-    public fun frow(canvas: Canvas): Boolean {
+    public fun grow(canvas: Canvas): Boolean {
         if (scale!! <= sMaxScale) {
             if (isOdd) {
                 scale = scale!! + 0.0125f * sFactor!!
@@ -52,7 +52,7 @@ class Bloom {
     }
 
     fun getRadius(): Float {
-//        return Heart.getRadius() * scale!!
+        return Heart.getRadius() * scale!!
         return  0f
     }
 
@@ -66,7 +66,7 @@ class Bloom {
         canvas.saveLayerAlpha(-r, -r, r, r, Color.alpha(color!!))
         canvas.rotate(angle!!)
         canvas.scale(scale!!, scale!!)
-//        canvas.drawPath(Heart.getPath(), paint)
+        canvas.drawPath(Heart.getPath(), paint)
         canvas.restore()
         canvas.restore()
     }

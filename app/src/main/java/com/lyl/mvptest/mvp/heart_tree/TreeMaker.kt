@@ -1,12 +1,29 @@
 package com.lyl.mvptest.mvp.heart_tree
 
+import java.util.*
+import kotlin.collections.ArrayList
+
 /**
  * User: lyl
  * Date: 2019-07-26 16:28
  */
 class TreeMaker{
 
+
+
     companion object {
+
+        private var r:Float?=null
+        private var c:Float?=null
+
+        private var p:Int?=null
+        private var sRecycleBlooms= arrayOfNulls<FallingBloom>(8)
+
+        public fun init(canvasHeight:Int,crownRadiusFactor:Float){
+            r=canvasHeight*crownRadiusFactor
+            c= r!! *1.35f
+        }
+
         public fun getBranches():Branch{
             var data = Array(11) { IntArray(10) }
             data[0] = intArrayOf(0, -1, 217, 490, 252, 60, 182, 10, 30, 100)
@@ -35,41 +52,43 @@ class TreeMaker{
         }
 
         public fun recycleBloom(bloom:FallingBloom){
-            if (p<sRecycleBlooms.length){
+            if (p!!<sRecycleBlooms.size){
                 while (true){
-                    var x=CommonUtil.random(-c,c)
-                    var y=CommonUtil.random(-c,c)
-                    if (isHeart(x,y,r)){
+                    var x=CommonUtil.random(-c!!,c!!)
+                    var y=CommonUtil.random(-c!!,c!!)
+                    if (isHeart(x,y,r!!)){
                         bloom.reset(x,-y)
                         break
                     }
                 }
-                sRecycleBlooms[p++]=bloom
+                p=p!!+1
+                sRecycleBlooms[p!!]=bloom
             }
         }
 
         public fun fillFallingBloom(blooms:ArrayList<FallingBloom>,num:Int){
             var n=0
-            while (n<num&&p>0){
-                blooms.add(sRecycleBlooms[--p])
+            while (n<num&&p!!>0){
+                blooms.add(sRecycleBlooms[p!!]!!)
+                p=p!!-1
                 n++
             }
             while (n<num){
-                var x=CommonUtil.random(-c,c)
-                var y=CommonUtil.random(-c,c)
-                if (isHeart(x,y,r)){
+                var x=CommonUtil.random(-c!!,c!!)
+                var y=CommonUtil.random(-c!!,c!!)
+                if (isHeart(x,y,r!!)){
                     blooms.add(FallingBloom(Point(x,-y)))
                     n++
                 }
             }
         }
 
-        public fun fillBloom(blooms:ArrayList<Bloom>,num:Int){
+        public fun fillBloom(blooms: LinkedList<Bloom>, num:Int){
             var n=0
             while (n<num){
-                var x=CommonUtil.random(-c,c)
-                var y=CommonUtil.random(-c,c)
-                if (isHeart(x,y,r)){
+                var x=CommonUtil.random(-c!!,c!!)
+                var y=CommonUtil.random(-c!!,c!!)
+                if (isHeart(x,y,r!!)){
                     blooms.add(Bloom(Point(x,-y)))
                     n++
                 }
