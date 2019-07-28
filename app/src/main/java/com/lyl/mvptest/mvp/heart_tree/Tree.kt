@@ -55,6 +55,7 @@ class Tree {
         //snapshot
         var snapshotWidth=816f* STAND_FACTOR* resolutionFactor!!
         treeSnapShot= SnapShot(Bitmap.createBitmap(Math.round(snapshotWidth),canvasHeight,Bitmap.Config.ARGB_8888))
+        snapShotDx=(canvasWidth-snapshotWidth)/2f
         //Branches
         var branchesWidth=375f* BRANCHES_FACTOR* resolutionFactor!!
         var branchesHeight=490* BRANCHES_FACTOR* resolutionFactor!!

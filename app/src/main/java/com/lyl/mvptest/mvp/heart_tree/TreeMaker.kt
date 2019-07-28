@@ -33,6 +33,58 @@ class TreeMaker{
 
             return branches[0]!!
         }
+
+        public fun recycleBloom(bloom:FallingBloom){
+            if (p<sRecycleBlooms.length){
+                while (true){
+                    var x=CommonUtil.random(-c,c)
+                    var y=CommonUtil.random(-c,c)
+                    if (isHeart(x,y,r)){
+                        bloom.reset(x,-y)
+                        break
+                    }
+                }
+                sRecycleBlooms[p++]=bloom
+            }
+        }
+
+        public fun fillFallingBloom(blooms:ArrayList<FallingBloom>,num:Int){
+            var n=0
+            while (n<num&&p>0){
+                blooms.add(sRecycleBlooms[--p])
+                n++
+            }
+            while (n<num){
+                var x=CommonUtil.random(-c,c)
+                var y=CommonUtil.random(-c,c)
+                if (isHeart(x,y,r)){
+                    blooms.add(FallingBloom(Point(x,-y)))
+                    n++
+                }
+            }
+        }
+
+        public fun fillBloom(blooms:ArrayList<Bloom>,num:Int){
+            var n=0
+            while (n<num){
+                var x=CommonUtil.random(-c,c)
+                var y=CommonUtil.random(-c,c)
+                if (isHeart(x,y,r)){
+                    blooms.add(Bloom(Point(x,-y)))
+                    n++
+                }
+            }
+        }
+
+        private fun isHeart(px:Float,py:Float,r:Float):Boolean{
+            //(x^2+y^2-1)^3-x^2*y^3=0
+            var x=px/r
+            var y=py/r
+            var sx=x*x
+            var sy=y*y
+            var a=sy+sx-1
+            return a*a*a-sx*sy*y<0
+        }
     }
 
 }
