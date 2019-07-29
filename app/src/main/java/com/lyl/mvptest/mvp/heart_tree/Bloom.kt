@@ -29,7 +29,7 @@ open class Bloom {
     var position: Point? = null
     var color: Int? = null
     var angle: Float? = null
-    var scale: Float? = null
+    var scale: Float? = 0f
     private var isOdd: Boolean = false
 
     constructor(position: Point) {
@@ -53,7 +53,6 @@ open class Bloom {
 
     fun getRadius(): Float {
         return Heart.getRadius() * scale!!
-        return  0f
     }
 
     private fun draw(canvas: Canvas) {

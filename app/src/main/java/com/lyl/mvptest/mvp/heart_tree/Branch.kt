@@ -11,7 +11,7 @@ import java.util.*
 public class Branch(data: IntArray) {
 
     companion object {
-        public var branchColor=0xFF775533
+        public var branchColor = 0xFF775533
     }
 
     private var cp = arrayOfNulls<Point>(3)
@@ -32,14 +32,14 @@ public class Branch(data: IntArray) {
         part = 1 / maxLength!!
     }
 
-    public fun grow(canvas: Canvas,scaleFactor:Float):Boolean{
-        if (currentLength< maxLength!!){
+    public fun grow(canvas: Canvas, scaleFactor: Float): Boolean {
+        if (currentLength < maxLength!!) {
             bezier(currentLength!! * part!!)
             draw(canvas, scaleFactor)
             radius = radius!! * 0.97f
             currentLength = currentLength!! + 1
             return true
-        }else{
+        } else {
             return false
         }
     }
@@ -53,12 +53,12 @@ public class Branch(data: IntArray) {
     }
 
     private fun draw(canvas: Canvas, scaleFactory: Float) {
-        var paint=CommonUtil.getPaint()
-        paint.color= branchColor.toInt()
+        var paint = CommonUtil.getPaint()
+        paint.color = branchColor.toInt()
         canvas.save()
         canvas.scale(scaleFactory, scaleFactory)
         canvas.translate(growX!!, growY!!)
-        canvas.drawCircle(0f, 0f, radius!!,paint)
+        canvas.drawCircle(0f, 0f, radius!!, paint)
         canvas.restore()
     }
 

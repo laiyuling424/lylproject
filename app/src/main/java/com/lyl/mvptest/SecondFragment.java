@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.lyl.mvptest.mvp.animation.AnimationActivity;
 import com.lyl.mvptest.mvp.cv.CvActivity;
 import com.lyl.mvptest.mvp.eventbus.EventBusActivity;
+import com.lyl.mvptest.mvp.heart_tree.HeartTreeActivity;
 import com.lyl.mvptest.mvp.huanfu.HuanfuActivity1;
 import com.lyl.mvptest.mvp.jetpack_0701_test.JetPackActivity;
 import com.lyl.mvptest.mvp.live_data_bus.LiveEventBusActivity1;
@@ -77,7 +78,7 @@ public class SecondFragment extends Fragment {
 
     }
 
-    @OnClick({R.id.btn1,R.id.btn2,R.id.btn3,R.id.btn4,R.id.btn5,R.id.btn6,R.id.btn7,R.id.btn8,R.id.btn9,R.id.btn10,R.id.btn11})
+    @OnClick({R.id.btn1,R.id.btn2,R.id.btn3,R.id.btn4,R.id.btn5,R.id.btn6,R.id.btn7,R.id.btn8,R.id.btn9,R.id.btn10,R.id.btn11,R.id.btn12})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn1:
@@ -112,6 +113,9 @@ public class SecondFragment extends Fragment {
                 break;
             case R.id.btn11:
                 startActivity(new Intent(getContext(), HuanfuActivity1.class));
+                break;
+            case R.id.btn12:
+                startActivity(new Intent(getContext(), HeartTreeActivity.class));
                 break;
         }
     }

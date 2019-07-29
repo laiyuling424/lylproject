@@ -7,24 +7,23 @@ import kotlin.collections.ArrayList
  * User: lyl
  * Date: 2019-07-26 16:28
  */
-class TreeMaker{
-
+class TreeMaker {
 
 
     companion object {
 
-        private var r:Float?=null
-        private var c:Float?=null
+        private var r: Float? = null
+        private var c: Float? = null
 
-        private var p:Int?=null
-        private var sRecycleBlooms= arrayOfNulls<FallingBloom>(8)
+        private var p: Int? = 0
+        private var sRecycleBlooms = arrayOfNulls<FallingBloom>(8)
 
-        public fun init(canvasHeight:Int,crownRadiusFactor:Float){
-            r=canvasHeight*crownRadiusFactor
-            c= r!! *1.35f
+        public fun init(canvasHeight: Int, crownRadiusFactor: Float) {
+            r = canvasHeight * crownRadiusFactor
+            c = r!! * 1.35f
         }
 
-        public fun getBranches():Branch{
+        public fun getBranches(): Branch {
             var data = Array(11) { IntArray(10) }
             data[0] = intArrayOf(0, -1, 217, 490, 252, 60, 182, 10, 30, 100)
             data[1] = intArrayOf(1, 0, 222, 310, 137, 227, 22, 210, 13, 100)
@@ -51,58 +50,58 @@ class TreeMaker{
             return branches[0]!!
         }
 
-        public fun recycleBloom(bloom:FallingBloom){
-            if (p!!<sRecycleBlooms.size){
-                while (true){
-                    var x=CommonUtil.random(-c!!,c!!)
-                    var y=CommonUtil.random(-c!!,c!!)
-                    if (isHeart(x,y,r!!)){
-                        bloom.reset(x,-y)
+        public fun recycleBloom(bloom: FallingBloom) {
+            if (p!! < sRecycleBlooms.size) {
+                while (true) {
+                    var x = CommonUtil.random(-c!!, c!!)
+                    var y = CommonUtil.random(-c!!, c!!)
+                    if (isHeart(x, y, r!!)) {
+                        bloom.reset(x, -y)
                         break
                     }
                 }
-                p=p!!+1
-                sRecycleBlooms[p!!]=bloom
+                p = p!! + 1
+                sRecycleBlooms[p!!] = bloom
             }
         }
 
-        public fun fillFallingBloom(blooms:ArrayList<FallingBloom>,num:Int){
-            var n=0
-            while (n<num&&p!!>0){
+        public fun fillFallingBloom(blooms: ArrayList<FallingBloom>, num: Int) {
+            var n = 0
+            while (n < num && p!! > 0) {
                 blooms.add(sRecycleBlooms[p!!]!!)
-                p=p!!-1
+                p = p!! - 1
                 n++
             }
-            while (n<num){
-                var x=CommonUtil.random(-c!!,c!!)
-                var y=CommonUtil.random(-c!!,c!!)
-                if (isHeart(x,y,r!!)){
-                    blooms.add(FallingBloom(Point(x,-y)))
+            while (n < num) {
+                var x = CommonUtil.random(-c!!, c!!)
+                var y = CommonUtil.random(-c!!, c!!)
+                if (isHeart(x, y, r!!)) {
+                    blooms.add(FallingBloom(Point(x, -y)))
                     n++
                 }
             }
         }
 
-        public fun fillBloom(blooms: LinkedList<Bloom>, num:Int){
-            var n=0
-            while (n<num){
-                var x=CommonUtil.random(-c!!,c!!)
-                var y=CommonUtil.random(-c!!,c!!)
-                if (isHeart(x,y,r!!)){
-                    blooms.add(Bloom(Point(x,-y)))
+        public fun fillBloom(blooms: LinkedList<Bloom>, num: Int) {
+            var n = 0
+            while (n < num) {
+                var x = CommonUtil.random(-c!!, c!!)
+                var y = CommonUtil.random(-c!!, c!!)
+                if (isHeart(x, y, r!!)) {
+                    blooms.add(Bloom(Point(x, -y)))
                     n++
                 }
             }
         }
 
-        private fun isHeart(px:Float,py:Float,r:Float):Boolean{
+        private fun isHeart(px: Float, py: Float, r: Float): Boolean {
             //(x^2+y^2-1)^3-x^2*y^3=0
-            var x=px/r
-            var y=py/r
-            var sx=x*x
-            var sy=y*y
-            var a=sy+sx-1
-            return a*a*a-sx*sy*y<0
+            var x = px / r
+            var y = py / r
+            var sx = x * x
+            var sy = y * y
+            var a = sy + sx - 1
+            return a * a * a - sx * sy * y < 0
         }
     }
 
