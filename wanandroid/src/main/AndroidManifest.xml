@@ -9,13 +9,15 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
+        android:name=".WanAdnroidApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/WanAndroid">
-        <activity android:name=".ui.activity.tixi_detail.TixiDetailActivity"></activity>
+        <activity android:name=".ui.activity.login.LoginActivity"></activity>
+        <activity android:name=".ui.activity.tixi_detail.TixiDetailActivity" />
         <activity
             android:name=".ui.activity.search.SearchActivity"
             android:theme="@style/WanAndroid.SearchActivity" />

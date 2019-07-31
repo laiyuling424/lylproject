@@ -1,5 +1,6 @@
 package com.lyl.wanandroid.http
 
+import com.lyl.wanandroid.ui.activity.login.LoginBean
 import com.lyl.wanandroid.ui.activity.search.SearchResponseListBean
 import com.lyl.wanandroid.ui.activity.search.SearchWordBean
 import com.lyl.wanandroid.ui.base.HttpResponse
@@ -77,4 +78,8 @@ interface Api {
     //项目列表详情列表
     @GET("project/list/{page}/json")
     fun getkindContentList(@Path("page") page: Int,@Query("cid") cid:Int): Observable<HttpResponse<KindContentListBean>>
+
+    //login
+    @POST("user/login")
+    fun login(@Query("username") username: String,@Query("password") password:String): Observable<HttpResponse<LoginBean>>
 }

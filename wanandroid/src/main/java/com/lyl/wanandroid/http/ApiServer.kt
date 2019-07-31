@@ -1,6 +1,7 @@
 package com.lyl.wanandroid.http
 
 import com.lyl.wanandroid.WanAdnroidApplication
+import com.lyl.wanandroid.http.cookie.CookieJarImpl
 import com.lyl.wanandroid.util.MyLog
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,6 +42,8 @@ object ApiServer {
                 .readTimeout(time, TimeUnit.MILLISECONDS)
                 .writeTimeout(time, TimeUnit.MILLISECONDS)
                 .addInterceptor(loggingInterceptor)
+                .cookieJar(CookieJarImpl(com.lyl.wanandroid.http.cookie.PersistentCookieStore(WanAdnroidApplication.getContext())))
+
 //                .cookieJar(CookiesManager())
 //                .addInterceptor { chain ->
 //                    //添加统一请求头
@@ -64,19 +67,4 @@ object ApiServer {
                 .build()
     }
 
-    private class CookiesManager : CookieJar {
-        private val cookieStore = PersistentCookieStore(WanAdnroidApplication.context)
-
-        override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
-            if (cookies != null && cookies.size > 0) {
-                for (item in cookies) {
-                    cookieStore.add(url, item)
-                }
-            }
-        }
-
-        override fun loadForRequest(url: HttpUrl): List<Cookie> {
-            return cookieStore[url]
-        }
-    }
 }

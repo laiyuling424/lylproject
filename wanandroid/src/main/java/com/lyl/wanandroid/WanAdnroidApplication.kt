@@ -8,19 +8,22 @@ import android.content.Context
  * Date: 2019-06-11 14:54
  */
 
-open class WanAdnroidApplication: Application() {
+open class WanAdnroidApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        context=this
+        context = this
     }
+
 
     companion object {
-
-        lateinit var context:Context
-
-        fun getGlobalContext():Context{
-            return context
+        private var context:Application? = null
+        fun getContext():Context{
+            return context!!
         }
+
     }
+
+
+
 }
