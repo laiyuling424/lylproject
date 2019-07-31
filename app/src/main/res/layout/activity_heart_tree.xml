@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvp.heart_tree.HeartTreeActivity">
+    tools:context=".mvp.secondfragment.heart_tree.HeartTreeActivity">
 
-    <com.lyl.mvptest.mvp.heart_tree.TreeView
+    <com.lyl.mvptest.mvp.secondfragment.heart_tree.TreeView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"

@@ -6,9 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -20,27 +19,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".mvp.huanfu.HuanfuActivity3"></activity>
-        <activity android:name=".mvp.huanfu.HuanfuActivity2" />
-        <activity android:name=".mvp.huanfu.HuanfuActivity1" />
+        <activity android:name=".mvp.secondfragment.loading.LoadingActivity"></activity>
+        <activity android:name=".mvp.secondfragment.huanfu.HuanfuActivity3" />
+        <activity android:name=".mvp.secondfragment.huanfu.HuanfuActivity2" />
+        <activity android:name=".mvp.secondfragment.huanfu.HuanfuActivity1" />
         <activity
-            android:name=".mvp.heart_tree.HeartTreeActivity"
+            android:name=".mvp.secondfragment.heart_tree.HeartTreeActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".mvp.tree.TreeActivity" />
-        <activity android:name=".mvp.eventbus.EventBusActivity2" />
-        <activity android:name=".mvp.eventbus.EventBusActivity" />
-        <activity android:name=".mvp.live_data_bus.AAAActivity" />
-        <activity android:name=".mvp.live_data_bus.LiveEventBusActivity2" />
-        <activity android:name=".mvp.live_data_bus.LiveEventBusActivity1" />
-        <activity android:name=".mvp.jetpack_0701_test.JetPackActivity" />
-        <activity android:name=".mvp.recycleview.RecycleViewActivity" />
-        <activity android:name=".mvp.textclock_view.TextClockViewActivity" />
-        <activity android:name=".mvp.radar_view.RadarViewActivity" />
-        <activity android:name=".mvp.cv.CvTest2Activity" />
-        <activity android:name=".mvp.suefaceview.DrawActivity" />
-        <activity android:name=".mvp.cv.CvTest1Activity" />
-        <activity android:name=".mvp.cv.CvActivity" />
-        <activity android:name=".mvp.animation.AnimationActivity" />
+        <activity android:name=".mvp.secondfragment.tree.TreeActivity" />
+        <activity android:name=".mvp.secondfragment.eventbus.EventBusActivity2" />
+        <activity android:name=".mvp.secondfragment.eventbus.EventBusActivity" />
+        <activity android:name=".mvp.secondfragment.live_data_bus.AAAActivity" />
+        <activity android:name=".mvp.secondfragment.live_data_bus.LiveEventBusActivity2" />
+        <activity android:name=".mvp.secondfragment.live_data_bus.LiveEventBusActivity1" />
+        <activity android:name=".mvp.secondfragment.jetpack_0701_test.JetPackActivity" />
+        <activity android:name=".mvp.secondfragment.recycleview.RecycleViewActivity" />
+        <activity android:name=".mvp.secondfragment.textclock_view.TextClockViewActivity" />
+        <activity android:name=".mvp.secondfragment.radar_view.RadarViewActivity" />
+        <activity android:name=".mvp.secondfragment.cv.CvTest2Activity" />
+        <activity android:name=".mvp.secondfragment.suefaceview.DrawActivity" />
+        <activity android:name=".mvp.secondfragment.cv.CvTest1Activity" />
+        <activity android:name=".mvp.secondfragment.cv.CvActivity" />
+        <activity android:name=".mvp.secondfragment.animation.AnimationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,7 +50,7 @@
         </activity>
         <activity android:name=".mvp.movie.MovieDetailActivity" />
 
-        <receiver android:name=".mvp.appWidgetProvider.MyAppWidgetProvider">
+        <receiver android:name=".mvp.secondfragment.appWidgetProvider.MyAppWidgetProvider">
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/appwidget_provider_info" />

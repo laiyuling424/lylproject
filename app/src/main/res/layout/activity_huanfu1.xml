@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvp.huanfu.HuanfuActivity1"
+    tools:context=".mvp.secondfragment.huanfu.HuanfuActivity1"
     android:background="@drawable/pic1">
 
     <Button

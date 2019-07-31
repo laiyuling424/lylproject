@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvp.tree.TreeActivity">
+    tools:context=".mvp.secondfragment.tree.TreeActivity">
 
-    <com.lyl.mvptest.mvp.tree.TreeView
+    <com.lyl.mvptest.mvp.secondfragment.tree.TreeView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"

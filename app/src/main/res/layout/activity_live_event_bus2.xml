@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvp.live_data_bus.LiveEventBusActivity2">
+    tools:context=".mvp.secondfragment.live_data_bus.LiveEventBusActivity2">
 
     <Button
         android:layout_width="wrap_content"
