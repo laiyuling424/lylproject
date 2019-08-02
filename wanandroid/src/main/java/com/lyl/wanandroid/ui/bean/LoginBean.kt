@@ -1,4 +1,4 @@
-package com.lyl.wanandroid.ui.activity.login
+package com.lyl.wanandroid.ui.bean
 
 /**
  * User: lyl

@@ -20,7 +20,16 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import com.lyl.wanandroid.R
+import com.lyl.wanandroid.WanAdnroidApplication
+import com.lyl.wanandroid.http.ApiServer
+import com.lyl.wanandroid.ui.bean.LoginBean
 import com.lyl.wanandroid.ui.activity.search.SearchActivity
+import com.lyl.wanandroid.ui.base.ExecuteOnceObserver
+import com.lyl.wanandroid.util.LiveDataBus
+import com.lyl.wanandroid.util.MyLog
+import com.lyl.wanandroid.util.SharedPreferencesUtil
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 class MainActivity : BaseActivity() {
@@ -35,11 +44,35 @@ class MainActivity : BaseActivity() {
         get() = com.lyl.wanandroid.R.layout.activity_main
 
     override fun loadData() {
-
+        login()
     }
 
     override fun initView() {
         setupToolbar()
+    }
+
+    private fun login(){
+        ApiServer.getApiServer()
+                .login(SharedPreferencesUtil.getString(WanAdnroidApplication.getContext(),"username","")!!,
+                        SharedPreferencesUtil.getString(WanAdnroidApplication.getContext(),"password","")!!)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
+                    MyLog.Logd("login  success")
+                    if (it.errorCode != 0) {
+                        SharedPreferencesUtil.putBoolean(WanAdnroidApplication.getContext(),"islanding",false)
+
+                    } else {
+                        SharedPreferencesUtil.putBoolean(WanAdnroidApplication.getContext(),"islanding",true)
+
+                        LiveDataBus.getInstance().with("userdata", LoginBean::class.java).postValue(it.data)
+                        LiveDataBus.getInstance().with("userName", String::class.java).postValue(it.data!!.username)
+                    }
+                }, onExecuteOnceError = {
+                    MyLog.Logd("error=" + it.message)
+                }, onExecuteOnceComplete = {
+
+                }))
     }
 
     protected fun setupToolbar() {
@@ -66,7 +99,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(com.lyl.wanandroid.R.layout.activity_main)
+
         val navView: BottomNavigationView = findViewById(com.lyl.wanandroid.R.id.nav_view)
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)

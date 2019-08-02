@@ -1,9 +1,11 @@
 package com.lyl.wanandroid.http
 
-import com.lyl.wanandroid.ui.activity.login.LoginBean
+import com.lyl.wanandroid.ui.bean.LoginBean
 import com.lyl.wanandroid.ui.activity.search.SearchResponseListBean
 import com.lyl.wanandroid.ui.activity.search.SearchWordBean
 import com.lyl.wanandroid.ui.base.HttpResponse
+import com.lyl.wanandroid.ui.bean.CollectArticleListBean
+import com.lyl.wanandroid.ui.bean.CollectWebBean
 import com.lyl.wanandroid.ui.fragment.first.main.MainArticleBodyBean
 import com.lyl.wanandroid.ui.fragment.first.main.MianBannerBean
 import com.lyl.wanandroid.ui.fragment.first.project.KindBean
@@ -14,6 +16,7 @@ import com.lyl.wanandroid.ui.fragment.first.usefulweb.UsefulWebBean
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatContentListBean
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicListBeanResponse
 import io.reactivex.Observable
+import okhttp3.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -82,4 +85,45 @@ interface Api {
     //login
     @POST("user/login")
     fun login(@Query("username") username: String,@Query("password") password:String): Observable<HttpResponse<LoginBean>>
+
+    //register
+    @POST("user/register")
+    fun register(@Query("username") username: String,@Query("password") password:String,@Query("repassword") repassword:String): Observable<Response>
+
+    //logout
+    @GET("user/register")
+    fun logout(): Observable<Response>
+
+    //收藏文章列表
+    @GET("lg/collect/list/{page}/json")
+    fun collectArticleList(@Path("page") page: Int):  Observable<HttpResponse<CollectArticleListBean>>
+
+    //收藏站内文章
+    @POST("lg/collect/{id}/json")
+    fun collectInnerArticle():  Observable<Response>
+
+    //收藏站外文章  title，author，link
+    @POST("lg/collect/add/json")
+    fun collectOutArticle(@Query("title") title: String,@Query("author") author: String,@Query("link") link: String):  Observable<Response>
+
+    //取消收藏
+    //TODO 没有做
+    @POST("lg/collect/{id}/json")
+    fun uncollect():  Observable<Response>
+
+    //收藏网站列表
+    @GET("lg/collect/usertools/json")
+    fun collectWebList():  Observable<HttpResponse<List<CollectWebBean>>>
+
+    //收藏网址
+    @POST("lg/collect/addtool/json")
+    fun collectWeb(@Query("name") name: String,@Query("link") link: String):  Observable<Response>
+
+    //编辑收藏网站
+    @GET("lg/collect/updatetool/json")
+    fun editCollectWeb(@Query("id") id: String,@Query("name") name: String,@Query("link") link: String):  Observable<Response>
+
+    //删除收藏网站
+    @GET("lg/collect/deletetool/json")
+    fun delectCollectWeb(@Query("id") id: String):  Observable<Response>
 }

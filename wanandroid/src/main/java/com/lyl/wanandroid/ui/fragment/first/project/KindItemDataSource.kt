@@ -1,11 +1,8 @@
 package com.lyl.wanandroid.ui.fragment.first.project
 
-import androidx.paging.DataSource
 import androidx.paging.ItemKeyedDataSource
-import com.lyl.wanandroid.http.Api
 import com.lyl.wanandroid.http.ApiServer
 import com.lyl.wanandroid.ui.base.ExecuteOnceObserver
-import com.lyl.wanandroid.ui.test_jetpack.paging.ApiGenerate
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

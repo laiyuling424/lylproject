@@ -1,5 +1,7 @@
 package com.lyl.wanandroid.http.cookie;
 
+import com.lyl.wanandroid.util.MyLog;
+
 import java.util.List;
 
 import okhttp3.Cookie;
@@ -30,6 +32,7 @@ public class CookieJarImpl implements CookieJar {
 
     @Override
     public synchronized List<Cookie> loadForRequest(HttpUrl url) {
+        MyLog.INSTANCE.Logd("this is cookie:"+this.cookieStore.get(urll));
         return this.cookieStore.get(urll);
     }
 

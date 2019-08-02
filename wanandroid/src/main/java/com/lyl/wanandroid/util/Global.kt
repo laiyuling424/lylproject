@@ -45,7 +45,7 @@ fun showToast(content: String) {
 //fun showToastOnUiThread(content: String, duration: Int = Toast.LENGTH_SHORT) {
 //    GifFun.getHandler().post {
 //        if (toast == null) {
-//            toast = Toast.makeText(GifFun.getContext(), content, duration)
+//            toast = Toast.makeText(WanAdnroidApplication.getContext(), content, duration)
 //        } else {
 //            toast?.setText(content)
 //        }

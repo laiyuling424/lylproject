@@ -16,7 +16,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/WanAndroid">
-        <activity android:name=".ui.activity.login.LoginActivity"></activity>
+        <activity android:name=".ui.activity.UpdataUserDataActivity"></activity>
+        <activity android:name=".ui.activity.ChangePasswordActivity" />
+        <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".ui.activity.myissue.MyIssueActivity" />
+        <activity android:name=".ui.activity.myproject.MyProjectActivity" />
+        <activity android:name=".ui.activity.collectweb.CollectWebActivity" />
+        <activity android:name=".ui.activity.collectarticle.CollectArticleActivity" />
+        <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.tixi_detail.TixiDetailActivity" />
         <activity
             android:name=".ui.activity.search.SearchActivity"
