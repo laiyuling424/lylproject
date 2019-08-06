@@ -34,6 +34,8 @@ class SettingActivity : BaseActivity() {
         } else {
             loginout.text = "登陆"
         }
+
+        tv_clear.text = DataCleanManager.getTotalCacheSize(this@SettingActivity)
     }
 
     @OnClick(R.id.img_back, R.id.ll_clear, R.id.ll_changepassword, R.id.ll_updatauserdata, R.id.loginout)

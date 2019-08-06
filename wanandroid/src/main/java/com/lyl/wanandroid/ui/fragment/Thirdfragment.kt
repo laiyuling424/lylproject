@@ -66,13 +66,13 @@ class Thirdfragment : BaseFragment() {
 
         LiveDataBus.getInstance().with("userWebNum", Int::class.java).observe(
                 this@Thirdfragment, Observer<Int> {
-            username.text = it.toString()
+            web_num.text = it.toString()
         }
         )
 
         LiveDataBus.getInstance().with("userName", String::class.java).observe(
                 this@Thirdfragment, Observer<String> {
-            web_num.text = it
+            username.text = it
         }
         )
 
