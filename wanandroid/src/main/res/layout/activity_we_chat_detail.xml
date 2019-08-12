@@ -33,19 +33,17 @@
             android:layout_centerInParent="true"
             android:textColor="#fff"
             android:textSize="19sp"
+            android:lines="1"
             android:text="标题"/>
 
-        <TextView
-            android:id="@+id/tv_right_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/collection"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:textColor="#fff"
-            android:textSize="16sp"
             android:layout_marginRight="10dp"
-            android:visibility="gone"
-            />
+            android:src="@drawable/uncollection"/>
 
     </RelativeLayout>
 

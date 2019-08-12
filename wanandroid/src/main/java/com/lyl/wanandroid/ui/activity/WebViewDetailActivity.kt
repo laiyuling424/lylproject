@@ -8,6 +8,8 @@ import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import butterknife.ButterKnife
+import butterknife.OnClick
 import com.lyl.wanandroid.Constants
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseActivity
@@ -26,17 +28,29 @@ class WebViewDetailActivity : BaseActivity() {
     }
 
     override fun initView() {
-
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_we_chat_detail)
-
-        title_name.text = intent.getStringExtra(Constants.CONTENT_TITLE)
+        ButterKnife.bind(this@WebViewDetailActivity)
+        if (intent.getStringExtra(Constants.CONTENT_TITLE).length > 15) {
+            title_name.text = intent.getStringExtra(Constants.CONTENT_TITLE).substring(0, 13) + "..."
+        } else title_name.text = intent.getStringExtra(Constants.CONTENT_TITLE)
         url = intent.getStringExtra(Constants.CONTENT_URL)
+        collection.tag = -1
+
         init(url!!)
     }
+
+    @OnClick(R.id.collection)
+    fun collection() {
+        // 0未收藏 1收藏
+        when (collection.tag as Int) {
+            -1, 0 -> {
+
+            }
+            1 -> {
+
+            }
+        }
+    }
+
 
     fun img_back(view: View) {
         if (webview.url.equals(url))
