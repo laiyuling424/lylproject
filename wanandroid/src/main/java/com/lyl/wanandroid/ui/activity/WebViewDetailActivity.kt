@@ -10,9 +10,11 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import butterknife.ButterKnife
 import butterknife.OnClick
+import com.bumptech.glide.Glide
 import com.lyl.wanandroid.Constants
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseActivity
+import com.lyl.wanandroid.util.CollectionUtil
 import com.lyl.wanandroid.util.MyLog
 import kotlinx.android.synthetic.main.activity_we_chat_detail.*
 
@@ -43,10 +45,18 @@ class WebViewDetailActivity : BaseActivity() {
         // 0未收藏 1收藏
         when (collection.tag as Int) {
             -1, 0 -> {
-
+//                collection.tag=null
+//                Glide.with(this).load(R.drawable.collection).into(collection)
+                collection.setImageResource(R.drawable.collection)
+                collection.tag=1
+                CollectionUtil.collectionWanandroidArticle(intent.getIntExtra(Constants.CONTENT_Id,-1))
             }
             1 -> {
-
+//                collection.tag=null
+//                Glide.with(this).load(R.drawable.uncollection).into(collection)
+                collection.setImageResource(R.drawable.uncollection)
+                collection.tag=0
+                CollectionUtil.uncollectArtilceList(intent.getIntExtra(Constants.CONTENT_Id,-1))
             }
         }
     }

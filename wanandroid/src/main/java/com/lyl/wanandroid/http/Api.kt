@@ -17,6 +17,7 @@ import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatContentListBean
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicListBeanResponse
 import io.reactivex.Observable
 import okhttp3.Response
+import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -88,11 +89,11 @@ interface Api {
 
     //register
     @POST("user/register")
-    fun register(@Query("username") username: String,@Query("password") password:String,@Query("repassword") repassword:String): Observable<Response>
+    fun register(@Query("username") username: String,@Query("password") password:String,@Query("repassword") repassword:String): Observable<ResponseBody>
 
     //logout
-    @GET("user/register")
-    fun logout(): Observable<Response>
+    @GET("user/logout/json")
+    fun logout(): Observable<ResponseBody>
 
     //收藏文章列表
     @GET("lg/collect/list/{page}/json")
@@ -100,16 +101,19 @@ interface Api {
 
     //收藏站内文章
     @POST("lg/collect/{id}/json")
-    fun collectInnerArticle():  Observable<Response>
+    fun collectInnerArticle(@Path("id") id: Int):  Observable<ResponseBody>
 
     //收藏站外文章  title，author，link
     @POST("lg/collect/add/json")
-    fun collectOutArticle(@Query("title") title: String,@Query("author") author: String,@Query("link") link: String):  Observable<Response>
+    fun collectOutArticle(@Query("title") title: String,@Query("author") author: String,@Query("link") link: String):  Observable<ResponseBody>
 
-    //取消收藏
+    //收藏页面取消收藏
     //TODO 没有做
     @POST("lg/collect/{id}/json")
-    fun uncollect():  Observable<Response>
+    fun uncollectCollectionList(@Path("id") page: Int):  Observable<ResponseBody>
+    //文章列表取消收藏
+    @POST("lg/uncollect_originId/{id}/json")
+    fun uncollectArtilceList(@Path("id") page: Int):  Observable<ResponseBody>
 
     //收藏网站列表
     @GET("lg/collect/usertools/json")
@@ -117,13 +121,13 @@ interface Api {
 
     //收藏网址
     @POST("lg/collect/addtool/json")
-    fun collectWeb(@Query("name") name: String,@Query("link") link: String):  Observable<Response>
+    fun collectWeb(@Query("name") name: String,@Query("link") link: String):  Observable<ResponseBody>
 
     //编辑收藏网站
     @GET("lg/collect/updatetool/json")
-    fun editCollectWeb(@Query("id") id: String,@Query("name") name: String,@Query("link") link: String):  Observable<Response>
+    fun editCollectWeb(@Query("id") id: String,@Query("name") name: String,@Query("link") link: String):  Observable<ResponseBody>
 
     //删除收藏网站
     @GET("lg/collect/deletetool/json")
-    fun delectCollectWeb(@Query("id") id: String):  Observable<Response>
+    fun delectCollectWeb(@Query("id") id: Int):  Observable<ResponseBody>
 }

@@ -40,7 +40,7 @@ class CollectWebActivity : BaseActivity() {
         get() = R.layout.activity_collect_web
 
     override fun loadData() {
-        if (SharedPreferencesUtil.getBoolean(WanAdnroidApplication.getContext(), "island", false)) {
+        if (SharedPreferencesUtil.getBoolean(WanAdnroidApplication.getContext(), "islanding", false)) {
             viewModel = getViewModel()
             viewModel!!.collectWebList.observe(this, Observer(adapter!!::submitList))
         } else {

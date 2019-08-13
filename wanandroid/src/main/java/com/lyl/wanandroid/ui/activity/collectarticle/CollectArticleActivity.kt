@@ -35,7 +35,7 @@ class CollectArticleActivity : BaseActivity() {
         get() = R.layout.activity_collect_article
 
     override fun loadData() {
-        if (SharedPreferencesUtil.getBoolean(WanAdnroidApplication.getContext(), "island", false)) {
+        if (SharedPreferencesUtil.getBoolean(WanAdnroidApplication.getContext(), "islanding", false)) {
             viewModel = getViewModel()
             viewModel!!.collectArticleList.observe(this, Observer(adapter!!::submitList))
         } else {

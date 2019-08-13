@@ -25,6 +25,8 @@ class UsefulWebFragment : BaseFragment() , OnItemClickListener<String> {
         val intent = Intent()
 
         intent.putExtra(Constants.CONTENT_URL, this!!.listUsefulWeb!![position].link)
+        intent.putExtra(Constants.CONTENT_TITLE, this!!.listUsefulWeb!![position].name)
+        intent.putExtra(Constants.CONTENT_Id, this!!.listUsefulWeb!![position].id)
 
         MyLog.Logd("url===>"+this!!.listUsefulWeb!![position].link)
 
