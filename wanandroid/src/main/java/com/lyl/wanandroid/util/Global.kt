@@ -40,15 +40,15 @@ fun showToast(content: String) {
  * @param duration
  * Toast显示的时长
  */
-//@SuppressLint("ShowToast")
-//@JvmOverloads
-//fun showToastOnUiThread(content: String, duration: Int = Toast.LENGTH_SHORT) {
-//    GifFun.getHandler().post {
-//        if (toast == null) {
-//            toast = Toast.makeText(WanAdnroidApplication.getContext(), content, duration)
-//        } else {
-//            toast?.setText(content)
-//        }
-//        toast?.show()
-//    }
-//}
+@SuppressLint("ShowToast")
+@JvmOverloads
+fun showToastOnUiThread(content: String, duration: Int = Toast.LENGTH_SHORT) {
+    WanAdnroidApplication.getHandler().post {
+        if (toast == null) {
+            toast = Toast.makeText(WanAdnroidApplication.getContext(), content, duration)
+        } else {
+            toast?.setText(content)
+        }
+        toast?.show()
+    }
+}

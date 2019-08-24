@@ -21,7 +21,7 @@ class KindContentAdapter(var context: Context, var list: List<KindContentBean>) 
     var onItemClickListenerTwo: OnItemClickListenerTwo<KindContentBean>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KindContentViewHolder {
-        return KindContentViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.kindcontent_list_itemview, null, false))
+        return KindContentViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.kindcontent_list_itemview, parent, false))
     }
 
     override fun getItemCount(): Int {
