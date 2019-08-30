@@ -1,3 +1,6 @@
+## 项目
+* 项目在wanandroid library中
+
 ## 功能
 大概地做了一下，已实现的功能如下：
 * 首页，包含顶部轮播图和数据列表
@@ -19,13 +22,29 @@
 
 
 ## 效果图
-<img src="https://github.com/laiyuling424/lylproject/tree/master/wanandroid/img/img1.jpg" width=400>
-<img src="https://github.com/laiyuling424/lylproject/tree/master/wanandroid/img/img2.jpg" width=400>
-<img src="https://github.com/laiyuling424/lylproject/tree/master/wanandroid/img/img3.jpg" width=400>
-<img src="https://github.com/laiyuling424/lylproject/tree/master/wanandroid/img/img4.jpg" width=400>
-<img src="https://github.com/laiyuling424/lylproject/tree/master/wanandroid/img/img5.jpg" width=400>
-<img src="https://github.com/laiyuling424/lylproject/tree/master/wanandroid/img/img6.jpg" width=400>
-<img src="https://github.com/laiyuling424/lylproject/tree/master/wanandroid/img/img7.jpg" width=400>
+
+<p align="center">
+	<img src="https://github.com/laiyuling424/lylproject/blob/master/images/img1.jpg"  height="480" width="240">
+</p>
+<p align="center">
+	<img src="https://github.com/laiyuling424/lylproject/blob/master/images/img2.jpg"  height="480" width="240">
+</p>
+<p align="center">
+	<img src="https://github.com/laiyuling424/lylproject/blob/master/images/img3.jpg"  height="480" width="240">
+</p>
+<p align="center">
+	<img src="https://github.com/laiyuling424/lylproject/blob/master/images/img4.jpg"  height="480" width="240">
+</p>
+<p align="center">
+	<img src="https://github.com/laiyuling424/lylproject/blob/master/images/img5.jpg"  height="480" width="240">
+</p>
+<p align="center">
+	<img src="https://github.com/laiyuling424/lylproject/blob/master/images/img6.jpg"  height="480" width="240">
+</p>
+<p align="center">
+	<img src="https://github.com/laiyuling424/lylproject/blob/master/images/img7.jpg"  height="480" width="240">
+</p>
+
 
 
 ## 感谢
