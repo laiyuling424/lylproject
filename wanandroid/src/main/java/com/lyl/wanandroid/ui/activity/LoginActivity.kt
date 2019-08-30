@@ -47,6 +47,21 @@ class LoginActivity : AppCompatActivity() {
 
                     }))
         }
+
+
+        login.setOnClickListener {
+            ApiServer.getApiServer()
+                    .register(register_username.text.toString(), register_password.text.toString(), register_repassword.text.toString())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+                    .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
+                        MyLog.Logd("register  success")
+                    }, onExecuteOnceError = {
+                        MyLog.Logd("error=" + it.message)
+                    }, onExecuteOnceComplete = {
+
+                    }))
+        }
     }
 
 
