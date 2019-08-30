@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 
     <application
         android:name=".MyApplication"
@@ -36,9 +37,7 @@
         <activity android:name=".mvp.secondfragment.recycleview.RecycleViewActivity" />
         <activity android:name=".mvp.secondfragment.textclock_view.TextClockViewActivity" />
         <activity android:name=".mvp.secondfragment.radar_view.RadarViewActivity" />
-        <activity android:name=".mvp.secondfragment.cv.CvTest2Activity" />
         <activity android:name=".mvp.secondfragment.suefaceview.DrawActivity" />
-        <activity android:name=".mvp.secondfragment.cv.CvTest1Activity" />
         <activity android:name=".mvp.secondfragment.cv.CvActivity" />
         <activity android:name=".mvp.secondfragment.animation.AnimationActivity" />
         <activity android:name=".MainActivity">

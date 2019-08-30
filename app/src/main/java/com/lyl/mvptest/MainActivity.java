@@ -1,16 +1,10 @@
 package com.lyl.mvptest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
 import com.lyl.mvptest.adapter.ViewPagerAdapter;
-import com.lyl.mvptest.config.TestConfig;
-import com.lyl.mvptest.test.annotation.test.TestAnnotation;
 import com.lyl.mvptest.widget.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -42,12 +36,6 @@ public class MainActivity extends AppCompatActivity {
         init();
 
 //        if (TestConfig.outputTestAnnotationLog)  testAnnotation();
-    }
-
-    private void testAnnotation() {
-        TestAnnotation testAnnotation=new TestAnnotation();
-        testAnnotation.aa();
-        testAnnotation.gg();
     }
 
     private void init() {

@@ -12,7 +12,7 @@ class ThreadPoolManager {
     companion object {
         private var threadPoolManager = ThreadPoolManager()
 
-        public fun getInstance(): ThreadPoolManager{
+        public fun getInstance(): ThreadPoolManager {
             return threadPoolManager
         }
     }
@@ -65,14 +65,14 @@ class ThreadPoolManager {
 
     public fun addTask(runnable: Runnable) {
 //        if (runnable != null) {
-            mQueue!!.add(runnable)
+        mQueue!!.add(runnable)
 //        }
     }
 
     public fun addDelayTask(ht: HttpTask<*>) {
 //        if (ht != null) {
-            ht.setDelayTime(3000)
-            mDelayQueue.offer(ht)
+        ht.setDelayTime(3000)
+        mDelayQueue.offer(ht)
 //        }
     }
 

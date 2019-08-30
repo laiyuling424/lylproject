@@ -77,7 +77,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
     //opencv 4.1.0
-    implementation project(':cv410')
+//    implementation project(':cv410')
 
     //kotlin
     api "androidx.core:core-ktx:+"

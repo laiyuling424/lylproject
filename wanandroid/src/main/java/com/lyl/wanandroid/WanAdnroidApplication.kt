@@ -15,7 +15,6 @@ open class WanAdnroidApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = this
-        handler = Handler(Looper.getMainLooper())
     }
 
 

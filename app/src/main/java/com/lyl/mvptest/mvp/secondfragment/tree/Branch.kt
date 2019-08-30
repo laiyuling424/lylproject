@@ -2,7 +2,7 @@ package com.lyl.mvptest.mvp.secondfragment.tree
 
 import android.graphics.Canvas
 import android.graphics.Paint
-import org.opencv.core.Point
+
 import java.util.*
 
 /**
@@ -58,8 +58,8 @@ class Branch(data: IntArray) {
         var c0 = (1 - t) * (1 - t)
         var c1 = 2 * t * (1 - t)
         var c2 = t * t
-        growX = c0 * cp[0]!!.x.toFloat() + c1 * cp[1]!!.x.toFloat() + c2 * cp[2]!!.x.toFloat()
-        growY = c0 * cp[0]!!.y.toFloat() + c1 * cp[1]!!.y.toFloat() + c2 * cp[2]!!.y.toFloat()
+        growX = c0 * cp[0]!!.x!!.toFloat() + c1 * cp[1]!!.x!!.toFloat() + c2 * cp[2]!!.x!!.toFloat()
+        growY = c0 * cp[0]!!.y!!.toFloat() + c1 * cp[1]!!.y!!.toFloat() + c2 * cp[2]!!.y!!.toFloat()
     }
 
     fun addChild(branch: Branch?) {

@@ -24,10 +24,10 @@ public class CvActivity extends Activity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cv1:
-                startActivity(new Intent(CvActivity.this, CvTest1Activity.class));
+//                startActivity(new Intent(CvActivity.this, CvTest1Activity.class));
                 break;
             case R.id.cv1kt:
-                startActivity(new Intent(CvActivity.this, CvTest2Activity.class));
+//                startActivity(new Intent(CvActivity.this, CvTest2Activity.class));
                 break;
         }
     }
