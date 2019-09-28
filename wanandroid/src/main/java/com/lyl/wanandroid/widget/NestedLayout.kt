@@ -12,7 +12,7 @@ import androidx.core.view.ViewCompat
  * User: lyl
  * Date: 2019-07-11 11:44
  */
-class NestedLayout(context: Context?, attrs: AttributeSet?) : RelativeLayout(context, attrs), NestedScrollingParent2 {
+class NestedLayout(context: Context?, attrs: AttributeSet?) : LinearLayout(context, attrs), NestedScrollingParent2 {
 
     private lateinit var image_head: View
     lateinit var recyView: View
