@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <!--<activity android:name=".mvp.secondfragment.particle_animations.Particle_animations"></activity>-->
+        <activity android:name=".mvp.secondfragment.particle.ParticleExplosionActivity"></activity>
         <activity android:name=".mvp.secondfragment.loading.LoadingActivity" />
         <activity android:name=".mvp.secondfragment.huanfu.HuanfuActivity3" />
         <activity android:name=".mvp.secondfragment.huanfu.HuanfuActivity2" />

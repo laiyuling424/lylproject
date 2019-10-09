@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvp.secondfragment.particle_animations.Particle_animations">
+    android:id="@+id/content"
+    tools:context=".mvp.secondfragment.particle.Particle_animations">
 
     <ImageView
         android:id="@+id/image1"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@color/black"
+        android:src="@drawable/aa"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +21,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
-        android:background="@color/black"
+        android:src="@drawable/pic1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/image1" />

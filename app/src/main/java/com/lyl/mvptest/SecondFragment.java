@@ -80,7 +80,7 @@ public class SecondFragment extends Fragment {
 
     }
 
-    @OnClick({R.id.btn12,R.id.btn2,R.id.btn3,R.id.btn4,R.id.btn5,R.id.btn6,R.id.btn7,R.id.btn8,R.id.btn9,R.id.btn10,R.id.btn11,R.id.btn13})
+    @OnClick({R.id.btn12, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btn10, R.id.btn11, R.id.btn13, R.id.btn14})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn1:
@@ -120,6 +120,9 @@ public class SecondFragment extends Fragment {
                 startActivity(new Intent(getContext(), HeartTreeActivity.class));
                 break;
             case R.id.btn13:
+                startActivity(new Intent(getContext(), LoadingActivity.class));
+                break;
+            case R.id.btn14:
                 startActivity(new Intent(getContext(), LoadingActivity.class));
                 break;
         }
