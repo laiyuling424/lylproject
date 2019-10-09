@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-24 09:30
  */
 class SnapShot(bitmap: Bitmap) {

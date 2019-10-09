@@ -4,7 +4,7 @@ import androidx.paging.DataSource
 import com.lyl.wanandroid.ui.bean.CollectWebBean
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-08-02 15:48
  */
 class CollectWebItemDataSouceFactory:DataSource.Factory<Int,CollectWebBean>(){

@@ -19,7 +19,7 @@ import com.lyl.wanandroid.ui.fragment.first.tixi.NavigationListBean
 import com.lyl.wanandroid.widget.RecycleListView2
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-13 09:05
  */
 class NavigationAdapter(context: Context) : PagedListAdapter<NavigationListBean, NavigationAdapter.ProvinceViewHolder>(diffCallback),OnItemClickListener<Any> {

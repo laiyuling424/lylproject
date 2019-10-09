@@ -15,7 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-11 10:19
  */
 public class LylLinearLayout extends LinearLayout

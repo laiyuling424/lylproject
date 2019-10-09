@@ -7,7 +7,7 @@ import java.util.concurrent.Delayed
 import java.util.concurrent.TimeUnit
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-18 10:09
  */
 class HttpTask<T> : Runnable, Delayed {

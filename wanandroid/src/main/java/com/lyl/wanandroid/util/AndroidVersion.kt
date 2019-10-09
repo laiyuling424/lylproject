@@ -3,7 +3,7 @@ package com.lyl.wanandroid.util
 import android.os.Build
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-06-11 14:12
  *
  * 以更加可读的方式提供Android系统版本号的判断方法。

@@ -20,7 +20,7 @@ import com.lyl.wanandroid.R
 import java.util.ArrayList
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-05 15:52
  */
 abstract class BaseFragment : Fragment(), RequestLifecycle {

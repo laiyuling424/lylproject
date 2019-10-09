@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 /**
- * By: lyl
+ * Create By: lyl
  * Date: 2019-09-23 13:35
  */
 internal class TextItemDecoration : RecyclerView.ItemDecoration() {

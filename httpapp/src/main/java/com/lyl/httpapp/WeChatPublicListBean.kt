@@ -1,7 +1,7 @@
 package com.lyl.httpapp
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-18 14:34
  */
 data class WeChatPublicListBean(

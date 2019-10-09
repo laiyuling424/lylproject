@@ -7,7 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-01 15:51
  */
 class ProvinceItemDataSouce :ItemKeyedDataSource<Long,ProvinceBean>() {

@@ -7,7 +7,7 @@ import android.graphics.PorterDuff
 import kotlinx.android.synthetic.main.item_view.view.*
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019/7/26 21:06
  */
 class FallingBloom(position: Point) : Bloom(position) {

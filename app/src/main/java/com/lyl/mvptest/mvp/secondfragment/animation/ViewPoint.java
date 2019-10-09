@@ -1,7 +1,7 @@
 package com.lyl.mvptest.mvp.secondfragment.animation;
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019/5/5 4:16 PM
  */
 public class ViewPoint {

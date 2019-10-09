@@ -4,7 +4,7 @@ import android.graphics.Paint
 import kotlin.random.Random
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-26 11:11
  */
 class CommonUtil {

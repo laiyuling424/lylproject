@@ -5,7 +5,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-11 15:41
  */
 class ViewModelSearch:ViewModel(){

@@ -11,7 +11,7 @@ import com.lyl.wanandroid.R
 import com.lyl.wanandroid.listener.OnItemClickListener
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-08 14:51
  */
 class WeChatTitleAdapter : PagedListAdapter<WeChatPublicListBean, WeChatTitleAdapter.ProvinceViewHolder>(diffCallback) {

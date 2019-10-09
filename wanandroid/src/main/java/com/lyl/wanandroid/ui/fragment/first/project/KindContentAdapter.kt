@@ -13,7 +13,7 @@ import com.lyl.wanandroid.listener.OnItemClickListener
 import com.lyl.wanandroid.listener.OnItemClickListenerTwo
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-26 11:42
  */
 class KindContentAdapter(var context: Context, var list: List<KindContentBean>) : RecyclerView.Adapter<KindContentAdapter.KindContentViewHolder>() {

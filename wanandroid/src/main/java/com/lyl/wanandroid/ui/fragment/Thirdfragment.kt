@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.is_landing.*
 import kotlinx.android.synthetic.main.third_fragment_layout.*
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-08 14:12
  */
 class Thirdfragment : BaseFragment() {

@@ -21,7 +21,7 @@ import android.view.animation.LinearInterpolator
 import com.lyl.mvptest.R
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-31 09:39
  */
 class LoadingView : SurfaceView, SurfaceHolder.Callback, Runnable {

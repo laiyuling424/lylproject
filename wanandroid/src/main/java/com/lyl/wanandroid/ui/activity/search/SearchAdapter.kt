@@ -11,7 +11,7 @@ import com.lyl.wanandroid.R
 import com.lyl.wanandroid.listener.OnItemClickListenerTwo
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-12 15:29
  */
 class SearchAdapter : PagedListAdapter<SearchResponseBean, SearchAdapter.ProvinceViewHolder>(diffCallback) {

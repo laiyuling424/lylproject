@@ -1,7 +1,7 @@
 package com.lyl.wanandroid.listener
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-08 17:08
  */
 interface OnItemClickListener<T> {

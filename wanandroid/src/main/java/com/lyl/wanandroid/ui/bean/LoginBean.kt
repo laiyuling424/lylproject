@@ -1,7 +1,7 @@
 package com.lyl.wanandroid.ui.bean
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-31 17:55
  */
 /**

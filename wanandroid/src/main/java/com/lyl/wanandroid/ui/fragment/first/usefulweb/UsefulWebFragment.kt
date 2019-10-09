@@ -14,7 +14,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.useful_fragment_layout.*
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-11 14:43
  */
 class UsefulWebFragment : BaseFragment() , OnItemClickListener<String> {

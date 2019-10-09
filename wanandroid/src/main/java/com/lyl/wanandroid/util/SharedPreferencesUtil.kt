@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-30 11:29
  */
 object SharedPreferencesUtil {

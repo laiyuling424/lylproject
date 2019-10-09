@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.main_fragment_layout.*
 
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-06-11 15:45
  */
 class MainFragment:BaseFragment(),OnItemClickListener<MainArticleBean>{

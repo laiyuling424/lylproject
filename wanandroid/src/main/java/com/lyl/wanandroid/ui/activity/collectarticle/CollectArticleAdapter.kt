@@ -13,7 +13,7 @@ import com.lyl.wanandroid.ui.bean.CollectArticleBean
 
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-08-02 14:27
  */
 class CollectArticleAdapter : PagedListAdapter<CollectArticleBean, CollectArticleAdapter.CollectArticleViewHodel>(diffCallback) {

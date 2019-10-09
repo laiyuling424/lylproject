@@ -10,7 +10,7 @@ import java.net.URL
 import java.net.URLConnection
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-18 10:18
  */
 class JsonHttpRequest : IHttpRequest {

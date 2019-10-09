@@ -12,7 +12,7 @@ import com.lyl.wanandroid.R
 import com.lyl.wanandroid.listener.OnItemClickListenerTwo
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-08 19:02
  */
 class WeChatContentAdapter : PagedListAdapter<WeChatContentBean, WeChatContentAdapter.ProvinceViewHolder>(diffCallback) {

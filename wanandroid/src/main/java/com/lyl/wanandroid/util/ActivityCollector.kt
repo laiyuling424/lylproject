@@ -5,7 +5,7 @@ import java.lang.ref.WeakReference
 import java.util.ArrayList
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-06-11 13:56
  *
  * 应用中所有Activity的管理器，可用于一键杀死所有Activity。

@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.core.view.LayoutInflaterCompat
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-27 10:17
  */
 open class BaseActivity : Activity() {

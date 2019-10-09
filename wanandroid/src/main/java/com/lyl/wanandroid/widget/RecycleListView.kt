@@ -21,7 +21,7 @@ import java.util.Random
 
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-10 11:55
  */
 class RecycleListView : ViewGroup, View.OnClickListener {

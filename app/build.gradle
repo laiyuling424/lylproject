@@ -49,6 +49,12 @@ android {
         exclude 'META-INF/ASL2.0'
     }
 
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
 }
 
 
@@ -61,20 +67,21 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     //okhttp+gson
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+//    implementation config.dependencies["okhttp"]
+    implementation config.dependencies["gson"]
 
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
     //glide
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    implementation "com.github.bumptech.glide:glide:4.8.0"
+
 
     //moive detail activity sliding
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
 
     //butterknife
-    implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    implementation config.dependencies["butterknife"]
+    annotationProcessor config.dependencies["butterknife-compiler"]
 
     //opencv 4.1.0
 //    implementation project(':cv410')
@@ -85,21 +92,20 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //paging
-    def paging_version = "1.0.0"
-    implementation "android.arch.paging:runtime:$paging_version"
+    implementation config.dependencies["paging-runtime"]
 
     // ViewModel and LiveData
     def lifecycle_version = "1.1.1"
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:2.2.2"
-    implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
+    implementation config.dependencies["rxjava2"]
+    implementation config.dependencies["rxandroid2"]
 
     // Retrofit
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
+    implementation config.dependencies["adapter-rxjava2"]
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
-    implementation "com.squareup.retrofit2:retrofit:2.4.0"
+    implementation config.dependencies["retrofit"]
 
 
     //组件化
@@ -114,6 +120,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
+    implementation project(path: ':utils')
 }
 repositories {
     mavenCentral()

@@ -17,8 +17,8 @@ ext {
             "butterknife-compiler": 'com.jakewharton:butterknife-compiler:10.1.0',
 
             // Glide
-            "glide:"              : 'com.github.bumptech.glide:glide:4.9.0',
-            "glide-compiler"      : 'com.github.bumptech.glide:compiler:4.9.0',
+            "glide:"              : 'com.github.bumptech.glide:glide:4.8.0',
+            "glide-compiler"      : 'com.github.bumptech.glide:compiler:4.8.0',
 
             // RxJava
             "rxjava2"             : "io.reactivex.rxjava2:rxjava:2.2.2",
@@ -38,6 +38,12 @@ ext {
             "paging-common"       : "android.arch.paging:common:1.0.0",
             //Paging对RxJava2的原生支持
             "paging-rxjava2"      : "android.arch.paging:rxjava2:1.0.0-rc1",
+
+            //okhttp
+            "okhttp"              : 'com.squareup.okhttp3:okhttp:3.10.0',
+
+            //gson
+            "gson"                : 'com.google.code.gson:gson:2.8.5',
 
     ]
 }

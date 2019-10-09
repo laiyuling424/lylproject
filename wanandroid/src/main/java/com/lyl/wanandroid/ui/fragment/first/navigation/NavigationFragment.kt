@@ -17,7 +17,7 @@ import com.lyl.wanandroid.ui.fragment.first.tixi.ViewModelNavigation
 
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-13 09:05
  */
 class NavigationFragment : BaseFragment() {

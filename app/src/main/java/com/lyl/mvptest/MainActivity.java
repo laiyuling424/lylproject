@@ -1,12 +1,19 @@
 package com.lyl.mvptest;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.lyl.mvptest.adapter.ViewPagerAdapter;
 import com.lyl.mvptest.widget.NoScrollViewPager;
+import com.lyl.utils.function.InstallUtil;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
     ViewPagerAdapter viewPagerAdapter;
     List<Fragment> list;
      Toolbar mToolbar;
+
+    static {
+        System.loadLibrary("native-lib");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,4 +115,55 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    private void updata() {
+        new AsyncTask<Void, Void, File>() {
+            @Override
+            protected File doInBackground(Void... voids) {
+
+                String patch = new File(Environment.getExternalStorageDirectory(), "patch").getAbsolutePath();
+                String oldApk = getApplicationInfo().sourceDir;
+                String output = createNewApk().getAbsolutePath();
+
+                if (!new File(patch).exists()) {
+                    return null;
+                }
+                bsPatch(oldApk, patch, output);
+                return new File(output);
+            }
+
+            @Override
+            protected void onPostExecute(File file) {
+                super.onPostExecute(file);
+                Log.d("lyll", "path===" + file.getAbsolutePath());
+                //安装新apk
+                if (file != null) {
+                    InstallUtil installUtil = new InstallUtil(MainActivity.this, file.getAbsolutePath());
+                    installUtil.install();
+                } else {
+                    Toast.makeText(MainActivity.this, "差分包不存在！", Toast.LENGTH_LONG).show();
+                }
+            }
+        }.execute();
+    }
+
+
+    /**
+     * 创建合成后的新版本apk文件
+     *
+     * @return
+     */
+    private File createNewApk() {
+        File newApk = new File(Environment.getExternalStorageDirectory(), "bsdiff.apk");
+        if (!newApk.exists()) {
+            try {
+                newApk.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return newApk;
+    }
+
+
+    private native void bsPatch(String oldApk, String patch, String output);
 }

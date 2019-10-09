@@ -12,7 +12,7 @@ import com.lyl.wanandroid.listener.OnItemClickListener
 
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-10 16:27
  */
 class MainArticleAdapter : PagedListAdapter<MainArticleBean, MainArticleAdapter.ProvinceViewHolder>(diffCallback) {

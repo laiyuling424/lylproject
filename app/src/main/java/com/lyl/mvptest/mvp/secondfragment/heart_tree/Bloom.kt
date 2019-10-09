@@ -4,7 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019/7/26 21:05
  */
 open class Bloom {

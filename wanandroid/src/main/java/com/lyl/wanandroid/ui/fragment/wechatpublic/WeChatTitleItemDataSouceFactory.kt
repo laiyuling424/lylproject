@@ -4,7 +4,7 @@ import androidx.paging.DataSource
 
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-08 15:25
  */
 class WeChatTitleItemDataSouceFactory : DataSource.Factory<Int, WeChatPublicListBean>() {

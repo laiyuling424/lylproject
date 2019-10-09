@@ -9,7 +9,7 @@ import androidx.viewpager.widget.ViewPager
 
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-09 11:53
  */
 class NoScrollViewPager : ViewPager {

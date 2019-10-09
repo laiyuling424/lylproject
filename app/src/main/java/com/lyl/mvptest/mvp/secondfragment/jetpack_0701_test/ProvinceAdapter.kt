@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lyl.mvptest.R
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-01 16:10
  */
 class ProvinceAdapter : PagedListAdapter<ProvinceBean, ProvinceAdapter.ProvinceViewHolder>(diffCallback) {

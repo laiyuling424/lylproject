@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-05 17:50
  */
 object ApiServer {

@@ -3,7 +3,7 @@ package com.lyl.mvptest.mvp.secondfragment.eventbus
 import com.lyl.mvptest.utils.MyLog
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-17 09:33
  */
 class EventBus private constructor() {

@@ -8,7 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-10 15:06
  */
 class MainArticleItemDataSouce(var page: Int) : ItemKeyedDataSource<Int, MainArticleBean>() {

@@ -19,7 +19,7 @@ import com.lyl.wanandroid.ui.base.BaseFragment
 import com.lyl.wanandroid.util.MyLog
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-08 13:47
  */
 class WeChatPublicFragment : BaseFragment(), OnItemClickListener<WeChatPublicListBean>, OnItemClickListenerTwo<WeChatContentBean> {

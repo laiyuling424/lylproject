@@ -10,7 +10,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import androidx.annotation.Nullable;
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-31 09:48
  */
 public class zzz extends View {

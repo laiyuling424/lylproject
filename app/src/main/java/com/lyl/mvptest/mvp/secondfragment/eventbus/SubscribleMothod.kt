@@ -3,7 +3,7 @@ package com.lyl.mvptest.mvp.secondfragment.eventbus
 import java.lang.reflect.Method
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-17 10:10
  */
 data class SubscribleMothod(

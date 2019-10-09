@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.lyl.mvptest.R;
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-22 11:38
  */
 public class MyAppWidgetProvider extends AppWidgetProvider {

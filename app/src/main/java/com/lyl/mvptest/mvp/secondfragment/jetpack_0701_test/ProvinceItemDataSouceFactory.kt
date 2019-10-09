@@ -3,7 +3,7 @@ package com.lyl.mvptest.mvp.secondfragment.jetpack_0701_test
 import androidx.paging.DataSource
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-01 16:05
  */
 class ProvinceItemDataSouceFactory:DataSource.Factory<Long,ProvinceBean>(){

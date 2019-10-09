@@ -1,7 +1,7 @@
 package com.lyl.wanandroid.ui.fragment.wechatpublic
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-08 17:44
  */
 data class WeChatContentListBean(

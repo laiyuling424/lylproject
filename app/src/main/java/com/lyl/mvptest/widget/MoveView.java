@@ -9,7 +9,7 @@ import android.view.ViewConfiguration;
 import androidx.annotation.Nullable;
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019/5/13 11:28 AM
  */
 public class MoveView extends View {

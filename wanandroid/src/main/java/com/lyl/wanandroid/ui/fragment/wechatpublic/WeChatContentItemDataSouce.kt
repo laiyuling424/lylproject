@@ -8,7 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-08 18:46
  */
 class WeChatContentItemDataSouce(val id : Int): ItemKeyedDataSource<Int,WeChatContentBean>(){

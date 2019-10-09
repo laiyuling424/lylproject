@@ -30,7 +30,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.project_fragment_layout.*
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-19 14:10
  */
 class ProjectFragment : BaseFragment(), OnItemClickListener<KindBean>, OnItemClickListenerTwo<KindContentBean> {

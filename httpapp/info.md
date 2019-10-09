@@ -1,0 +1,1 @@
+这个是自己写的组件化demo 与app third相关 在项目极的config.gradle里面配置

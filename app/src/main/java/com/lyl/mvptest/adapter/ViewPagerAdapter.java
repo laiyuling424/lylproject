@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019/5/5 5:22 PM
  */
 public class ViewPagerAdapter extends FragmentPagerAdapter {

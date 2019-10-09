@@ -14,7 +14,7 @@ import com.lyl.wanandroid.listener.OnItemClickListener
 import com.lyl.wanandroid.util.MyLog
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-19 17:27
  */
 class KindAdapter : PagedListAdapter<KindBean, KindAdapter.ProvinceViewHolder>(diffCallback) {

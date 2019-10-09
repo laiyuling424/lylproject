@@ -8,7 +8,7 @@ import android.graphics.drawable.BitmapDrawable
 
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-08-06 17:23
  */
 class CircleImageView : ImageView {

@@ -12,7 +12,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019/5/10 3:50 PM
  */
 public class SurfaceViewL extends SurfaceView implements SurfaceHolder.Callback, Runnable {

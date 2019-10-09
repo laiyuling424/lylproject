@@ -4,7 +4,7 @@ import android.util.Log
 import java.util.concurrent.*
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-18 09:40
  */
 class ThreadPoolManager {

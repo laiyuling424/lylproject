@@ -3,7 +3,7 @@ package com.lyl.mvptest.mvp.secondfragment.animation;
 import android.animation.TypeEvaluator;
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019/5/5 4:26 PM
  */
 public class ViewPathEvaluator implements TypeEvaluator<ViewPoint> {

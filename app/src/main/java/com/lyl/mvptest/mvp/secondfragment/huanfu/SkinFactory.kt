@@ -12,7 +12,7 @@ import java.lang.Exception
 import kotlin.reflect.KClass
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-27 11:22
  */
 class SkinFactory : LayoutInflater.Factory2 {

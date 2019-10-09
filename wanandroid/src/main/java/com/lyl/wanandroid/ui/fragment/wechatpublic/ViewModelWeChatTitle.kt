@@ -5,7 +5,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-08 15:00
  */
 class ViewModelWeChatTitle:ViewModel(){

@@ -14,7 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-11 10:14
  */
 public class DampLayout extends LinearLayout

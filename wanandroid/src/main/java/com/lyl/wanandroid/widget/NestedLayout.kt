@@ -9,7 +9,7 @@ import androidx.core.view.NestedScrollingParent2
 import androidx.core.view.ViewCompat
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-11 11:44
  */
 class NestedLayout(context: Context?, attrs: AttributeSet?) : LinearLayout(context, attrs), NestedScrollingParent2 {

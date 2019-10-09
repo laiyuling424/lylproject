@@ -5,7 +5,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-01 15:39
  */
 

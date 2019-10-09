@@ -10,7 +10,7 @@ import okhttp3.Cookie;
 /**
  * 仿照android-async-http的SerializableCookie实现，用处是cookie对象与对象流的互转，保存和读取cookie
  *
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-31 15:25
  *
  */

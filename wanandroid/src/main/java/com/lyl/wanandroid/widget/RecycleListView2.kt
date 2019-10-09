@@ -20,7 +20,7 @@ import java.util.Random
 
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-13 11:55
  */
 class RecycleListView2 : ViewGroup {

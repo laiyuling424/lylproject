@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import java.lang.Exception
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-27 11:04
  */
 class SkinManager {

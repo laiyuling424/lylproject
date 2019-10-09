@@ -6,7 +6,7 @@ import android.graphics.Paint
 import java.util.*
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-24 09:33
  */
 class Branch(data: IntArray) {

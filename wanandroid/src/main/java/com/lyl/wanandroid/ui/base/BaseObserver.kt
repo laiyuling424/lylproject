@@ -3,7 +3,7 @@ package com.lyl.wanandroid.ui.base
 import org.reactivestreams.Subscriber
 
 /**
- * User: lyl
+ * Create By: lyl
  * Date: 2019-07-10 10:58
  */
 abstract class BaseObserver<T> : Subscriber<T> {
