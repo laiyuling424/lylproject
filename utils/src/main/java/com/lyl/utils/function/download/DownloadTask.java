@@ -1,9 +1,8 @@
-package com.lyl.utils.function;
+package com.lyl.utils.function.download;
 
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;

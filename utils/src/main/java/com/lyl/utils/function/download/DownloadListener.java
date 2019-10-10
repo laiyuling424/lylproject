@@ -1,4 +1,4 @@
-package com.lyl.utils.function;
+package com.lyl.utils.function.download;
 
 public interface DownloadListener {
 

@@ -16,6 +16,7 @@ import com.lyl.mvptest.mvp.secondfragment.huanfu.HuanfuActivity1;
 import com.lyl.mvptest.mvp.secondfragment.jetpack_0701_test.JetPackActivity;
 import com.lyl.mvptest.mvp.secondfragment.live_data_bus.LiveEventBusActivity1;
 import com.lyl.mvptest.mvp.secondfragment.loading.LoadingActivity;
+import com.lyl.mvptest.mvp.secondfragment.particle.ParticleExplosionActivity;
 import com.lyl.mvptest.mvp.secondfragment.radar_view.RadarViewActivity;
 import com.lyl.mvptest.mvp.secondfragment.recycleview.RecycleViewActivity;
 import com.lyl.mvptest.mvp.secondfragment.suefaceview.DrawActivity;
@@ -123,7 +124,7 @@ public class SecondFragment extends Fragment {
                 startActivity(new Intent(getContext(), LoadingActivity.class));
                 break;
             case R.id.btn14:
-                startActivity(new Intent(getContext(), LoadingActivity.class));
+                startActivity(new Intent(getContext(), ParticleExplosionActivity.class));
                 break;
         }
     }
