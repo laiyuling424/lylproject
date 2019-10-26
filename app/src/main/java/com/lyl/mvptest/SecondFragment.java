@@ -2,14 +2,13 @@ package com.lyl.mvptest;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.lyl.mvptest.mvp.secondfragment.animation.AnimationActivity;
-import com.lyl.mvptest.mvp.secondfragment.cv.CvActivity;
+import com.lyl.mvptest.mvp.secondfragment.cv.LylRecycleViewActivity;
 import com.lyl.mvptest.mvp.secondfragment.eventbus.EventBusActivity;
 import com.lyl.mvptest.mvp.secondfragment.heart_tree.HeartTreeActivity;
 import com.lyl.mvptest.mvp.secondfragment.huanfu.HuanfuActivity1;
@@ -88,7 +87,7 @@ public class SecondFragment extends Fragment {
                 startActivity(new Intent(getContext(), AnimationActivity.class));
                 break;
             case R.id.btn2:
-                startActivity(new Intent(getContext(), CvActivity.class));
+                startActivity(new Intent(getContext(), LylRecycleViewActivity.class));
                 break;
             case R.id.btn3:
                 startActivity(new Intent(getContext(), DrawActivity.class));

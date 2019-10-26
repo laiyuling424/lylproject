@@ -19,7 +19,7 @@
             android:id="@+id/btn2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="cv collection"
+            android:text="cv"
             android:textAllCaps="false"
             app:layout_constraintTop_toBottomOf="@+id/btn1" />
 

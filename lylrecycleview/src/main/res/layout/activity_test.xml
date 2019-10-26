@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvp.secondfragment.cv.LylRecycleViewActivity">
+    tools:context=".TestActivity">
 
     <com.lyl.lylrecycleview.LoadRefreshRecyclerView
         android:id="@+id/recycle"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     </com.lyl.lylrecycleview.LoadRefreshRecyclerView>
 

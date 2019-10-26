@@ -10,7 +10,7 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-
+    <!--android:appComponentFactory="只需要在android:appComponentFactory后面填写任意字符就行。或者将这两句话删了也行，这两句话作用是解决依赖库的冲突问题的"-->
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
 
-        android:appComponentFactory="只需要在android:appComponentFactory后面填写任意字符就行。或者将这两句话删了也行，这两句话作用是解决依赖库的冲突问题的"
+        android:appComponentFactory="aa"
         tools:replace="android:appComponentFactory">
         <activity android:name=".mvp.secondfragment.particle.ParticleExplosionActivity"></activity>
         <activity android:name=".mvp.secondfragment.loading.LoadingActivity" />
@@ -41,7 +41,7 @@
         <activity android:name=".mvp.secondfragment.textclock_view.TextClockViewActivity" />
         <activity android:name=".mvp.secondfragment.radar_view.RadarViewActivity" />
         <activity android:name=".mvp.secondfragment.suefaceview.DrawActivity" />
-        <activity android:name=".mvp.secondfragment.cv.CvActivity" />
+        <activity android:name=".mvp.secondfragment.cv.LylRecycleViewActivity" />
         <activity android:name=".mvp.secondfragment.animation.AnimationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
