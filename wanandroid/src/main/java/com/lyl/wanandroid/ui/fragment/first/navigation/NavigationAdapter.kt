@@ -22,18 +22,18 @@ import com.lyl.wanandroid.widget.RecycleListView2
  * Create By: lyl
  * Date: 2019-07-13 09:05
  */
-class NavigationAdapter(context: Context) : PagedListAdapter<NavigationListBean, NavigationAdapter.ProvinceViewHolder>(diffCallback),OnItemClickListener<Any> {
+class NavigationAdapter(context: Context) : PagedListAdapter<NavigationListBean, NavigationAdapter.ProvinceViewHolder>(diffCallback), OnItemClickListener<Any> {
 
-    var context:Context?=null
+    var context: Context? = null
 
     init {
-        this.context=context
+        this.context = context
     }
 
     override fun itemClick(t: Any, position: Int) {
         val intent = Intent()
 
-        intent.setClass(context,WebViewDetailActivity::class.java)
+        intent.setClass(context, WebViewDetailActivity::class.java)
 
         intent.putExtra(Constants.CONTENT_URL, (t as NavigationBean).link)
 
@@ -61,7 +61,7 @@ class NavigationAdapter(context: Context) : PagedListAdapter<NavigationListBean,
 
     override fun onBindViewHolder(holder: ProvinceViewHolder, position: Int) {
         holder.bindTo(getItem(position))
-        holder.mRecycleListView.onItemClickListener=this
+        holder.mRecycleListView.onItemClickListener = this
     }
 
     class ProvinceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
