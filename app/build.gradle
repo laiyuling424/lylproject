@@ -60,11 +60,16 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.google.android.material:material:1.0.0'
+//    implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
+//    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+//    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+//    implementation 'com.google.android.material:material:1.0.0'
+    implementation config.dependencies["appcompat"]
+    implementation config.dependencies["constraintlayout"]
+    implementation config.dependencies["lifecycle"]
+    implementation config.dependencies["core-ktx"]
+    implementation config.dependencies["material"]
 
     //okhttp+gson
 //    implementation config.dependencies["okhttp"]
@@ -74,6 +79,7 @@ dependencies {
 
     //glide
     implementation "com.github.bumptech.glide:glide:4.8.0"
+//    implementation config.dependencies["glide"]
 
 
     //moive detail activity sliding
@@ -87,16 +93,18 @@ dependencies {
 //    implementation project(':cv410')
 
     //kotlin
-    api "androidx.core:core-ktx:+"
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0-beta01"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    api "androidx.core:core-ktx:+"
+    //todo 没搞
+//    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0-beta01"
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //paging
     implementation config.dependencies["paging-runtime"]
 
     // ViewModel and LiveData
-    def lifecycle_version = "1.1.1"
-    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+//    def lifecycle_version = "1.1.1"
+//    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation config.dependencies["lifecycle"]
 
     // RxJava
     implementation config.dependencies["rxjava2"]
@@ -104,7 +112,7 @@ dependencies {
 
     // Retrofit
     implementation config.dependencies["adapter-rxjava2"]
-    implementation "com.squareup.retrofit2:converter-gson:2.4.0"
+    implementation config.dependencies["converter-gson"]
     implementation config.dependencies["retrofit"]
 
 

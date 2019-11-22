@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.lyl.view.loadView.view1.ShapeLoadingView
+        android:id="@+id/shapeLoadingView"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/shadow"
+        android:layout_marginTop="4dp" />
+
+    <ImageView
+        android:id="@+id/indication"
+        android:layout_width="23dp"
+        android:layout_height="3dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="82dp"
+        android:src="@drawable/shadow" />
+
+    <TextView
+        android:id="@+id/promptTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/indication"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="玩命加载中..."
+        android:textColor="#757575"
+        android:textSize="14sp" />
+</LinearLayout>

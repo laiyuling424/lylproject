@@ -9,9 +9,38 @@ ext {
             targetSdkVersion : 28
     ]
     dependencies = [
+            //-------------------必须依赖----------------------------
+            "appcompat"           : 'androidx.appcompat:appcompat:1.1.0',
+            "constraintlayout"    : "androidx.constraintlayout:constraintlayout:1.1.3",
 
-            "junit"               : 'junit:junit:4.12',
+            "material"            : "com.google.android.material:material:1.0.0",
+            "recyclerview"        : "androidx.recyclerview:recyclerview:1.0.0",
 
+
+            //-------------------kotlin----------------------------
+            "kotlin-reflect"      : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
+            "kotlin"              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            "kotlin8"              : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+            "core-ktx"            : "androidx.core:core-ktx:1.0.2",
+
+            //-------------------测试相关----------------------------
+            "junit"               : "junit:junit:4.12",
+            "runner"              : "androidx.test:runner:1.2.0",
+            "espresso"            : "androidx.test.espresso:espresso-core:3.2.0",
+
+            //-------------------jetpack----------------------------
+            //Paging
+            "paging-runtime"      : "android.arch.paging:runtime:1.0.0",
+            "paging-common"       : "android.arch.paging:common:1.0.0",
+            //Paging对RxJava2的原生支持
+            "paging-rxjava2"      : "android.arch.paging:rxjava2:1.0.0-rc1",
+
+            "lifecycle"           : "androidx.lifecycle:lifecycle-extensions:2.0.0",
+            "paging-rxjava2"      : "android.arch.paging:rxjava2:1.0.0-rc1",
+            "paging-rxjava2"      : "android.arch.paging:rxjava2:1.0.0-rc1",
+
+
+            //-------------------第三方-------------------------------
             //butterknife  java:annotationProcessor  kotlin:kapt
             "butterknife"         : 'com.jakewharton:butterknife:10.1.0',
             "butterknife-compiler": 'com.jakewharton:butterknife-compiler:10.1.0',
@@ -33,17 +62,17 @@ ext {
             "router-api"          : "com.alibaba:arouter-api:1.5.0",
             "router-compiler"     : "com.alibaba:arouter-compiler:1.2.2",
 
-            //Paging
-            "paging-runtime"      : "android.arch.paging:runtime:1.0.0",
-            "paging-common"       : "android.arch.paging:common:1.0.0",
-            //Paging对RxJava2的原生支持
-            "paging-rxjava2"      : "android.arch.paging:rxjava2:1.0.0-rc1",
-
             //okhttp
             "okhttp"              : 'com.squareup.okhttp3:okhttp:3.10.0',
 
             //gson
             "gson"                : 'com.google.code.gson:gson:2.8.5',
+
+            //eventbus
+            "gson"                : 'org.greenrobot:eventbus:3.0.0',
+
+            //fastjson
+            "fastjson"            : 'com.alibaba:fastjson:1.2.32',
 
     ]
 }

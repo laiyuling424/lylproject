@@ -41,10 +41,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+//    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation config.dependencies["appcompat"]
+    implementation config.dependencies["constraintlayout"]
 
     //ARouter
     implementation config.dependencies["router-api"]

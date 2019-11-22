@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 def config = rootProject.ext
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -32,5 +32,5 @@ dependencies {
     implementation config.dependencies["appcompat"]
     implementation config.dependencies["constraintlayout"]
 
-    implementation config.dependencies["okhttp"]
+    implementation config.dependencies["kotlin"]
 }

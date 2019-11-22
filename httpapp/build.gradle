@@ -58,15 +58,18 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+//    implementation 'androidx.appcompat:appcompat:1.0.2'
+//    implementation 'androidx.core:core-ktx:1.0.2'
+//    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation config.dependencies["appcompat"]
+    implementation config.dependencies["constraintlayout"]
+    implementation config.dependencies["core-ktx"]
+    implementation config.dependencies["material"]
 
-    implementation 'com.alibaba:fastjson:1.2.32'
+
+//    implementation 'com.alibaba:fastjson:1.2.32'
+    implementation config.dependencies["fastjson"]
 
     //ARouter
     implementation config.dependencies["router-api"]
