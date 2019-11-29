@@ -1,57 +1,56 @@
-<com.sothree.slidinguppanel.SlidingUpPanelLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
     android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
-    sothree:umanoPanelHeight="250dp"
-    sothree:umanoShadowHeight="0dp"
-    sothree:umanoParallaxOffset="100dp"
     sothree:umanoDragView="@+id/dragView"
     sothree:umanoOverlay="true"
-   >
+    sothree:umanoPanelHeight="250dp"
+    sothree:umanoParallaxOffset="100dp"
+    sothree:umanoShadowHeight="0dp">
 
 
     <!-- MAIN CONTENT -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <androidx.appcompat.widget.Toolbar
+
+            <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:sothree="http://schemas.android.com/apk/res-auto"
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/main_toolbar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
-                sothree:theme="@style/ActionBar"
-                android:layout_width="match_parent"
-                app:navigationIcon="@drawable/ic_toolbar_back"/>
+                app:navigationIcon="@drawable/ic_toolbar_back"
+                sothree:theme="@style/ActionBar" />
+
             <ImageView
+                android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:id="@+id/image"
                 android:transitionName="wallpaper_thumb"
                 app:layout_collapseParallaxMultiplier="0.7"
-                app:layout_scrollFlags="scroll"/>
+                app:layout_scrollFlags="scroll" />
         </LinearLayout>
     </FrameLayout>
 
     <!-- SLIDING LAYOUT -->
     <LinearLayout
+        android:id="@+id/dragView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
-        android:orientation="vertical"
         android:clickable="true"
         android:focusable="false"
-        android:id="@+id/dragView">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,137 +61,158 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="46sp"
-                android:gravity="center"
                 android:background="#81f186"
-                android:text="↓詳細↓"/>
+                android:gravity="center"
+                android:text="↓詳細↓"
+                android:textSize="46sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="蚁人2：黃蜂女現身"
-                android:textSize="20sp"
                 android:id="@+id/nameCN"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"/>
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ant-Man and the Wasp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="蚁人2：黃蜂女現身"
+                android:textSize="20sp" />
+
+            <TextView
                 android:id="@+id/nameUS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:text="Ant-Man and the Wasp" />
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="動作 / 科幻"
                 android:id="@+id/genres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:text="動作 / 科幻" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2018" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2018"
-                    android:id="@+id/year"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="在中國大陸上映"/>
+                    android:text="在中國大陸上映" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="導演:"/>
+                    android:text="導演:" />
+
                 <TextView
+                    android:id="@+id/directors"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="黄渤"
-                    android:id="@+id/directors" />
+                    android:text="黄渤" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="評分:"/>
+                    android:text="評分:" />
+
                 <TextView
+                    android:id="@+id/rating"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="7.6"
-                    android:id="@+id/rating"/>
+                    android:text="7.6" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="想看人數:"/>
+                    android:text="想看人數:" />
+
                 <TextView
+                    android:id="@+id/collect_count"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="240039"
-                    android:id="@+id/collect_count"/>
+                    android:text="240039" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:id="@+id/like"
-                    android:text="喜歡"
-                    android:layout_margin="5dp"/>
-                <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
+                    android:text="喜歡" />
+
+                <Button
                     android:id="@+id/see"
-                    android:text="看過"
-                    android:layout_margin="5dp"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="看過" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="#ccc"/>
+                android:background="#ccc" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="演員"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:text="演員" />
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/casts"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/casts">
-            </androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 

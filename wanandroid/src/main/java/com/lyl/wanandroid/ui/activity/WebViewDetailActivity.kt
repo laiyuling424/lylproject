@@ -1,8 +1,6 @@
 package com.lyl.wanandroid.ui.activity
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.webkit.WebChromeClient
@@ -10,7 +8,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.bumptech.glide.Glide
 import com.lyl.wanandroid.Constants
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseActivity
@@ -48,15 +45,15 @@ class WebViewDetailActivity : BaseActivity() {
 //                collection.tag=null
 //                Glide.with(this).load(R.drawable.collection).into(collection)
                 collection.setImageResource(R.drawable.collection)
-                collection.tag=1
-                CollectionUtil.collectionWanandroidArticle(intent.getIntExtra(Constants.CONTENT_Id,-1))
+                collection.tag = 1
+                CollectionUtil.collectionWanandroidArticle(intent.getIntExtra(Constants.CONTENT_Id, -1))
             }
             1 -> {
 //                collection.tag=null
 //                Glide.with(this).load(R.drawable.uncollection).into(collection)
                 collection.setImageResource(R.drawable.uncollection)
-                collection.tag=0
-                CollectionUtil.uncollectArtilceList(intent.getIntExtra(Constants.CONTENT_Id,-1))
+                collection.tag = 0
+                CollectionUtil.uncollectArtilceList(intent.getIntExtra(Constants.CONTENT_Id, -1))
             }
         }
     }

@@ -4,7 +4,7 @@
 
     <application>
         <activity android:name="com.lyl.httpapp.Main2Activity"></activity>
-        <activity android:name="com.lyl.httpapp.MainActivity" ></activity>
+        <activity android:name="com.lyl.httpapp.MainActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package com.lyl.wanandroid.ui.fragment.first.tixi
 
-import androidx.paging.DataSource
 import androidx.paging.ItemKeyedDataSource
 import com.lyl.wanandroid.http.ApiServer
 import com.lyl.wanandroid.ui.base.ExecuteOnceObserver
@@ -28,7 +27,7 @@ class NavigationItemDataSouce() : ItemKeyedDataSource<Int, NavigationListBean>()
                             MyLog.Logd("Navigation onExecuteOnceNext")
                         },
                         onExecuteOnceError = {
-                            MyLog.Logd("Navigation onExecuteOnceError===>"+it.message)
+                            MyLog.Logd("Navigation onExecuteOnceError===>" + it.message)
                         },
                         onExecuteOnceComplete = {
                             MyLog.Logd("Navigation onExecuteOnceComplete")

@@ -1,7 +1,7 @@
 package com.lyl.mvptest.mvp.secondfragment.eventbus
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.lyl.mvptest.R
 import kotlinx.android.synthetic.main.activity_event_bus2.*
 

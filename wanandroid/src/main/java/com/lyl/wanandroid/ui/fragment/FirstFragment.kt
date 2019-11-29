@@ -7,18 +7,13 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.lyl.wanandroid.R
-import com.lyl.wanandroid.http.Api
 import com.lyl.wanandroid.ui.base.BaseFragment
 import com.lyl.wanandroid.ui.fragment.first.main.MainFragment
 import com.lyl.wanandroid.ui.fragment.first.navigation.NavigationFragment
 import com.lyl.wanandroid.ui.fragment.first.project.ProjectFragment
 import com.lyl.wanandroid.ui.fragment.first.tixi.TixiFragment
 import com.lyl.wanandroid.ui.fragment.first.usefulweb.UsefulWebFragment
-import com.lyl.wanandroid.util.MyLog
-import java.lang.reflect.InvocationHandler
-import java.lang.reflect.Method
-import java.lang.reflect.Proxy
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Create By: lyl

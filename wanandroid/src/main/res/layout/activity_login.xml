@@ -7,64 +7,63 @@
     tools:context=".ui.activity.LoginActivity">
 
     <EditText
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/name"
         android:hint="name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/password"
         android:hint="password"
         android:inputType="textPassword"
-     app:layout_constraintTop_toBottomOf="@+id/name"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="login"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/register_username"
-        android:hint="username"
-        app:layout_constraintTop_toBottomOf="@+id/login"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="username"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login" />
+
+    <EditText
         android:id="@+id/register_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="password"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/register_username"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_username" />
 
     <EditText
+        android:id="@+id/register_repassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/register_repassword"
         android:hint="repassword"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/register_password"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_password" />
 
     <Button
+        android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/register"
         android:hint="register"
-        app:layout_constraintTop_toBottomOf="@+id/register_repassword"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_repassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,46 +7,46 @@
     tools:context=".ui.test_jetpack.LifecycleActivity">
 
     <TextView
+        android:id="@+id/tv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/tv1"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/btn_change"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="viewmodel btn_change"
         android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@+id/tv1"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/btn_change"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv1" />
 
     <Button
+        android:id="@+id/btnA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="LiveData btn_change1"
         android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@+id/btn_change"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/btnA"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_change" />
 
     <Button
+        android:id="@+id/btnB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="LiveData btn_change2"
         android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@+id/btnA"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/btnB"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnA" />
 
     <Button
+        android:id="@+id/btnC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="to Paging"
         android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@+id/btnB"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/btnC"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnB" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

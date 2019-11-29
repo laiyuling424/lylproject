@@ -1,7 +1,6 @@
 package com.lyl.mvptest.adapter;
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +8,10 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.lyl.mvptest.R;
-
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.lyl.mvptest.R;
 
 /**
  * create 2018/8/24
@@ -20,20 +19,19 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class LoadMoreWrapper extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private RecyclerView.Adapter adapter;
-
-    // 普通布局
-    private final int TYPE_ITEM = 1;
-    // 脚布局
-    private final int TYPE_FOOTER = 2;
-    // 当前加载状态，默认为加载完成
-    private int loadState = 2;
     // 正在加载
     public final int LOADING = 1;
     // 加载完成
     public final int LOADING_COMPLETE = 2;
     // 加载到底
     public final int LOADING_END = 3;
+    // 普通布局
+    private final int TYPE_ITEM = 1;
+    // 脚布局
+    private final int TYPE_FOOTER = 2;
+    private RecyclerView.Adapter adapter;
+    // 当前加载状态，默认为加载完成
+    private int loadState = 2;
 
     public LoadMoreWrapper(RecyclerView.Adapter adapter) {
         this.adapter = adapter;
@@ -113,6 +111,16 @@ public class LoadMoreWrapper extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+    /**
+     * 设置上拉加载状态
+     *
+     * @param loadState 0.正在加载 1.加载完成 2.加载到底
+     */
+    public void setLoadState(int loadState) {
+        this.loadState = loadState;
+        notifyDataSetChanged();
+    }
+
     private class FootViewHolder extends RecyclerView.ViewHolder {
 
         ProgressBar pbLoading;
@@ -125,16 +133,6 @@ public class LoadMoreWrapper extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvLoading = (TextView) itemView.findViewById(R.id.tv_loading);
             llEnd = (LinearLayout) itemView.findViewById(R.id.ll_end);
         }
-    }
-
-    /**
-     * 设置上拉加载状态
-     *
-     * @param loadState 0.正在加载 1.加载完成 2.加载到底
-     */
-    public void setLoadState(int loadState) {
-        this.loadState = loadState;
-        notifyDataSetChanged();
     }
 }
 

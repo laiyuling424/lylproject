@@ -1,10 +1,10 @@
 package com.lyl.mvptest.mvp.secondfragment.live_data_bus;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import com.lyl.mvptest.R;
 
@@ -14,7 +14,7 @@ public class AAAActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aaa);
-        LiveDataBus.getInstance().with("dabaicai",Dabaicai.class).observe(
+        LiveDataBus.getInstance().with("dabaicai", Dabaicai.class).observe(
                 this, new Observer<Dabaicai>() {
                     @Override
                     public void onChanged(Dabaicai dabaicai) {
@@ -29,6 +29,6 @@ public class AAAActivity extends AppCompatActivity {
     }
 
     public void send(View view) {
-        LiveDataBus.getInstance().with("dabaicai",String.class).postValue("xihuan");
+        LiveDataBus.getInstance().with("dabaicai", String.class).postValue("xihuan");
     }
 }

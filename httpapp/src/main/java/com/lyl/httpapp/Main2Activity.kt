@@ -1,8 +1,8 @@
 package com.lyl.httpapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.lyl.baselibrary.ARouterMap
 import com.lyll.httpapp.R
@@ -25,6 +25,7 @@ class Main2Activity : AppCompatActivity() {
                     override fun onSuccess(t: WeChatPublicListBeanResponse?) {
                         Log.d("lyll", "response====>$t")
                     }
+
                     override fun onFailure() {
 
                     }
@@ -37,6 +38,7 @@ class Main2Activity : AppCompatActivity() {
                     override fun onSuccess(t: WeChatPublicListBeanResponse?) {
                         Log.d("lyll", "response====>$t")
                     }
+
                     override fun onFailure() {
 
                     }

@@ -1,1 +1,1 @@
-include ':app',  ':wanandroid', ':httpapp', ':baselibrary', ':utils', ':lylrecycleview', ':view', ':core'
+include ':app', ':wanandroid', ':httpapp', ':baselibrary', ':utils', ':lylrecycleview', ':view', ':core'

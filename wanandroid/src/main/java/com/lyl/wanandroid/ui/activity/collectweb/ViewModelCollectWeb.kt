@@ -8,8 +8,8 @@ import androidx.paging.PagedList
  * Create By: lyl
  * Date: 2019-08-02 15:48
  */
-class ViewModelCollectWeb:ViewModel(){
-    var collectWebList=LivePagedListBuilder(CollectWebItemDataSouceFactory(),
+class ViewModelCollectWeb : ViewModel() {
+    var collectWebList = LivePagedListBuilder(CollectWebItemDataSouceFactory(),
             PagedList.Config.Builder()
                     .setPageSize(10)
                     .setEnablePlaceholders(false)

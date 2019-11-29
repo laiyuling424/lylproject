@@ -2,22 +2,15 @@ package com.lyl.wanandroid.widget
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.content.res.TypedArray
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.listener.OnItemClickListener
-import com.lyl.wanandroid.ui.fragment.first.main.MainArticleBean
-import com.lyl.wanandroid.util.MyLog
-
-import java.util.ArrayList
-import java.util.Random
+import java.util.*
 
 
 /**

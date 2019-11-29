@@ -1,6 +1,5 @@
 package com.lyl.wanandroid.ui.fragment.first.tixi
 
-import androidx.paging.DataSource
 import androidx.paging.ItemKeyedDataSource
 import com.lyl.wanandroid.http.ApiServer
 import com.lyl.wanandroid.ui.base.ExecuteOnceObserver
@@ -27,7 +26,7 @@ class TixiItemDataSouce() : ItemKeyedDataSource<Int, TixiBean>() {
                             callback.onResult(it.data!!)
                         },
                         onExecuteOnceError = {
-                            MyLog.Logd("Tixi onExecuteOnceError===>"+it.message)
+                            MyLog.Logd("Tixi onExecuteOnceError===>" + it.message)
                         },
                         onExecuteOnceComplete = {
                             MyLog.Logd("Tixi onExecuteOnceComplete")

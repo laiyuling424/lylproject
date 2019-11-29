@@ -11,19 +11,19 @@ import io.reactivex.schedulers.Schedulers
  * Create By: lyl
  * Date: 2019-07-08 15:15
  */
-class WeChatTitleItemDataSouce:ItemKeyedDataSource<Int,WeChatPublicListBean>(){
+class WeChatTitleItemDataSouce : ItemKeyedDataSource<Int, WeChatPublicListBean>() {
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<WeChatPublicListBean>) {
         apiGenerate.getWeChatPublicList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
-                    Log.d("lyll","next")
-                    Log.d("lyll","data="+ it.data!![0]!!.name)
+                    Log.d("lyll", "next")
+                    Log.d("lyll", "data=" + it.data!![0]!!.name)
                     callback.onResult(it.data!!)
-                },onExecuteOnceError = {
-                    Log.d("lyll","error")
-                },onExecuteOnceComplete = {
-                    Log.d("lyll","complete")
+                }, onExecuteOnceError = {
+                    Log.d("lyll", "error")
+                }, onExecuteOnceComplete = {
+                    Log.d("lyll", "complete")
                 }))
     }
 
@@ -32,13 +32,13 @@ class WeChatTitleItemDataSouce:ItemKeyedDataSource<Int,WeChatPublicListBean>(){
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
-                    Log.d("lyll","next")
+                    Log.d("lyll", "next")
 //                    Log.d("lyll","data="+it.get(0).name)
                     callback.onResult(it.data!!)
-                },onExecuteOnceError = {
-                    Log.d("lyll","error")
-                },onExecuteOnceComplete = {
-                    Log.d("lyll","complete")
+                }, onExecuteOnceError = {
+                    Log.d("lyll", "error")
+                }, onExecuteOnceComplete = {
+                    Log.d("lyll", "complete")
                 }))
     }
 

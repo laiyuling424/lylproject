@@ -3,7 +3,6 @@ package com.lyl.wanandroid
 import android.app.Application
 import android.content.Context
 import android.os.Handler
-import android.os.Looper
 
 /**
  * Create By: lyl
@@ -19,16 +18,16 @@ open class WanAdnroidApplication : Application() {
 
 
     companion object {
-        private var handler:Handler? = null
-        private var context:Application? = null
-        fun getContext():Context{
+        private var handler: Handler? = null
+        private var context: Application? = null
+        fun getContext(): Context {
             return context!!
         }
-        fun getHandler():Handler{
+
+        fun getHandler(): Handler {
             return handler!!
         }
     }
-
 
 
 }

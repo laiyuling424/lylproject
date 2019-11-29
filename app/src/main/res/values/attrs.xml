@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="LoadingView">
-        <attr name="ball_color" format="color"/>
-        <attr name="line_color" format="color"/>
-        <attr name="line_width" format="dimension"/>
-        <attr name="stroke_width" format="dimension"/>
+        <attr name="ball_color" format="color" />
+        <attr name="line_color" format="color" />
+        <attr name="line_width" format="dimension" />
+        <attr name="stroke_width" format="dimension" />
     </declare-styleable>
 </resources>

@@ -2,7 +2,6 @@ package com.lyl.httpapp
 
 import android.util.Log
 import com.alibaba.fastjson.JSON
-import java.lang.Exception
 import java.util.concurrent.Delayed
 import java.util.concurrent.TimeUnit
 

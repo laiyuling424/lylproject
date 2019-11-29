@@ -8,8 +8,8 @@ import androidx.paging.PagedList
  * Create By: lyl
  * Date: 2019-07-19 17:13
  */
-class ViewModelKind:ViewModel(){
-    var kindList=LivePagedListBuilder(KindItemDataSourceFactory(),
+class ViewModelKind : ViewModel() {
+    var kindList = LivePagedListBuilder(KindItemDataSourceFactory(),
             PagedList.Config
                     .Builder()
                     .setPageSize(10)

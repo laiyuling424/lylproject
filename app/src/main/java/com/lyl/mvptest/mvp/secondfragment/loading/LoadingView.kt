@@ -11,7 +11,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
-import android.util.Log
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -105,7 +104,7 @@ class LoadingView : SurfaceView, SurfaceHolder.Callback, Runnable {
         freeDownControl!!.interpolator = LinearInterpolator()
         freeDownControl!!.addUpdateListener {
             var t = it.animatedValue as Float
-            freeDownDistance = (10 * Math.sqrt(10.toDouble())*t).toFloat() - 5f * t * t
+            freeDownDistance = (10 * Math.sqrt(10.toDouble()) * t).toFloat() - 5f * t * t
         }
         freeDownControl!!.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
@@ -176,7 +175,7 @@ class LoadingView : SurfaceView, SurfaceHolder.Callback, Runnable {
                 path!!.moveTo(width / 2 - line_width!! / 2f, height / 2f)
                 if (loadingState == LoadingState.DOWN) {
                     //三阶贝塞尔曲线
-                    path!!.rQuadTo(line_width!! / 2f,2* downDistance!!, line_width!!.toFloat(), 0f)
+                    path!!.rQuadTo(line_width!! / 2f, 2 * downDistance!!, line_width!!.toFloat(), 0f)
                     paint!!.color = line_color!!
                     paint!!.style = Paint.Style.STROKE
                     canvas!!.drawPath(path, paint)

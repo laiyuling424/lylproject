@@ -22,6 +22,7 @@ class MainActivity : Activity() {
                     override fun onSuccess(t: WeChatPublicListBeanResponse?) {
                         Log.d("lyll", "response====>$t")
                     }
+
                     override fun onFailure() {
 
                     }
@@ -34,6 +35,7 @@ class MainActivity : Activity() {
                     override fun onSuccess(t: WeChatPublicListBeanResponse?) {
                         Log.d("lyll", "response====>$t")
                     }
+
                     override fun onFailure() {
 
                     }

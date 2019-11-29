@@ -3,33 +3,33 @@ package com.lyl.wanandroid.ui.activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.lyl.wanandroid.ui.base.BaseActivity
-import com.lyl.wanandroid.ui.fragment.FirstFragment
-import com.lyl.wanandroid.ui.fragment.Thirdfragment
-import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicFragment
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.ArrayList
-import android.widget.Toast
-import android.view.KeyEvent
-import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.widget.Toolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.WanAdnroidApplication
 import com.lyl.wanandroid.http.ApiServer
-import com.lyl.wanandroid.ui.bean.LoginBean
 import com.lyl.wanandroid.ui.activity.search.SearchActivity
+import com.lyl.wanandroid.ui.base.BaseActivity
 import com.lyl.wanandroid.ui.base.ExecuteOnceObserver
+import com.lyl.wanandroid.ui.bean.LoginBean
+import com.lyl.wanandroid.ui.fragment.FirstFragment
+import com.lyl.wanandroid.ui.fragment.Thirdfragment
+import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicFragment
 import com.lyl.wanandroid.util.LiveDataBus
 import com.lyl.wanandroid.util.MyLog
 import com.lyl.wanandroid.util.SharedPreferencesUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 class MainActivity : BaseActivity() {
@@ -51,19 +51,19 @@ class MainActivity : BaseActivity() {
         setupToolbar()
     }
 
-    private fun login(){
+    private fun login() {
         ApiServer.getApiServer()
-                .login(SharedPreferencesUtil.getString(WanAdnroidApplication.getContext(),"username","")!!,
-                        SharedPreferencesUtil.getString(WanAdnroidApplication.getContext(),"password","")!!)
+                .login(SharedPreferencesUtil.getString(WanAdnroidApplication.getContext(), "username", "")!!,
+                        SharedPreferencesUtil.getString(WanAdnroidApplication.getContext(), "password", "")!!)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
                     MyLog.Logd("login  success")
                     if (it.errorCode != 0) {
-                        SharedPreferencesUtil.putBoolean(WanAdnroidApplication.getContext(),"islanding",false)
+                        SharedPreferencesUtil.putBoolean(WanAdnroidApplication.getContext(), "islanding", false)
 
                     } else {
-                        SharedPreferencesUtil.putBoolean(WanAdnroidApplication.getContext(),"islanding",true)
+                        SharedPreferencesUtil.putBoolean(WanAdnroidApplication.getContext(), "islanding", true)
 
                         LiveDataBus.getInstance().with("userdata", LoginBean::class.java).postValue(it.data)
                         LiveDataBus.getInstance().with("userName", String::class.java).postValue(it.data!!.username)
@@ -115,30 +115,30 @@ class MainActivity : BaseActivity() {
 //        var mWeChatPublicFragment=WeChatPublicFragment()
 //        fragmentList!!.add(mWeChatPublicFragment)
 
-        var adapter= Adapter(this@MainActivity.supportFragmentManager)
+        var adapter = Adapter(this@MainActivity.supportFragmentManager)
 
-        adapter.addFragment(FirstFragment(),"FirstFragment")
+        adapter.addFragment(FirstFragment(), "FirstFragment")
 //        adapter.addFragment(SecondFragment(),"SecondFragment")
-        adapter.addFragment(WeChatPublicFragment(),"微信公众号")
-        adapter.addFragment(Thirdfragment(),"Thirdfragment")
+        adapter.addFragment(WeChatPublicFragment(), "微信公众号")
+        adapter.addFragment(Thirdfragment(), "Thirdfragment")
 
-        viewpager!!.adapter=adapter
+        viewpager!!.adapter = adapter
 
-        viewpager.currentItem=0
+        viewpager.currentItem = 0
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             com.lyl.wanandroid.R.id.navigation_home -> {
-                viewpager.currentItem=0
+                viewpager.currentItem = 0
                 return@OnNavigationItemSelectedListener true
             }
             com.lyl.wanandroid.R.id.navigation_dashboard -> {
-                viewpager.currentItem=1
+                viewpager.currentItem = 1
                 return@OnNavigationItemSelectedListener true
             }
             com.lyl.wanandroid.R.id.navigation_notifications -> {
-                viewpager.currentItem=2
+                viewpager.currentItem = 2
                 return@OnNavigationItemSelectedListener true
             }
         }

@@ -34,8 +34,9 @@ class ExecuteOnceObserver<T>(val onExecuteOnceNext: (T) -> Unit = {},
             }
         }
     }
+
     override fun onError(e: Throwable) {
         onExecuteOnceError(e)
-        Log.d("lyll"," onExecuteOnceError="+e.message)
+        Log.d("lyll", " onExecuteOnceError=" + e.message)
     }
 }

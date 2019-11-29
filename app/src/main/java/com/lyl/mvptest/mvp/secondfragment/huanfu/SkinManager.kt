@@ -8,7 +8,6 @@ import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.core.content.ContextCompat
-import java.lang.Exception
 
 /**
  * Create By: lyl
@@ -81,7 +80,7 @@ class SkinManager {
         //就是名字和类型匹配的资源对象中的id
         val identifier = resources!!.getIdentifier(resourceEntryName, typeName, skinPackageName)
 
-        Log.d("lyll","identifier============$identifier")
+        Log.d("lyll", "identifier============$identifier")
         if (identifier == 0) {
             return ContextCompat.getDrawable(context!!, id)!!
         }

@@ -16,19 +16,19 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <include
-            layout="@layout/no_landing"
             android:id="@+id/no_landing"
-            android:visibility="visible"/>
+            layout="@layout/no_landing"
+            android:visibility="visible" />
 
         <include
-            layout="@layout/is_landing"
             android:id="@+id/is_landing"
-            android:visibility="gone"/>
+            layout="@layout/is_landing"
+            android:visibility="gone" />
         <!--<ViewStub-->
-            <!--android:id="@+id/viewStub"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout="@layout/no_landing"/>-->
+        <!--android:id="@+id/viewStub"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout="@layout/no_landing"/>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -37,8 +37,8 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="2dp"
         android:background="@color/white"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headview">
@@ -95,8 +95,8 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="2dp"
         android:background="@color/white"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/l_web">
@@ -124,8 +124,8 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="2dp"
         android:background="@color/white"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/l_project">

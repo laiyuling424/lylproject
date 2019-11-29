@@ -21,12 +21,12 @@ public class LiveDataBus {
 
     private Map<String, BusMutableLiveData<Object>> bus;
 
-    public static LiveDataBus getInstance() {
-        return liveDataBus;
-    }
-
     private LiveDataBus() {
         bus = new HashMap<>();
+    }
+
+    public static LiveDataBus getInstance() {
+        return liveDataBus;
     }
 
     public synchronized <T> BusMutableLiveData<T> with(String key, Class<T> type) {
@@ -61,24 +61,24 @@ public class LiveDataBus {
 
             Object mapvalue = null;
             if (invokeEntry != null && invokeEntry instanceof Map.Entry) {
-                mapvalue=((Map.Entry)invokeEntry).getValue();
+                mapvalue = ((Map.Entry) invokeEntry).getValue();
             }
 
-            if (mapvalue==null){
+            if (mapvalue == null) {
                 throw new NullPointerException("null");
             }
 
             //todo 不知道为什么要getSuperclass
-            Class<?> calss=mapvalue.getClass().getSuperclass();
+            Class<?> calss = mapvalue.getClass().getSuperclass();
 
-            Field mLastVersion=calss.getDeclaredField("mLastVersion");
+            Field mLastVersion = calss.getDeclaredField("mLastVersion");
             mLastVersion.setAccessible(true);
 
-            Field mVersion=liveDataClass.getDeclaredField("mVersion");
+            Field mVersion = liveDataClass.getDeclaredField("mVersion");
             mVersion.setAccessible(true);
-            Object o=mVersion.get(this);
+            Object o = mVersion.get(this);
 
-            mLastVersion.set(mapvalue,o);
+            mLastVersion.set(mapvalue, o);
         }
 
     }

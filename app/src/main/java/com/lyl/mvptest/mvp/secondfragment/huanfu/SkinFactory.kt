@@ -8,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import java.lang.Exception
-import kotlin.reflect.KClass
 
 /**
  * Create By: lyl
@@ -67,14 +65,14 @@ class SkinFactory : LayoutInflater.Factory2 {
             var attributeValue = attrs.getAttributeValue(i)
             //判断每条属性是否包含 background color src。。。  background  textColor
             if (attributeName.contains("background") || attributeName.contains("textColor") || attributeName.contains("src")) {
-                Log.d("lyll","attributeName====$attributeName")
+                Log.d("lyll", "attributeName====$attributeName")
                 //获取资源id
                 var resId = attributeValue.substring(1).toInt()
                 //获取到属性的类型
                 var typeName = view.resources.getResourceTypeName(resId)
                 //获取到属性的值的名字
                 var entryName = view.resources.getResourceEntryName(resId)
-                Log.d("lyll","entryName====$entryName             typeName=====$typeName")
+                Log.d("lyll", "entryName====$entryName             typeName=====$typeName")
                 var skinItem = SkinItem(attributeName, resId, entryName, typeName)
                 itemList.add(skinItem)
             }
@@ -131,22 +129,22 @@ class SkinFactory : LayoutInflater.Factory2 {
 
         public fun apply() {
             for (skinItem in list!!) {
-                Log.d("lyll","apply    skinItem===="+skinItem.name)
-                Log.d("lyll","apply    skinItem==========>"+skinItem.typeName)
+                Log.d("lyll", "apply    skinItem====" + skinItem.name)
+                Log.d("lyll", "apply    skinItem==========>" + skinItem.typeName)
                 when (skinItem.name) {
                     "background" -> {
                         when (skinItem.typeName) {
                             "color" -> {
-                                Log.d("lyll","zzzzzzzzzzzzzz")
+                                Log.d("lyll", "zzzzzzzzzzzzzz")
                                 view!!.setBackgroundColor(SkinManager.getSkinManager().getColor(skinItem.resId!!))
                             }
                             "drawable" -> {
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                    Log.d("lyll","aaaaaaaaaaaaaa")
+                                    Log.d("lyll", "aaaaaaaaaaaaaa")
                                     view!!.background = SkinManager.getSkinManager().getDrawable(skinItem.resId!!)
 
                                 } else {
-                                    Log.d("lyll","bbbbbbbbbb")
+                                    Log.d("lyll", "bbbbbbbbbb")
                                     view!!.setBackgroundDrawable(SkinManager.getSkinManager().getDrawable(skinItem.resId!!))
                                 }
                             }
@@ -162,7 +160,7 @@ class SkinFactory : LayoutInflater.Factory2 {
                     }
                     "textColor" -> {
                         if (view is TextView) {
-                            Log.d("lyll","cccccccccccc")
+                            Log.d("lyll", "cccccccccccc")
                             (view as TextView).setTextColor(SkinManager.getSkinManager().getColor(skinItem.resId!!))
                         } else if (view is Button) {
                             (view as Button).setTextColor(SkinManager.getSkinManager().getColor(skinItem.resId!!))

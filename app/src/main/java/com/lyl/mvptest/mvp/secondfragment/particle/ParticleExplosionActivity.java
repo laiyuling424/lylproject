@@ -1,8 +1,8 @@
 package com.lyl.mvptest.mvp.secondfragment.particle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lyl.mvptest.R;
 

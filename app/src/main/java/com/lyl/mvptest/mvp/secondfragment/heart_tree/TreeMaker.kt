@@ -1,7 +1,6 @@
 package com.lyl.mvptest.mvp.secondfragment.heart_tree
 
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Create By: lyl

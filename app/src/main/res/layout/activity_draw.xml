@@ -7,10 +7,10 @@
     tools:context=".mvp.secondfragment.suefaceview.DrawActivity">
 
     <com.lyl.mvptest.widget.SurfaceViewL
+        android:id="@+id/surfaceview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/surfaceview"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

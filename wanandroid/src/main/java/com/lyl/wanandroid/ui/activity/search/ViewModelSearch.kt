@@ -8,9 +8,9 @@ import androidx.paging.PagedList
  * Create By: lyl
  * Date: 2019-07-11 15:41
  */
-class ViewModelSearch:ViewModel(){
+class ViewModelSearch : ViewModel() {
 
-    var searchList=LivePagedListBuilder(
+    var searchList = LivePagedListBuilder(
             SearchDataSouceFactory(),
             PagedList.Config.Builder()
                     .setPageSize(10)

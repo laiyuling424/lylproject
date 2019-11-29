@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
@@ -12,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseFragment
-import android.graphics.drawable.Drawable
 import com.lyl.wanandroid.ui.fragment.first.tixi.ViewModelNavigation
 
 

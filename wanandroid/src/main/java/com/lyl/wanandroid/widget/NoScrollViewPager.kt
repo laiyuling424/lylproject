@@ -1,11 +1,9 @@
 package com.lyl.wanandroid.widget
 
 import android.content.Context
-import android.text.method.Touch.onTouchEvent
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.viewpager.widget.ViewPager
-
 
 
 /**

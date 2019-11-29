@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.core.view.NestedScrollingParent2
 import androidx.core.view.ViewCompat
 
@@ -69,8 +68,6 @@ class NestedLayout(context: Context?, attrs: AttributeSet?) : LinearLayout(conte
             super.scrollTo(x, y)
         }
     }
-
-
 
 
 }

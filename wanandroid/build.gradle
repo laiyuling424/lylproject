@@ -88,7 +88,7 @@ dependencies {
     implementation config.dependencies["adapter-rxjava2"]
     implementation config.dependencies["converter-gson"]
     implementation config.dependencies["retrofit"]
-    implementation config.dependencies["okhttp"]
+    implementation config.dependencies["logging-interceptor"]
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.8.0'

@@ -1,9 +1,8 @@
 package com.lyl.mvptest.mvp.secondfragment.radar_view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.lyl.mvptest.R
-import com.lyl.mvptest.widget.RadarView
 
 class RadarViewActivity : AppCompatActivity() {
 

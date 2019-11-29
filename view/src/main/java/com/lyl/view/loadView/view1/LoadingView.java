@@ -19,15 +19,24 @@ import com.lyl.view.R;
  * Date: 2019-11-22 16:25
  */
 public class LoadingView extends LinearLayout {
-    private ImageView mIndicationView;
     ShapeLoadingView mShapeLodingView;
+    AnimatorSet mFreeFallAnimatiorSet, mFreeUpAnimatiorSet;
+    int mTranslationYDistance = 270;
+    float factor = 2;
+    int ANIMATION_DURATION = 520;
+    ObjectAnimator mRectRoteAnimation, mDefaultRoteAnimation;
+    ShapeLoadingView.CureentShape mCureentShape = ShapeLoadingView.CureentShape.SHAPE_RECT;
+    private ImageView mIndicationView;
     private Context mContext;
+
     public LoadingView(Context context) {
         this(context, null);
     }
+
     public LoadingView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
+
     public LoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
@@ -35,7 +44,7 @@ public class LoadingView extends LinearLayout {
         init();
     }
 
-    public void init(){
+    public void init() {
         initFreeFallAnimation();
         upThrow();
 //        initRoteAnimation();
@@ -45,11 +54,11 @@ public class LoadingView extends LinearLayout {
 
     }
 
-    public void start(){
+    public void start() {
         freeFall();
     }
 
-    public void stop(){
+    public void stop() {
 //        ViewGroup parent = (ViewGroup) this.getParent();
 //        if(parent != null){
 //            parent.removeView(this);
@@ -60,31 +69,24 @@ public class LoadingView extends LinearLayout {
 //        }
     }
 
-    public void fall(){
+    public void fall() {
         mFreeFallAnimatiorSet.start();
     }
 
-    public void up(){
+    public void up() {
         mFreeUpAnimatiorSet.start();
     }
 
     private void initLayout() {
-        View view=View.inflate(mContext, R.layout.load_view,this);
+        View view = View.inflate(mContext, R.layout.load_view, this);
         mShapeLodingView = (ShapeLoadingView) view.findViewById(R.id.shapeLoadingView);
         mIndicationView = (ImageView) view.findViewById(R.id.indication);
     }
 
-    AnimatorSet mFreeFallAnimatiorSet,mFreeUpAnimatiorSet;
-    int mTranslationYDistance=270;
-    float factor=2;
-    int ANIMATION_DURATION=520;
-    ObjectAnimator mRectRoteAnimation,mDefaultRoteAnimation;
-    ShapeLoadingView.CureentShape mCureentShape= ShapeLoadingView.CureentShape.SHAPE_RECT;
-
     //初始化下落动画
     private void initFreeFallAnimation() {
         // 下落动画集合
-        mFreeFallAnimatiorSet  = new AnimatorSet();
+        mFreeFallAnimatiorSet = new AnimatorSet();
         // 几何图形的垂直位移动画
         ObjectAnimator freeFallTranslationAnimator = ObjectAnimator.ofFloat(
                 mShapeLodingView, "translationY", 0, mTranslationYDistance);
@@ -127,7 +129,7 @@ public class LoadingView extends LinearLayout {
              * 执行旋转动画
              */
             private void startShapeRoteAnimator() {
-                ObjectAnimator roteAnimation  = mShapeLodingView.getUpThrowRoteAnimation();
+                ObjectAnimator roteAnimation = mShapeLodingView.getUpThrowRoteAnimation();
                 roteAnimation.setDuration(ANIMATION_DURATION);
                 roteAnimation.setInterpolator(new DecelerateInterpolator(factor));
                 roteAnimation.start();
@@ -140,21 +142,22 @@ public class LoadingView extends LinearLayout {
     private void freeFall() {
         mFreeFallAnimatiorSet.start();
     }
+
     private void freeUp() {
         mFreeUpAnimatiorSet.start();
     }
 
     private void upThrow() {
         // 下落动画集合
-        mFreeUpAnimatiorSet  = new AnimatorSet();
+        mFreeUpAnimatiorSet = new AnimatorSet();
         // 几何图形的垂直位移动画
         ObjectAnimator freeUpTranslationAnimator = ObjectAnimator.ofFloat(
-                mShapeLodingView, "translationY", mTranslationYDistance,0);
+                mShapeLodingView, "translationY", mTranslationYDistance, 0);
         // 定义动画的变化率。
         freeUpTranslationAnimator.setInterpolator(new DecelerateInterpolator(factor));
         // 中间阴影缩小动画
         ObjectAnimator scaleIndication = ObjectAnimator.ofFloat(mIndicationView,
-                "scaleX",  0.2f,1);
+                "scaleX", 0.2f, 1);
 
         mFreeUpAnimatiorSet.setDuration(ANIMATION_DURATION);
         mFreeUpAnimatiorSet.playTogether(freeUpTranslationAnimator, scaleIndication);
@@ -169,7 +172,6 @@ public class LoadingView extends LinearLayout {
             }
 
 
-
             @Override
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
@@ -181,7 +183,7 @@ public class LoadingView extends LinearLayout {
              * 执行旋转动画
              */
             private void startShapeRoteAnimator() {
-                ObjectAnimator roteAnimation  = mShapeLodingView.getUpThrowRoteAnimation();
+                ObjectAnimator roteAnimation = mShapeLodingView.getUpThrowRoteAnimation();
                 roteAnimation.setDuration(ANIMATION_DURATION);
                 roteAnimation.setInterpolator(new DecelerateInterpolator(factor));
                 roteAnimation.start();
@@ -190,9 +192,6 @@ public class LoadingView extends LinearLayout {
 
 
     }
-
-
-
 
 
 }

@@ -13,17 +13,14 @@ import android.widget.ImageView;
 @SuppressLint("AppCompatCustomView")
 public class ShapeLoadingView extends ImageView {
 
-    enum CureentShape {SHAPE_RECT, SHAPE_TRINGLE, SHAPE_CIRCLE}
-
     CureentShape mCureentShape = CureentShape.SHAPE_RECT;
-    ObjectAnimator mRectRoteAnimation,mDefaultRoteAnimation;
-
+    ObjectAnimator mRectRoteAnimation, mDefaultRoteAnimation;
     public ShapeLoadingView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public ShapeLoadingView(Context context, AttributeSet attrs) {
-        this(context,attrs,0);
+        this(context, attrs, 0);
     }
 
     public ShapeLoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -48,15 +45,17 @@ public class ShapeLoadingView extends ImageView {
                 "rotation", 0, 180);
     }
 
-
     public ObjectAnimator getUpThrowRoteAnimation() {
-        switch (mCureentShape){
+        switch (mCureentShape) {
             case SHAPE_RECT:
-                return  mRectRoteAnimation;
+                return mRectRoteAnimation;
             default:
                 return mDefaultRoteAnimation;
         }
     }
+
+
+    enum CureentShape {SHAPE_RECT, SHAPE_TRINGLE, SHAPE_CIRCLE}
 
 
 }

@@ -51,9 +51,9 @@ class WeChatContentAdapter : PagedListAdapter<WeChatContentBean, WeChatContentAd
 
         fun bindTo(account: WeChatContentBean?) {
             account?.let {
-                name.text=it.author
-                time.text=it.niceDate
-                title.text=it.title
+                name.text = it.author
+                time.text = it.niceDate
+                title.text = it.title
             }
         }
     }

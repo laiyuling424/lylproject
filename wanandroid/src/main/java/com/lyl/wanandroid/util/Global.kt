@@ -1,7 +1,6 @@
 package com.lyl.wanandroid.util
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.os.Looper
 import android.widget.Toast
 import com.lyl.wanandroid.WanAdnroidApplication
@@ -24,7 +23,7 @@ private var toast: Toast? = null
 fun showToast(content: String) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
         if (toast == null) {
-            toast = Toast.makeText(WanAdnroidApplication.getContext(), content,Toast.LENGTH_SHORT)
+            toast = Toast.makeText(WanAdnroidApplication.getContext(), content, Toast.LENGTH_SHORT)
         } else {
             toast?.setText(content)
         }

@@ -8,6 +8,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+
 import com.lyl.mvptest.adapter.ViewPagerAdapter;
 import com.lyl.mvptest.widget.NoScrollViewPager;
 import com.lyl.utils.function.InstallUtil;
@@ -17,9 +21,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -28,15 +29,16 @@ import butterknife.OnClick;
  * author lyl
  */
 public class MainActivity extends AppCompatActivity {
-//    DrawerLayout mDrawerLayout;
-    NoScrollViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;
-    List<Fragment> list;
-     Toolbar mToolbar;
-
     static {
         System.loadLibrary("native-lib");
     }
+
+    //    DrawerLayout mDrawerLayout;
+    NoScrollViewPager viewPager;
+    ViewPagerAdapter viewPagerAdapter;
+    List<Fragment> list;
+    Toolbar mToolbar;
+    private long firstTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,22 +55,22 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
 //        mDrawerLayout=(DrawerLayout)findViewById(R.id.drag_layout);
 //        NavigationView navigationView=(NavigationView)findViewById(R.id.nav);
-        viewPager =(NoScrollViewPager)findViewById(R.id.viewpager);
-        list=new ArrayList<>();
-        Fragment fragmentOne=new MainFragment();
-        Fragment fragmentTwo=new SecondFragment();
-        Fragment fragmentThree=new ThirdFragment();
+        viewPager = (NoScrollViewPager) findViewById(R.id.viewpager);
+        list = new ArrayList<>();
+        Fragment fragmentOne = new MainFragment();
+        Fragment fragmentTwo = new SecondFragment();
+        Fragment fragmentThree = new ThirdFragment();
         list.add(fragmentOne);
         list.add(fragmentTwo);
         list.add(fragmentThree);
 //        viewPagerAdapter=new ViewPagerAdapter(this.getSupportFragmentManager(),list);
-        viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager(),list);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), list);
 
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setCurrentItem(0);
 
 
-        mToolbar=(Toolbar)findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_me);
         mToolbar.setContentInsetsAbsolute(0, 0);
         mToolbar.setContentInsetStartWithNavigation(0);
@@ -83,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
 //        });
     }
 
-    @OnClick({R.id.tv1,R.id.tv2,R.id.tv3})
-    public void onClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.tv1, R.id.tv2, R.id.tv3})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.tv1:
                 viewPager.setCurrentItem(0);
                 break;
@@ -97,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-
-    private long firstTime = 0;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

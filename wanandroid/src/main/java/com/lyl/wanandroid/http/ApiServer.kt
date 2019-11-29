@@ -3,7 +3,7 @@ package com.lyl.wanandroid.http
 import com.lyl.wanandroid.WanAdnroidApplication
 import com.lyl.wanandroid.http.cookie.CookieJarImpl
 import com.lyl.wanandroid.util.MyLog
-import okhttp3.*
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

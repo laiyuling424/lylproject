@@ -3,10 +3,6 @@ package com.lyl.wanandroid.ui.fragment.first.main
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -15,10 +11,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lyl.wanandroid.Constants
 import com.lyl.wanandroid.R
-import com.lyl.wanandroid.ui.base.BaseFragment
 import com.lyl.wanandroid.http.ApiServer
 import com.lyl.wanandroid.listener.OnItemClickListener
 import com.lyl.wanandroid.ui.activity.WebViewDetailActivity
+import com.lyl.wanandroid.ui.base.BaseFragment
 import com.lyl.wanandroid.ui.base.ExecuteOnceObserver
 import com.lyl.wanandroid.util.MyLog
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,7 +26,7 @@ import kotlinx.android.synthetic.main.main_fragment_layout.*
  * Create By: lyl
  * Date: 2019-06-11 15:45
  */
-class MainFragment:BaseFragment(),OnItemClickListener<MainArticleBean>{
+class MainFragment : BaseFragment(), OnItemClickListener<MainArticleBean> {
     override val layoutId: Int
         get() = R.layout.main_fragment_layout
 
@@ -55,7 +51,7 @@ class MainFragment:BaseFragment(),OnItemClickListener<MainArticleBean>{
         startActivity(WebViewDetailActivity::class.java, intent)
     }
 
-    var viewModelMainArticle:ViewModelMainArticle?=null
+    var viewModelMainArticle: ViewModelMainArticle? = null
 
 //    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 //        return inflater.inflate(R.layout.main_fragment_layout, container, false)
@@ -73,7 +69,7 @@ class MainFragment:BaseFragment(),OnItemClickListener<MainArticleBean>{
         mMainArticleAdapter.let { it!!.itemClickListener = this }
         recycle_view.adapter = mMainArticleAdapter
 
-        viewModelMainArticle=getviewModelMainArticle(0)
+        viewModelMainArticle = getviewModelMainArticle(0)
         viewModelMainArticle!!.articleLists.observe(this, Observer(mMainArticleAdapter!!::submitList))
 
         getBanner()
@@ -81,21 +77,20 @@ class MainFragment:BaseFragment(),OnItemClickListener<MainArticleBean>{
     }
 
 
-
-    private fun getBanner(){
+    private fun getBanner() {
         ApiServer.getApiServer().getMainBanner()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
-                    var bannerList:ArrayList<String>?= ArrayList()
-                    for (i in 0 until it.data!!.size){
+                    var bannerList: ArrayList<String>? = ArrayList()
+                    for (i in 0 until it.data!!.size) {
 
                         bannerList!!.add(it.data!![i].imagePath!!)
                     }
                     slideshowView.setUrlList(bannerList)
-                },onExecuteOnceError = {
-                    MyLog.Logd("error="+it.message)
-                },onExecuteOnceComplete = {
+                }, onExecuteOnceError = {
+                    MyLog.Logd("error=" + it.message)
+                }, onExecuteOnceComplete = {
 
                 }))
 

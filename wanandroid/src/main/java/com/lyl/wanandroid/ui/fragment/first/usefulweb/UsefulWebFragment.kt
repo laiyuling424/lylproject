@@ -17,9 +17,9 @@ import kotlinx.android.synthetic.main.useful_fragment_layout.*
  * Create By: lyl
  * Date: 2019-07-11 14:43
  */
-class UsefulWebFragment : BaseFragment() , OnItemClickListener<String> {
+class UsefulWebFragment : BaseFragment(), OnItemClickListener<String> {
 
-    var listUsefulWeb:List<UsefulWebBean>?=ArrayList()
+    var listUsefulWeb: List<UsefulWebBean>? = ArrayList()
 
     override fun itemClick(t: String, position: Int) {
         val intent = Intent()
@@ -28,7 +28,7 @@ class UsefulWebFragment : BaseFragment() , OnItemClickListener<String> {
         intent.putExtra(Constants.CONTENT_TITLE, this!!.listUsefulWeb!![position].name)
         intent.putExtra(Constants.CONTENT_Id, this!!.listUsefulWeb!![position].id)
 
-        MyLog.Logd("url===>"+this!!.listUsefulWeb!![position].link)
+        MyLog.Logd("url===>" + this!!.listUsefulWeb!![position].link)
 
         startActivity(WebViewDetailActivity::class.java, intent)
     }
@@ -45,7 +45,6 @@ class UsefulWebFragment : BaseFragment() , OnItemClickListener<String> {
     }
 
 
-
     private fun getBanner() {
         ApiServer.getApiServer()
                 .getUsefulWebList()
@@ -58,11 +57,11 @@ class UsefulWebFragment : BaseFragment() , OnItemClickListener<String> {
                                 list!!.add(it.data!![i].name!!)
                             }
                             recycle_list_view.setListText(list)
-                            listUsefulWeb=it.data
+                            listUsefulWeb = it.data
                         }, onExecuteOnceError = {
                             MyLog.Logd("onExecuteOnceError==>" + it.message)
                         }, onExecuteOnceComplete = {
-//                            MyLog.Logd("onExecuteOnceComplete")
+                            //                            MyLog.Logd("onExecuteOnceComplete")
                         })
                 )
 

@@ -2,14 +2,14 @@ package com.lyl.mvptest.mvp.secondfragment.recycleview
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lyl.mvptest.R
-import java.util.ArrayList
+import java.util.*
 
 class RecycleViewActivity : AppCompatActivity() {
 

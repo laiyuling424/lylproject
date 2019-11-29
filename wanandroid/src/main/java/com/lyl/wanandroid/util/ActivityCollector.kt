@@ -2,7 +2,7 @@ package com.lyl.wanandroid.util
 
 import android.app.Activity
 import java.lang.ref.WeakReference
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Create By: lyl

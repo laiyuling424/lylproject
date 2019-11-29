@@ -3,8 +3,8 @@ package com.lyl.mvptest.mvp.movie;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.lyl.mvptest.utils.OkhttpUtil;
 import com.lyl.mvptest.beans.HotMovieinfo;
+import com.lyl.mvptest.utils.OkhttpUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,10 +19,10 @@ import okhttp3.Response;
  * author lyl
  */
 public class MoviePresenter implements BasePresenter {
-    private BaseView view;
-    private Call call;
     List<HotMovieinfo.SubjectsBean> list;
     int hotMovieinfoCount = 0;
+    private BaseView view;
+    private Call call;
 
     public MoviePresenter(BaseView View) {
         view = View;
@@ -68,7 +68,7 @@ public class MoviePresenter implements BasePresenter {
                 HotMovieinfo hotMovieinfo = gson.fromJson(responseData, HotMovieinfo.class);
                 hotMovieinfoCount = hotMovieinfo.getTotal();
                 list = hotMovieinfo.getSubjects();
-                if (list==null||list.size()== 0) {
+                if (list == null || list.size() == 0) {
                     view.showNo("数据获取失败");
                 } else {
                     view.show(list);

@@ -36,7 +36,7 @@ public class MoveView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         final int actionIndex = event.getActionIndex();
-        switch (event.getActionMasked()){
+        switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 mScrollPointerId = event.getPointerId(0);
                 mLastTouchX = (int) (event.getX() + 0.5f);
@@ -54,7 +54,7 @@ public class MoveView extends View {
                 int y = (int) (event.getY(index) + 0.5f);
                 int dx = mLastTouchX - x;
                 int dy = mLastTouchY - y;
-                if(!mCanMove) {
+                if (!mCanMove) {
                     if (Math.abs(dy) >= mTouchSlop) {
                         if (dy > 0) {
                             dy -= mTouchSlop;

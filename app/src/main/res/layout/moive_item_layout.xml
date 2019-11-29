@@ -1,106 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="185dp"
     android:orientation="vertical">
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#ccc"/>
+        android:background="#ccc" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
         <ImageView
-            android:layout_margin="5dp"
+            android:id="@+id/image"
             android:layout_width="96dp"
             android:layout_height="155dp"
-            android:id="@+id/image"/>
+            android:layout_margin="5dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_margin="5dp">
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
             <TextView
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:textSize="20sp"
                 android:text="一出好戏"
-                android:id="@+id/name"/>
+                android:textSize="20sp" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="10sp"
-                    android:text="观众评分：" />
+                    android:text="观众评分："
+                    android:textSize="10sp" />
+
                 <TextView
+                    android:id="@+id/rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="10sp"
                     android:text="8.6"
-                    android:id="@+id/rating"/>
+                    android:textSize="10sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="10sp"
-                    android:text="导演：" />
+                    android:text="导演："
+                    android:textSize="10sp" />
+
                 <TextView
+                    android:id="@+id/directors"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="10sp"
                     android:text="乔"
-                    android:id="@+id/directors"/>
+                    android:textSize="10sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="10sp"
-                    android:text="主演：" />
+                    android:text="主演："
+                    android:textSize="10sp" />
+
                 <TextView
+                    android:id="@+id/casts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="10sp"
                     android:text="xxx"
-                    android:id="@+id/casts"/>
+                    android:textSize="10sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="10sp"
-                    android:text="上映：" />
+                    android:text="上映："
+                    android:textSize="10sp" />
+
                 <TextView
+                    android:id="@+id/durations"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="10sp"
                     android:text="120"
-                    android:id="@+id/durations"/>
+                    android:textSize="10sp" />
 
             </LinearLayout>
         </LinearLayout>

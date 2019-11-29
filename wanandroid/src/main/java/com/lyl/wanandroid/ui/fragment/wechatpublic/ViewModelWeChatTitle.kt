@@ -8,7 +8,7 @@ import androidx.paging.PagedList
  * Create By: lyl
  * Date: 2019-07-08 15:00
  */
-class ViewModelWeChatTitle:ViewModel(){
+class ViewModelWeChatTitle : ViewModel() {
 
     val titleLists = LivePagedListBuilder(WeChatTitleItemDataSouceFactory(),
             PagedList.Config.Builder()

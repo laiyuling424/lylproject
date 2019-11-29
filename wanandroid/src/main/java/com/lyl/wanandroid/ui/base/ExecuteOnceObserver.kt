@@ -23,8 +23,8 @@ class ExecuteOnceObserver<T>(val onExecuteOnceNext: (T) -> Unit = {},
 
     override fun onNext(t: T) {
 //        try {
-            onExecuteOnceNext(t)
-            this.onComplete()
+        onExecuteOnceNext(t)
+        this.onComplete()
 //        } catch (e: Throwable) {
 //            this.onError(e)
 //        } finally {
@@ -33,6 +33,7 @@ class ExecuteOnceObserver<T>(val onExecuteOnceNext: (T) -> Unit = {},
 //            }
 //        }
     }
+
     override fun onError(e: Throwable) {
         onExecuteOnceError(e)
     }
