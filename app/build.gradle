@@ -22,6 +22,17 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+        //多渠道打包
+        flavorDimensions "default"
+    }
+    //多渠道打包
+    productFlavors{
+        tencent{
+            applicationId "com.lyl.mvptest.tencent"
+        }
+        huawei{
+            applicationId "com.lyl.mvptest.huawei"
+        }
     }
     buildTypes {
         release {
