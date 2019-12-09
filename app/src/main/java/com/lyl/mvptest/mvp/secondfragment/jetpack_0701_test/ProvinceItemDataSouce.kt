@@ -1,8 +1,6 @@
 package com.lyl.mvptest.mvp.secondfragment.jetpack_0701_test
 
-import android.util.Log
 import androidx.paging.ItemKeyedDataSource
-import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -10,7 +8,7 @@ import io.reactivex.schedulers.Schedulers
  * Create By: lyl
  * Date: 2019-07-01 15:51
  */
-class ProvinceItemDataSouce :ItemKeyedDataSource<Long,ProvinceBean>() {
+class ProvinceItemDataSouce : ItemKeyedDataSource<Long, ProvinceBean>() {
 
     private val apiGenerate by lazy {
         ApiGenerate.getApiService()
@@ -22,8 +20,8 @@ class ProvinceItemDataSouce :ItemKeyedDataSource<Long,ProvinceBean>() {
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
                     callback.onResult(it)
-                },onExecuteOnceError = {
-                },onExecuteOnceComplete = {
+                }, onExecuteOnceError = {
+                }, onExecuteOnceComplete = {
                 }))
     }
 
@@ -33,8 +31,8 @@ class ProvinceItemDataSouce :ItemKeyedDataSource<Long,ProvinceBean>() {
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
                     callback.onResult(it)
-                },onExecuteOnceError = {
-                },onExecuteOnceComplete = {
+                }, onExecuteOnceError = {
+                }, onExecuteOnceComplete = {
                 }))
     }
 

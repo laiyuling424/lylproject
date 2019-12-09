@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.lyl.wanandroid.R
-import com.lyl.wanandroid.listener.OnItemClickListener
 import com.lyl.wanandroid.listener.OnItemClickListenerTwo
 
 /**

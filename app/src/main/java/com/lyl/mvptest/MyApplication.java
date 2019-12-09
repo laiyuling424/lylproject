@@ -5,6 +5,7 @@ import android.app.Application;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lyl.mvptest.config.Config;
 import com.lyl.mvptest.utils.CatchHandler;
+
 /**
  * create 2018/8/24
  * author lyl

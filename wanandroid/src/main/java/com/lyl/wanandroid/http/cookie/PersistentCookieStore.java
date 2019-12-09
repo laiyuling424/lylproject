@@ -36,7 +36,9 @@ public class PersistentCookieStore implements CookieStore {
     private final SharedPreferences cookiePrefs;
     private boolean omitNonPersistentCookies = false;
 
-    /** Construct a persistent cookie store.  */
+    /**
+     * Construct a persistent cookie store.
+     */
     public PersistentCookieStore(Context context) {
         this.cookiePrefs = context.getSharedPreferences(COOKIE_PREFS, 0);
         this.cookies = new HashMap<String, ConcurrentHashMap<String, Cookie>>();
@@ -74,7 +76,9 @@ public class PersistentCookieStore implements CookieStore {
         clearExpired();
     }
 
-    /** 移除失效cookie */
+    /**
+     * 移除失效cookie
+     */
     private void clearExpired() {
         SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
 
@@ -115,7 +119,7 @@ public class PersistentCookieStore implements CookieStore {
         String hostKey = this.hostName(httpUrl);
 
         // Save cookie into local store, or remove if expired
-        if(!this.cookies.containsKey(hostKey)) {
+        if (!this.cookies.containsKey(hostKey)) {
             this.cookies.put(hostKey, new ConcurrentHashMap<String, Cookie>());
         }
         cookies.get(hostKey).put(name, cookie);
@@ -153,7 +157,9 @@ public class PersistentCookieStore implements CookieStore {
         return result;
     }
 
-    /** 获取cookie集合 */
+    /**
+     * 获取cookie集合
+     */
     private List<Cookie> get(String hostKey) {
         ArrayList<Cookie> result = new ArrayList<Cookie>();
 
@@ -162,8 +168,7 @@ public class PersistentCookieStore implements CookieStore {
             for (Cookie cookie : cookies) {
                 if (isCookieExpired(cookie)) {
                     this.remove(hostKey, cookie);
-                }
-                else {
+                } else {
                     result.add(cookie);
                 }
             }
@@ -176,7 +181,9 @@ public class PersistentCookieStore implements CookieStore {
         return this.remove(this.hostName(httpUrl), cookie);
     }
 
-    /** 从缓存中移除cookie */
+    /**
+     * 从缓存中移除cookie
+     */
     private boolean remove(String hostKey, Cookie cookie) {
         String name = this.cookieName(cookie);
         if (this.cookies.containsKey(hostKey) && this.cookies.get(hostKey).containsKey(name)) {
@@ -210,7 +217,9 @@ public class PersistentCookieStore implements CookieStore {
         this.omitNonPersistentCookies = omitNonPersistentCookies;
     }
 
-    /** 判断cookie是否失效  */
+    /**
+     * 判断cookie是否失效
+     */
     private boolean isCookieExpired(Cookie cookie) {
         return cookie.expiresAt() < System.currentTimeMillis();
     }

@@ -4,9 +4,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -74,7 +72,7 @@ public class LylLinearLayout extends LinearLayout
         getParent().requestDisallowInterceptTouchEvent(true);
         if (type == ViewCompat.TYPE_TOUCH) {//手指触发的滑动
             // dy>0向下scroll dy<0向上scroll
-            layout(getLeft(),getTop()+dy,getRight(),getBottom()+dy);
+            layout(getLeft(), getTop() + dy, getRight(), getBottom() + dy);
 //            headerView.setTranslationY(-dy);
 //            childView.setTranslationY(dy);
             requestLayout();

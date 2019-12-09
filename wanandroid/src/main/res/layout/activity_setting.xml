@@ -7,50 +7,52 @@
     tools:context=".ui.activity.SettingActivity">
 
     <LinearLayout
-        android:gravity="center|left"
-        android:background="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
         android:id="@+id/ll_head"
+        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center|left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:id="@+id/img_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:padding="5dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/back_white"
+            android:layout_marginLeft="5dp"
+            android:padding="5dp"
             android:scaleType="centerInside"
-            android:layout_marginLeft="5dp"/>
+            android:src="@drawable/back_white" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:text="设置"
-            android:textSize="16sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:padding="5dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:scaleType="centerInside"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginLeft="5dp"
+            android:padding="5dp"
+            android:scaleType="centerInside" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:gravity="center"
+        android:id="@+id/ll_clear"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="@color/white"
-        android:layout_width="match_parent"
-        android:id="@+id/ll_clear"
-        android:layout_height="50dp"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/ll_head">
 
         <TextView
@@ -58,30 +60,31 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="清除缓存"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:text="清除缓存" />
+
         <TextView
+            android:id="@+id/tv_clear"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/tv_clear"
             android:layout_marginRight="10dp"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical" />
 
         <ImageView
             android:layout_width="8dp"
             android:layout_height="14dp"
             android:layout_marginRight="15dp"
-            android:visibility="gone"
-            android:src="@drawable/jiantou" />
+            android:src="@drawable/jiantou"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
-        android:gravity="center"
+        android:id="@+id/ll_changepassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="@color/white"
-        android:layout_width="match_parent"
-        android:id="@+id/ll_changepassword"
-        android:layout_height="50dp"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/ll_clear">
 
@@ -90,24 +93,24 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="修改密码"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:text="修改密码" />
 
         <ImageView
             android:layout_width="8dp"
             android:layout_height="14dp"
             android:layout_marginRight="15dp"
-            android:visibility="visible"
-            android:src="@drawable/jiantou" />
+            android:src="@drawable/jiantou"
+            android:visibility="visible" />
     </LinearLayout>
 
     <LinearLayout
-        android:gravity="center"
+        android:id="@+id/ll_updatauserdata"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="@color/white"
-        android:layout_width="match_parent"
-        android:id="@+id/ll_updatauserdata"
-        android:layout_height="50dp"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/ll_changepassword">
 
@@ -116,25 +119,25 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="完善个人信息"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:text="完善个人信息" />
 
         <ImageView
             android:layout_width="8dp"
             android:layout_height="14dp"
             android:layout_marginRight="15dp"
-            android:visibility="visible"
-            android:src="@drawable/jiantou" />
+            android:src="@drawable/jiantou"
+            android:visibility="visible" />
     </LinearLayout>
 
     <Button
         android:id="@+id/loginout"
         android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:background="@color/colorPrimaryDark"
         android:text="退出当前账号"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
     </Button>

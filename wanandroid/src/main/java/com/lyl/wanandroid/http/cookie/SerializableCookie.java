@@ -9,12 +9,10 @@ import okhttp3.Cookie;
 
 /**
  * 仿照android-async-http的SerializableCookie实现，用处是cookie对象与对象流的互转，保存和读取cookie
- *
+ * <p>
  * Create By: lyl
  * Date: 2019-07-31 15:25
- *
  */
-
 
 
 public class SerializableCookie implements Serializable {
@@ -35,7 +33,9 @@ public class SerializableCookie implements Serializable {
         return bestCookie;
     }
 
-    /** 将cookie写到对象流中 */
+    /**
+     * 将cookie写到对象流中
+     */
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.writeObject(this.cookie.name());
         out.writeObject(this.cookie.value());
@@ -48,7 +48,9 @@ public class SerializableCookie implements Serializable {
         out.writeBoolean(this.cookie.persistent());
     }
 
-    /** 从对象流中构建cookie对象 */
+    /**
+     * 从对象流中构建cookie对象
+     */
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         String name = (String) in.readObject();
         String value = (String) in.readObject();

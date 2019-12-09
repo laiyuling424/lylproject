@@ -9,12 +9,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewStub
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toolbar
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -24,11 +21,8 @@ import com.lyl.wanandroid.R
 import com.lyl.wanandroid.util.ActivityCollector
 import com.lyl.wanandroid.util.AndroidVersion
 import com.lyl.wanandroid.util.MyLog
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import java.lang.ref.WeakReference
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Create By: lyl

@@ -6,14 +6,15 @@
 
 
     <LinearLayout
+        android:id="@+id/headview"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:id="@+id/headview"
         android:layout_marginTop="30dp"
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <com.lyl.wanandroid.widget.CircleImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -23,16 +24,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/username"
-            android:textSize="25sp"
-            android:text="cabbage"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/headview"/>
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:text="cabbage"
+            android:textSize="25sp"
+            app:layout_constraintLeft_toRightOf="@+id/headview"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="14dp"
@@ -40,7 +41,6 @@
             android:layout_marginRight="20dp"
             android:src="@drawable/arrow" />
     </LinearLayout>
-
 
 
     <LinearLayout
@@ -51,20 +51,22 @@
         app:layout_constraintTop_toBottomOf="@+id/headview">
 
         <LinearLayout
+            android:id="@+id/ll_article"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/ll_article"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
+                android:id="@+id/article_num"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/article_num"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -74,20 +76,22 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_web"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/ll_web"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
+                android:id="@+id/web_num"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/web_num"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -97,20 +101,22 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_project"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/ll_project"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
+                android:id="@+id/project_num"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/project_num"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -120,20 +126,22 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_issue"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/ll_issue"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
+                android:id="@+id/issue_num"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/issue_num"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

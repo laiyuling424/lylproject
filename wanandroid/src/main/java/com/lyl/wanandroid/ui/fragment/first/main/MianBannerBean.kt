@@ -21,12 +21,12 @@ data class MianBannerBean(
 //        "errorCode": 0,
 //        "errorMsg": ""
 //    }
-    var desc:String?=null,
-    var id:Int?=-1,
-    var imagePath:String?=null,
-    var isVisible:Int?=-1,
-    var order:Int?=-1,
-    var title:String?=null,
-    var type:Int?=-1,
-    var url:String?=null
+        var desc: String? = null,
+        var id: Int? = -1,
+        var imagePath: String? = null,
+        var isVisible: Int? = -1,
+        var order: Int? = -1,
+        var title: String? = null,
+        var type: Int? = -1,
+        var url: String? = null
 )

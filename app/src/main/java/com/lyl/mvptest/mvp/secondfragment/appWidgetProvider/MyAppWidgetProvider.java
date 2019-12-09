@@ -55,7 +55,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
                                 .getBroadcast(context, 0, intentClick, 0);
                         remoteViews.setOnClickPendingIntent(R.id.imageView1, pendingIntent);
                         appWidgetManager.updateAppWidget(new ComponentName(
-                                context, MyAppWidgetProvider.class),remoteViews);
+                                context, MyAppWidgetProvider.class), remoteViews);
                         SystemClock.sleep(30);
                     }
 

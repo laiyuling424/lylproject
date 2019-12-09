@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.lyl.mvptest.mvp.secondfragment.ColorTrackTextViewActivity;
 import com.lyl.mvptest.mvp.secondfragment.animation.AnimationActivity;
 import com.lyl.mvptest.mvp.secondfragment.cv.LylRecycleViewActivity;
@@ -23,10 +27,6 @@ import com.lyl.mvptest.mvp.secondfragment.suefaceview.DrawActivity;
 import com.lyl.mvptest.mvp.secondfragment.textclock_view.TextClockViewActivity;
 import com.lyl.mvptest.mvp.secondfragment.tree.TreeActivity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,16 +37,13 @@ import butterknife.Unbinder;
  * Date: 2019/5/5 5:28 PM
  */
 public class SecondFragment extends Fragment {
-    private Unbinder unbinder;
-
     @BindView(R.id.btn1)
     Button btn1;
-
     @BindView(R.id.btn2)
     Button btn2;
-
     @BindView(R.id.btn3)
     Button btn3;
+    private Unbinder unbinder;
 
     @Nullable
     @Override

@@ -7,35 +7,34 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
-import com.lyl.mvptest.beans.HotMovieinfo;
 import com.lyl.mvptest.R;
+import com.lyl.mvptest.beans.HotMovieinfo;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * create 2018/8/22
  * author lyl
  */
-public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder>  {
+public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder> {
     private Context mContext;
-    private List<HotMovieinfo.SubjectsBean> mList=new ArrayList<>();
+    private List<HotMovieinfo.SubjectsBean> mList = new ArrayList<>();
     private MovieAdapterSelectCallback movieAdapterSelectCallback;
 
-    public MoiveAdapter(Context mContext, List<HotMovieinfo.SubjectsBean> mList,MovieAdapterSelectCallback callback) {
+    public MoiveAdapter(Context mContext, List<HotMovieinfo.SubjectsBean> mList, MovieAdapterSelectCallback callback) {
         this.mContext = mContext;
         this.mList = mList;
-        movieAdapterSelectCallback=callback;
+        movieAdapterSelectCallback = callback;
     }
-
 
 
     @Override
     public MoiveAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.moive_item_layout,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.moive_item_layout, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -48,8 +47,8 @@ public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder
         holder.directors.setText(mList.get(position).getDirectors().get(0).getName());
         holder.durations.setText(mList.get(position).getYear());
 
-        List<String> list=new ArrayList<>();
-        for(int i=0;i<mList.get(position).getCasts().size();i++){
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < mList.get(position).getCasts().size(); i++) {
             list.add(mList.get(position).getCasts().get(i).getName());
         }
         holder.casts.setText(list.toString());
@@ -60,7 +59,7 @@ public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder
             public void onClick(View v) {
                 //Log.d("lyll","position01--"+position);
                 //Log.d("lyll","position02--"+holder.getAdapterPosition());
-                movieAdapterSelectCallback.onItemSelected(mList,holder.getAdapterPosition());
+                movieAdapterSelectCallback.onItemSelected(mList, holder.getAdapterPosition());
             }
         });
     }
@@ -71,26 +70,25 @@ public class MoiveAdapter extends RecyclerView.Adapter<MoiveAdapter.MyViewHolder
     }
 
 
-
     /**
-     *将ViewHolder类写成静态的.
+     * 将ViewHolder类写成静态的.
      **/
-    static class MyViewHolder extends RecyclerView.ViewHolder{
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         View itemDetailView;
         ImageView image;
-        TextView name,rating,directors,casts,durations;
+        TextView name, rating, directors, casts, durations;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            itemDetailView=itemView;
-            image=itemView.findViewById(R.id.image);
-            name=itemView.findViewById(R.id.name);
-            rating=itemView.findViewById(R.id.rating);
-            directors=itemView.findViewById(R.id.directors);
-            casts=itemView.findViewById(R.id.casts);
-            durations=itemView.findViewById(R.id.durations);
+            itemDetailView = itemView;
+            image = itemView.findViewById(R.id.image);
+            name = itemView.findViewById(R.id.name);
+            rating = itemView.findViewById(R.id.rating);
+            directors = itemView.findViewById(R.id.directors);
+            casts = itemView.findViewById(R.id.casts);
+            durations = itemView.findViewById(R.id.durations);
         }
     }
-
 
 
 }

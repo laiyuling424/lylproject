@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.listener.OnItemClickListener
-import com.lyl.wanandroid.util.MyLog
 
 /**
  * Create By: lyl
@@ -51,7 +50,7 @@ class KindAdapter : PagedListAdapter<KindBean, KindAdapter.ProvinceViewHolder>(d
 
         val name: TextView = itemView.findViewById(R.id.kind_name)
         var checkBox: CheckBox = itemView.findViewById(R.id.checkbox)
-        var view:LinearLayout=itemView.findViewById(R.id.view)
+        var view: LinearLayout = itemView.findViewById(R.id.view)
 
         fun bindTo(account: KindBean?, kindBean: KindBean) {
             account?.let {

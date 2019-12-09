@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.PorterDuff
-import kotlinx.android.synthetic.main.item_view.view.*
 
 /**
  * Create By: lyl

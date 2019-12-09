@@ -9,8 +9,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,8 +18,6 @@ import com.lyl.wanandroid.ui.activity.LoginActivity
 import com.lyl.wanandroid.ui.activity.search.SearchActivity
 import com.lyl.wanandroid.ui.base.BaseActivity
 import com.lyl.wanandroid.util.SharedPreferencesUtil
-import kotlinx.android.synthetic.main.activity_collect_article.*
-import kotlinx.android.synthetic.main.activity_collect_web.*
 
 class CollectArticleActivity : BaseActivity() {
 

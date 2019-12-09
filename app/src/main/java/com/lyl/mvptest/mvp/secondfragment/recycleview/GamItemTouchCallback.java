@@ -1,7 +1,6 @@
 package com.lyl.mvptest.mvp.secondfragment.recycleview;
 
 import android.graphics.Canvas;
-
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -53,8 +52,8 @@ public class GamItemTouchCallback extends ItemTouchHelper.Callback {
     @Override
     public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         // 首次滑动时，记录下ItemView当前滑动的距离
-        Log.d("lyll","dx="+dX+"   getScrollX="+viewHolder.itemView.getScrollX());
-        Log.d("lyll","isCurrentlyActive="+isCurrentlyActive+"   mFirstInactive="+mFirstInactive);
+        Log.d("lyll", "dx=" + dX + "   getScrollX=" + viewHolder.itemView.getScrollX());
+        Log.d("lyll", "isCurrentlyActive=" + isCurrentlyActive + "   mFirstInactive=" + mFirstInactive);
         if (dX == 0) {
             mCurrentScrollX = viewHolder.itemView.getScrollX();
             mFirstInactive = true;

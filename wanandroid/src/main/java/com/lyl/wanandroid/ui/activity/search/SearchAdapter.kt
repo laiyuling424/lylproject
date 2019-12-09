@@ -51,10 +51,10 @@ class SearchAdapter : PagedListAdapter<SearchResponseBean, SearchAdapter.Provinc
 
         fun bindTo(account: SearchResponseBean?) {
             account?.let {
-                name.text=it.author
-                time.text=it.niceDate
-                title.text=it.title
-                classification.text=it.superChapterName+"/"+it.chapterName
+                name.text = it.author
+                time.text = it.niceDate
+                title.text = it.title
+                classification.text = it.superChapterName + "/" + it.chapterName
             }
         }
     }

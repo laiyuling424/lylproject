@@ -19,12 +19,12 @@ import androidx.annotation.Nullable;
  */
 public class PageView extends View {
 
+    boolean isInitPath = false;
     private RectF rect;
     private Paint paintPink;
     private Paint paintRed = new Paint();
     private Paint paintBlack = new Paint();
     private Paint paintWhite = new Paint();
-
     private Path mPath = new Path();
     private Path mPathEar1 = new Path();
     private Path mPathEar2 = new Path();
@@ -34,7 +34,6 @@ public class PageView extends View {
     private Path mPathArmLeft = new Path();
     private Path mPathHandLeft = new Path();
     private Path mPathTail = new Path();
-
     // 常规百分百绘制
     private ValueAnimator animNose;
     private ValueAnimator animEyes;
@@ -50,7 +49,6 @@ public class PageView extends View {
     private int progressLegs = 0;
     private int progressFoots = 0;
     private int progressName = 0;
-
     // 贝塞尔曲线绘制
     private ValueAnimator animHead;
     private ValueAnimator animEar1;
@@ -61,7 +59,6 @@ public class PageView extends View {
     private ValueAnimator animArmLeft;
     private ValueAnimator animHandLeft;
     private ValueAnimator animTail;
-
     private ViewPoint pointHead = new ViewPoint();
     private ViewPoint pointEar1 = new ViewPoint();
     private ViewPoint pointEar2 = new ViewPoint();
@@ -71,9 +68,6 @@ public class PageView extends View {
     private ViewPoint pointArmLeft = new ViewPoint();
     private ViewPoint pointHandLeft = new ViewPoint();
     private ViewPoint pointTail = new ViewPoint();
-
-
-    boolean isInitPath = false;
     private AnimatorSet animatorSet;
 
     public PageView(Context context) {
@@ -89,6 +83,11 @@ public class PageView extends View {
     public PageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
+    }
+
+    public static int dp2px(Context context, float dpValue) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
     public void init() {
@@ -374,7 +373,7 @@ public class PageView extends View {
         animatorSet = new AnimatorSet();
         // 设置动画集合，按顺序绘制
         animatorSet.playSequentially(animNose, animHead, animEar2, animEar1, animEyes, animMouth, animFace,
-                animBody, animArmRight, animHandRight, animArmLeft, animHandLeft, animLegs, animFoots, animTail,animName);
+                animBody, animArmRight, animHandRight, animArmLeft, animHandLeft, animLegs, animFoots, animTail, animName);
 
     }
 
@@ -389,7 +388,6 @@ public class PageView extends View {
             }
         }
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -472,10 +470,10 @@ public class PageView extends View {
         paintPink.setTextSize(50);
         Path path = new Path();
         paintPink.setTextAlign(Paint.Align.RIGHT);
-        path.moveTo(dp2px(200),dp2px(400));
-        path.lineTo(dp2px(200+50 * progressName / 100f),dp2px(400));
+        path.moveTo(dp2px(200), dp2px(400));
+        path.lineTo(dp2px(200 + 50 * progressName / 100f), dp2px(400));
 //        canvas.drawPath(path, paintPink);
-        canvas.drawTextOnPath("范喵喵",path,0,0,paintPink);
+        canvas.drawTextOnPath("范喵喵", path, 0, 0, paintPink);
 
         paintPink.setStyle(Paint.Style.STROKE);
         paintBlack.setStyle(Paint.Style.STROKE);
@@ -514,11 +512,6 @@ public class PageView extends View {
 
     private int dp2px(float dpValue) {
         return dp2px(getContext(), dpValue);
-    }
-
-    public static int dp2px(Context context, float dpValue) {
-        float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
     }
 
     public void startAnimation() {

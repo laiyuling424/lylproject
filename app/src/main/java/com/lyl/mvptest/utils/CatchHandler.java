@@ -18,15 +18,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * create 2018/8/24
  * author lyl
  */
 public class CatchHandler implements Thread.UncaughtExceptionHandler {
 
+    private static CatchHandler mCatchHandler = new CatchHandler();
     private Map<String, String> infos = new HashMap<String, String>();
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-
+    private Context mContext;
 
     private CatchHandler() {
     }
@@ -35,11 +37,6 @@ public class CatchHandler implements Thread.UncaughtExceptionHandler {
 
         return mCatchHandler;
     }
-
-    private static CatchHandler mCatchHandler = new CatchHandler();
-
-    private Context mContext;
-
 
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
@@ -87,16 +84,16 @@ public class CatchHandler implements Thread.UncaughtExceptionHandler {
             String rpname = "report.log";
 
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                String path = Environment.getExternalStorageDirectory()+"/Android/data/"+mContext.getPackageName()+"/catch/";
+                String path = Environment.getExternalStorageDirectory() + "/Android/data/" + mContext.getPackageName() + "/catch/";
                 File dir = new File(path);
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-                File report = new File(path+rpname);
-                if(report.exists()){
+                File report = new File(path + rpname);
+                if (report.exists()) {
                     report.delete();
                 }
-                FileOutputStream fos = new FileOutputStream(path+fileName);
+                FileOutputStream fos = new FileOutputStream(path + fileName);
                 fos.write(sb.toString().getBytes());
                 fos.close();
                 FileOutputStream rpfos = new FileOutputStream(report);

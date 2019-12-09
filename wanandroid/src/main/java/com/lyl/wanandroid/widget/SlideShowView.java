@@ -1,18 +1,9 @@
 package com.lyl.wanandroid.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -29,6 +20,14 @@ import com.bumptech.glide.request.RequestOptions;
 import com.lyl.wanandroid.R;
 import com.lyl.wanandroid.util.MyLog;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * Create By: lyl
@@ -39,28 +38,21 @@ public class SlideShowView extends FrameLayout {
 
     //自动轮播启用开关
     private final static boolean isAutoPlay = true;
-
+    public int position;
+    Timer timer;
     //自定义轮播图的资源ID
     private int[] imagesResIds;
     //放轮播图片的ImageView 的list
     private List<ImageView> imageViewsList;
     //放圆点的View的list
     private List<View> dotViewsList;
-
     private ViewPager viewPager;
     //当前轮播页
     private int currentItem = 0;
     //定时任务
     private ScheduledExecutorService scheduledExecutorService;
-
-    public int position;
-
     private List<String> urlList;
-
     private Context mContext;
-
-    Timer timer;
-
     //Handler
     private Handler handler = new Handler() {
 
@@ -138,9 +130,9 @@ public class SlideShowView extends FrameLayout {
 //            view.setScaleType(ScaleType.FIT_XY);
 //            imageViewsList.add(view);
 //        }
-        if (urlList.size()==0){
+        if (urlList.size() == 0) {
 
-        }else {
+        } else {
             for (String url : urlList) {
                 ImageView view = new ImageView(context);
                 Glide.with(mContext)
@@ -163,6 +155,68 @@ public class SlideShowView extends FrameLayout {
 
         viewPager.setAdapter(new MyPagerAdapter());
         viewPager.setOnPageChangeListener(new MyPageChangeListener());
+    }
+
+    //TODO 没有用 点击banner停止轮播 放开后3秒在轮播
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                MyLog.INSTANCE.Logd("index===");
+                stopPlay();
+                return true;
+            case MotionEvent.ACTION_UP:
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        startPlay();
+                    }
+                }, 3000);
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    /**
+     * 销毁ImageView资源，回收内存
+     *
+     * @author caizhiming
+     */
+    private void destoryBitmaps() {
+
+        for (int i = 0; i < urlList.size(); i++) {
+            ImageView imageView = imageViewsList.get(i);
+            Drawable drawable = imageView.getDrawable();
+            if (drawable != null) {
+                //解除drawable对view的引用
+                drawable.setCallback(null);
+            }
+        }
+    }
+
+    public void setUrlList(List<String> list) {
+        MyLog.INSTANCE.Logd("list" + list.size());
+        urlList = list;
+        imageViewsList.clear();
+        for (String url : list) {
+            ImageView view = new ImageView(mContext);
+
+            Glide.with(mContext)
+                    .applyDefaultRequestOptions(new RequestOptions()
+                            .placeholder(R.drawable.place)
+                            .error(R.drawable.place))
+                    .load(url)
+                    .into(view);
+            view.setScaleType(ScaleType.FIT_XY);
+            imageViewsList.add(view);
+        }
+        dotViewsList.add(findViewById(R.id.v_dot1));
+        dotViewsList.add(findViewById(R.id.v_dot2));
+        dotViewsList.add(findViewById(R.id.v_dot3));
+        dotViewsList.add(findViewById(R.id.v_dot4));
+
+        viewPager.getAdapter().notifyDataSetChanged();
     }
 
     /**
@@ -255,27 +309,6 @@ public class SlideShowView extends FrameLayout {
 
     }
 
-    //TODO 没有用 点击banner停止轮播 放开后3秒在轮播
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()){
-            case MotionEvent.ACTION_DOWN:
-                MyLog.INSTANCE.Logd("index===");
-                stopPlay();
-                return true;
-            case MotionEvent.ACTION_UP:
-                timer=new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        startPlay();
-                    }
-                },3000);
-                break;
-        }
-        return super.onTouchEvent(event);
-    }
-
     /**
      * 执行轮播图切换任务
      *
@@ -292,47 +325,6 @@ public class SlideShowView extends FrameLayout {
             }
         }
 
-    }
-
-    /**
-     * 销毁ImageView资源，回收内存
-     *
-     * @author caizhiming
-     */
-    private void destoryBitmaps() {
-
-        for (int i = 0; i < urlList.size(); i++) {
-            ImageView imageView = imageViewsList.get(i);
-            Drawable drawable = imageView.getDrawable();
-            if (drawable != null) {
-                //解除drawable对view的引用
-                drawable.setCallback(null);
-            }
-        }
-    }
-
-    public void setUrlList(List<String> list) {
-        MyLog.INSTANCE.Logd("list"+list.size());
-        urlList = list;
-        imageViewsList.clear();
-        for (String url : list) {
-            ImageView view = new ImageView(mContext);
-
-            Glide.with(mContext)
-                    .applyDefaultRequestOptions(new RequestOptions()
-                                                .placeholder(R.drawable.place)
-                                                .error(R.drawable.place))
-                    .load(url)
-                    .into(view);
-            view.setScaleType(ScaleType.FIT_XY);
-            imageViewsList.add(view);
-        }
-        dotViewsList.add(findViewById(R.id.v_dot1));
-        dotViewsList.add(findViewById(R.id.v_dot2));
-        dotViewsList.add(findViewById(R.id.v_dot3));
-        dotViewsList.add(findViewById(R.id.v_dot4));
-
-        viewPager.getAdapter().notifyDataSetChanged();
     }
 
 }

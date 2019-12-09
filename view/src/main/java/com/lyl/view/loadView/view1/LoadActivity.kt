@@ -1,8 +1,8 @@
 package com.lyl.view.loadView.view1
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.lyl.view.R
 import kotlinx.android.synthetic.main.activity_load.*
 

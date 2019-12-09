@@ -1,7 +1,6 @@
 package com.lyl.mvptest.mvp.secondfragment.heart_tree
 
 import android.graphics.Canvas
-import android.graphics.Paint
 import java.util.*
 
 /**

@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
  */
 public class SkinFactory2 implements LayoutInflater.Factory2 {
 
-    private static String[] prxfixList={
+    private static String[] prxfixList = {
             "android.widget",
             "android.view",
             "android.webkit"
@@ -44,7 +44,7 @@ public class SkinFactory2 implements LayoutInflater.Factory2 {
 //        view.setBackground(SkinManager.Companion.getSkinManager().getDrawable(000));
         try {
             Class<?> aClass = context.getClassLoader().loadClass(name);
-            aClass.getConstructor(new Class[]{Context.class,AttributeSet.class});
+            aClass.getConstructor(new Class[]{Context.class, AttributeSet.class});
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -17,7 +17,7 @@ object Constants {
     const val CONTENT_CHAPTER = "contentChapterName"
     const val CONTENT_CHAPTER_ID = "contentChapterID"
 
-    val TITLE_FRAGMENTS = arrayOf("文章","收藏","计划")
+    val TITLE_FRAGMENTS = arrayOf("文章", "收藏", "计划")
 
 
 }

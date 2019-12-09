@@ -23,7 +23,7 @@ import com.lyl.wanandroid.ui.base.BaseActivity
 import com.lyl.wanandroid.ui.fragment.first.main.MainArticleAdapter
 import com.lyl.wanandroid.ui.fragment.first.main.MainArticleBean
 
-class TixiDetailActivity : BaseActivity(),OnItemClickListener<MainArticleBean> {
+class TixiDetailActivity : BaseActivity(), OnItemClickListener<MainArticleBean> {
 
     var toolbar: Toolbar? = null
 
@@ -63,7 +63,7 @@ class TixiDetailActivity : BaseActivity(),OnItemClickListener<MainArticleBean> {
 
         recyclerView.adapter = adapter
 
-        adapter!!.let { it.itemClickListener=this }
+        adapter!!.let { it.itemClickListener = this }
     }
 
     private fun initData() {

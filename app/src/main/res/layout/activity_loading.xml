@@ -7,10 +7,10 @@
     tools:context=".mvp.secondfragment.loading.LoadingActivity">
 
     <com.lyl.mvptest.mvp.secondfragment.loading.LoadingView
+        android:id="@+id/loadingview"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:id="@+id/loadingview"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

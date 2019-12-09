@@ -13,7 +13,6 @@ import com.lyl.wanandroid.Constants
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.listener.OnItemClickListener
 import com.lyl.wanandroid.ui.activity.WebViewDetailActivity
-import com.lyl.wanandroid.ui.activity.tixi_detail.TixiDetailActivity
 import com.lyl.wanandroid.ui.fragment.first.tixi.NavigationBean
 import com.lyl.wanandroid.ui.fragment.first.tixi.NavigationListBean
 import com.lyl.wanandroid.widget.RecycleListView2

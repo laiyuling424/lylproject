@@ -8,7 +8,7 @@ import androidx.paging.PagedList
  * Create By: lyl
  * Date: 2019-07-01 15:50
  */
-class ProvinceViewModel: ViewModel(){
+class ProvinceViewModel : ViewModel() {
     val accounts = LivePagedListBuilder(ProvinceItemDataSouceFactory(),
             PagedList.Config.Builder()
                     .setPageSize(10)

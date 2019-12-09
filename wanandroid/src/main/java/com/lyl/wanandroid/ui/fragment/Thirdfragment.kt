@@ -6,12 +6,12 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.WanAdnroidApplication
+import com.lyl.wanandroid.ui.activity.LoginActivity
 import com.lyl.wanandroid.ui.activity.SettingActivity
 import com.lyl.wanandroid.ui.activity.collectarticle.CollectArticleActivity
 import com.lyl.wanandroid.ui.activity.collectweb.CollectWebActivity
-import com.lyl.wanandroid.ui.activity.LoginActivity
-import com.lyl.wanandroid.ui.bean.LoginBean
 import com.lyl.wanandroid.ui.base.BaseFragment
+import com.lyl.wanandroid.ui.bean.LoginBean
 import com.lyl.wanandroid.util.LiveDataBus
 import com.lyl.wanandroid.util.SharedPreferencesUtil
 import com.lyl.wanandroid.util.showToast
@@ -78,7 +78,7 @@ class Thirdfragment : BaseFragment() {
 
     }
 
-    @OnClick(R.id.login_img,R.id.headview, R.id.ll_article, R.id.ll_web, R.id.ll_project, R.id.ll_issue, R.id.l_article, R.id.l_web, R.id.l_project, R.id.l_issue)
+    @OnClick(R.id.login_img, R.id.headview, R.id.ll_article, R.id.ll_web, R.id.ll_project, R.id.ll_issue, R.id.l_article, R.id.l_web, R.id.l_project, R.id.l_issue)
     fun onClick(view: View) {
         when (view.id) {
             R.id.login_img -> {

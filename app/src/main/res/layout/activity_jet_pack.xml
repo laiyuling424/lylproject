@@ -7,11 +7,11 @@
     tools:context=".mvp.secondfragment.jetpack_0701_test.JetPackActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerVieww"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/recyclerVieww">
+        app:layout_constraintTop_toTopOf="parent">
 
     </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>

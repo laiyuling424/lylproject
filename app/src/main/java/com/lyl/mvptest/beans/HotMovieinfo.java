@@ -8,17 +8,6 @@ import java.util.List;
  * author lyl
  */
 public class HotMovieinfo implements Serializable {
-    @Override
-    public String toString() {
-        return "HotMovieinfo{" +
-                "count=" + count +
-                ", start=" + start +
-                ", total=" + total +
-                ", title='" + title + '\'' +
-                ", subjects=" + subjects +
-                '}';
-    }
-
     /**
      * count : 20
      * start : 0
@@ -32,6 +21,17 @@ public class HotMovieinfo implements Serializable {
     private int total;
     private String title;
     private List<SubjectsBean> subjects;
+
+    @Override
+    public String toString() {
+        return "HotMovieinfo{" +
+                "count=" + count +
+                ", start=" + start +
+                ", total=" + total +
+                ", title='" + title + '\'' +
+                ", subjects=" + subjects +
+                '}';
+    }
 
     public int getCount() {
         return count;
@@ -73,25 +73,7 @@ public class HotMovieinfo implements Serializable {
         this.subjects = subjects;
     }
 
-    public static class SubjectsBean implements Serializable{
-        @Override
-        public String toString() {
-            return "SubjectsBean{" +
-                    "rating=" + rating +
-                    ", title='" + title + '\'' +
-                    ", collect_count=" + collect_count +
-                    ", original_title='" + original_title + '\'' +
-                    ", subtype='" + subtype + '\'' +
-                    ", year='" + year + '\'' +
-                    ", images=" + images +
-                    ", alt='" + alt + '\'' +
-                    ", id='" + id + '\'' +
-                    ", genres=" + genres +
-                    ", casts=" + casts +
-                    ", directors=" + directors +
-                    '}';
-        }
-
+    public static class SubjectsBean implements Serializable {
         /**
          * rating : {"max":10,"average":7.3,"stars":"40","min":0}
          * genres : ["剧情","喜剧"]
@@ -119,6 +101,24 @@ public class HotMovieinfo implements Serializable {
         private List<String> genres;
         private List<CastsBean> casts;
         private List<DirectorsBean> directors;
+
+        @Override
+        public String toString() {
+            return "SubjectsBean{" +
+                    "rating=" + rating +
+                    ", title='" + title + '\'' +
+                    ", collect_count=" + collect_count +
+                    ", original_title='" + original_title + '\'' +
+                    ", subtype='" + subtype + '\'' +
+                    ", year='" + year + '\'' +
+                    ", images=" + images +
+                    ", alt='" + alt + '\'' +
+                    ", id='" + id + '\'' +
+                    ", genres=" + genres +
+                    ", casts=" + casts +
+                    ", directors=" + directors +
+                    '}';
+        }
 
         public RatingBean getRating() {
             return rating;
@@ -216,7 +216,7 @@ public class HotMovieinfo implements Serializable {
             this.directors = directors;
         }
 
-        public static class RatingBean implements Serializable{
+        public static class RatingBean implements Serializable {
             /**
              * max : 10
              * average : 7.3
@@ -262,7 +262,7 @@ public class HotMovieinfo implements Serializable {
             }
         }
 
-        public static class ImagesBean implements Serializable{
+        public static class ImagesBean implements Serializable {
             /**
              * small : https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2529571873.webp
              * large : https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2529571873.webp
@@ -298,7 +298,7 @@ public class HotMovieinfo implements Serializable {
             }
         }
 
-        public static class CastsBean implements Serializable{
+        public static class CastsBean implements Serializable {
             /**
              * alt : https://movie.douban.com/celebrity/1274242/
              * avatars : {"small":"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1656.webp","large":"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1656.webp","medium":"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1656.webp"}
@@ -343,7 +343,7 @@ public class HotMovieinfo implements Serializable {
                 this.id = id;
             }
 
-            public static class AvatarsBean implements Serializable{
+            public static class AvatarsBean implements Serializable {
                 /**
                  * small : https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1656.webp
                  * large : https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1656.webp
@@ -380,7 +380,7 @@ public class HotMovieinfo implements Serializable {
             }
         }
 
-        public static class DirectorsBean implements Serializable{
+        public static class DirectorsBean implements Serializable {
             /**
              * alt : https://movie.douban.com/celebrity/1274242/
              * avatars : {"small":"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1656.webp","large":"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1656.webp","medium":"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1656.webp"}
@@ -425,7 +425,7 @@ public class HotMovieinfo implements Serializable {
                 this.id = id;
             }
 
-            public static class AvatarsBeanX implements Serializable{
+            public static class AvatarsBeanX implements Serializable {
                 /**
                  * small : https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1656.webp
                  * large : https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1656.webp

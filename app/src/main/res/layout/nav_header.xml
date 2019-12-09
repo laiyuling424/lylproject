@@ -25,7 +25,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:text="副标题栏" />
+        android:text="副标题栏"
+        android:textSize="12sp" />
 
 </LinearLayout>

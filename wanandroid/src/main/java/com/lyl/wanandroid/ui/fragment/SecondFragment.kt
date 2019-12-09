@@ -1,21 +1,17 @@
 package com.lyl.wanandroid.ui.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseFragment
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Create By: lyl
  * Date: 2019-07-08 14:12
  */
-class SecondFragment: BaseFragment(){
+class SecondFragment : BaseFragment() {
     override val layoutId: Int
         get() = R.layout.second_fragment_layout
 

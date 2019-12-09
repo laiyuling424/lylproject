@@ -3,7 +3,6 @@ package com.lyl.mvptest.mvp.secondfragment.loading;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
@@ -18,7 +17,7 @@ public class zzz extends View {
         super(context);
 
 
-        ValueAnimator downControl= ValueAnimator.ofFloat(0f,1f);
+        ValueAnimator downControl = ValueAnimator.ofFloat(0f, 1f);
         downControl.setInterpolator(new AccelerateDecelerateInterpolator());
     }
 

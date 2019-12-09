@@ -8,8 +8,8 @@ import androidx.paging.PagedList
  * Create By: lyl
  * Date: 2019-08-02 14:26
  */
-class ViewModelCollectArticle:ViewModel(){
-    var collectArticleList=LivePagedListBuilder(CollectArticleItemDataSouceFactory(),
+class ViewModelCollectArticle : ViewModel() {
+    var collectArticleList = LivePagedListBuilder(CollectArticleItemDataSouceFactory(),
             PagedList.Config.Builder()
                     .setPageSize(10)
                     .setEnablePlaceholders(false)

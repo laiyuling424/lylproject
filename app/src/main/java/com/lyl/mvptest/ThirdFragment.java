@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -31,8 +30,8 @@ public class ThirdFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.third_fragment_layout,container,false);
-        ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.third_fragment_layout, container, false);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -43,8 +42,8 @@ public class ThirdFragment extends Fragment {
 
 
     @OnClick({R.id.httpapp_MainActivity})
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.httpapp_MainActivity:
                 ARouter.getInstance().build(ARouterMap.httpapp_mainactivity2).navigation();
                 break;

@@ -1,10 +1,8 @@
 package com.lyl.httpapp
 
-import android.util.Log
 import java.io.BufferedOutputStream
 import java.io.InputStream
 import java.io.OutputStream
-import java.lang.RuntimeException
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLConnection

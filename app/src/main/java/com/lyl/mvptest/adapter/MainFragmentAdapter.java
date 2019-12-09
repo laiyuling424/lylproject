@@ -1,23 +1,24 @@
 package com.lyl.mvptest.adapter;
 
-import java.util.List;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import java.util.List;
 
 /**
  * create 2018/8/21
  * author lyl
  */
 public class MainFragmentAdapter extends FragmentPagerAdapter {
-    private  String[] TABLAYOUT_ID={"movie","book"};
     List<Fragment> list;
+    private String[] TABLAYOUT_ID = {"movie", "book"};
     private FragmentManager fragmetnmanager;
-    public MainFragmentAdapter(FragmentManager fm,List<Fragment> list) {
+
+    public MainFragmentAdapter(FragmentManager fm, List<Fragment> list) {
         super(fm);
         this.list = list;
-        fragmetnmanager=fm;
+        fragmetnmanager = fm;
     }
 
     @Override

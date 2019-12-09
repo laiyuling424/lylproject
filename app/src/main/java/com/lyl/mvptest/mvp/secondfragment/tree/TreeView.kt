@@ -45,7 +45,7 @@ class TreeView : View {
         if (!growingBranches!!.isEmpty()) {
             var tempBranches: LinkedList<Branch>? = null
             snapShot!!.canvas!!.save()
-            snapShot!!.canvas!!.translate(width/2-434f,height-980f)
+            snapShot!!.canvas!!.translate(width / 2 - 434f, height - 980f)
             val iterator = growingBranches!!.iterator()
             while (iterator.hasNext()) {
                 var branch = iterator.next()

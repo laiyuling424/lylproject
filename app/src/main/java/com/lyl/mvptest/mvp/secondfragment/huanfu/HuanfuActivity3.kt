@@ -1,6 +1,5 @@
 package com.lyl.mvptest.mvp.secondfragment.huanfu
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.lyl.mvptest.R
 

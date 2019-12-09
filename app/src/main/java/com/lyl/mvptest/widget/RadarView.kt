@@ -3,13 +3,11 @@ package com.lyl.mvptest.widget
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import androidx.annotation.ColorInt
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
-import android.graphics.DashPathEffect
 
 
 /**
@@ -180,7 +178,7 @@ class RadarView @JvmOverloads constructor(
 //            else if (j == nRadius.size-1) mPath.lineTo(pointScoreXY[0]!!.x, pointScoreXY[0]!!.y) //好像不需要 会自动连接成封闭区域
             else mPath.lineTo(pointScoreXY[j]!!.x, pointScoreXY[j]!!.y)
 
-            if (j == nRadius.size-1) {
+            if (j == nRadius.size - 1) {
                 mPath.close()
             }
 

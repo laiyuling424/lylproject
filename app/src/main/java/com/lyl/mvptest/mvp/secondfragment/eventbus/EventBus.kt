@@ -71,7 +71,7 @@ class EventBus private constructor() {
 
                 //todo 不知道为什么二个数据类不一样
 //                if (subscribleMothod.type!!.javaClass.isAssignableFrom(type.javaClass)) {
-                 if (subscribleMothod.type.toString().equals(type.javaClass.toString())) {
+                if (subscribleMothod.type.toString().equals(type.javaClass.toString())) {
                     invoke(subscribleMothod, it.key, type)
                 }
             }

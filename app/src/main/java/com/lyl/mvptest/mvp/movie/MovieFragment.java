@@ -4,8 +4,6 @@ package com.lyl.mvptest.mvp.movie;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.ViewModelStore;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.lyl.mvptest.R;
 import com.lyl.mvptest.adapter.EndlessRecyclerOnScrollListener;
 import com.lyl.mvptest.adapter.LoadMoreWrapper;
@@ -26,20 +32,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.ViewModelStore;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 /**
  * create 2018/8/21
  * author lyl
  */
-public class MovieFragment extends Fragment implements BaseView,MovieAdapterSelectCallback{
+public class MovieFragment extends Fragment implements BaseView, MovieAdapterSelectCallback {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private Button button;
@@ -49,10 +46,11 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
     private MoiveAdapter moiveAdapter;
     private LoadMoreWrapper loadMoreWrapper;
     private SwipeRefreshLayout swipeRefreshLayout;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.movie_layout,container,false);
+        return inflater.inflate(R.layout.movie_layout, container, false);
         //return inflater.inflate(R.layout.moive_item_layout,container,false);
     }
 
@@ -60,27 +58,27 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        recyclerView=(RecyclerView) getView().findViewById(R.id.movieRecycleView);
-        progressBar=(ProgressBar)getView().findViewById(R.id.progressBar);
-        button=(Button)getView().findViewById(R.id.btn01);
-        textView=(TextView)getView().findViewById(R.id.error);
-        mList=new ArrayList<>();
+        recyclerView = (RecyclerView) getView().findViewById(R.id.movieRecycleView);
+        progressBar = (ProgressBar) getView().findViewById(R.id.progressBar);
+        button = (Button) getView().findViewById(R.id.btn01);
+        textView = (TextView) getView().findViewById(R.id.error);
+        mList = new ArrayList<>();
 
-        swipeRefreshLayout=(SwipeRefreshLayout)getView().findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipeRefreshLayout);
 
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity().getApplicationContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        moiveAdapter=new MoiveAdapter(getActivity().getApplicationContext(),mList,this);
-        loadMoreWrapper=new LoadMoreWrapper(moiveAdapter);
+        moiveAdapter = new MoiveAdapter(getActivity().getApplicationContext(), mList, this);
+        loadMoreWrapper = new LoadMoreWrapper(moiveAdapter);
         recyclerView.setAdapter(loadMoreWrapper);
 
-        if (mList.size()==0)   init();
+        if (mList.size() == 0) init();
     }
 
     private void init() {
 //        new MoviePresenter(this);
-        moviePresenter=new MoviePresenter(this);
+        moviePresenter = new MoviePresenter(this);
         moviePresenter.start();
         swipeRefreshLayout.setRefreshing(false);
         // 设置颜色属性的时候一定要注意是引用了资源文件还是直接设置16进制的颜色，因为都是int值容易搞混
@@ -135,7 +133,6 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
     }
 
 
-
     @Override
     public Lifecycle getLifecycle() {
         return super.getLifecycle();
@@ -143,7 +140,7 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
 
     @Override
     public void setPresenter(MoviePresenter presenter) {
-        this.moviePresenter=presenter;
+        this.moviePresenter = presenter;
     }
 
     @Override
@@ -185,8 +182,8 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
             }
         });
 
-        List<HotMovieinfo.SubjectsBean> relist=list;
-        if(mList.size()==0){
+        List<HotMovieinfo.SubjectsBean> relist = list;
+        if (mList.size() == 0) {
             recyclerView.post(new Runnable() {
                 @Override
                 public void run() {
@@ -196,15 +193,15 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
                     loadMoreWrapper.notifyDataSetChanged();
                 }
             });
-        }else {
-            if(relist.get(0).getId().equals(mList.get(0).getId())){
+        } else {
+            if (relist.get(0).getId().equals(mList.get(0).getId())) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity().getApplicationContext(),"木有新数据",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "木有新数据", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }else {
+            } else {
                 recyclerView.post(new Runnable() {
                     @Override
                     public void run() {
@@ -228,7 +225,7 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
                 recyclerView.setVisibility(View.GONE);
                 textView.setVisibility(View.VISIBLE);
                 textView.setText(error);
-                Toast.makeText(getActivity().getApplicationContext(),"数据加载失败,点击再次加载",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "数据加载失败,点击再次加载", Toast.LENGTH_LONG).show();
                 button.setVisibility(View.VISIBLE);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -243,9 +240,9 @@ public class MovieFragment extends Fragment implements BaseView,MovieAdapterSele
 
     @Override
     public void onItemSelected(List<HotMovieinfo.SubjectsBean> list, int postion) {
-        Intent intent=new Intent(getActivity().getApplicationContext(),MovieDetailActivity.class);
-        intent.putExtra("MovieDetail",(Serializable) list);
-        intent.putExtra("position",postion);
+        Intent intent = new Intent(getActivity().getApplicationContext(), MovieDetailActivity.class);
+        intent.putExtra("MovieDetail", (Serializable) list);
+        intent.putExtra("position", postion);
         startActivity(intent);
     }
 

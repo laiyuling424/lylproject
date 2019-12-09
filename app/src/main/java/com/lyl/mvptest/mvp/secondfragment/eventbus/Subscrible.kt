@@ -7,4 +7,4 @@ package com.lyl.mvptest.mvp.secondfragment.eventbus
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Subscrible(val threadMode: ThreadMode =ThreadMode.Main)
+annotation class Subscrible(val threadMode: ThreadMode = ThreadMode.Main)

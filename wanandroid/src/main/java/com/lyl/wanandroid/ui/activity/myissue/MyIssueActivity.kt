@@ -1,7 +1,5 @@
 package com.lyl.wanandroid.ui.activity.myissue
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.ui.base.BaseActivity
 

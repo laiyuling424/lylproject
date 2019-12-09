@@ -2,11 +2,8 @@ package com.lyl.wanandroid.ui.activity.collectweb
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.view.ViewStub
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -16,17 +13,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.ButterKnife
-import butterknife.OnClick
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.WanAdnroidApplication
 import com.lyl.wanandroid.ui.activity.LoginActivity
-import com.lyl.wanandroid.ui.activity.collectarticle.CollectArticleAdapter
-import com.lyl.wanandroid.ui.activity.collectarticle.ViewModelCollectArticle
 import com.lyl.wanandroid.ui.activity.search.SearchActivity
 import com.lyl.wanandroid.ui.base.BaseActivity
 import com.lyl.wanandroid.util.SharedPreferencesUtil
-import kotlinx.android.synthetic.main.activity_collect_article.*
-import kotlinx.android.synthetic.main.activity_collect_web.*
 
 class CollectWebActivity : BaseActivity() {
 

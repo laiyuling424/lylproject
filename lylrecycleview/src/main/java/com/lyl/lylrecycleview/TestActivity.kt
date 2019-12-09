@@ -1,13 +1,11 @@
 package com.lyl.lylrecycleview
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
-import android.os.Looper.loop
 import android.util.Log
-import android.view.LayoutInflater
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_test.*
 import java.util.*

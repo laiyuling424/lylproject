@@ -24,7 +24,6 @@ import com.lyl.wanandroid.util.AndroidVersion
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.main_fragment_layout.*
 
 class SearchActivity : BaseActivity(), OnItemClickListener<String>, OnItemClickListenerTwo<SearchResponseBean> {
 
@@ -97,7 +96,7 @@ class SearchActivity : BaseActivity(), OnItemClickListener<String>, OnItemClickL
     }
 
     private fun searchFor(query: String) {
-        searchResults.visibility=View.VISIBLE
+        searchResults.visibility = View.VISIBLE
         viewModelSearch = getViewMode()
         viewModelSearch!!.searchList.observe(this, Observer(mSearchAdapter!!::submitList))
 
@@ -133,7 +132,7 @@ class SearchActivity : BaseActivity(), OnItemClickListener<String>, OnItemClickL
                                 list!!.add(it.data!![i].name!!)
                             }
                             words.setListText(list)
-                            loading!!.visibility=View.GONE
+                            loading!!.visibility = View.GONE
                         },
                         onExecuteOnceError = {
 

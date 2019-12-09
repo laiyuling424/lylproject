@@ -46,11 +46,18 @@ import com.lyl.mvptest.R;
 @SuppressLint("AppCompatCustomView")
 public class SelectColorViewJava extends ImageView {
     Context context;
-    private Bitmap iconBitMap;
     float iconRadius;// 吸管圆的半径
     float iconCenterX;
     float iconCenterY;
     PointF iconPoint;// 点击位置坐标
+    Paint mBitmapPaint;
+    Bitmap imageBitmap;
+    float viewRadius;// 整个view半径
+    float radius;// 图片半径
+    Canvas canvas;
+    boolean isMove;
+    private Bitmap iconBitMap;
+    private OnColorChangedListener mChangedListener;
 
     public SelectColorViewJava(Context context) {
         this(context, null);
@@ -66,11 +73,6 @@ public class SelectColorViewJava extends ImageView {
         this(context, attrs, 0);
         init();
     }
-
-    Paint mBitmapPaint;
-    Bitmap imageBitmap;
-    float viewRadius;// 整个view半径
-    float radius;// 图片半径
 
     /**
      * 初始化画笔
@@ -97,8 +99,6 @@ public class SelectColorViewJava extends ImageView {
         // TODO Auto-generated method stub
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
-
-    Canvas canvas;
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -197,13 +197,9 @@ public class SelectColorViewJava extends ImageView {
         isMove = true;
     }
 
-    boolean isMove;
-
     public void setOnColorChangedListenner(OnColorChangedListener l) {
         this.mChangedListener = l;
     }
-
-    private OnColorChangedListener mChangedListener;
 
     // 内部接口 回调颜色 rgb值
     public interface OnColorChangedListener {

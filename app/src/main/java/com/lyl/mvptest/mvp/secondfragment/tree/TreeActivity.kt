@@ -1,7 +1,7 @@
 package com.lyl.mvptest.mvp.secondfragment.tree
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.lyl.mvptest.R
 
 class TreeActivity : AppCompatActivity() {

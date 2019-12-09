@@ -12,12 +12,12 @@ import java.lang.reflect.Proxy
 class Test {
 
     public fun proxy() {
-        var api:Api=Proxy.newProxyInstance(Api::class.java.classLoader, arrayOf(Api::class.java), object : InvocationHandler {
+        var api: Api = Proxy.newProxyInstance(Api::class.java.classLoader, arrayOf(Api::class.java), object : InvocationHandler {
             override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
                 MyLog.Logd("method==$method")
                 return null
             }
-        })as Api
+        }) as Api
         api.getWeChatPublicList()
     }
 }

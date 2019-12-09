@@ -8,14 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.lyl.mvptest.R;
 import com.lyl.mvptest.beans.HotMovieinfo;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * create 2018/8/23
@@ -26,16 +26,16 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.MyViewHolder
     private List<HotMovieinfo.SubjectsBean> list;
     private int n;
 
-    public ActorAdapter(Context context, List<HotMovieinfo.SubjectsBean> list,int n) {
-        this.context=context;
-        this.list=list;
-        this.n=n;
+    public ActorAdapter(Context context, List<HotMovieinfo.SubjectsBean> list, int n) {
+        this.context = context;
+        this.list = list;
+        this.n = n;
     }
 
     @NonNull
     @Override
     public ActorAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.casts_item_layout,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.casts_item_layout, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -63,15 +63,16 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.MyViewHolder
         return list.get(n).getCasts().size();
     }
 
-    static class MyViewHolder extends RecyclerView.ViewHolder{
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         View itemDetailView;
         ImageView image;
         TextView name;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            itemDetailView=itemView;
-            image=itemView.findViewById(R.id.image);
-            name=itemView.findViewById(R.id.casts);
+            itemDetailView = itemView;
+            image = itemView.findViewById(R.id.image);
+            name = itemView.findViewById(R.id.casts);
         }
     }
 }

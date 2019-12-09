@@ -10,8 +10,8 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/shadow"
-        android:layout_marginTop="4dp" />
+        android:layout_marginTop="4dp"
+        android:src="@drawable/shadow" />
 
     <ImageView
         android:id="@+id/indication"

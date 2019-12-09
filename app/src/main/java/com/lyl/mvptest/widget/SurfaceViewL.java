@@ -16,16 +16,16 @@ import android.view.SurfaceView;
  * Date: 2019/5/10 3:50 PM
  */
 public class SurfaceViewL extends SurfaceView implements SurfaceHolder.Callback, Runnable {
-    // SurfaceHolder
-    private SurfaceHolder mSurfaceHolder;
-    // 画布
-    private Canvas mCanvas;
     // 子线程标志位
     public boolean isDrawing;
     // 画笔
     Paint mPaint;
     // 路径
     Path mPath;
+    // SurfaceHolder
+    private SurfaceHolder mSurfaceHolder;
+    // 画布
+    private Canvas mCanvas;
     private float mLastX, mLastY;//上次的坐标
 
     public SurfaceViewL(Context context, AttributeSet attrs) {
@@ -58,7 +58,7 @@ public class SurfaceViewL extends SurfaceView implements SurfaceHolder.Callback,
     @Override
     public void surfaceCreated(SurfaceHolder holder) {//创建
         isDrawing = true;
-        Log.e("surfaceCreated","--"+isDrawing);
+        Log.e("surfaceCreated", "--" + isDrawing);
         //绘制线程
         new Thread(this).start();
     }
@@ -72,12 +72,12 @@ public class SurfaceViewL extends SurfaceView implements SurfaceHolder.Callback,
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {//销毁
         isDrawing = false;
-        Log.e("surfaceDestroyed","--"+isDrawing);
+        Log.e("surfaceDestroyed", "--" + isDrawing);
     }
 
     @Override
     public void run() {
-        while (isDrawing){
+        while (isDrawing) {
             drawing();
         }
     }
@@ -88,9 +88,9 @@ public class SurfaceViewL extends SurfaceView implements SurfaceHolder.Callback,
     private void drawing() {
         try {
             mCanvas = mSurfaceHolder.lockCanvas();
-            if (mCanvas==null) return;
+            if (mCanvas == null) return;
             mCanvas.drawColor(Color.WHITE);
-            mCanvas.drawPath(mPath,mPaint);
+            mCanvas.drawPath(mPath, mPaint);
         } finally {
             if (mCanvas != null) {
                 mSurfaceHolder.unlockCanvasAndPost(mCanvas);
@@ -122,7 +122,7 @@ public class SurfaceViewL extends SurfaceView implements SurfaceHolder.Callback,
                 break;
 
             case MotionEvent.BUTTON_BACK:
-                isDrawing=false;
+                isDrawing = false;
                 break;
         }
         return true;

@@ -14,12 +14,11 @@ import okhttp3.HttpUrl;
  */
 public class CookieJarImpl implements CookieJar {
 
+    HttpUrl urll = HttpUrl.parse("https://www.wanandroid.com");
     private CookieStore cookieStore;
 
-    HttpUrl urll= HttpUrl.parse("https://www.wanandroid.com");
-
     public CookieJarImpl(CookieStore cookieStore) {
-        if(cookieStore == null) {
+        if (cookieStore == null) {
             throw new IllegalArgumentException("cookieStore can not be null.");
         }
         this.cookieStore = cookieStore;
@@ -32,7 +31,7 @@ public class CookieJarImpl implements CookieJar {
 
     @Override
     public synchronized List<Cookie> loadForRequest(HttpUrl url) {
-        MyLog.INSTANCE.Logd("this is cookie:"+this.cookieStore.get(urll));
+        MyLog.INSTANCE.Logd("this is cookie:" + this.cookieStore.get(urll));
         return this.cookieStore.get(urll);
     }
 

@@ -2,9 +2,9 @@ package com.lyl.wanandroid.widget
 
 import android.content.Context
 import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
 import android.util.AttributeSet
 import android.widget.ImageView
-import android.graphics.drawable.BitmapDrawable
 
 
 /**

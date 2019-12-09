@@ -20,7 +20,7 @@ ext {
             //-------------------kotlin----------------------------
             "kotlin-reflect"      : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
             "kotlin"              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
-            "kotlin8"              : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+            "kotlin8"             : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
             "core-ktx"            : "androidx.core:core-ktx:1.0.2",
 
             //-------------------测试相关----------------------------

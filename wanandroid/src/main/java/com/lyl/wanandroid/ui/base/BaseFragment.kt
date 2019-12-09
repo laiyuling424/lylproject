@@ -8,16 +8,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewStub
-import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.lyl.wanandroid.R
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Create By: lyl
@@ -62,7 +59,7 @@ abstract class BaseFragment : Fragment(), RequestLifecycle {
     var mView: View? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView=inflater.inflate(layoutId, container, false)
+        mView = inflater.inflate(layoutId, container, false)
         return mView
     }
 

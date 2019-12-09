@@ -1,31 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--tools:context=".Main2Activity">-->
+<?xml version="1.0" encoding="utf-8"?><!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--tools:context=".Main2Activity">-->
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="dsfdsdgfgfddf"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"/>-->
+<!--<TextView-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="dsfdsdgfgfddf"-->
+<!--app:layout_constraintTop_toTopOf="parent"-->
+<!--app:layout_constraintBottom_toBottomOf="parent"-->
+<!--app:layout_constraintLeft_toLeftOf="parent"-->
+<!--app:layout_constraintRight_toRightOf="parent"/>-->
 
 <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="#00BB00" >
+        android:background="#00BB00">
+
         <TextView
             android:id="@+id/common_title_tv"
             android:layout_width="wrap_content"
@@ -37,32 +37,35 @@
     </androidx.appcompat.widget.Toolbar>
 
     <com.lyl.mvptest.widget.NoScrollViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/viewpager">
-    </com.lyl.mvptest.widget.NoScrollViewPager>
+        android:layout_weight="1"></com.lyl.mvptest.widget.NoScrollViewPager>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal">
+
         <TextView
-            android:layout_width="0dp"
             android:id="@+id/tv1"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#FF6EB4"/>
+            android:background="#FF6EB4" />
+
         <TextView
-            android:layout_width="0dp"
             android:id="@+id/tv2"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#FA8072"/>
-        <TextView
             android:layout_width="0dp"
-            android:id="@+id/tv3"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#EE82EE"/>
+            android:background="#FA8072" />
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#EE82EE" />
     </LinearLayout>
 </LinearLayout>

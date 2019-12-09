@@ -26,11 +26,11 @@ android {
         flavorDimensions "default"
     }
     //多渠道打包
-    productFlavors{
-        tencent{
+    productFlavors {
+        tencent {
             applicationId "com.lyl.mvptest.tencent"
         }
-        huawei{
+        huawei {
             applicationId "com.lyl.mvptest.huawei"
         }
     }

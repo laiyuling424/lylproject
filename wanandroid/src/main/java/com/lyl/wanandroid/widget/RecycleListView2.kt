@@ -8,15 +8,11 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.listener.OnItemClickListener
 import com.lyl.wanandroid.ui.fragment.first.tixi.NavigationBean
-import com.lyl.wanandroid.ui.fragment.first.tixi.TixiBean
 import com.lyl.wanandroid.ui.fragment.first.tixi.TixiChildBean
-
-import java.util.ArrayList
-import java.util.Random
+import java.util.*
 
 
 /**

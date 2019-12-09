@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.listener.OnItemClickListener
-import com.lyl.wanandroid.ui.bean.CollectArticleBean
 import com.lyl.wanandroid.ui.bean.CollectWebBean
 
 /**
@@ -33,7 +32,7 @@ class CollectWebAdapter : PagedListAdapter<CollectWebBean, CollectWebAdapter.Col
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectWebViewHoder {
-        return CollectWebViewHoder(LayoutInflater.from(parent.context).inflate(R.layout.collectweb_list_itemview,null))
+        return CollectWebViewHoder(LayoutInflater.from(parent.context).inflate(R.layout.collectweb_list_itemview, null))
     }
 
     override fun onBindViewHolder(holder: CollectWebViewHoder, position: Int) {

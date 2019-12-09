@@ -5,11 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lyl.mvptest.R;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.lyl.mvptest.R;
 
 /**
  * create 2018/8/21
@@ -20,7 +20,7 @@ public class BookFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.book_layout,container,false);
+        return inflater.inflate(R.layout.book_layout, container, false);
     }
 
     @Override

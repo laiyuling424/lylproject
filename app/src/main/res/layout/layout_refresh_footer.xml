@@ -2,35 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="horizontal">
 
 
     <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/pb_loading"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <TextView
-        android:layout_marginLeft="10dp"
+        android:id="@+id/tv_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_loading"
+        android:layout_marginLeft="10dp"
         android:text="加载中" />
 
     <LinearLayout
+        android:id="@+id/ll_end"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:id="@+id/ll_end"
+        android:gravity="center"
         android:orientation="vertical"
-        android:gravity="center">
+        android:visibility="gone">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:lines="1"
-            android:textColor="#b8ecdf"
-            android:text="- - -白菜可是有底线的(=￣ω￣=)- - -"/>
+            android:text="- - -白菜可是有底线的(=￣ω￣=)- - -"
+            android:textColor="#b8ecdf" />
     </LinearLayout>
 </LinearLayout>

@@ -1,11 +1,10 @@
 package com.lyl.mvptest.mvp.secondfragment
 
 import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.lyl.mvptest.R
 import com.lyl.mvptest.widget.ColorTrackTextView
 import kotlinx.android.synthetic.main.activity_color_track_text_view.*

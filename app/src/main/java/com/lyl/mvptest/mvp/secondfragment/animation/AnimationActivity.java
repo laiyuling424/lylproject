@@ -23,7 +23,7 @@ public class AnimationActivity extends Activity {
     }
 
     @OnClick({R.id.btn})
-    public void click(){
+    public void click() {
         pageView.startAnimation();
     }
 

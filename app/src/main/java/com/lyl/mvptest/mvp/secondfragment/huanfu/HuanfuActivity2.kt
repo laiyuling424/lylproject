@@ -1,7 +1,6 @@
 package com.lyl.mvptest.mvp.secondfragment.huanfu
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -15,14 +14,14 @@ class HuanfuActivity2 : BaseActivity() {
         setContentView(R.layout.activity_huanfu2)
 
         huanfu.setOnClickListener {
-            var path=Environment.getExternalStorageDirectory().path+"/skin.apk"
-            Log.d("lyll","path=$path")
-            SkinManager.getSkinManager().loadSkinApk(Environment.getExternalStorageDirectory().path+"/skin.apk")
+            var path = Environment.getExternalStorageDirectory().path + "/skin.apk"
+            Log.d("lyll", "path=$path")
+            SkinManager.getSkinManager().loadSkinApk(Environment.getExternalStorageDirectory().path + "/skin.apk")
             apply()
         }
 
         jump2.setOnClickListener {
-            startActivity(Intent(this@HuanfuActivity2,HuanfuActivity3::class.java))
+            startActivity(Intent(this@HuanfuActivity2, HuanfuActivity3::class.java))
         }
     }
 }

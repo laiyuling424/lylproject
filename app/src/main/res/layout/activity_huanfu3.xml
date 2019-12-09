@@ -4,32 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvp.secondfragment.huanfu.HuanfuActivity3"
-    android:background="@drawable/pic1">
+    android:background="@drawable/pic1"
+    tools:context=".mvp.secondfragment.huanfu.HuanfuActivity3">
+
     <Button
+        android:id="@+id/huanfu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/bg_blue"
         android:text="huanfu"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/huanfu"
-        android:background="@color/bg_blue"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:layout_constraintTop_toBottomOf="@+id/huanfu"
         android:layout_margin="10dp"
+        android:src="@drawable/ic_launcher"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:src="@drawable/ic_launcher"/>
+        app:layout_constraintTop_toBottomOf="@+id/huanfu" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="修饰类当用final去修饰一个类的时候，表示这个类不能被继承。注意：a. 被final修饰的类，final类中的成员变量可以根据自己的实际需要设计为fianl。b. final类中的成员方法都会被隐式的指定为final方法。说明：在自己设计一个类的时候，要想好这个类将来是否会被继承，如果可以被继承，则该类不能使用fianl修饰，在这里呢，一般来说工具类我们往往都会设计成为一个fianl类。在JDK中，被设计为final类的有String、System等。代码："
+        android:textColor="@color/ab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textColor="@color/ab"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

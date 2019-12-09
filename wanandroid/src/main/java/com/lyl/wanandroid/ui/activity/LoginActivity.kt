@@ -1,7 +1,7 @@
 package com.lyl.wanandroid.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.lyl.wanandroid.R
 import com.lyl.wanandroid.WanAdnroidApplication
 import com.lyl.wanandroid.http.ApiServer
@@ -29,12 +29,12 @@ class LoginActivity : AppCompatActivity() {
                     .subscribe(ExecuteOnceObserver(onExecuteOnceNext = {
                         MyLog.Logd("login  success")
                         if (it.errorCode != 0) {
-                            SharedPreferencesUtil.putBoolean(WanAdnroidApplication.getContext(),"islanding",false)
+                            SharedPreferencesUtil.putBoolean(WanAdnroidApplication.getContext(), "islanding", false)
                             showToast("账号密码不匹配")
                         } else {
-                            SharedPreferencesUtil.putBoolean(WanAdnroidApplication.getContext(),"islanding",true)
-                            SharedPreferencesUtil.putString(WanAdnroidApplication.getContext(),"username",name.text.toString())
-                            SharedPreferencesUtil.putString(WanAdnroidApplication.getContext(),"password",password.text.toString())
+                            SharedPreferencesUtil.putBoolean(WanAdnroidApplication.getContext(), "islanding", true)
+                            SharedPreferencesUtil.putString(WanAdnroidApplication.getContext(), "username", name.text.toString())
+                            SharedPreferencesUtil.putString(WanAdnroidApplication.getContext(), "password", password.text.toString())
 
                             LiveDataBus.getInstance().with("userdata", LoginBean::class.java).postValue(it.data)
                             LiveDataBus.getInstance().with("userName", String::class.java).postValue(it.data!!.username)
