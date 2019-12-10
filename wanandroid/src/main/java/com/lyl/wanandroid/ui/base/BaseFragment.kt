@@ -273,11 +273,12 @@ abstract class BaseFragment : Fragment(), RequestLifecycle {
         loading?.visibility = View.GONE
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         mActivity = context as Activity
         mContext = context
     }
+
 
     /**
      * [页面跳转]

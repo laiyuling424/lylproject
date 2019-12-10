@@ -15,6 +15,7 @@ public class ShapeLoadingView extends ImageView {
 
     CureentShape mCureentShape = CureentShape.SHAPE_RECT;
     ObjectAnimator mRectRoteAnimation, mDefaultRoteAnimation;
+
     public ShapeLoadingView(Context context) {
         this(context, null);
     }
