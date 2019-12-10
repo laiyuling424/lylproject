@@ -74,5 +74,8 @@ ext {
             //fastjson
             "fastjson"            : 'com.alibaba:fastjson:1.2.32',
 
+            //fastjson
+            "logging-interceptor" : 'com.squareup.okhttp3:logging-interceptor:3.10.0',
+
     ]
 }
