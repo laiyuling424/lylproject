@@ -10,9 +10,4 @@
 /.idea
 /.idea/caches
 
-/app/build
-/cv410/build
-/wanandroid/build
-/baselibrary/build
-/httpapp/build
 /build
