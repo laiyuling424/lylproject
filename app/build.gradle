@@ -26,14 +26,14 @@ android {
         flavorDimensions "default"
     }
     //多渠道打包
-    productFlavors {
-        tencent {
-            applicationId "com.lyl.mvptest.tencent"
-        }
-        huawei {
-            applicationId "com.lyl.mvptest.huawei"
-        }
-    }
+//    productFlavors {
+//        tencent {
+//            applicationId "com.lyl.mvptest.tencent"
+//        }
+//        huawei {
+//            applicationId "com.lyl.mvptest.huawei"
+//        }
+//    }
     buildTypes {
         release {
             minifyEnabled false
@@ -141,6 +141,7 @@ dependencies {
 
     implementation project(path: ':utils')
     implementation project(path: ':lylrecycleview')
+    implementation project(path: ':core')
 }
 repositories {
     mavenCentral()

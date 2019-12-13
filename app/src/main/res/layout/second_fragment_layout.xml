@@ -127,5 +127,13 @@
             android:textAllCaps="false"
             app:layout_constraintTop_toBottomOf="@+id/btn14" />
 
+        <Button
+            android:id="@+id/btn16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NoRegisterActivity"
+            android:textAllCaps="false"
+            app:layout_constraintTop_toBottomOf="@+id/btn15" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

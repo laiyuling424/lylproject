@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.lyl.core.framework.plugin.NoRegisterActivity;
 import com.lyl.mvptest.mvp.secondfragment.ColorTrackTextViewActivity;
 import com.lyl.mvptest.mvp.secondfragment.animation.AnimationActivity;
 import com.lyl.mvptest.mvp.secondfragment.cv.LylRecycleViewActivity;
@@ -79,7 +80,7 @@ public class SecondFragment extends Fragment {
 
     }
 
-    @OnClick({R.id.btn12, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btn10, R.id.btn11, R.id.btn13, R.id.btn14, R.id.btn15})
+    @OnClick({R.id.btn12, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btn10, R.id.btn11, R.id.btn13, R.id.btn14, R.id.btn15, R.id.btn16})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn1:
@@ -126,6 +127,9 @@ public class SecondFragment extends Fragment {
                 break;
             case R.id.btn15:
                 startActivity(new Intent(getContext(), ColorTrackTextViewActivity.class));
+                break;
+            case R.id.btn16:
+                startActivity(new Intent(getContext(), NoRegisterActivity.class));
                 break;
 
         }

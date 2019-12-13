@@ -1,4 +1,4 @@
-package com.lyl.hotfix;
+package com.lyl.core.framework.hotfix;
 
 import android.content.Context;
 
