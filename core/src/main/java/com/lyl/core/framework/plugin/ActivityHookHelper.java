@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -27,23 +28,23 @@ import java.lang.reflect.Proxy;
 public class ActivityHookHelper {
 
     private Context context;
-    private String activityAllName = "com.lyl.core.framework.plugin.TestActivity";
+    private String proxyActivity = "com.lyl.core.framework.plugin.TestActivity";
 
     public ActivityHookHelper(Context context) {
         this.context = context;
     }
 
-    public ActivityHookHelper(Context context, String activityAllName) {
+    public ActivityHookHelper(Context context, String proxyActivity) {
         this.context = context;
-        this.activityAllName = activityAllName;
+        this.proxyActivity = proxyActivity;
     }
 
-    public String getActivityAllName() {
-        return activityAllName;
+    public String getProxyActivity() {
+        return proxyActivity;
     }
 
-    public void setActivityAllName(String activityAllName) {
-        this.activityAllName = activityAllName;
+    public void setProxyActivity(String activityAllName) {
+        this.proxyActivity = activityAllName;
     }
 
     public void hookStartActivity() throws Exception {
@@ -88,8 +89,8 @@ public class ActivityHookHelper {
                         return method.invoke(amsObj, objects);
                     }
 
+                    proxyIntent.setComponent(new ComponentName(context, proxyActivity));
 
-                    proxyIntent.setComponent(new ComponentName(context, activityAllName));
                     // 把原来的Intent绑在代理Intent上面
                     proxyIntent.putExtra("targetIntent", targetIntent);
 
@@ -155,6 +156,7 @@ public class ActivityHookHelper {
         mCallBack.set(mH, new Handler.Callback() {
             @Override
             public boolean handleMessage(@NonNull Message message) {
+                Log.d("lyll", "------>" + message.what);
                 if (message.what == 100) {
                     handleLaunchActivity(message);
                 }
@@ -171,7 +173,9 @@ public class ActivityHookHelper {
             intentField.setAccessible(true);
             Intent proxyIntent = (Intent) intentField.get(obj);
             // 代理意图
-            Intent originIntent = proxyIntent.getParcelableExtra("realIntent");
+            Intent originIntent = proxyIntent.getParcelableExtra("targetIntent");
+            Log.d("lyll", "------>" + originIntent.getComponent().getPackageName());
+            Log.d("lyll", "------>" + originIntent.getComponent().getClassName());
             if (originIntent != null) {
                 // 替换意图
                 intentField.set(obj, originIntent);

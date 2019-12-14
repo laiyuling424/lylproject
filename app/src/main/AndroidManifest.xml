@@ -14,13 +14,11 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:appComponentFactory="aa"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:replace="android:appComponentFactory">
+        android:theme="@style/AppTheme">
         <activity android:name=".mvp.secondfragment.ColorTrackTextViewActivity"></activity>
         <activity android:name=".mvp.secondfragment.particle.ParticleExplosionActivity" />
         <activity android:name=".mvp.secondfragment.loading.LoadingActivity" />

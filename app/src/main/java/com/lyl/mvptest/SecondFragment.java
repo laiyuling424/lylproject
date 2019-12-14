@@ -129,7 +129,9 @@ public class SecondFragment extends Fragment {
                 startActivity(new Intent(getContext(), ColorTrackTextViewActivity.class));
                 break;
             case R.id.btn16:
-                startActivity(new Intent(getContext(), NoRegisterActivity.class));
+                Intent intent = new Intent();
+                intent.setClassName("com.lyl.core.framework.plugin", "com.lyl.core.framework.plugin.NoRegisterActivity");
+                startActivity(intent);
                 break;
 
         }

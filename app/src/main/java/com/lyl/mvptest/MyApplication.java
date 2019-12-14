@@ -27,6 +27,7 @@ public class MyApplication extends Application {
         ActivityHookHelper activityHookHelper = new ActivityHookHelper(getApplicationContext());
         try {
             activityHookHelper.hookStartActivity();
+            activityHookHelper.hookLaunchActivity();
         } catch (Exception e) {
             e.printStackTrace();
         }
