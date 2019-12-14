@@ -66,10 +66,10 @@ ext {
             "okhttp"              : 'com.squareup.okhttp3:okhttp:3.10.0',
 
             //gson
-            "gson"                : 'com.google.code.gson:gson:2.8.5',
+            "gson"                : 'com.google.code.gson:gson:2.8.2',
 
             //eventbus
-            "gson"                : 'org.greenrobot:eventbus:3.0.0',
+            "eventbus"            : 'org.greenrobot:eventbus:3.0.0',
 
             //fastjson
             "fastjson"            : 'com.alibaba:fastjson:1.2.32',

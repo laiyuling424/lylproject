@@ -1,9 +1,9 @@
 package com.lyl.core.framework.plugin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lyl.core.R;
 

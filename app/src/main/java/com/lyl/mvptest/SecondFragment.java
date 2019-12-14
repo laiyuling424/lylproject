@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.lyl.core.framework.plugin.NoRegisterActivity;
 import com.lyl.mvptest.mvp.secondfragment.ColorTrackTextViewActivity;
 import com.lyl.mvptest.mvp.secondfragment.animation.AnimationActivity;
 import com.lyl.mvptest.mvp.secondfragment.cv.LylRecycleViewActivity;
