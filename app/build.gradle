@@ -24,6 +24,14 @@ android {
         }
         //多渠道打包
         flavorDimensions "default"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-fexceptions"
+                // 只生成 armeabi
+                abiFilters "armeabi"
+            }
+        }
     }
     //多渠道打包
 //    productFlavors {

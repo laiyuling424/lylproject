@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.lyl.mvptest.aboutc.JniClass;
 import com.lyl.mvptest.adapter.ViewPagerAdapter;
 import com.lyl.mvptest.widget.NoScrollViewPager;
 import com.lyl.utils.function.InstallUtil;
@@ -29,10 +30,6 @@ import butterknife.OnClick;
  * author lyl
  */
 public class MainActivity extends AppCompatActivity {
-    static {
-        System.loadLibrary("native-lib");
-    }
-
     //    DrawerLayout mDrawerLayout;
     NoScrollViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
@@ -127,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!new File(patch).exists()) {
                     return null;
                 }
-                bsPatch(oldApk, patch, output);
+                JniClass.bsPatch(oldApk, patch, output);
                 return new File(output);
             }
 
@@ -165,5 +162,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private native void bsPatch(String oldApk, String patch, String output);
+
 }

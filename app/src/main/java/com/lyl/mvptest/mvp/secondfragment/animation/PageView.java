@@ -372,8 +372,11 @@ public class PageView extends View {
 
         animatorSet = new AnimatorSet();
         // 设置动画集合，按顺序绘制
+//        animatorSet.playSequentially(animNose, animHead, animEar2, animEar1, animEyes, animMouth, animFace,
+//                animBody, animArmRight, animHandRight, animArmLeft, animHandLeft, animLegs, animFoots, animTail, animName);
         animatorSet.playSequentially(animNose, animHead, animEar2, animEar1, animEyes, animMouth, animFace,
-                animBody, animArmRight, animHandRight, animArmLeft, animHandLeft, animLegs, animFoots, animTail, animName);
+                animBody, animArmRight, animHandRight, animArmLeft, animHandLeft, animLegs, animFoots, animTail);
+
 
     }
 

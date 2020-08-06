@@ -30,7 +30,8 @@
         android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"></com.lyl.wanandroid.widget.NoScrollViewPager>
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"></com.lyl.wanandroid.widget.NoScrollViewPager>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -42,6 +43,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewpager"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

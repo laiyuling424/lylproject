@@ -2,6 +2,7 @@ package com.lyl.wanandroid.widget
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.core.view.NestedScrollingParent2
@@ -18,6 +19,8 @@ class NestedLayout(context: Context?, attrs: AttributeSet?) : LinearLayout(conte
     var top_height: Int = 0
 
     override fun onNestedPreScroll(target: View, dx: Int, dy: Int, consumed: IntArray, type: Int) {
+//        Log.d("lyll", "actual hight is " + layoutParams.height)
+//        Log.d("lyll", "actual hight is " + top_height)
         val hiddenTop = dy > 0 && scrollY < top_height
         val showTop = dy < 0 && scrollY >= 0 && !ViewCompat.canScrollVertically(target, -1)
         if (hiddenTop || showTop) {
@@ -29,6 +32,14 @@ class NestedLayout(context: Context?, attrs: AttributeSet?) : LinearLayout(conte
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         top_height = image_head.measuredHeight
+
+//        Log.d("lyll", "before hight is " + height)
+//        val layoutParams = this.layoutParams
+//        var yyyy = height + image_head.measuredHeight
+//        layoutParams.height = yyyy
+//        setLayoutParams(layoutParams)
+//        Log.d("lyll", "after hight is " + layoutParams.height)
+//        requestLayout()
     }
 
     override fun onFinishInflate() {

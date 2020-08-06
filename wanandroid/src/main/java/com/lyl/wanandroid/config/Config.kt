@@ -9,7 +9,7 @@ package com.lyl.wanandroid.config
 object Config {
 
     //log日志打印
-    const val outputLog = true
+    const val outputLog = false
 
     //exception catch
     const val catchException = false
