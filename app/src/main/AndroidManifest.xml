@@ -11,6 +11,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -19,7 +22,14 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvp.secondfragment.ColorTrackTextViewActivity"></activity>
+        <activity android:name=".LaunchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".mvp.secondfragment.ColorTrackTextViewActivity" />
         <activity android:name=".mvp.secondfragment.particle.ParticleExplosionActivity" />
         <activity android:name=".mvp.secondfragment.loading.LoadingActivity" />
         <activity android:name=".mvp.secondfragment.huanfu.HuanfuActivity3" />
@@ -42,11 +52,7 @@
         <activity android:name=".mvp.secondfragment.cv.LylRecycleViewActivity" />
         <activity android:name=".mvp.secondfragment.animation.AnimationActivity" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".mvp.movie.MovieDetailActivity" />
 

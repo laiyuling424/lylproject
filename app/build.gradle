@@ -150,6 +150,8 @@ dependencies {
     implementation project(path: ':utils')
     implementation project(path: ':lylrecycleview')
     implementation project(path: ':core')
+
+    implementation config.dependencies["permissionx"]
 }
 repositories {
     mavenCentral()

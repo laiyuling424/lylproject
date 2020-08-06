@@ -1,5 +1,9 @@
 package com.lyl.mvptest.aboutc;
 
+import android.graphics.Bitmap;
+
+import java.util.List;
+
 /**
  * Create By: lyl
  * Date: 2020/8/6 9:30 AM
@@ -20,6 +24,10 @@ public class JniClass {
      * @param output 输出路径
      * @return : void
      */
-    public static native void bsPatch(String oldApk, String patch, String output);
+    public native static  void bsPatch(String oldApk, String patch, String output);
+
+    public native static Bitmap getCameraFrameBitbmp(Bitmap bmp);
+
+    public native static void loadcascade(String filepath);
 
 }

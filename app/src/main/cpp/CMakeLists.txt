@@ -47,4 +47,6 @@ target_link_libraries(
 
         opencv_java3
 
+        jnigraphics
+
         log)
