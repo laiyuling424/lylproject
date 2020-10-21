@@ -1,4 +1,4 @@
-package com.lyl.lylrecycleview;
+package com.lyl.lylrecycleview.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.lyl.lylrecycleview.MultiTypeSupport;
+import com.lyl.lylrecycleview.OnItemClickListener;
+import com.lyl.lylrecycleview.OnLongClickListener;
+import com.lyl.lylrecycleview.ViewHolder;
 
 import java.util.List;
 

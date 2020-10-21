@@ -15,12 +15,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
+    <com.lyl.mvptest.aboutc.VaccaeSurfaceView
         android:id="@+id/surfaceviewlayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBaseline_toBaselineOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/start"
+        app:layout_constraintTop_toBottomOf="@+id/start"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 

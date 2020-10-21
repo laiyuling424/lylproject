@@ -1,4 +1,4 @@
-package com.lyl.lylrecycleview;
+package com.lyl.lylrecycleview.creator;
 
 import android.content.Context;
 import android.view.View;

@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".mvp.secondfragment.cv.LylRecycleViewActivity">
 
-    <com.lyl.lylrecycleview.LoadRefreshRecyclerView
+    <com.lyl.lylrecycleview.recycleviewabout.LoadRefreshRecyclerView
         android:id="@+id/recycle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </com.lyl.lylrecycleview.LoadRefreshRecyclerView>
+    </com.lyl.lylrecycleview.recycleviewabout.LoadRefreshRecyclerView>
 
 </LinearLayout>

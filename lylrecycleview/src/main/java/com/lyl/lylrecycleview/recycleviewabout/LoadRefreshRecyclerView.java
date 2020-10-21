@@ -1,4 +1,4 @@
-package com.lyl.lylrecycleview;
+package com.lyl.lylrecycleview.recycleviewabout;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -9,6 +9,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
+
+import com.lyl.lylrecycleview.creator.LoadViewCreator;
 
 /**
  * Create By: lyl
@@ -86,7 +88,7 @@ public class LoadRefreshRecyclerView extends RefreshRecyclerView {
      */
     private void restoreLoadView() {
         int currentBottomMargin = ((MarginLayoutParams) mLoadView.getLayoutParams()).bottomMargin;
-        int finalBottomMargin = 0;
+        int finalBottomMargin = -mLoadViewHeight + 1;
         if (mCurrentLoadStatus == LOAD_STATUS_LOOSEN_LOADING) {
             mCurrentLoadStatus = LOAD_STATUS_LOADING;
             if (mLoadCreator != null) {
@@ -177,13 +179,28 @@ public class LoadRefreshRecyclerView extends RefreshRecyclerView {
         }
     }
 
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        if (changed) {
+            if (mLoadView != null && mLoadViewHeight >= 0) {
+                // 获取头部刷新View的高度
+                mLoadViewHeight = mLoadView.getMeasuredHeight();
+                if (mLoadViewHeight > 0) {
+                    // 隐藏头部刷新的View  marginTop  多留出1px防止无法判断是不是滚动到头部问题
+                    setLoadViewMarginBottom(-mLoadViewHeight - 1);
+                }
+            }
+        }
+    }
+
     /**
      * 设置加载View的marginBottom
      */
     public void setLoadViewMarginBottom(int marginBottom) {
         MarginLayoutParams params = (MarginLayoutParams) mLoadView.getLayoutParams();
-        if (marginBottom < 0) {
-            marginBottom = 0;
+        if (marginBottom > mLoadViewHeight - 1) {
+            marginBottom = mLoadViewHeight - 1;
         }
         params.bottomMargin = marginBottom;
         mLoadView.setLayoutParams(params);

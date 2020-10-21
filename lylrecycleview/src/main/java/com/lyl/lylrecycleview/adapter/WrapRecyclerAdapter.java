@@ -1,4 +1,4 @@
-package com.lyl.lylrecycleview;
+package com.lyl.lylrecycleview.adapter;
 
 import android.util.SparseArray;
 import android.view.View;

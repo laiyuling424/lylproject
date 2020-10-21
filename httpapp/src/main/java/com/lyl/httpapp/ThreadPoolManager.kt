@@ -30,7 +30,7 @@ class ThreadPoolManager {
                     //将拒绝的线程重新放入
                     addTask(r!!)
                 })
-        //创建叫号员线程，不断从队列获取
+        //不断从队列获取
         var coreThread: Runnable = object : Runnable {
             var runn: Runnable? = null
             override fun run() {

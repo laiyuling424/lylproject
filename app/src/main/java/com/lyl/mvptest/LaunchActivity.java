@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +27,7 @@ public class LaunchActivity extends AppCompatActivity {
 
 
     private VaccaeSurfaceView surfaceView;
-    private RelativeLayout surfaceviewlayout;
+//    private RelativeLayout surfaceviewlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +38,17 @@ public class LaunchActivity extends AppCompatActivity {
         copyCascadeFile();
         JniClass.loadcascade(detectionFaceFile.getAbsolutePath());
 
-        surfaceviewlayout = findViewById(R.id.surfaceviewlayout);
+        surfaceView = findViewById(R.id.surfaceviewlayout);
     }
 
 
     public void start(View view) {
         Log.d("lyll", "start click");
 
-        surfaceView = new VaccaeSurfaceView(LaunchActivity.this);
-        surfaceviewlayout.addView(surfaceView);
+//        surfaceView.startCamera();
+        toMainActivity();
     }
+
 
     private void requestPermission() {
         PermissionX.init(LaunchActivity.this)

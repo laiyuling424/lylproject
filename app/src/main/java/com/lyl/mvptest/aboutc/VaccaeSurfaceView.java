@@ -13,6 +13,7 @@ import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.graphics.YuvImage;
 import android.hardware.Camera;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -74,10 +75,14 @@ public class VaccaeSurfaceView extends SurfaceView implements SurfaceHolder.Call
         }
     };
 
+    public VaccaeSurfaceView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context);
+    }
+
 
     //构造函数
-    public VaccaeSurfaceView(Context context) {
-        super(context);
+    public void init(Context context) {
 
         //获取WindowManager
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -100,7 +105,7 @@ public class VaccaeSurfaceView extends SurfaceView implements SurfaceHolder.Call
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
         //开启摄像机
         Log.d("lyll", "open camera");
-        startCamera(mCameraIndex);
+//        startCamera(mCameraIndex);
     }
 
     @Override
@@ -129,6 +134,10 @@ public class VaccaeSurfaceView extends SurfaceView implements SurfaceHolder.Call
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
         //关闭摄像机
         stopCamera();
+    }
+
+    public void startCamera() {
+        startCamera(mCameraIndex);
     }
 
     //region 开启关闭Camera
@@ -179,8 +188,11 @@ public class VaccaeSurfaceView extends SurfaceView implements SurfaceHolder.Call
     }
     //endregion
 
+    int num = 0;
+
     private Bitmap nv21ToBitmap(byte[] nv21, int width, int height) {
         Bitmap bitmap = null, dstBitmap = null;
+        num++;
         try {
             YuvImage image = new YuvImage(nv21, ImageFormat.NV21, width, height, null);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -196,11 +208,11 @@ public class VaccaeSurfaceView extends SurfaceView implements SurfaceHolder.Call
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(),
                     m, true);
 
-            ocrtimes++;
             //调用JNI方法处理图像
-
+            if (num % 3 == 0) {
+                return bitmap;
+            }
             dstBitmap = JniClass.getCameraFrameBitbmp(bitmap);
-
 
             stream.close();
         } catch (IOException e) {

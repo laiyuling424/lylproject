@@ -1,4 +1,4 @@
-package com.lyl.lylrecycleview;
+package com.lyl.lylrecycleview.creator;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,30 +7,34 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 
+import com.lyl.lylrecycleview.R;
+import com.lyl.lylrecycleview.creator.RefreshViewCreator;
+
 /**
  * Create By: lyl
- * Date: 2019-10-26 14:31
+ * Date: 2019-10-26 13:48
  */
-public class DefaultLoadCreator extends LoadViewCreator {
-
+public class DefaultRefreshCreator extends RefreshViewCreator {
+    // 加载数据的ImageView
     private View mRefreshIv;
 
     @Override
-    public View getLoadView(Context context, ViewGroup parent) {
+    public View getRefreshView(Context context, ViewGroup parent) {
         View refreshView = LayoutInflater.from(context).inflate(R.layout.layout_refresh_header_view, parent, false);
         mRefreshIv = refreshView.findViewById(R.id.refresh_iv);
         return refreshView;
     }
 
     @Override
-    public void onPull(int currentDragHeight, int loadViewHeight, int currentLoadStatus) {
-        float rotate = ((float) currentDragHeight) / loadViewHeight;
+    public void onPull(int currentDragHeight, int refreshViewHeight, int currentRefreshStatus) {
+        float rotate = ((float) currentDragHeight) / refreshViewHeight;
         // 不断下拉的过程中不断的旋转图片
         mRefreshIv.setRotation(rotate * 360);
     }
 
     @Override
-    public void onLoading() {
+    public void onRefreshing() {
+        // 刷新的时候不断旋转
         RotateAnimation animation = new RotateAnimation(0, 720,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         animation.setRepeatCount(-1);
@@ -39,9 +43,10 @@ public class DefaultLoadCreator extends LoadViewCreator {
     }
 
     @Override
-    public void onStopLoad() {
+    public void onStopRefresh() {
         // 停止加载的时候清除动画
         mRefreshIv.setRotation(0);
         mRefreshIv.clearAnimation();
     }
 }
+

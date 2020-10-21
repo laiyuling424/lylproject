@@ -1,4 +1,4 @@
-package com.lyl.lylrecycleview;
+package com.lyl.lylrecycleview.recycleviewabout;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,6 +6,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.lyl.lylrecycleview.adapter.WrapRecyclerAdapter;
 
 /**
  * Create By: lyl
