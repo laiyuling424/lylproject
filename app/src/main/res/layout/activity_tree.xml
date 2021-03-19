@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".mvp.secondfragment.tree.TreeActivity">
 
-    <com.lyl.mvptest.mvp.secondfragment.tree.TreeView
+    <com.lyl.view.tree.TreeView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"

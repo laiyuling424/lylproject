@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".loadView.view1.LoadActivity">
+    tools:context=".loadview.view1.LoadActivity">
 
-    <com.lyl.view.loadView.view1.LoadingView
+    <com.lyl.view.loadview.view1.LoadingView
         android:id="@+id/loadview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

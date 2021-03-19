@@ -3,7 +3,22 @@
     package="com.lyl.view">
 
     <application>
-        <activity android:name=".loadView.view1.LoadActivity"></activity>
+        <activity android:name=".textcolor.SimpleActivity"></activity>
+        <activity android:name=".clock.SimpleActivity" />
+        <activity android:name=".loadview.view2.SimpleActivity" />
+        <activity android:name=".peiqi.PeiQiTestActivity" />
+        <activity android:name=".loadview.view1.LoadActivity" />
+
+        <receiver android:name=".desktopwidget.MyAppWidgetProvider">
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_provider_info" />
+
+            <intent-filter>
+                <action android:name="com.ryg.chapter_5.action.CLICK" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

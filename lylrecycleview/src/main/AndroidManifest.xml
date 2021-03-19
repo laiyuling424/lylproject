@@ -3,7 +3,8 @@
     package="com.lyl.lylrecycleview">
 
     <application>
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".simple.LylRecycleViewActivity"></activity>
+        <activity android:name=".simple.TestActivity" />
     </application>
 
 </manifest>

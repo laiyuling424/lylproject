@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RadarView">
+        <attr name="radius" format="dimension" />
+        <attr name="later" format="integer" />
+        <attr name="score" format="dimension" />
+        <attr name="lineWidth" format="dimension" />
+        <attr name="scoreLineColor" format="color" />
+        <attr name="scoreColor" format="color" />
+        <attr name="n" format="integer" />
+    </declare-styleable>
+</resources>

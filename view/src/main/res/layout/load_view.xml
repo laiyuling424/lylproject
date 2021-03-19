@@ -5,7 +5,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <com.lyl.view.loadView.view1.ShapeLoadingView
+    <com.lyl.view.loadview.view1.ShapeLoadingView
         android:id="@+id/shapeLoadingView"
         android:layout_width="24dp"
         android:layout_height="24dp"

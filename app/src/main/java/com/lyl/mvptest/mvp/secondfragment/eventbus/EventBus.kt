@@ -43,11 +43,12 @@ class EventBus private constructor() {
             var methods = clazz.declaredMethods
             for (method in methods) {
 //                MyLog.Logd("lyll", "method name===>${method.name}")
-                var subscrible: com.lyl.mvptest.mvp.secondfragment.eventbus.Subscrible? = method.getAnnotation(com.lyl.mvptest.mvp.secondfragment.eventbus.Subscrible::class.java)
-                        ?: continue
+                var subscrible: Subscrible? = method.getAnnotation(com.lyl.mvptest.mvp.secondfragment.eventbus.Subscrible::class.java) ?: continue
 
                 var types = method.parameterTypes
-                if (types.size != 1) MyLog.Loge("lyll", "eventbus only accpet one para")
+                if (types.size != 1) {
+                    MyLog.Loge("lyll", "eventbus only accpet one para")
+                }
 
                 var threadMode = subscrible!!.threadMode
 
