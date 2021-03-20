@@ -3,7 +3,8 @@
     package="com.lyl.core">
 
     <application>
-        <activity android:name=".framework.plugin.TestActivity" />
+        <activity android:name=".plugin.TestActivity" />
+        <activity android:name=".mvpbase.simple1.LoginActivity" />
     </application>
 
 </manifest>
