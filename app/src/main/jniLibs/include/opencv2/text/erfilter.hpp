@@ -49,10 +49,8 @@
 #include <deque>
 #include <string>
 
-namespace cv
-{
-namespace text
-{
+namespace cv {
+    namespace text {
 
 //! @addtogroup text_detect
 //! @{
@@ -63,105 +61,112 @@ An ER is a 4-connected set of pixels with all its grey-level values smaller than
 outer boundary. A class-specific ER is selected (using a classifier) from all the ER's in the
 component tree of the image. :
  */
-struct CV_EXPORTS ERStat
-{
-public:
-    //! Constructor
-    explicit ERStat(int level = 256, int pixel = 0, int x = 0, int y = 0);
-    //! Destructor
-    ~ERStat() { }
+        struct CV_EXPORTS ERStat
+                {
+                        public:
+                        //! Constructor
+                        explicit ERStat(int level = 256, int pixel = 0, int x = 0, int y = 0);
+                        //! Destructor
+                        ~ERStat() {}
 
-    //! seed point and the threshold (max grey-level value)
-    int pixel;
-    int level;
+                        //! seed point and the threshold (max grey-level value)
+                        int pixel;
+                        int level;
 
-    //! incrementally computable features
-    int area;
-    int perimeter;
-    int euler;                 //!< Euler's number
-    Rect rect;
-    double raw_moments[2];     //!< order 1 raw moments to derive the centroid
-    double central_moments[3]; //!< order 2 central moments to construct the covariance matrix
-    Ptr<std::deque<int> > crossings;//!< horizontal crossings
-    float med_crossings;       //!< median of the crossings at three different height levels
+                        //! incrementally computable features
+                        int area;
+                        int perimeter;
+                        int euler;                 //!< Euler's number
+                        Rect rect;
+                        double raw_moments[2];     //!< order 1 raw moments to derive the centroid
+                        double central_moments[3]; //!< order 2 central moments to construct the covariance matrix
+                        Ptr<std::deque<int> > crossings;//!< horizontal crossings
+                        float med_crossings;       //!< median of the crossings at three different height levels
 
-    //! 2nd stage features
-    float hole_area_ratio;
-    float convex_hull_ratio;
-    float num_inflexion_points;
+                        //! 2nd stage features
+                        float hole_area_ratio;
+                        float convex_hull_ratio;
+                        float num_inflexion_points;
 
-    // TODO Other features can be added (average color, standard deviation, and such)
+                        // TODO Other features can be added (average color, standard deviation, and such)
 
 
-    // TODO shall we include the pixel list whenever available (i.e. after 2nd stage) ?
-    std::vector<int> *pixels;
+                        // TODO shall we include the pixel list whenever available (i.e. after 2nd stage) ?
+                        std::vector<int> *pixels;
 
-    //! probability that the ER belongs to the class we are looking for
-    double probability;
+                        //! probability that the ER belongs to the class we are looking for
+                        double probability;
 
-    //! pointers preserving the tree structure of the component tree
-    ERStat* parent;
-    ERStat* child;
-    ERStat* next;
-    ERStat* prev;
+                        //! pointers preserving the tree structure of the component tree
+                        ERStat* parent;
+                        ERStat* child;
+                        ERStat* next;
+                        ERStat* prev;
 
-    //! whenever the regions is a local maxima of the probability
-    bool local_maxima;
-    ERStat* max_probability_ancestor;
-    ERStat* min_probability_ancestor;
-};
+                        //! whenever the regions is a local maxima of the probability
+                        bool local_maxima;
+                        ERStat* max_probability_ancestor;
+                        ERStat* min_probability_ancestor;
+                };
 
 /** @brief Base class for 1st and 2nd stages of Neumann and Matas scene text detection algorithm @cite Neumann12. :
 
 Extracts the component tree (if needed) and filter the extremal regions (ER's) by using a given classifier.
  */
-class CV_EXPORTS_W ERFilter : public Algorithm
-{
-public:
+        class CV_EXPORTS_W ERFilter
 
-    /** @brief Callback with the classifier is made a class.
+        : public Algorithm {
+        public:
 
-    By doing it we hide SVM, Boost etc. Developers can provide their own classifiers to the
-    ERFilter algorithm.
-     */
-    class CV_EXPORTS_W Callback
-    {
-    public:
-        virtual ~Callback() { }
-        /** @brief The classifier must return probability measure for the region.
+        /** @brief Callback with the classifier is made a class.
 
-        @param  stat :   The region to be classified
+        By doing it we hide SVM, Boost etc. Developers can provide their own classifiers to the
+        ERFilter algorithm.
          */
-        virtual double eval(const ERStat& stat) = 0; //const = 0; //TODO why cannot use const = 0 here?
+        class CV_EXPORTS_W Callback
+                {
+                        public:
+                        virtual ~Callback() {}
+                        /** @brief The classifier must return probability measure for the region.
+
+                        @param  stat :   The region to be classified
+                         */
+                        virtual double eval(const ERStat& stat) = 0; //const = 0; //TODO why cannot use const = 0 here?
+                };
+
+        /** @brief The key method of ERFilter algorithm.
+
+        Takes image on input and returns the selected regions in a vector of ERStat only distinctive
+        ERs which correspond to characters are selected by a sequential classifier
+
+        @param image Single channel image CV_8UC1
+
+        @param regions Output for the 1st stage and Input/Output for the 2nd. The selected Extremal Regions
+        are stored here.
+
+        Extracts the component tree (if needed) and filter the extremal regions (ER's) by using a given
+        classifier.
+         */
+        virtual void run(InputArray image, std::vector <ERStat> &regions) = 0;
+
+
+        //! set/get methods to set the algorithm properties,
+        virtual void setCallback(const Ptr <ERFilter::Callback> &cb) = 0;
+
+        virtual void setThresholdDelta(int thresholdDelta) = 0;
+
+        virtual void setMinArea(float minArea) = 0;
+
+        virtual void setMaxArea(float maxArea) = 0;
+
+        virtual void setMinProbability(float minProbability) = 0;
+
+        virtual void setMinProbabilityDiff(float minProbabilityDiff) = 0;
+
+        virtual void setNonMaxSuppression(bool nonMaxSuppression) = 0;
+
+        virtual int getNumRejected() = 0;
     };
-
-    /** @brief The key method of ERFilter algorithm.
-
-    Takes image on input and returns the selected regions in a vector of ERStat only distinctive
-    ERs which correspond to characters are selected by a sequential classifier
-
-    @param image Single channel image CV_8UC1
-
-    @param regions Output for the 1st stage and Input/Output for the 2nd. The selected Extremal Regions
-    are stored here.
-
-    Extracts the component tree (if needed) and filter the extremal regions (ER's) by using a given
-    classifier.
-     */
-    virtual void run( InputArray image, std::vector<ERStat>& regions ) = 0;
-
-
-    //! set/get methods to set the algorithm properties,
-    virtual void setCallback(const Ptr<ERFilter::Callback>& cb) = 0;
-    virtual void setThresholdDelta(int thresholdDelta) = 0;
-    virtual void setMinArea(float minArea) = 0;
-    virtual void setMaxArea(float maxArea) = 0;
-    virtual void setMinProbability(float minProbability) = 0;
-    virtual void setMinProbabilityDiff(float minProbabilityDiff) = 0;
-    virtual void setNonMaxSuppression(bool nonMaxSuppression) = 0;
-    virtual int  getNumRejected() = 0;
-};
-
 
 
 /** @brief Create an Extremal Region Filter for the 1st stage classifier of N&M algorithm @cite Neumann12.
@@ -184,11 +189,13 @@ the probability P(er|character) are selected (if the local maximum of the probab
 global limit pmin and the difference between local maximum and local minimum is greater than
 minProbabilityDiff).
  */
-CV_EXPORTS_W Ptr<ERFilter> createERFilterNM1(const Ptr<ERFilter::Callback>& cb,
-                                                  int thresholdDelta = 1, float minArea = (float)0.00025,
-                                                  float maxArea = (float)0.13, float minProbability = (float)0.4,
-                                                  bool nonMaxSuppression = true,
-                                                  float minProbabilityDiff = (float)0.1);
+    CV_EXPORTS_W Ptr<ERFilter>
+
+    createERFilterNM1(const Ptr <ERFilter::Callback> &cb,
+                      int thresholdDelta = 1, float minArea = (float) 0.00025,
+                      float maxArea = (float) 0.13, float minProbability = (float) 0.4,
+                      bool nonMaxSuppression = true,
+                      float minProbabilityDiff = (float) 0.1);
 
 /** @brief Create an Extremal Region Filter for the 2nd stage classifier of N&M algorithm @cite Neumann12.
 
@@ -201,27 +208,33 @@ non-character classes using more informative but also more computationally expen
 classifier uses all the features calculated in the first stage and the following additional
 features: hole area ratio, convex hull ratio, and number of outer inflexion points.
  */
-CV_EXPORTS_W Ptr<ERFilter> createERFilterNM2(const Ptr<ERFilter::Callback>& cb,
-                                                  float minProbability = (float)0.3);
+    CV_EXPORTS_W Ptr<ERFilter>
+
+    createERFilterNM2(const Ptr <ERFilter::Callback> &cb,
+                      float minProbability = (float) 0.3);
 
 /** @brief Reads an Extremal Region Filter for the 1st stage classifier of N&M algorithm
     from the provided path e.g. /path/to/cpp/trained_classifierNM1.xml
 
 @overload
  */
-CV_EXPORTS_W  Ptr<ERFilter> createERFilterNM1(const String& filename,
-                                                  int thresholdDelta = 1, float minArea = (float)0.00025,
-                                                  float maxArea = (float)0.13, float minProbability = (float)0.4,
-                                                  bool nonMaxSuppression = true,
-                                                  float minProbabilityDiff = (float)0.1);
+    CV_EXPORTS_W Ptr<ERFilter>
+
+    createERFilterNM1(const String &filename,
+                      int thresholdDelta = 1, float minArea = (float) 0.00025,
+                      float maxArea = (float) 0.13, float minProbability = (float) 0.4,
+                      bool nonMaxSuppression = true,
+                      float minProbabilityDiff = (float) 0.1);
 
 /** @brief Reads an Extremal Region Filter for the 2nd stage classifier of N&M algorithm
     from the provided path e.g. /path/to/cpp/trained_classifierNM2.xml
 
 @overload
  */
-CV_EXPORTS_W Ptr<ERFilter> createERFilterNM2(const String& filename,
-                                                  float minProbability = (float)0.3);
+    CV_EXPORTS_W Ptr<ERFilter>
+
+    createERFilterNM2(const String &filename,
+                      float minProbability = (float) 0.3);
 
 /** @brief Allow to implicitly load the default classifier when creating an ERFilter object.
 
@@ -229,7 +242,9 @@ CV_EXPORTS_W Ptr<ERFilter> createERFilterNM2(const String& filename,
 
 returns a pointer to ERFilter::Callback.
  */
-CV_EXPORTS_W Ptr<ERFilter::Callback> loadClassifierNM1(const String& filename);
+    CV_EXPORTS_W Ptr<ERFilter::Callback>
+
+    loadClassifierNM1(const String &filename);
 
 /** @brief Allow to implicitly load the default classifier when creating an ERFilter object.
 
@@ -237,13 +252,16 @@ CV_EXPORTS_W Ptr<ERFilter::Callback> loadClassifierNM1(const String& filename);
 
 returns a pointer to ERFilter::Callback.
  */
-CV_EXPORTS_W Ptr<ERFilter::Callback> loadClassifierNM2(const String& filename);
+    CV_EXPORTS_W Ptr<ERFilter::Callback>
+
+    loadClassifierNM2(const String &filename);
 
 
 //! computeNMChannels operation modes
-enum { ERFILTER_NM_RGBLGrad,
-       ERFILTER_NM_IHSGrad
-     };
+    enum {
+        ERFILTER_NM_RGBLGrad,
+        ERFILTER_NM_IHSGrad
+    };
 
 /** @brief Compute the different channels to be processed independently in the N&M algorithm @cite Neumann12.
 
@@ -259,34 +277,33 @@ channels (Grad) are used in order to obtain high localization recall. This imple
 provides an alternative combination of red (R), green (G), blue (B), lightness (L), and gradient
 magnitude (Grad).
  */
-CV_EXPORTS_W void computeNMChannels(InputArray _src, CV_OUT OutputArrayOfArrays _channels, int _mode = ERFILTER_NM_RGBLGrad);
-
+    CV_EXPORTS_W void computeNMChannels(InputArray _src, CV_OUT OutputArrayOfArrays _channels, int _mode = ERFILTER_NM_RGBLGrad);
 
 
 //! text::erGrouping operation modes
-enum erGrouping_Modes {
+    enum erGrouping_Modes {
 
-    /** Exhaustive Search algorithm proposed in @cite Neumann11 for grouping horizontally aligned text.
-    The algorithm models a verification function for all the possible ER sequences. The
-    verification fuction for ER pairs consists in a set of threshold-based pairwise rules which
-    compare measurements of two regions (height ratio, centroid angle, and region distance). The
-    verification function for ER triplets creates a word text line estimate using Least
-    Median-Squares fitting for a given triplet and then verifies that the estimate is valid (based
-    on thresholds created during training). Verification functions for sequences larger than 3 are
-    approximated by verifying that the text line parameters of all (sub)sequences of length 3 are
-    consistent.
-    */
-    ERGROUPING_ORIENTATION_HORIZ,
-    /** Text grouping method proposed in @cite Gomez13 @cite Gomez14 for grouping arbitrary oriented text. Regions
-    are agglomerated by Single Linkage Clustering in a weighted feature space that combines proximity
-    (x,y coordinates) and similarity measures (color, size, gradient magnitude, stroke width, etc.).
-    SLC provides a dendrogram where each node represents a text group hypothesis. Then the algorithm
-    finds the branches corresponding to text groups by traversing this dendrogram with a stopping rule
-    that combines the output of a rotation invariant text group classifier and a probabilistic measure
-    for hierarchical clustering validity assessment.
-     */
-    ERGROUPING_ORIENTATION_ANY
-};
+        /** Exhaustive Search algorithm proposed in @cite Neumann11 for grouping horizontally aligned text.
+        The algorithm models a verification function for all the possible ER sequences. The
+        verification fuction for ER pairs consists in a set of threshold-based pairwise rules which
+        compare measurements of two regions (height ratio, centroid angle, and region distance). The
+        verification function for ER triplets creates a word text line estimate using Least
+        Median-Squares fitting for a given triplet and then verifies that the estimate is valid (based
+        on thresholds created during training). Verification functions for sequences larger than 3 are
+        approximated by verifying that the text line parameters of all (sub)sequences of length 3 are
+        consistent.
+        */
+        ERGROUPING_ORIENTATION_HORIZ,
+        /** Text grouping method proposed in @cite Gomez13 @cite Gomez14 for grouping arbitrary oriented text. Regions
+        are agglomerated by Single Linkage Clustering in a weighted feature space that combines proximity
+        (x,y coordinates) and similarity measures (color, size, gradient magnitude, stroke width, etc.).
+        SLC provides a dendrogram where each node represents a text group hypothesis. Then the algorithm
+        finds the branches corresponding to text groups by traversing this dendrogram with a stopping rule
+        that combines the output of a rotation invariant text group classifier and a probabilistic measure
+        for hierarchical clustering validity assessment.
+         */
+        ERGROUPING_ORIENTATION_ANY
+    };
 
 /** @brief Find groups of Extremal Regions that are organized as text blocks.
 
@@ -311,20 +328,20 @@ ERGROUPING_ORIENTATION_ANY.
 @param minProbablity The minimum probability for accepting a group. Only to use when grouping
 method is ERGROUPING_ORIENTATION_ANY.
  */
-CV_EXPORTS void erGrouping(InputArray img, InputArrayOfArrays channels,
-                                           std::vector<std::vector<ERStat> > &regions,
-                                           std::vector<std::vector<Vec2i> > &groups,
-                                           std::vector<Rect> &groups_rects,
-                                           int method = ERGROUPING_ORIENTATION_HORIZ,
-                                           const std::string& filename = std::string(),
-                                           float minProbablity = 0.5);
+    CV_EXPORTS void erGrouping(InputArray img, InputArrayOfArrays channels,
+                               std::vector <std::vector<ERStat>> &regions,
+                               std::vector <std::vector<Vec2i>> &groups,
+                               std::vector <Rect> &groups_rects,
+                               int method = ERGROUPING_ORIENTATION_HORIZ,
+                               const std::string &filename = std::string(),
+                               float minProbablity = 0.5);
 
-CV_EXPORTS_W void erGrouping(InputArray image, InputArray channel,
-                                           std::vector<std::vector<Point> > regions,
-                                           CV_OUT std::vector<Rect> &groups_rects,
-                                           int method = ERGROUPING_ORIENTATION_HORIZ,
-                                           const String& filename = String(),
-                                           float minProbablity = (float)0.5);
+    CV_EXPORTS_W void erGrouping(InputArray image, InputArray channel,
+                                 std::vector <std::vector<Point>> regions,
+                                 CV_OUT std::vector <Rect> &groups_rects,
+                                 int method = ERGROUPING_ORIENTATION_HORIZ,
+                                 const String &filename = String(),
+                                 float minProbablity = (float) 0.5);
 
 /** @brief Converts MSER contours (vector\<Point\>) to ERStat regions.
 
@@ -342,11 +359,12 @@ ERStats where extracted from two different channels).
 An example of MSERsToERStats in use can be found in the text detection webcam_demo:
 <https://github.com/opencv/opencv_contrib/blob/master/modules/text/samples/webcam_demo.cpp>
  */
-CV_EXPORTS void MSERsToERStats(InputArray image, std::vector<std::vector<Point> > &contours,
-                               std::vector<std::vector<ERStat> > &regions);
+    CV_EXPORTS void MSERsToERStats(InputArray image, std::vector <std::vector<Point>> &contours,
+                                   std::vector <std::vector<ERStat>> &regions);
 
 // Utility funtion for scripting
-CV_EXPORTS_W void detectRegions(InputArray image, const Ptr<ERFilter>& er_filter1, const Ptr<ERFilter>& er_filter2, CV_OUT std::vector< std::vector<Point> >& regions);
+    CV_EXPORTS_W void
+    detectRegions(InputArray image, const Ptr <ERFilter> &er_filter1, const Ptr <ERFilter> &er_filter2, CV_OUT std::vector <std::vector<Point>> &regions);
 
 
 /** @brief Extracts text regions from image.
@@ -361,10 +379,11 @@ CV_EXPORTS_W void detectRegions(InputArray image, const Ptr<ERFilter>& er_filter
 
 
  */
-CV_EXPORTS_W void detectRegions(InputArray image, const Ptr<ERFilter>& er_filter1, const Ptr<ERFilter>& er_filter2, CV_OUT std::vector<Rect> &groups_rects,
-                                           int method = ERGROUPING_ORIENTATION_HORIZ,
-                                           const String& filename = String(),
-                                           float minProbability = (float)0.5);
+    CV_EXPORTS_W void
+    detectRegions(InputArray image, const Ptr <ERFilter> &er_filter1, const Ptr <ERFilter> &er_filter2, CV_OUT std::vector <Rect> &groups_rects,
+                  int method = ERGROUPING_ORIENTATION_HORIZ,
+                  const String &filename = String(),
+                  float minProbability = (float) 0.5);
 
 //! @}
 

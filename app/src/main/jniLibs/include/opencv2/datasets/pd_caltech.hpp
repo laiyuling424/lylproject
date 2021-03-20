@@ -49,21 +49,18 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_pd
 //! @{
 
-struct PD_caltechObj : public Object
-{
-    //double groundTrue[][];
-    //Mat image;
-    std::string name;
-    std::vector< std::string > imageNames;
-};
+        struct PD_caltechObj : public Object {
+            //double groundTrue[][];
+            //Mat image;
+            std::string name;
+            std::vector <std::string> imageNames;
+        };
 
 //
 // first version of Caltech Pedestrian dataset loading
@@ -73,13 +70,17 @@ struct PD_caltechObj : public Object
 // also ground truth isn't processed, as need to convert it from mat files first
 //
 
-class CV_EXPORTS PD_caltech : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS PD_caltech
 
-    static Ptr<PD_caltech> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <PD_caltech> create();
+    };
 
 //! @}
 

@@ -49,26 +49,27 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_is
 //! @{
 
-struct IS_bsdsObj : public Object
-{
-    std::string name;
-};
+        struct IS_bsdsObj : public Object {
+            std::string name;
+        };
 
-class CV_EXPORTS IS_bsds : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS IS_bsds
 
-    static Ptr<IS_bsds> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <IS_bsds> create();
+    };
 
 //! @}
 

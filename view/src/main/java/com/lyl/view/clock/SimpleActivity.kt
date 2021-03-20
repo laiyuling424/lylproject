@@ -1,7 +1,7 @@
 package com.lyl.view.clock
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.lyl.view.R
 import kotlinx.android.synthetic.main.activity_clock.*
 import kotlin.concurrent.timer

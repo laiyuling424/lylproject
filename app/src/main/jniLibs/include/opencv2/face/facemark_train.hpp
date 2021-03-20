@@ -25,30 +25,30 @@ Mentor: Delia Passalacqua
 
 
 namespace cv {
-namespace face {
+    namespace face {
 
 //! @addtogroup face
 //! @{
 
-typedef bool(*FN_FaceDetector)(InputArray, OutputArray, void* userData);
+        typedef bool(*FN_FaceDetector)(InputArray, OutputArray, void *userData);
 
-struct CParams{
-    String cascade; //!<  the face detector
-    double scaleFactor; //!< Parameter specifying how much the image size is reduced at each image scale.
-    int minNeighbors; //!< Parameter specifying how many neighbors each candidate rectangle should have to retain it.
-    Size minSize; //!< Minimum possible object size.
-    Size maxSize; //!< Maximum possible object size.
+        struct CParams {
+            String cascade; //!<  the face detector
+            double scaleFactor; //!< Parameter specifying how much the image size is reduced at each image scale.
+            int minNeighbors; //!< Parameter specifying how many neighbors each candidate rectangle should have to retain it.
+            Size minSize; //!< Minimum possible object size.
+            Size maxSize; //!< Maximum possible object size.
 
-    CV_EXPORTS CParams(
-        String cascade_model,
-        double sf = 1.1,
-        int minN = 3,
-        Size minSz = Size(30, 30),
-        Size maxSz = Size()
-    );
+            CV_EXPORTS CParams(
+                    String cascade_model,
+                    double sf = 1.1,
+                    int minN = 3,
+                    Size minSz = Size(30, 30),
+                    Size maxSz = Size()
+            );
 
-    CascadeClassifier face_cascade;
-};
+            CascadeClassifier face_cascade;
+        };
 
 /** @brief Default face detector
 This function is mainly utilized by the implementation of a Facemark Algorithm.
@@ -71,9 +71,9 @@ for(int j=0;j<faces.size();j++){
 cv::imshow("detection", frame);
 @endcode
 */
-CV_EXPORTS bool getFaces(InputArray image, OutputArray faces, CParams* params);
+        CV_EXPORTS bool getFaces(InputArray image, OutputArray faces, CParams *params);
 
-CV_EXPORTS_W bool getFacesHAAR(InputArray image, OutputArray faces, const String& face_cascade_name);
+        CV_EXPORTS_W bool getFacesHAAR(InputArray image, OutputArray faces, const String &face_cascade_name);
 
 /** @brief A utility to load list of paths to training image and annotation file.
 @param imageList The specified file contains paths to the training images.
@@ -90,10 +90,10 @@ std::vector<String> landmarks_train;
 loadDatasetList(imageFiles,ptsFiles,images_train,landmarks_train);
 @endcode
 */
-CV_EXPORTS_W bool loadDatasetList(String imageList,
-                                  String annotationList,
-                                  std::vector<String> & images,
-                                  std::vector<String> & annotations);
+        CV_EXPORTS_W bool loadDatasetList(String imageList,
+                                          String annotationList,
+                                          std::vector<String> &images,
+                                          std::vector<String> &annotations);
 
 /** @brief A utility to load facial landmark dataset from a single file.
 
@@ -120,9 +120,9 @@ std::vector<std::vector<Point2f> > facePoints;
 loadTrainingData(imageFiles, ptsFiles, images, facePoints, 0.0f);
 @endcode
 */
-CV_EXPORTS_W bool loadTrainingData( String filename , std::vector<String> & images,
-                                    OutputArray facePoints,
-                                    char delim = ' ', float offset = 0.0f);
+        CV_EXPORTS_W bool loadTrainingData(String filename, std::vector<String> &images,
+                                           OutputArray facePoints,
+                                           char delim = ' ', float offset = 0.0f);
 
 /** @brief A utility to load facial landmark information from the dataset.
 
@@ -160,10 +160,10 @@ example of content in the points_train.txt
 /home/user/ibug/image_006.pts
 @endcode
 */
-CV_EXPORTS_W bool loadTrainingData( String imageList, String groundTruth,
-                                    std::vector<String> & images,
-                                    OutputArray facePoints,
-                                    float offset = 0.0f);
+        CV_EXPORTS_W bool loadTrainingData(String imageList, String groundTruth,
+                                           std::vector<String> &images,
+                                           OutputArray facePoints,
+                                           float offset = 0.0f);
 
 /** @brief This function extracts the data for training from .txt files which contains the corresponding image name and landmarks.
 *The first file in each file should give the path of the image whose
@@ -181,8 +181,8 @@ CV_EXPORTS_W bool loadTrainingData( String imageList, String groundTruth,
 * @param trainimages A vector of type cv::String which stores the name of images whose landmarks are tracked
 * @returns A boolean value. It returns true when it reads the data successfully and false otherwise
 */
-CV_EXPORTS_W bool loadTrainingData(std::vector<String> filename,std::vector< std::vector<Point2f> >
-                          &trainlandmarks,std::vector<String> & trainimages);
+        CV_EXPORTS_W bool loadTrainingData(std::vector<String> filename, std::vector<std::vector<Point2f> >
+        &trainlandmarks, std::vector<String> &trainimages);
 
 /** @brief A utility to load facial landmark information from a given file.
 
@@ -209,8 +209,8 @@ n_points:  68
 where n_points is the number of points considered
 and each point is represented as its position in x and y.
 */
-CV_EXPORTS_W bool loadFacePoints( String filename, OutputArray points,
-                                  float offset = 0.0f);
+        CV_EXPORTS_W bool loadFacePoints(String filename, OutputArray points,
+                                         float offset = 0.0f);
 
 /** @brief Utility to draw the detected facial landmark points
 
@@ -229,8 +229,8 @@ for(int j=0;j<rects.size();j++){
 }
 @endcode
 */
-CV_EXPORTS_W void drawFacemarks( InputOutputArray image, InputArray points,
-                                 Scalar color = Scalar(255,0,0));
+        CV_EXPORTS_W void drawFacemarks(InputOutputArray image, InputArray points,
+                                        Scalar color = Scalar(255, 0, 0));
 
 /** @brief Abstract base class for trainable facemark models
 
@@ -259,134 +259,133 @@ The typical pipeline for facemark detection is listed as follows:
 - Load the trained model using Facemark::loadModel.
 - Perform the fitting via the Facemark::fit.
 */
-class CV_EXPORTS_W FacemarkTrain : public Facemark
-{
-public:
-    /** @brief Add one training sample to the trainer.
+        class CV_EXPORTS_W FacemarkTrain : public Facemark {
+        public:
+            /** @brief Add one training sample to the trainer.
 
-    @param image Input image.
-    @param landmarks The ground-truth of facial landmarks points corresponds to the image.
+            @param image Input image.
+            @param landmarks The ground-truth of facial landmarks points corresponds to the image.
 
-    <B>Example of usage</B>
-    @code
-    String imageFiles = "../data/images_train.txt";
-    String ptsFiles = "../data/points_train.txt";
-    std::vector<String> images_train;
-    std::vector<String> landmarks_train;
+            <B>Example of usage</B>
+            @code
+            String imageFiles = "../data/images_train.txt";
+            String ptsFiles = "../data/points_train.txt";
+            std::vector<String> images_train;
+            std::vector<String> landmarks_train;
 
-    // load the list of dataset: image paths and landmark file paths
-    loadDatasetList(imageFiles,ptsFiles,images_train,landmarks_train);
+            // load the list of dataset: image paths and landmark file paths
+            loadDatasetList(imageFiles,ptsFiles,images_train,landmarks_train);
 
-    Mat image;
-    std::vector<Point2f> facial_points;
-    for(size_t i=0;i<images_train.size();i++){
-        image = imread(images_train[i].c_str());
-        loadFacePoints(landmarks_train[i],facial_points);
-        facemark->addTrainingSample(image, facial_points);
-    }
-    @endcode
+            Mat image;
+            std::vector<Point2f> facial_points;
+            for(size_t i=0;i<images_train.size();i++){
+                image = imread(images_train[i].c_str());
+                loadFacePoints(landmarks_train[i],facial_points);
+                facemark->addTrainingSample(image, facial_points);
+            }
+            @endcode
 
-    The contents in the training files should follows the standard format.
-    Here are examples for the contents in these files.
-    example of content in the images_train.txt
-    @code
-    /home/user/ibug/image_003_1.jpg
-    /home/user/ibug/image_004_1.jpg
-    /home/user/ibug/image_005_1.jpg
-    /home/user/ibug/image_006.jpg
-    @endcode
+            The contents in the training files should follows the standard format.
+            Here are examples for the contents in these files.
+            example of content in the images_train.txt
+            @code
+            /home/user/ibug/image_003_1.jpg
+            /home/user/ibug/image_004_1.jpg
+            /home/user/ibug/image_005_1.jpg
+            /home/user/ibug/image_006.jpg
+            @endcode
 
-    example of content in the points_train.txt
-    @code
-    /home/user/ibug/image_003_1.pts
-    /home/user/ibug/image_004_1.pts
-    /home/user/ibug/image_005_1.pts
-    /home/user/ibug/image_006.pts
-    @endcode
+            example of content in the points_train.txt
+            @code
+            /home/user/ibug/image_003_1.pts
+            /home/user/ibug/image_004_1.pts
+            /home/user/ibug/image_005_1.pts
+            /home/user/ibug/image_006.pts
+            @endcode
 
-    */
-    virtual bool addTrainingSample(InputArray image, InputArray landmarks)=0;
+            */
+            virtual bool addTrainingSample(InputArray image, InputArray landmarks) = 0;
 
-    /** @brief Trains a Facemark algorithm using the given dataset.
-    Before the training process, training samples should be added to the trainer
-    using face::addTrainingSample function.
+            /** @brief Trains a Facemark algorithm using the given dataset.
+            Before the training process, training samples should be added to the trainer
+            using face::addTrainingSample function.
 
-    @param parameters Optional extra parameters (algorithm dependent).
+            @param parameters Optional extra parameters (algorithm dependent).
 
-    <B>Example of usage</B>
-    @code
-    FacemarkLBF::Params params;
-    params.model_filename = "ibug68.model"; // filename to save the trained model
-    Ptr<Facemark> facemark = FacemarkLBF::create(params);
+            <B>Example of usage</B>
+            @code
+            FacemarkLBF::Params params;
+            params.model_filename = "ibug68.model"; // filename to save the trained model
+            Ptr<Facemark> facemark = FacemarkLBF::create(params);
 
-    // add training samples (see Facemark::addTrainingSample)
+            // add training samples (see Facemark::addTrainingSample)
 
-    facemark->training();
-    @endcode
-    */
+            facemark->training();
+            @endcode
+            */
 
-    virtual void training(void* parameters=0)=0;
+            virtual void training(void *parameters = 0) = 0;
 
-    /** @brief Set a user defined face detector for the Facemark algorithm.
-    @param detector The user defined face detector function
-    @param userData Detector parameters
+            /** @brief Set a user defined face detector for the Facemark algorithm.
+            @param detector The user defined face detector function
+            @param userData Detector parameters
 
-    <B>Example of usage</B>
-    @code
-    MyDetectorParameters detectorParameters(...);
-    facemark->setFaceDetector(myDetector, &detectorParameters);
-    @endcode
+            <B>Example of usage</B>
+            @code
+            MyDetectorParameters detectorParameters(...);
+            facemark->setFaceDetector(myDetector, &detectorParameters);
+            @endcode
 
-    Example of a user defined face detector
-    @code
-    bool myDetector( InputArray image, OutputArray faces, void* userData)
-    {
-        MyDetectorParameters* params = (MyDetectorParameters*)userData;
-        // -------- do something --------
-    }
-    @endcode
+            Example of a user defined face detector
+            @code
+            bool myDetector( InputArray image, OutputArray faces, void* userData)
+            {
+                MyDetectorParameters* params = (MyDetectorParameters*)userData;
+                // -------- do something --------
+            }
+            @endcode
 
-    TODO Lifetime of detector parameters is uncontrolled. Rework interface design to "Ptr<FaceDetector>".
-    */
-    virtual bool setFaceDetector(FN_FaceDetector detector, void* userData = 0)=0;
+            TODO Lifetime of detector parameters is uncontrolled. Rework interface design to "Ptr<FaceDetector>".
+            */
+            virtual bool setFaceDetector(FN_FaceDetector detector, void *userData = 0) = 0;
 
-    /** @brief Detect faces from a given image using default or user defined face detector.
-    Some Algorithm might not provide a default face detector.
+            /** @brief Detect faces from a given image using default or user defined face detector.
+            Some Algorithm might not provide a default face detector.
 
-    @param image Input image.
-    @param faces Output of the function which represent region of interest of the detected faces. Each face is stored in cv::Rect container.
+            @param image Input image.
+            @param faces Output of the function which represent region of interest of the detected faces. Each face is stored in cv::Rect container.
 
-    <B>Example of usage</B>
-    @code
-    std::vector<cv::Rect> faces;
-    facemark->getFaces(img, faces);
-    for(int j=0;j<faces.size();j++){
-        cv::rectangle(img, faces[j], cv::Scalar(255,0,255));
-    }
-    @endcode
-    */
-    virtual bool getFaces(InputArray image, OutputArray faces)=0;
+            <B>Example of usage</B>
+            @code
+            std::vector<cv::Rect> faces;
+            facemark->getFaces(img, faces);
+            for(int j=0;j<faces.size();j++){
+                cv::rectangle(img, faces[j], cv::Scalar(255,0,255));
+            }
+            @endcode
+            */
+            virtual bool getFaces(InputArray image, OutputArray faces) = 0;
 
-    /** @brief Get data from an algorithm
+            /** @brief Get data from an algorithm
 
-    @param items The obtained data, algorithm dependent.
+            @param items The obtained data, algorithm dependent.
 
-    <B>Example of usage</B>
-    @code
-    Ptr<FacemarkAAM> facemark = FacemarkAAM::create();
-    facemark->loadModel("AAM.yml");
+            <B>Example of usage</B>
+            @code
+            Ptr<FacemarkAAM> facemark = FacemarkAAM::create();
+            facemark->loadModel("AAM.yml");
 
-    FacemarkAAM::Data data;
-    facemark->getData(&data);
-    std::vector<Point2f> s0 = data.s0;
+            FacemarkAAM::Data data;
+            facemark->getData(&data);
+            std::vector<Point2f> s0 = data.s0;
 
-    cout<<s0<<endl;
-    @endcode
-    */
-    virtual bool getData(void * items=0)=0; // FIXIT
-}; /* Facemark*/
+            cout<<s0<<endl;
+            @endcode
+            */
+            virtual bool getData(void *items = 0) = 0; // FIXIT
+        }; /* Facemark*/
 
 //! @}
-} /* namespace face */
+    } /* namespace face */
 } /* namespace cv */
 #endif //__OPENCV_FACELANDMARKTRAIN_HPP__

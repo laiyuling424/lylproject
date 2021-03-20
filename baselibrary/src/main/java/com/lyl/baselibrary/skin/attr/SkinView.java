@@ -20,7 +20,7 @@ public class SkinView {
         this.mSkinAttrs = skinAttrs;
     }
 
-    public void skin(){
+    public void skin() {
         for (SkinAttr attr : mSkinAttrs) {
             attr.skin(mView);
         }

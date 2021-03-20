@@ -46,7 +46,7 @@
 #include "opencv2/core.hpp"
 
 namespace cv {
-namespace detail {
+    namespace detail {
 
 //! @addtogroup stitching
 //! @{
@@ -55,24 +55,26 @@ namespace detail {
 
 @note Translation is assumed to be zero during the whole stitching pipeline. :
  */
-struct CV_EXPORTS CameraParams
-{
-    CameraParams();
-    CameraParams(const CameraParams& other);
-    CameraParams& operator =(const CameraParams& other);
-    Mat K() const;
+        struct CV_EXPORTS CameraParams {
+            CameraParams();
 
-    double focal; // Focal length
-    double aspect; // Aspect ratio
-    double ppx; // Principal point X
-    double ppy; // Principal point Y
-    Mat R; // Rotation
-    Mat t; // Translation
-};
+            CameraParams(const CameraParams &other);
+
+            CameraParams &operator=(const CameraParams &other);
+
+            Mat K() const;
+
+            double focal; // Focal length
+            double aspect; // Aspect ratio
+            double ppx; // Principal point X
+            double ppy; // Principal point Y
+            Mat R; // Rotation
+            Mat t; // Translation
+        };
 
 //! @}
 
-} // namespace detail
+    } // namespace detail
 } // namespace cv
 
 #endif // #ifndef OPENCV_STITCHING_CAMERA_HPP

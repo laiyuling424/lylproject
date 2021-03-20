@@ -31,17 +31,15 @@ import java.io.IOException;
  */
 public class VaccaeSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 
+    int num = 0;
     //定义SurfaceHolder
     private SurfaceHolder holder;
     //定义SurfaceTexture;
     private SurfaceTexture surfaceTexture;
-
     //WindowManager 用于获取摄像机方向
     private WindowManager windowManager;
     //当前相机角度
     private int rotatedegree = 0;
-
-
     //Camera相关
     //设置摄像头ID，我们默认为后置
     private int mCameraIndex = Camera.CameraInfo.CAMERA_FACING_BACK;
@@ -75,11 +73,11 @@ public class VaccaeSurfaceView extends SurfaceView implements SurfaceHolder.Call
         }
     };
 
+
     public VaccaeSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
-
 
     //构造函数
     public void init(Context context) {
@@ -175,6 +173,7 @@ public class VaccaeSurfaceView extends SurfaceView implements SurfaceHolder.Call
             }
         }
     }
+    //endregion
 
     //关闭摄像机
     private void stopCamera() {
@@ -186,9 +185,6 @@ public class VaccaeSurfaceView extends SurfaceView implements SurfaceHolder.Call
         }
 
     }
-    //endregion
-
-    int num = 0;
 
     private Bitmap nv21ToBitmap(byte[] nv21, int width, int height) {
         Bitmap bitmap = null, dstBitmap = null;

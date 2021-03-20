@@ -49,27 +49,28 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_fr
 //! @{
 
-struct FR_lfwObj : public Object
-{
-    std::string image1, image2;
-    bool same;
-};
+        struct FR_lfwObj : public Object {
+            std::string image1, image2;
+            bool same;
+        };
 
-class CV_EXPORTS FR_lfw : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS FR_lfw
 
-    static Ptr<FR_lfw> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <FR_lfw> create();
+    };
 
 //! @}
 

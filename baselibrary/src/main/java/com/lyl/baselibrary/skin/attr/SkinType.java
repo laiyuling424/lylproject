@@ -22,19 +22,19 @@ public enum SkinType {
         public void skin(View view, String resName) {
             SkinResource skinResource = getSkinResource();
             ColorStateList color = skinResource.getColorByName(resName);
-            if(color==null){
+            if (color == null) {
                 return;
             }
             TextView textView = (TextView) view;
             textView.setTextColor(color);
         }
-    },BACKGROUND("background") {
+    }, BACKGROUND("background") {
         @Override
         public void skin(View view, String resName) {
             // 背景可能是图片也可能是颜色
             SkinResource skinResource = getSkinResource();
             Drawable drawable = skinResource.getDrawableByName(resName);
-            if(drawable!=null){
+            if (drawable != null) {
                 ImageView imageView = (ImageView) view;
                 imageView.setBackgroundDrawable(drawable);
                 return;
@@ -42,17 +42,17 @@ public enum SkinType {
 
             // 可能是颜色
             ColorStateList color = skinResource.getColorByName(resName);
-            if(color!=null){
+            if (color != null) {
                 view.setBackgroundColor(color.getDefaultColor());
             }
         }
-    },SRC("src") {
+    }, SRC("src") {
         @Override
         public void skin(View view, String resName) {
             // 获取资源设置
             SkinResource skinResource = getSkinResource();
             Drawable drawable = skinResource.getDrawableByName(resName);
-            if(drawable!=null){
+            if (drawable != null) {
                 ImageView imageView = (ImageView) view;
                 imageView.setImageDrawable(drawable);
                 return;
@@ -62,7 +62,8 @@ public enum SkinType {
 
     // 会根据名字调对应的方法
     private String mResName;
-    SkinType(String resName){
+
+    SkinType(String resName) {
         this.mResName = resName;
     }
 

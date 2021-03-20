@@ -46,7 +46,7 @@ public class DaoSupportFactory {
 
     public <T> IDaoSupport<T> getDao(Class<T> clazz) {
         IDaoSupport<T> daoSoupport = new DaoSupport();
-        daoSoupport.init(mSqLiteDatabase,clazz);
+        daoSoupport.init(mSqLiteDatabase, clazz);
         return daoSoupport;
     }
 }

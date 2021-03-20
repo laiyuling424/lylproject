@@ -42,29 +42,25 @@
 #ifndef __OPENCV_FUZZY_TYPES_H__
 #define __OPENCV_FUZZY_TYPES_H__
 
-namespace cv
-{
+namespace cv {
 
-namespace ft
-{
-    //! @addtogroup fuzzy
-    //! @{
+    namespace ft {
+        //! @addtogroup fuzzy
+        //! @{
 
-    enum
-    {
-        LINEAR = 1, //!< linear (triangular) shape
-        SINUS = 2 //!< sinusoidal shape
-    };
+        enum {
+            LINEAR = 1, //!< linear (triangular) shape
+            SINUS = 2 //!< sinusoidal shape
+        };
 
-    enum
-    {
-        ONE_STEP = 1, //!< processing in one step
-        MULTI_STEP = 2, //!< processing in multiple step
-        ITERATIVE = 3 //!< processing in several iterations
-    };
+        enum {
+            ONE_STEP = 1, //!< processing in one step
+            MULTI_STEP = 2, //!< processing in multiple step
+            ITERATIVE = 3 //!< processing in several iterations
+        };
 
-    //! @}
-}
+        //! @}
+    }
 }
 
 #endif // __OPENCV_FUZZY_TYPES_H__

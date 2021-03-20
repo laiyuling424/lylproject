@@ -49,10 +49,8 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_ir
 //! @{
@@ -62,24 +60,26 @@ namespace datasets
 // 0.0000e+00   2.8285e+03   6.1618e+02
 // 0.0000e+00   0.0000e+00   1.0000e+00
 
-struct cameraPos
-{
-    std::vector<std::string> images;
-};
+        struct cameraPos {
+            std::vector <std::string> images;
+        };
 
-struct IR_robotObj : public Object
-{
-    std::string name;
-    std::vector<cameraPos> pos;
-};
+        struct IR_robotObj : public Object {
+            std::string name;
+            std::vector <cameraPos> pos;
+        };
 
-class CV_EXPORTS IR_robot : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS IR_robot
 
-    static Ptr<IR_robot> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <IR_robot> create();
+    };
 
 //! @}
 

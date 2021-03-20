@@ -49,29 +49,30 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_is
 //! @{
 
-struct IS_weizmannObj : public Object
-{
-    std::string imageName;
-    std::string srcBw;
-    std::string srcColor;
-    std::string humanSeg; // TODO: read human segmented
-};
+        struct IS_weizmannObj : public Object {
+            std::string imageName;
+            std::string srcBw;
+            std::string srcColor;
+            std::string humanSeg; // TODO: read human segmented
+        };
 
-class CV_EXPORTS IS_weizmann : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS IS_weizmann
 
-    static Ptr<IS_weizmann> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <IS_weizmann> create();
+    };
 
 //! @}
 

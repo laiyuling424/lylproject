@@ -48,34 +48,39 @@ the use of this software, even if advised of the possibility of such damage.
 #include "opencv2/core.hpp"
 
 namespace cv {
-namespace face {
+    namespace face {
 
 /** Implementation of bio-inspired features (BIF) from the paper:
  *  Guo, Guodong, et al. "Human age estimation using bio-inspired features."
  *  Computer Vision and Pattern Recognition, 2009. CVPR 2009.
  */
-class CV_EXPORTS_W BIF : public Algorithm {
-public:
-    /** @returns The number of filter bands used for computing BIF. */
-    CV_WRAP virtual int getNumBands() const = 0;
+        class CV_EXPORTS_W BIF
 
-    /** @returns The number of image rotations. */
-    CV_WRAP virtual int getNumRotations() const = 0;
+        : public Algorithm {
+        public:
 
-    /** Computes features sby input image.
-     *  @param image Input image (CV_32FC1).
-     *  @param features Feature vector (CV_32FC1).
-     */
-    CV_WRAP virtual void compute(InputArray image,
-                                 OutputArray features) const = 0;
+        /** @returns The number of filter bands used for computing BIF. */
+        CV_WRAP virtual int getNumBands() const = 0;
 
-    /**
-     * @param num_bands The number of filter bands (<=8) used for computing BIF.
-     * @param num_rotations The number of image rotations for computing BIF.
-     * @returns Object for computing BIF.
-     */
-    CV_WRAP static Ptr<BIF> create(int num_bands = 8, int num_rotations = 12);
-};
+        /** @returns The number of image rotations. */
+        CV_WRAP virtual int getNumRotations() const = 0;
+
+        /** Computes features sby input image.
+         *  @param image Input image (CV_32FC1).
+         *  @param features Feature vector (CV_32FC1).
+         */
+        CV_WRAP virtual void compute(InputArray image,
+                                     OutputArray features) const = 0;
+
+        /**
+         * @param num_bands The number of filter bands (<=8) used for computing BIF.
+         * @param num_rotations The number of image rotations for computing BIF.
+         * @returns Object for computing BIF.
+         */
+        CV_WRAP static Ptr<BIF>
+
+        create(int num_bands = 8, int num_rotations = 12);
+    };
 
 }  // namespace cv
 }  // namespace face

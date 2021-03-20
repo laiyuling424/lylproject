@@ -55,10 +55,8 @@
 
 */
 
-namespace cv
-{
-    namespace stereo
-    {
+namespace cv {
+    namespace stereo {
         //! @addtogroup stereo
         //! @{
         //		 void correctMatches( InputArray F, InputArray points1, InputArray points2,
@@ -76,10 +74,10 @@ namespace cv
         */
         /** @brief The base class for stereo correspondence algorithms.
         */
-        class StereoMatcher : public Algorithm
-        {
+        class StereoMatcher : public Algorithm {
         public:
-            enum { DISP_SHIFT = 4,
+            enum {
+                DISP_SHIFT = 4,
                 DISP_SCALE = (1 << DISP_SHIFT)
             };
 
@@ -91,78 +89,98 @@ namespace cv
             like StereoBM or StereoSGBM compute 16-bit fixed-point disparity map (where each disparity value
             has 4 fractional bits), whereas other algorithms output 32-bit floating-point disparity map.
             */
-            virtual void compute( InputArray left, InputArray right,
-                OutputArray disparity ) = 0;
+            virtual void compute(InputArray left, InputArray right,
+                                 OutputArray disparity) = 0;
 
             virtual int getMinDisparity() const = 0;
+
             virtual void setMinDisparity(int minDisparity) = 0;
 
             virtual int getNumDisparities() const = 0;
+
             virtual void setNumDisparities(int numDisparities) = 0;
 
             virtual int getBlockSize() const = 0;
+
             virtual void setBlockSize(int blockSize) = 0;
 
             virtual int getSpeckleWindowSize() const = 0;
+
             virtual void setSpeckleWindowSize(int speckleWindowSize) = 0;
 
             virtual int getSpeckleRange() const = 0;
+
             virtual void setSpeckleRange(int speckleRange) = 0;
 
             virtual int getDisp12MaxDiff() const = 0;
+
             virtual void setDisp12MaxDiff(int disp12MaxDiff) = 0;
 
         };
+
         //!speckle removal algorithms. These algorithms have the purpose of removing small regions
         enum {
             CV_SPECKLE_REMOVAL_ALGORITHM, CV_SPECKLE_REMOVAL_AVG_ALGORITHM
         };
         //!subpixel interpolationm methods for disparities.
-        enum{
+        enum {
             CV_QUADRATIC_INTERPOLATION, CV_SIMETRICV_INTERPOLATION
         };
+
         /** @brief Class for computing stereo correspondence using the block matching algorithm, introduced and
         contributed to OpenCV by K. Konolige.
         */
-        class StereoBinaryBM : public StereoMatcher
-        {
+        class StereoBinaryBM : public StereoMatcher {
         public:
-            enum { PREFILTER_NORMALIZED_RESPONSE = 0,
-                PREFILTER_XSOBEL              = 1
+            enum {
+                PREFILTER_NORMALIZED_RESPONSE = 0,
+                PREFILTER_XSOBEL = 1
             };
 
             virtual int getPreFilterType() const = 0;
+
             virtual void setPreFilterType(int preFilterType) = 0;
 
             virtual int getPreFilterSize() const = 0;
+
             virtual void setPreFilterSize(int preFilterSize) = 0;
 
             virtual int getPreFilterCap() const = 0;
+
             virtual void setPreFilterCap(int preFilterCap) = 0;
 
             virtual int getTextureThreshold() const = 0;
+
             virtual void setTextureThreshold(int textureThreshold) = 0;
 
             virtual int getUniquenessRatio() const = 0;
+
             virtual void setUniquenessRatio(int uniquenessRatio) = 0;
 
             virtual int getSmallerBlockSize() const = 0;
+
             virtual void setSmallerBlockSize(int blockSize) = 0;
 
-            virtual int getScalleFactor() const = 0 ;
+            virtual int getScalleFactor() const = 0;
+
             virtual void setScalleFactor(int factor) = 0;
 
-            virtual int getSpekleRemovalTechnique() const = 0 ;
+            virtual int getSpekleRemovalTechnique() const = 0;
+
             virtual void setSpekleRemovalTechnique(int factor) = 0;
 
-            virtual bool getUsePrefilter() const = 0 ;
+            virtual bool getUsePrefilter() const = 0;
+
             virtual void setUsePrefilter(bool factor) = 0;
 
             virtual int getBinaryKernelType() const = 0;
+
             virtual void setBinaryKernelType(int value) = 0;
 
             virtual int getAgregationWindowSize() const = 0;
+
             virtual void setAgregationWindowSize(int value) = 0;
+
             /** @brief Creates StereoBM object
 
             @param numDisparities the disparity search range. For each pixel algorithm will find the best
@@ -176,7 +194,9 @@ namespace cv
             The function create StereoBM object. You can then call StereoBM::compute() to compute disparity for
             a specific stereo pair.
             */
-            CV_EXPORTS static Ptr< cv::stereo::StereoBinaryBM > create(int numDisparities = 0, int blockSize = 9);
+            CV_EXPORTS static Ptr<cv::stereo::StereoBinaryBM>
+
+            create(int numDisparities = 0, int blockSize = 9);
         };
 
         /** @brief The class implements the modified H. Hirschmuller algorithm @cite HH08 that differs from the original
@@ -197,37 +217,43 @@ namespace cv
         -   (Python) An example illustrating the use of the StereoSGBM matching algorithm can be found
         at opencv_source_code/samples/python2/stereo_match.py
         */
-        class StereoBinarySGBM : public StereoMatcher
-        {
+        class StereoBinarySGBM : public StereoMatcher {
         public:
-            enum
-            {
+            enum {
                 MODE_SGBM = 0,
-                MODE_HH   = 1
+                MODE_HH = 1
             };
 
             virtual int getPreFilterCap() const = 0;
+
             virtual void setPreFilterCap(int preFilterCap) = 0;
 
             virtual int getUniquenessRatio() const = 0;
+
             virtual void setUniquenessRatio(int uniquenessRatio) = 0;
 
             virtual int getP1() const = 0;
+
             virtual void setP1(int P1) = 0;
 
             virtual int getP2() const = 0;
+
             virtual void setP2(int P2) = 0;
 
             virtual int getMode() const = 0;
+
             virtual void setMode(int mode) = 0;
 
-            virtual int getSpekleRemovalTechnique() const = 0 ;
+            virtual int getSpekleRemovalTechnique() const = 0;
+
             virtual void setSpekleRemovalTechnique(int factor) = 0;
 
             virtual int getBinaryKernelType() const = 0;
+
             virtual void setBinaryKernelType(int value) = 0;
 
             virtual int getSubPixelInterpolationMethod() const = 0;
+
             virtual void setSubPixelInterpolationMethod(int value) = 0;
 
             /** @brief Creates StereoSGBM object
@@ -267,11 +293,13 @@ namespace cv
             set StereoSGBM::numDisparities at minimum. The second constructor enables you to set each parameter
             to a custom value.
             */
-            CV_EXPORTS static Ptr<cv::stereo::StereoBinarySGBM> create(int minDisparity, int numDisparities, int blockSize,
-                int P1 = 100, int P2 = 1000, int disp12MaxDiff = 1,
-                int preFilterCap = 0, int uniquenessRatio = 5,
-                int speckleWindowSize = 400, int speckleRange = 200,
-                int mode = StereoBinarySGBM::MODE_SGBM);
+            CV_EXPORTS static Ptr<cv::stereo::StereoBinarySGBM>
+
+            create(int minDisparity, int numDisparities, int blockSize,
+                   int P1 = 100, int P2 = 1000, int disp12MaxDiff = 1,
+                   int preFilterCap = 0, int uniquenessRatio = 5,
+                   int speckleWindowSize = 400, int speckleRange = 200,
+                   int mode = StereoBinarySGBM::MODE_SGBM);
         };
         //! @}
     }//stereo

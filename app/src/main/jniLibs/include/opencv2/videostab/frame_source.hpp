@@ -46,49 +46,51 @@
 #include <vector>
 #include "opencv2/core.hpp"
 
-namespace cv
-{
-namespace videostab
-{
+namespace cv {
+    namespace videostab {
 
 //! @addtogroup videostab
 //! @{
 
-class CV_EXPORTS IFrameSource
-{
-public:
-    virtual ~IFrameSource() {}
-    virtual void reset() = 0;
-    virtual Mat nextFrame() = 0;
-};
+        class CV_EXPORTS IFrameSource {
+        public:
+            virtual ~IFrameSource() {}
 
-class CV_EXPORTS NullFrameSource : public IFrameSource
-{
-public:
-    virtual void reset() CV_OVERRIDE {}
-    virtual Mat nextFrame() CV_OVERRIDE { return Mat(); }
-};
+            virtual void reset() = 0;
 
-class CV_EXPORTS VideoFileSource : public IFrameSource
-{
-public:
-    VideoFileSource(const String &path, bool volatileFrame = false);
+            virtual Mat nextFrame() = 0;
+        };
 
-    virtual void reset() CV_OVERRIDE;
-    virtual Mat nextFrame() CV_OVERRIDE;
+        class CV_EXPORTS NullFrameSource : public IFrameSource {
+        public:
+            virtual void reset() CV_OVERRIDE {}
 
-    int width();
-    int height();
-    int count();
-    double fps();
+            virtual Mat nextFrame() CV_OVERRIDE { return Mat(); }
+        };
 
-private:
-    Ptr<IFrameSource> impl;
-};
+        class CV_EXPORTS VideoFileSource : public IFrameSource {
+        public:
+            VideoFileSource(const String &path, bool volatileFrame = false);
+
+            virtual void reset() CV_OVERRIDE;
+
+            virtual Mat nextFrame() CV_OVERRIDE;
+
+            int width();
+
+            int height();
+
+            int count();
+
+            double fps();
+
+        private:
+            Ptr <IFrameSource> impl;
+        };
 
 //! @}
 
-} // namespace videostab
+    } // namespace videostab
 } // namespace cv
 
 #endif

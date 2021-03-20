@@ -3,7 +3,6 @@ package com.lyl.baselibrary.db.curd;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-
 import com.lyl.baselibrary.db.DaoUtil;
 
 import java.lang.reflect.Field;
@@ -103,6 +102,7 @@ public class QuerySupport<T> {
 
     /**
      * 通过Cursor封装成查找对象
+     *
      * @return 对象集合列表
      */
     private List<T> cursorToList(Cursor cursor) {

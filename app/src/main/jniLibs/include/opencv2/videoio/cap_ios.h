@@ -37,113 +37,217 @@
 
 /////////////////////////////////////// CvAbstractCamera /////////////////////////////////////
 
-@class CvAbstractCamera;
+@
 
-CV_EXPORTS @interface CvAbstractCamera : NSObject
+class CvAbstractCamera;
+
+CV_EXPORTS @
+interface CvAbstractCamera
+: NSObject
 {
-    UIDeviceOrientation currentDeviceOrientation;
+UIDeviceOrientation currentDeviceOrientation;
 
-    BOOL cameraAvailable;
+BOOL cameraAvailable;
 }
 
-@property (nonatomic, strong) AVCaptureSession* captureSession;
-@property (nonatomic, strong) AVCaptureConnection* videoCaptureConnection;
+@
+property (nonatomic, strong
+)
+AVCaptureSession *captureSession;
+@
+property (nonatomic, strong
+)
+AVCaptureConnection *videoCaptureConnection;
 
-@property (nonatomic, readonly) BOOL running;
-@property (nonatomic, readonly) BOOL captureSessionLoaded;
+@
+property (nonatomic, readonly
+)
+BOOL running;
+@
+property (nonatomic, readonly
+)
+BOOL captureSessionLoaded;
 
-@property (nonatomic, assign) int defaultFPS;
-@property (nonatomic, readonly) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
-@property (nonatomic, assign) AVCaptureDevicePosition defaultAVCaptureDevicePosition;
-@property (nonatomic, assign) AVCaptureVideoOrientation defaultAVCaptureVideoOrientation;
-@property (nonatomic, assign) BOOL useAVCaptureVideoPreviewLayer;
-@property (nonatomic, strong) NSString *const defaultAVCaptureSessionPreset;
+@
+property (nonatomic, assign
+)
+int defaultFPS;
+@
+property (nonatomic, readonly
+)
+AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
+@
+property (nonatomic, assign
+)
+AVCaptureDevicePosition defaultAVCaptureDevicePosition;
+@
+property (nonatomic, assign
+)
+AVCaptureVideoOrientation defaultAVCaptureVideoOrientation;
+@
+property (nonatomic, assign
+)
+BOOL useAVCaptureVideoPreviewLayer;
+@
+property (nonatomic, strong
+)
+NSString *const defaultAVCaptureSessionPreset;
 
-@property (nonatomic, assign) int imageWidth;
-@property (nonatomic, assign) int imageHeight;
+@
+property (nonatomic, assign
+)
+int imageWidth;
+@
+property (nonatomic, assign
+)
+int imageHeight;
 
-@property (nonatomic, strong) UIView* parentView;
+@
+property (nonatomic, strong
+)
+UIView *parentView;
 
-- (void)start;
-- (void)stop;
-- (void)switchCameras;
+- (void)
+start;
+- (void)
+stop;
+- (void)
+switchCameras;
 
-- (id)initWithParentView:(UIView*)parent;
+- (id)initWithParentView:(UIView*)
+parent;
 
-- (void)createCaptureOutput;
-- (void)createVideoPreviewLayer;
-- (void)updateOrientation;
+- (void)
+createCaptureOutput;
+- (void)
+createVideoPreviewLayer;
+- (void)
+updateOrientation;
 
-- (void)lockFocus;
-- (void)unlockFocus;
-- (void)lockExposure;
-- (void)unlockExposure;
-- (void)lockBalance;
-- (void)unlockBalance;
+- (void)
+lockFocus;
+- (void)
+unlockFocus;
+- (void)
+lockExposure;
+- (void)
+unlockExposure;
+- (void)
+lockBalance;
+- (void)
+unlockBalance;
 
 @end
 
 ///////////////////////////////// CvVideoCamera ///////////////////////////////////////////
 
-@class CvVideoCamera;
+@
 
-CV_EXPORTS @protocol CvVideoCameraDelegate <NSObject>
+class CvVideoCamera;
+
+CV_EXPORTS @
+protocol CvVideoCameraDelegate<NSObject>
 
 #ifdef __cplusplus
 // delegate method for processing image frames
 - (void)processImage:(cv::Mat&)image;
 #endif
 
-@end
+@
+end
 
-CV_EXPORTS @interface CvVideoCamera : CvAbstractCamera<AVCaptureVideoDataOutputSampleBufferDelegate>
+        CV_EXPORTS
+@
+interface CvVideoCamera
+: CvAbstractCamera<AVCaptureVideoDataOutputSampleBufferDelegate>
 {
-    AVCaptureVideoDataOutput *videoDataOutput;
+AVCaptureVideoDataOutput *videoDataOutput;
 
-    dispatch_queue_t videoDataOutputQueue;
-    CALayer *customPreviewLayer;
+dispatch_queue_t videoDataOutputQueue;
+CALayer *customPreviewLayer;
 
-    CMTime lastSampleTime;
+CMTime lastSampleTime;
 
 }
 
-@property (nonatomic, weak) id<CvVideoCameraDelegate> delegate;
-@property (nonatomic, assign) BOOL grayscaleMode;
+@
+property (nonatomic, weak
+)
+id <CvVideoCameraDelegate> delegate;
+@
+property (nonatomic, assign
+)
+BOOL grayscaleMode;
 
-@property (nonatomic, assign) BOOL recordVideo;
-@property (nonatomic, assign) BOOL rotateVideo;
-@property (nonatomic, strong) AVAssetWriterInput* recordAssetWriterInput;
-@property (nonatomic, strong) AVAssetWriterInputPixelBufferAdaptor* recordPixelBufferAdaptor;
-@property (nonatomic, strong) AVAssetWriter* recordAssetWriter;
+@
+property (nonatomic, assign
+)
+BOOL recordVideo;
+@
+property (nonatomic, assign
+)
+BOOL rotateVideo;
+@
+property (nonatomic, strong
+)
+AVAssetWriterInput *recordAssetWriterInput;
+@
+property (nonatomic, strong
+)
+AVAssetWriterInputPixelBufferAdaptor *recordPixelBufferAdaptor;
+@
+property (nonatomic, strong
+)
+AVAssetWriter *recordAssetWriter;
 
-- (void)adjustLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
-- (void)layoutPreviewLayer;
-- (void)saveVideo;
-- (NSURL *)videoFileURL;
-- (NSString *)videoFileString;
+- (void)adjustLayoutToInterfaceOrientation:(UIInterfaceOrientation)
+interfaceOrientation;
+- (void)
+layoutPreviewLayer;
+- (void)
+saveVideo;
+- (NSURL *)
+videoFileURL;
+- (NSString *)
+videoFileString;
 
 
 @end
 
 ///////////////////////////////// CvPhotoCamera ///////////////////////////////////////////
 
-@class CvPhotoCamera;
+@
 
-CV_EXPORTS @protocol CvPhotoCameraDelegate <NSObject>
+class CvPhotoCamera;
 
-- (void)photoCamera:(CvPhotoCamera*)photoCamera capturedImage:(UIImage *)image;
-- (void)photoCameraCancel:(CvPhotoCamera*)photoCamera;
+CV_EXPORTS @
+protocol CvPhotoCameraDelegate<NSObject>
 
-@end
+- (void)photoCamera:(CvPhotoCamera*)
+photoCamera capturedImage
+:(UIImage *)
+image;
+- (void)photoCameraCancel:(CvPhotoCamera*)
+photoCamera;
 
-CV_EXPORTS @interface CvPhotoCamera : CvAbstractCamera
+@
+end
+
+        CV_EXPORTS
+@
+interface CvPhotoCamera
+: CvAbstractCamera
 {
-    AVCaptureStillImageOutput *stillImageOutput;
+AVCaptureStillImageOutput *stillImageOutput;
 }
 
-@property (nonatomic, weak) id<CvPhotoCameraDelegate> delegate;
+@
+property (nonatomic, weak
+)
+id <CvPhotoCameraDelegate> delegate;
 
-- (void)takePicture;
+- (void)
+takePicture;
 
 @end
 

@@ -45,8 +45,7 @@
 
 #include "opencv2/core.hpp"
 
-namespace cv
-{
+namespace cv {
 /****************************************************************************************\
 *                                   EMDL1 Function                                      *
 \****************************************************************************************/
@@ -63,7 +62,7 @@ Statistics", by Elizaveta Levina and Peter Bickel.
 the histogram in each bin.
 @param signature2 Second signature of the same format and size as signature1.
  */
-CV_EXPORTS float EMDL1(InputArray signature1, InputArray signature2);
+    CV_EXPORTS float EMDL1(InputArray signature1, InputArray signature2);
 
 //! @}
 

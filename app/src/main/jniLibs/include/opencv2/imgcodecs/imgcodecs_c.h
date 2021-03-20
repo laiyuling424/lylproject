@@ -52,20 +52,19 @@ extern "C" {
   @{
   */
 
-enum
-{
+enum {
 /* 8bit, color or not */
-    CV_LOAD_IMAGE_UNCHANGED  =-1,
+    CV_LOAD_IMAGE_UNCHANGED = -1,
 /* 8bit, gray */
-    CV_LOAD_IMAGE_GRAYSCALE  =0,
+    CV_LOAD_IMAGE_GRAYSCALE = 0,
 /* ?, color */
-    CV_LOAD_IMAGE_COLOR      =1,
+    CV_LOAD_IMAGE_COLOR = 1,
 /* any depth, ? */
-    CV_LOAD_IMAGE_ANYDEPTH   =2,
+    CV_LOAD_IMAGE_ANYDEPTH = 2,
 /* ?, any color */
-    CV_LOAD_IMAGE_ANYCOLOR   =4,
+    CV_LOAD_IMAGE_ANYCOLOR = 4,
 /* ?, no rotate */
-    CV_LOAD_IMAGE_IGNORE_ORIENTATION  =128
+    CV_LOAD_IMAGE_IGNORE_ORIENTATION = 128
 };
 
 /* load image from file
@@ -74,28 +73,27 @@ enum
   using CV_LOAD_IMAGE_ANYCOLOR alone is equivalent to CV_LOAD_IMAGE_UNCHANGED
   unless CV_LOAD_IMAGE_ANYDEPTH is specified images are converted to 8bit
 */
-CVAPI(IplImage*) cvLoadImage( const char* filename, int iscolor CV_DEFAULT(CV_LOAD_IMAGE_COLOR));
-CVAPI(CvMat*) cvLoadImageM( const char* filename, int iscolor CV_DEFAULT(CV_LOAD_IMAGE_COLOR));
+CVAPI(IplImage*)cvLoadImage(const char *filename, int iscolor CV_DEFAULT(CV_LOAD_IMAGE_COLOR));
+CVAPI(CvMat*)cvLoadImageM(const char *filename, int iscolor CV_DEFAULT(CV_LOAD_IMAGE_COLOR));
 
-enum
-{
-    CV_IMWRITE_JPEG_QUALITY =1,
-    CV_IMWRITE_JPEG_PROGRESSIVE =2,
-    CV_IMWRITE_JPEG_OPTIMIZE =3,
-    CV_IMWRITE_JPEG_RST_INTERVAL =4,
-    CV_IMWRITE_JPEG_LUMA_QUALITY =5,
-    CV_IMWRITE_JPEG_CHROMA_QUALITY =6,
-    CV_IMWRITE_PNG_COMPRESSION =16,
-    CV_IMWRITE_PNG_STRATEGY =17,
-    CV_IMWRITE_PNG_BILEVEL =18,
-    CV_IMWRITE_PNG_STRATEGY_DEFAULT =0,
-    CV_IMWRITE_PNG_STRATEGY_FILTERED =1,
-    CV_IMWRITE_PNG_STRATEGY_HUFFMAN_ONLY =2,
-    CV_IMWRITE_PNG_STRATEGY_RLE =3,
-    CV_IMWRITE_PNG_STRATEGY_FIXED =4,
-    CV_IMWRITE_PXM_BINARY =32,
+enum {
+    CV_IMWRITE_JPEG_QUALITY = 1,
+    CV_IMWRITE_JPEG_PROGRESSIVE = 2,
+    CV_IMWRITE_JPEG_OPTIMIZE = 3,
+    CV_IMWRITE_JPEG_RST_INTERVAL = 4,
+    CV_IMWRITE_JPEG_LUMA_QUALITY = 5,
+    CV_IMWRITE_JPEG_CHROMA_QUALITY = 6,
+    CV_IMWRITE_PNG_COMPRESSION = 16,
+    CV_IMWRITE_PNG_STRATEGY = 17,
+    CV_IMWRITE_PNG_BILEVEL = 18,
+    CV_IMWRITE_PNG_STRATEGY_DEFAULT = 0,
+    CV_IMWRITE_PNG_STRATEGY_FILTERED = 1,
+    CV_IMWRITE_PNG_STRATEGY_HUFFMAN_ONLY = 2,
+    CV_IMWRITE_PNG_STRATEGY_RLE = 3,
+    CV_IMWRITE_PNG_STRATEGY_FIXED = 4,
+    CV_IMWRITE_PXM_BINARY = 32,
     CV_IMWRITE_EXR_TYPE = 48,
-    CV_IMWRITE_WEBP_QUALITY =64,
+    CV_IMWRITE_WEBP_QUALITY = 64,
     CV_IMWRITE_PAM_TUPLETYPE = 128,
     CV_IMWRITE_PAM_FORMAT_NULL = 0,
     CV_IMWRITE_PAM_FORMAT_BLACKANDWHITE = 1,
@@ -108,28 +106,27 @@ enum
 
 
 /* save image to file */
-CVAPI(int) cvSaveImage( const char* filename, const CvArr* image,
-                        const int* params CV_DEFAULT(0) );
+CVAPI(int) cvSaveImage(const char *filename, const CvArr *image,
+                       const int *params CV_DEFAULT(0));
 
 /* decode image stored in the buffer */
-CVAPI(IplImage*) cvDecodeImage( const CvMat* buf, int iscolor CV_DEFAULT(CV_LOAD_IMAGE_COLOR));
-CVAPI(CvMat*) cvDecodeImageM( const CvMat* buf, int iscolor CV_DEFAULT(CV_LOAD_IMAGE_COLOR));
+CVAPI(IplImage*)cvDecodeImage(const CvMat *buf, int iscolor CV_DEFAULT(CV_LOAD_IMAGE_COLOR));
+CVAPI(CvMat*)cvDecodeImageM(const CvMat *buf, int iscolor CV_DEFAULT(CV_LOAD_IMAGE_COLOR));
 
 /* encode image and store the result as a byte vector (single-row 8uC1 matrix) */
-CVAPI(CvMat*) cvEncodeImage( const char* ext, const CvArr* image,
-                             const int* params CV_DEFAULT(0) );
+CVAPI(CvMat*)cvEncodeImage(const char *ext, const CvArr *image,
+                           const int *params CV_DEFAULT(0));
 
-enum
-{
-    CV_CVTIMG_FLIP      =1,
-    CV_CVTIMG_SWAP_RB   =2
+enum {
+    CV_CVTIMG_FLIP = 1,
+    CV_CVTIMG_SWAP_RB = 2
 };
 
 /* utility function: convert one image to another with optional vertical flip */
-CVAPI(void) cvConvertImage( const CvArr* src, CvArr* dst, int flags CV_DEFAULT(0));
+CVAPI(void) cvConvertImage(const CvArr *src, CvArr *dst, int flags CV_DEFAULT(0));
 
-CVAPI(int) cvHaveImageReader(const char* filename);
-CVAPI(int) cvHaveImageWriter(const char* filename);
+CVAPI(int) cvHaveImageReader(const char *filename);
+CVAPI(int) cvHaveImageWriter(const char *filename);
 
 
 /****************************************************************************************\

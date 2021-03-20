@@ -49,27 +49,28 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_ar
 //! @{
 
-struct AR_sportsObj : public Object
-{
-    std::string videoUrl;
-    std::vector<int> labels;
-};
+        struct AR_sportsObj : public Object {
+            std::string videoUrl;
+            std::vector<int> labels;
+        };
 
-class CV_EXPORTS AR_sports : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS AR_sports
 
-    static Ptr<AR_sports> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <AR_sports> create();
+    };
 
 //! @}
 

@@ -49,29 +49,30 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_msm
 //! @{
 
-struct MSM_middleburyObj : public Object
-{
-    std::string imageName;
-    Matx33d k;
-    Matx33d r;
-    double t[3];
-};
+        struct MSM_middleburyObj : public Object {
+            std::string imageName;
+            Matx33d k;
+            Matx33d r;
+            double t[3];
+        };
 
-class CV_EXPORTS MSM_middlebury : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS MSM_middlebury
 
-    static Ptr<MSM_middlebury> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <MSM_middlebury> create();
+    };
 
 //! @}
 

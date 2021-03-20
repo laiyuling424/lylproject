@@ -11,17 +11,19 @@ import java.security.NoSuchAlgorithmException;
  * Description:
  */
 public class MD5Util {
-    /**利用MD5进行加密
-     * @param inStr  待加密的字符串
-     * @return  加密后的字符串
-     * @throws NoSuchAlgorithmException  没有这种产生消息摘要的算法
+    /**
+     * 利用MD5进行加密
+     *
+     * @param inStr 待加密的字符串
+     * @return 加密后的字符串
+     * @throws NoSuchAlgorithmException     没有这种产生消息摘要的算法
      * @throws UnsupportedEncodingException
      */
-    public static String string2MD5(String inStr){
+    public static String string2MD5(String inStr) {
         MessageDigest md5 = null;
-        try{
+        try {
             md5 = MessageDigest.getInstance("MD5");
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
             e.printStackTrace();
             return "";
@@ -33,7 +35,7 @@ public class MD5Util {
             byteArray[i] = (byte) charArray[i];
         byte[] md5Bytes = md5.digest(byteArray);
         StringBuffer hexValue = new StringBuffer();
-        for (int i = 0; i < md5Bytes.length; i++){
+        for (int i = 0; i < md5Bytes.length; i++) {
             int val = ((int) md5Bytes[i]) & 0xff;
             if (val < 16)
                 hexValue.append("0");

@@ -42,7 +42,7 @@
 
 
 namespace cv {
-namespace reg {
+    namespace reg {
 
 //! @addtogroup reg
 //! @{
@@ -50,52 +50,67 @@ namespace reg {
 /*!
  * Defines an transformation that consists on a simple displacement
  */
-class CV_EXPORTS_W MapShift : public Map
-{
-public:
-    /*!
-     * Default constructor builds an identity map
-     */
-    CV_WRAP MapShift();
+        class CV_EXPORTS_W MapShift
 
-    /*!
-     * Constructor providing explicit values
-     * \param[in] shift Displacement
-     */
+        : public Map {
+        public:
 
-    CV_WRAP MapShift(InputArray shift);
+        /*!
+         * Default constructor builds an identity map
+         */
+        CV_WRAP MapShift();
 
-    /*!
-     * Destructor
-     */
-    ~MapShift();
+        /*!
+         * Constructor providing explicit values
+         * \param[in] shift Displacement
+         */
 
-    CV_WRAP void inverseWarp(InputArray img1, OutputArray img2) const CV_OVERRIDE;
+        CV_WRAP MapShift(InputArray shift);
 
-    CV_WRAP cv::Ptr<Map> inverseMap() const CV_OVERRIDE;
+        /*!
+         * Destructor
+         */
+        ~
 
-    CV_WRAP void compose(cv::Ptr<Map> map) CV_OVERRIDE;
+        MapShift();
 
-    CV_WRAP void scale(double factor) CV_OVERRIDE;
+        CV_WRAP void inverseWarp(InputArray img1, OutputArray img2) const
 
-    /*!
-     * Return displacement
-     * \return Displacement
-     */
-    const cv::Vec<double, 2>& getShift() const {
-        return shift_;
-    }
+        CV_OVERRIDE;
 
-    CV_WRAP void getShift(OutputArray shift) const {
-        Mat(shift_).copyTo(shift);
-    }
+        CV_WRAP cv::Ptr<Map>
 
-private:
-    cv::Vec<double, 2> shift_;      /*< Displacement */
-};
+        inverseMap() const
+
+        CV_OVERRIDE;
+
+        CV_WRAP void compose(cv::Ptr<Map> map)
+
+        CV_OVERRIDE;
+
+        CV_WRAP void scale(double factor)
+
+        CV_OVERRIDE;
+
+        /*!
+         * Return displacement
+         * \return Displacement
+         */
+        const cv::Vec<double, 2> &getShift() const {
+            return shift_;
+        }
+
+        CV_WRAP void getShift(OutputArray shift) const {
+            Mat(shift_).copyTo(shift);
+        }
+
+        private:
+        cv::Vec<double, 2> shift_;      /*< Displacement */
+    };
 
 //! @}
 
-}}  // namespace cv::reg
+}
+}  // namespace cv::reg
 
 #endif  // MAPSHIFT_H_

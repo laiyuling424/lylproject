@@ -90,64 +90,65 @@ In OpenCV there is an C++ implementation of DPM cascade detector.
 
 */
 
-namespace cv
-{
+namespace cv {
 
-namespace dpm
-{
+    namespace dpm {
 
 //! @addtogroup dpm
 //! @{
 
 /** @brief This is a C++ abstract class, it provides external user API to work with DPM.
  */
-class CV_EXPORTS_W DPMDetector
-{
-public:
+        class CV_EXPORTS_W DPMDetector
+                {
+                        public:
 
-    struct CV_EXPORTS_W ObjectDetection
-    {
-        ObjectDetection();
-        ObjectDetection( const Rect& rect, float score, int classID=-1 );
-        Rect rect;
-        float score;
-        int classID;
-    };
+                        struct CV_EXPORTS_W ObjectDetection
+                        {
+                            ObjectDetection();
+                            ObjectDetection(
+                            const Rect &rect,
+                            float score,
+                            int classID = -1 );
+                            Rect rect;
+                            float score;
+                            int classID;
+                        };
 
-    virtual bool isEmpty() const = 0;
+                        virtual bool isEmpty() const = 0;
 
-    /** @brief Find rectangular regions in the given image that are likely to contain objects of loaded classes
-    (models) and corresponding confidence levels.
-    @param image An image.
-    @param objects The detections: rectangulars, scores and class IDs.
-    */
-    virtual void detect(cv::Mat &image, CV_OUT std::vector<ObjectDetection> &objects) = 0;
+                        /** @brief Find rectangular regions in the given image that are likely to contain objects of loaded classes
+                        (models) and corresponding confidence levels.
+                        @param image An image.
+                        @param objects The detections: rectangulars, scores and class IDs.
+                        */
+                        virtual void detect(cv::Mat &image, CV_OUT std::vector<ObjectDetection> &objects) = 0;
 
-    /** @brief Return the class (model) names that were passed in constructor or method load or extracted from
-    models filenames in those methods.
-     */
-    virtual std::vector<std::string> const& getClassNames() const = 0;
+                        /** @brief Return the class (model) names that were passed in constructor or method load or extracted from
+                        models filenames in those methods.
+                         */
+                        virtual std::vector<std::string> const& getClassNames() const = 0;
 
-    /** @brief Return a count of loaded models (classes).
-     */
-    virtual size_t getClassCount() const = 0;
+                        /** @brief Return a count of loaded models (classes).
+                         */
+                        virtual size_t getClassCount() const = 0;
 
-    /** @brief Load the trained models from given .xml files and return cv::Ptr\<DPMDetector\>.
-    @param filenames A set of filenames storing the trained detectors (models). Each file contains one
-    model. See examples of such files here `/opencv_extra/testdata/cv/dpm/VOC2007_Cascade/`.
-    @param classNames A set of trained models names. If it's empty then the name of each model will be
-    constructed from the name of file containing the model. E.g. the model stored in
-    "/home/user/cat.xml" will get the name "cat".
-     */
-    static cv::Ptr<DPMDetector> create(std::vector<std::string> const &filenames,
-            std::vector<std::string> const &classNames = std::vector<std::string>());
+                        /** @brief Load the trained models from given .xml files and return cv::Ptr\<DPMDetector\>.
+                        @param filenames A set of filenames storing the trained detectors (models). Each file contains one
+                        model. See examples of such files here `/opencv_extra/testdata/cv/dpm/VOC2007_Cascade/`.
+                        @param classNames A set of trained models names. If it's empty then the name of each model will be
+                        constructed from the name of file containing the model. E.g. the model stored in
+                        "/home/user/cat.xml" will get the name "cat".
+                         */
+                        static cv::Ptr<DPMDetector> create(std::vector<std::string> const &filenames,
+                        std::vector<std::string> const &classNames = std::vector<std::string>());
 
-    virtual ~DPMDetector(){}
-};
+                        virtual ~DPMDetector(){}
+                };
 
 //! @}
 
-} // namespace dpm
+    } // namespace dpm
 } // namespace cv
 
 #endif

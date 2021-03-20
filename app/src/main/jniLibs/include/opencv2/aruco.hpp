@@ -73,17 +73,17 @@ the use of this software, even if advised of the possibility of such damage.
 */
 
 namespace cv {
-namespace aruco {
+    namespace aruco {
 
 //! @addtogroup aruco
 //! @{
 
-enum CornerRefineMethod{
-    CORNER_REFINE_NONE,     ///< Tag and corners detection based on the ArUco approach
-    CORNER_REFINE_SUBPIX,   ///< ArUco approach and refine the corners locations using corner subpixel accuracy
-    CORNER_REFINE_CONTOUR,  ///< ArUco approach and refine the corners locations using the contour-points line fitting
-    CORNER_REFINE_APRILTAG, ///< Tag and corners detection based on the AprilTag 2 approach @cite wang2016iros
-};
+        enum CornerRefineMethod {
+            CORNER_REFINE_NONE,     ///< Tag and corners detection based on the ArUco approach
+            CORNER_REFINE_SUBPIX,   ///< ArUco approach and refine the corners locations using corner subpixel accuracy
+            CORNER_REFINE_CONTOUR,  ///< ArUco approach and refine the corners locations using the contour-points line fitting
+            CORNER_REFINE_APRILTAG, ///< Tag and corners detection based on the AprilTag 2 approach @cite wang2016iros
+        };
 
 /**
  * @brief Parameters for the detectMarker process:
@@ -145,46 +145,45 @@ enum CornerRefineMethod{
  * - aprilTagQuadSigma: What Gaussian blur should be applied to the segmented image (used for quad detection?)
  *   Parameter is the standard deviation in pixels.  Very noisy images benefit from non-zero values (e.g. 0.8).
  */
-struct CV_EXPORTS_W DetectorParameters {
+        struct CV_EXPORTS_W DetectorParameters{
 
-    DetectorParameters();
+                DetectorParameters();
 
-    CV_WRAP static Ptr<DetectorParameters> create();
+                CV_WRAP static Ptr<DetectorParameters> create();
 
-    CV_PROP_RW int adaptiveThreshWinSizeMin;
-    CV_PROP_RW int adaptiveThreshWinSizeMax;
-    CV_PROP_RW int adaptiveThreshWinSizeStep;
-    CV_PROP_RW double adaptiveThreshConstant;
-    CV_PROP_RW double minMarkerPerimeterRate;
-    CV_PROP_RW double maxMarkerPerimeterRate;
-    CV_PROP_RW double polygonalApproxAccuracyRate;
-    CV_PROP_RW double minCornerDistanceRate;
-    CV_PROP_RW int minDistanceToBorder;
-    CV_PROP_RW double minMarkerDistanceRate;
-    CV_PROP_RW int cornerRefinementMethod;
-    CV_PROP_RW int cornerRefinementWinSize;
-    CV_PROP_RW int cornerRefinementMaxIterations;
-    CV_PROP_RW double cornerRefinementMinAccuracy;
-    CV_PROP_RW int markerBorderBits;
-    CV_PROP_RW int perspectiveRemovePixelPerCell;
-    CV_PROP_RW double perspectiveRemoveIgnoredMarginPerCell;
-    CV_PROP_RW double maxErroneousBitsInBorderRate;
-    CV_PROP_RW double minOtsuStdDev;
-    CV_PROP_RW double errorCorrectionRate;
+                CV_PROP_RW int adaptiveThreshWinSizeMin;
+                CV_PROP_RW int adaptiveThreshWinSizeMax;
+                CV_PROP_RW int adaptiveThreshWinSizeStep;
+                CV_PROP_RW double adaptiveThreshConstant;
+                CV_PROP_RW double minMarkerPerimeterRate;
+                CV_PROP_RW double maxMarkerPerimeterRate;
+                CV_PROP_RW double polygonalApproxAccuracyRate;
+                CV_PROP_RW double minCornerDistanceRate;
+                CV_PROP_RW int minDistanceToBorder;
+                CV_PROP_RW double minMarkerDistanceRate;
+                CV_PROP_RW int cornerRefinementMethod;
+                CV_PROP_RW int cornerRefinementWinSize;
+                CV_PROP_RW int cornerRefinementMaxIterations;
+                CV_PROP_RW double cornerRefinementMinAccuracy;
+                CV_PROP_RW int markerBorderBits;
+                CV_PROP_RW int perspectiveRemovePixelPerCell;
+                CV_PROP_RW double perspectiveRemoveIgnoredMarginPerCell;
+                CV_PROP_RW double maxErroneousBitsInBorderRate;
+                CV_PROP_RW double minOtsuStdDev;
+                CV_PROP_RW double errorCorrectionRate;
 
-    // April :: User-configurable parameters.
-    CV_PROP_RW float aprilTagQuadDecimate;
-    CV_PROP_RW float aprilTagQuadSigma;
+                // April :: User-configurable parameters.
+                CV_PROP_RW float aprilTagQuadDecimate;
+                CV_PROP_RW float aprilTagQuadSigma;
 
-    // April :: Internal variables
-    CV_PROP_RW int aprilTagMinClusterPixels;
-    CV_PROP_RW int aprilTagMaxNmaxima;
-    CV_PROP_RW float aprilTagCriticalRad;
-    CV_PROP_RW float aprilTagMaxLineFitMse;
-    CV_PROP_RW int aprilTagMinWhiteBlackDiff;
-    CV_PROP_RW int aprilTagDeglitch;
-};
-
+                // April :: Internal variables
+                CV_PROP_RW int aprilTagMinClusterPixels;
+                CV_PROP_RW int aprilTagMaxNmaxima;
+                CV_PROP_RW float aprilTagCriticalRad;
+                CV_PROP_RW float aprilTagMaxLineFitMse;
+                CV_PROP_RW int aprilTagMinWhiteBlackDiff;
+                CV_PROP_RW int aprilTagDeglitch;
+        };
 
 
 /**
@@ -213,10 +212,10 @@ struct CV_EXPORTS_W DetectorParameters {
  * @sa estimatePoseSingleMarkers,  estimatePoseBoard
  *
  */
-CV_EXPORTS_W void detectMarkers(InputArray image, const Ptr<Dictionary> &dictionary, OutputArrayOfArrays corners,
-                                OutputArray ids, const Ptr<DetectorParameters> &parameters = DetectorParameters::create(),
-                                OutputArrayOfArrays rejectedImgPoints = noArray(), InputArray cameraMatrix= noArray(), InputArray distCoeff= noArray());
-
+        CV_EXPORTS_W void detectMarkers(InputArray image, const Ptr <Dictionary> &dictionary, OutputArrayOfArrays corners,
+                                        OutputArray ids, const Ptr <DetectorParameters> &parameters = DetectorParameters::create(),
+                                        OutputArrayOfArrays rejectedImgPoints = noArray(), InputArray cameraMatrix = noArray(),
+                                        InputArray distCoeff = noArray());
 
 
 /**
@@ -248,10 +247,9 @@ CV_EXPORTS_W void detectMarkers(InputArray image, const Ptr<Dictionary> &diction
  * (-markerLength/2, markerLength/2, 0), (markerLength/2, markerLength/2, 0),
  * (markerLength/2, -markerLength/2, 0), (-markerLength/2, -markerLength/2, 0)
  */
-CV_EXPORTS_W void estimatePoseSingleMarkers(InputArrayOfArrays corners, float markerLength,
-                                            InputArray cameraMatrix, InputArray distCoeffs,
-                                            OutputArray rvecs, OutputArray tvecs, OutputArray _objPoints = noArray());
-
+        CV_EXPORTS_W void estimatePoseSingleMarkers(InputArrayOfArrays corners, float markerLength,
+                                                    InputArray cameraMatrix, InputArray distCoeffs,
+                                                    OutputArray rvecs, OutputArray tvecs, OutputArray _objPoints = noArray());
 
 
 /**
@@ -264,30 +262,29 @@ CV_EXPORTS_W void estimatePoseSingleMarkers(InputArrayOfArrays corners, float ma
  * - The dictionary which indicates the type of markers of the board
  * - The identifier of all the markers in the board.
  */
-class CV_EXPORTS_W Board {
+        class CV_EXPORTS_W Board{
 
-    public:
-    /**
-    * @brief Provide way to create Board by passing nessesary data. Specially needed in Python.
-    *
-    * @param objPoints array of object points of all the marker corners in the board
-    * @param dictionary the dictionary of markers employed for this board
-    * @param ids vector of the identifiers of the markers in the board
-    *
-    */
-    CV_WRAP static Ptr<Board> create(InputArrayOfArrays objPoints, const Ptr<Dictionary> &dictionary, InputArray ids);
-    /// array of object points of all the marker corners in the board
-    /// each marker include its 4 corners in CCW order. For M markers, the size is Mx4.
-    CV_PROP std::vector< std::vector< Point3f > > objPoints;
+                public:
+                /**
+                * @brief Provide way to create Board by passing nessesary data. Specially needed in Python.
+                *
+                * @param objPoints array of object points of all the marker corners in the board
+                * @param dictionary the dictionary of markers employed for this board
+                * @param ids vector of the identifiers of the markers in the board
+                *
+                */
+                CV_WRAP static Ptr<Board> create(InputArrayOfArrays objPoints, const Ptr<Dictionary> &dictionary, InputArray ids);
+                /// array of object points of all the marker corners in the board
+                /// each marker include its 4 corners in CCW order. For M markers, the size is Mx4.
+                CV_PROP std::vector< std::vector< Point3f > > objPoints;
 
-    /// the dictionary of markers employed for this board
-    CV_PROP Ptr<Dictionary> dictionary;
+                /// the dictionary of markers employed for this board
+                CV_PROP Ptr<Dictionary> dictionary;
 
-    /// vector of the identifiers of the markers in the board (same size than objPoints)
-    /// The identifiers refers to the board dictionary
-    CV_PROP std::vector< int > ids;
-};
-
+                /// vector of the identifiers of the markers in the board (same size than objPoints)
+                /// The identifiers refers to the board dictionary
+                CV_PROP std::vector< int > ids;
+        };
 
 
 /**
@@ -295,67 +292,73 @@ class CV_EXPORTS_W Board {
  * More common type of board. All markers are placed in the same plane in a grid arrangment.
  * The board can be drawn using drawPlanarBoard() function (@sa drawPlanarBoard)
  */
-class CV_EXPORTS_W GridBoard : public Board {
+        class CV_EXPORTS_W GridBoard
 
-    public:
-    /**
-     * @brief Draw a GridBoard
-     *
-     * @param outSize size of the output image in pixels.
-     * @param img output image with the board. The size of this image will be outSize
-     * and the board will be on the center, keeping the board proportions.
-     * @param marginSize minimum margins (in pixels) of the board in the output image
-     * @param borderBits width of the marker borders.
-     *
-     * This function return the image of the GridBoard, ready to be printed.
-     */
-    CV_WRAP void draw(Size outSize, OutputArray img, int marginSize = 0, int borderBits = 1);
+        : public Board {
 
+        public:
 
-    /**
-     * @brief Create a GridBoard object
-     *
-     * @param markersX number of markers in X direction
-     * @param markersY number of markers in Y direction
-     * @param markerLength marker side length (normally in meters)
-     * @param markerSeparation separation between two markers (same unit as markerLength)
-     * @param dictionary dictionary of markers indicating the type of markers
-     * @param firstMarker id of first marker in dictionary to use on board.
-     * @return the output GridBoard object
-     *
-     * This functions creates a GridBoard object given the number of markers in each direction and
-     * the marker size and marker separation.
-     */
-    CV_WRAP static Ptr<GridBoard> create(int markersX, int markersY, float markerLength,
-                                         float markerSeparation, const Ptr<Dictionary> &dictionary, int firstMarker = 0);
-
-    /**
-      *
-      */
-    CV_WRAP Size getGridSize() const { return Size(_markersX, _markersY); }
-
-    /**
-      *
-      */
-    CV_WRAP float getMarkerLength() const { return _markerLength; }
-
-    /**
-      *
-      */
-    CV_WRAP float getMarkerSeparation() const { return _markerSeparation; }
+        /**
+         * @brief Draw a GridBoard
+         *
+         * @param outSize size of the output image in pixels.
+         * @param img output image with the board. The size of this image will be outSize
+         * and the board will be on the center, keeping the board proportions.
+         * @param marginSize minimum margins (in pixels) of the board in the output image
+         * @param borderBits width of the marker borders.
+         *
+         * This function return the image of the GridBoard, ready to be printed.
+         */
+        CV_WRAP void draw(Size outSize, OutputArray img, int marginSize = 0, int borderBits = 1);
 
 
-    private:
-    // number of markers in X and Y directions
-    int _markersX, _markersY;
+        /**
+         * @brief Create a GridBoard object
+         *
+         * @param markersX number of markers in X direction
+         * @param markersY number of markers in Y direction
+         * @param markerLength marker side length (normally in meters)
+         * @param markerSeparation separation between two markers (same unit as markerLength)
+         * @param dictionary dictionary of markers indicating the type of markers
+         * @param firstMarker id of first marker in dictionary to use on board.
+         * @return the output GridBoard object
+         *
+         * This functions creates a GridBoard object given the number of markers in each direction and
+         * the marker size and marker separation.
+         */
+        CV_WRAP static Ptr<GridBoard>
 
-    // marker side lenght (normally in meters)
-    float _markerLength;
+        create(int markersX, int markersY, float markerLength,
+               float markerSeparation, const Ptr <Dictionary> &dictionary, int firstMarker = 0);
 
-    // separation between markers in the grid
-    float _markerSeparation;
-};
+        /**
+          *
+          */
+        CV_WRAP Size
 
+        getGridSize() const { return Size(_markersX, _markersY); }
+
+        /**
+          *
+          */
+        CV_WRAP float getMarkerLength() const { return _markerLength; }
+
+        /**
+          *
+          */
+        CV_WRAP float getMarkerSeparation() const { return _markerSeparation; }
+
+
+        private:
+        // number of markers in X and Y directions
+        int _markersX, _markersY;
+
+        // marker side lenght (normally in meters)
+        float _markerLength;
+
+        // separation between markers in the grid
+        float _markerSeparation;
+    };
 
 
 /**
@@ -386,11 +389,9 @@ class CV_EXPORTS_W GridBoard : public Board {
  * The function returns the number of markers from the input employed for the board pose estimation.
  * Note that returning a 0 means the pose has not been estimated.
  */
-CV_EXPORTS_W int estimatePoseBoard(InputArrayOfArrays corners, InputArray ids, const Ptr<Board> &board,
-                                   InputArray cameraMatrix, InputArray distCoeffs, OutputArray rvec,
-                                   OutputArray tvec, bool useExtrinsicGuess = false);
-
-
+    CV_EXPORTS_W int estimatePoseBoard(InputArrayOfArrays corners, InputArray ids, const Ptr <Board> &board,
+                                       InputArray cameraMatrix, InputArray distCoeffs, OutputArray rvec,
+                                       OutputArray tvec, bool useExtrinsicGuess = false);
 
 
 /**
@@ -424,13 +425,12 @@ CV_EXPORTS_W int estimatePoseBoard(InputArrayOfArrays corners, InputArray ids, c
  * using projectPoint function. If not, missing marker projections are interpolated using global
  * homography, and all the marker corners in the board must have the same Z coordinate.
  */
-CV_EXPORTS_W void refineDetectedMarkers(
-    InputArray image,const  Ptr<Board> &board, InputOutputArrayOfArrays detectedCorners,
-    InputOutputArray detectedIds, InputOutputArrayOfArrays rejectedCorners,
-    InputArray cameraMatrix = noArray(), InputArray distCoeffs = noArray(),
-    float minRepDistance = 10.f, float errorCorrectionRate = 3.f, bool checkAllOrders = true,
-    OutputArray recoveredIdxs = noArray(), const Ptr<DetectorParameters> &parameters = DetectorParameters::create());
-
+    CV_EXPORTS_W void refineDetectedMarkers(
+            InputArray image, const Ptr <Board> &board, InputOutputArrayOfArrays detectedCorners,
+            InputOutputArray detectedIds, InputOutputArrayOfArrays rejectedCorners,
+            InputArray cameraMatrix = noArray(), InputArray distCoeffs = noArray(),
+            float minRepDistance = 10.f, float errorCorrectionRate = 3.f, bool checkAllOrders = true,
+            OutputArray recoveredIdxs = noArray(), const Ptr <DetectorParameters> &parameters = DetectorParameters::create());
 
 
 /**
@@ -450,10 +450,9 @@ CV_EXPORTS_W void refineDetectedMarkers(
  * the markers in the image. The marker borders are painted and the markers identifiers if provided.
  * Useful for debugging purposes.
  */
-CV_EXPORTS_W void drawDetectedMarkers(InputOutputArray image, InputArrayOfArrays corners,
-                                      InputArray ids = noArray(),
-                                      Scalar borderColor = Scalar(0, 255, 0));
-
+    CV_EXPORTS_W void drawDetectedMarkers(InputOutputArray image, InputArrayOfArrays corners,
+                                          InputArray ids = noArray(),
+                                          Scalar borderColor = Scalar(0, 255, 0));
 
 
 /**
@@ -472,9 +471,8 @@ CV_EXPORTS_W void drawDetectedMarkers(InputOutputArray image, InputArrayOfArrays
  * Given the pose estimation of a marker or board, this function draws the axis of the world
  * coordinate system, i.e. the system centered on the marker/board. Useful for debugging purposes.
  */
-CV_EXPORTS_W void drawAxis(InputOutputArray image, InputArray cameraMatrix, InputArray distCoeffs,
-                           InputArray rvec, InputArray tvec, float length);
-
+    CV_EXPORTS_W void drawAxis(InputOutputArray image, InputArray cameraMatrix, InputArray distCoeffs,
+                               InputArray rvec, InputArray tvec, float length);
 
 
 /**
@@ -489,9 +487,8 @@ CV_EXPORTS_W void drawAxis(InputOutputArray image, InputArray cameraMatrix, Inpu
  *
  * This function returns a marker image in its canonical form (i.e. ready to be printed)
  */
-CV_EXPORTS_W void drawMarker(const Ptr<Dictionary> &dictionary, int id, int sidePixels, OutputArray img,
-                             int borderBits = 1);
-
+    CV_EXPORTS_W void drawMarker(const Ptr <Dictionary> &dictionary, int id, int sidePixels, OutputArray img,
+                                 int borderBits = 1);
 
 
 /**
@@ -509,17 +506,15 @@ CV_EXPORTS_W void drawMarker(const Ptr<Dictionary> &dictionary, int id, int side
  * This function return the image of a planar board, ready to be printed. It assumes
  * the Board layout specified is planar by ignoring the z coordinates of the object points.
  */
-CV_EXPORTS_W void drawPlanarBoard(const Ptr<Board> &board, Size outSize, OutputArray img,
-                                  int marginSize = 0, int borderBits = 1);
-
+    CV_EXPORTS_W void drawPlanarBoard(const Ptr <Board> &board, Size outSize, OutputArray img,
+                                      int marginSize = 0, int borderBits = 1);
 
 
 /**
  * @brief Implementation of drawPlanarBoard that accepts a raw Board pointer.
  */
-void _drawPlanarBoardImpl(Board *board, Size outSize, OutputArray img,
-                          int marginSize = 0, int borderBits = 1);
-
+    void _drawPlanarBoardImpl(Board *board, Size outSize, OutputArray img,
+                              int marginSize = 0, int borderBits = 1);
 
 
 /**
@@ -558,22 +553,24 @@ void _drawPlanarBoardImpl(Board *board, Size outSize, OutputArray img,
  * detected markers from several views of the Board. The process is similar to the chessboard
  * calibration in calibrateCamera(). The function returns the final re-projection error.
  */
-CV_EXPORTS_AS(calibrateCameraArucoExtended) double calibrateCameraAruco(
-    InputArrayOfArrays corners, InputArray ids, InputArray counter, const Ptr<Board> &board,
-    Size imageSize, InputOutputArray cameraMatrix, InputOutputArray distCoeffs,
-    OutputArrayOfArrays rvecs, OutputArrayOfArrays tvecs,
-    OutputArray stdDeviationsIntrinsics, OutputArray stdDeviationsExtrinsics,
-    OutputArray perViewErrors, int flags = 0,
-    TermCriteria criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 30, DBL_EPSILON));
+    CV_EXPORTS_AS(calibrateCameraArucoExtended)
+
+    double calibrateCameraAruco(
+            InputArrayOfArrays corners, InputArray ids, InputArray counter, const Ptr <Board> &board,
+            Size imageSize, InputOutputArray cameraMatrix, InputOutputArray distCoeffs,
+            OutputArrayOfArrays rvecs, OutputArrayOfArrays tvecs,
+            OutputArray stdDeviationsIntrinsics, OutputArray stdDeviationsExtrinsics,
+            OutputArray perViewErrors, int flags = 0,
+            TermCriteria criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 30, DBL_EPSILON));
 
 
 /** @brief It's the same function as #calibrateCameraAruco but without calibration error estimation.
  */
-CV_EXPORTS_W double calibrateCameraAruco(
-  InputArrayOfArrays corners, InputArray ids, InputArray counter, const Ptr<Board> &board,
-  Size imageSize, InputOutputArray cameraMatrix, InputOutputArray distCoeffs,
-  OutputArrayOfArrays rvecs = noArray(), OutputArrayOfArrays tvecs = noArray(), int flags = 0,
-  TermCriteria criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 30, DBL_EPSILON));
+    CV_EXPORTS_W double calibrateCameraAruco(
+            InputArrayOfArrays corners, InputArray ids, InputArray counter, const Ptr <Board> &board,
+            Size imageSize, InputOutputArray cameraMatrix, InputOutputArray distCoeffs,
+            OutputArrayOfArrays rvecs = noArray(), OutputArrayOfArrays tvecs = noArray(), int flags = 0,
+            TermCriteria criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 30, DBL_EPSILON));
 
 
 /**
@@ -586,8 +583,8 @@ CV_EXPORTS_W double calibrateCameraAruco(
  * @param objPoints Vector of vectors of board marker points in the board coordinate space.
  * @param imgPoints Vector of vectors of the projections of board marker corner points.
 */
-CV_EXPORTS_W void getBoardObjectAndImagePoints(const Ptr<Board> &board, InputArrayOfArrays detectedCorners,
-  InputArray detectedIds, OutputArray objPoints, OutputArray imgPoints);
+    CV_EXPORTS_W void getBoardObjectAndImagePoints(const Ptr <Board> &board, InputArrayOfArrays detectedCorners,
+                                                   InputArray detectedIds, OutputArray objPoints, OutputArray imgPoints);
 
 
 //! @}

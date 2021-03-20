@@ -50,69 +50,78 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace xphoto
-{
+namespace cv {
+    namespace xphoto {
 
 //! @addtogroup xphoto
 //! @{
 
 /** @brief The base class for auto white balance algorithms.
  */
-class CV_EXPORTS_W WhiteBalancer : public Algorithm
-{
-  public:
-    /** @brief Applies white balancing to the input image
+        class CV_EXPORTS_W WhiteBalancer
 
-    @param src Input image
-    @param dst White balancing result
-    @sa cvtColor, equalizeHist
-    */
-    CV_WRAP virtual void balanceWhite(InputArray src, OutputArray dst) = 0;
-};
+        : public Algorithm {
+        public:
+
+        /** @brief Applies white balancing to the input image
+
+        @param src Input image
+        @param dst White balancing result
+        @sa cvtColor, equalizeHist
+        */
+        CV_WRAP virtual void balanceWhite(InputArray src, OutputArray dst) = 0;
+    };
 
 /** @brief A simple white balance algorithm that works by independently stretching
     each of the input image channels to the specified range. For increased robustness
     it ignores the top and bottom \f$p\%\f$ of pixel values.
  */
-class CV_EXPORTS_W SimpleWB : public WhiteBalancer
-{
-  public:
+    class CV_EXPORTS_W SimpleWB
+
+    : public WhiteBalancer {
+    public:
+
     /** @brief Input image range minimum value
     @see setInputMin */
     CV_WRAP virtual float getInputMin() const = 0;
+
     /** @copybrief getInputMin @see getInputMin */
     CV_WRAP virtual void setInputMin(float val) = 0;
 
     /** @brief Input image range maximum value
     @see setInputMax */
     CV_WRAP virtual float getInputMax() const = 0;
+
     /** @copybrief getInputMax @see getInputMax */
     CV_WRAP virtual void setInputMax(float val) = 0;
 
     /** @brief Output image range minimum value
     @see setOutputMin */
     CV_WRAP virtual float getOutputMin() const = 0;
+
     /** @copybrief getOutputMin @see getOutputMin */
     CV_WRAP virtual void setOutputMin(float val) = 0;
 
     /** @brief Output image range maximum value
     @see setOutputMax */
     CV_WRAP virtual float getOutputMax() const = 0;
+
     /** @copybrief getOutputMax @see getOutputMax */
     CV_WRAP virtual void setOutputMax(float val) = 0;
 
     /** @brief Percent of top/bottom values to ignore
     @see setP */
     CV_WRAP virtual float getP() const = 0;
+
     /** @copybrief getP @see getP */
     CV_WRAP virtual void setP(float val) = 0;
 };
 
 /** @brief Creates an instance of SimpleWB
  */
-CV_EXPORTS_W Ptr<SimpleWB> createSimpleWB();
+CV_EXPORTS_W Ptr<SimpleWB>
+
+createSimpleWB();
 
 /** @brief Gray-world white balance algorithm
 
@@ -136,20 +145,27 @@ white-balancing saturated images.
 
 Currently supports images of type @ref CV_8UC3 and @ref CV_16UC3.
  */
-class CV_EXPORTS_W GrayworldWB : public WhiteBalancer
+class CV_EXPORTS_W GrayworldWB
+
+: public WhiteBalancer
 {
-  public:
-    /** @brief Maximum saturation for a pixel to be included in the
-        gray-world assumption
-    @see setSaturationThreshold */
-    CV_WRAP virtual float getSaturationThreshold() const = 0;
-    /** @copybrief getSaturationThreshold @see getSaturationThreshold */
-    CV_WRAP virtual void setSaturationThreshold(float val) = 0;
+public:
+
+/** @brief Maximum saturation for a pixel to be included in the
+    gray-world assumption
+@see setSaturationThreshold */
+CV_WRAP virtual float getSaturationThreshold() const = 0;
+
+/** @copybrief getSaturationThreshold @see getSaturationThreshold */
+CV_WRAP virtual void setSaturationThreshold(float val) = 0;
+
 };
 
 /** @brief Creates an instance of GrayworldWB
  */
-CV_EXPORTS_W Ptr<GrayworldWB> createGrayworldWB();
+CV_EXPORTS_W Ptr<GrayworldWB>
+
+createGrayworldWB();
 
 /** @brief More sophisticated learning-based automatic white balance algorithm.
 
@@ -165,53 +181,62 @@ following condition:
 
 Currently supports images of type @ref CV_8UC3 and @ref CV_16UC3.
  */
-class CV_EXPORTS_W LearningBasedWB : public WhiteBalancer
+class CV_EXPORTS_W LearningBasedWB
+
+: public WhiteBalancer
 {
-  public:
-    /** @brief Implements the feature extraction part of the algorithm.
+public:
 
-    In accordance with @cite Cheng2015 , computes the following features for the input image:
-    1. Chromaticity of an average (R,G,B) tuple
-    2. Chromaticity of the brightest (R,G,B) tuple (while ignoring saturated pixels)
-    3. Chromaticity of the dominant (R,G,B) tuple (the one that has the highest value in the RGB histogram)
-    4. Mode of the chromaticity palette, that is constructed by taking 300 most common colors according to
-       the RGB histogram and projecting them on the chromaticity plane. Mode is the most high-density point
-       of the palette, which is computed by a straightforward fixed-bandwidth kernel density estimator with
-       a Epanechnikov kernel function.
+/** @brief Implements the feature extraction part of the algorithm.
 
-    @param src Input three-channel image (BGR color space is assumed).
-    @param dst An array of four (r,g) chromaticity tuples corresponding to the features listed above.
-    */
-    CV_WRAP virtual void extractSimpleFeatures(InputArray src, OutputArray dst) = 0;
+In accordance with @cite Cheng2015 , computes the following features for the input image:
+1. Chromaticity of an average (R,G,B) tuple
+2. Chromaticity of the brightest (R,G,B) tuple (while ignoring saturated pixels)
+3. Chromaticity of the dominant (R,G,B) tuple (the one that has the highest value in the RGB histogram)
+4. Mode of the chromaticity palette, that is constructed by taking 300 most common colors according to
+   the RGB histogram and projecting them on the chromaticity plane. Mode is the most high-density point
+   of the palette, which is computed by a straightforward fixed-bandwidth kernel density estimator with
+   a Epanechnikov kernel function.
 
-    /** @brief Maximum possible value of the input image (e.g. 255 for 8 bit images,
-               4095 for 12 bit images)
-    @see setRangeMaxVal */
-    CV_WRAP virtual int getRangeMaxVal() const = 0;
-    /** @copybrief getRangeMaxVal @see getRangeMaxVal */
-    CV_WRAP virtual void setRangeMaxVal(int val) = 0;
+@param src Input three-channel image (BGR color space is assumed).
+@param dst An array of four (r,g) chromaticity tuples corresponding to the features listed above.
+*/
+CV_WRAP virtual void extractSimpleFeatures(InputArray src, OutputArray dst) = 0;
 
-    /** @brief Threshold that is used to determine saturated pixels, i.e. pixels where at least one of the
-        channels exceeds \f$\texttt{saturation_threshold}\times\texttt{range_max_val}\f$ are ignored.
-    @see setSaturationThreshold */
-    CV_WRAP virtual float getSaturationThreshold() const = 0;
-    /** @copybrief getSaturationThreshold @see getSaturationThreshold */
-    CV_WRAP virtual void setSaturationThreshold(float val) = 0;
+/** @brief Maximum possible value of the input image (e.g. 255 for 8 bit images,
+           4095 for 12 bit images)
+@see setRangeMaxVal */
+CV_WRAP virtual int getRangeMaxVal() const = 0;
 
-    /** @brief Defines the size of one dimension of a three-dimensional RGB histogram that is used internally
-        by the algorithm. It often makes sense to increase the number of bins for images with higher bit depth
-        (e.g. 256 bins for a 12 bit image).
-    @see setHistBinNum */
-    CV_WRAP virtual int getHistBinNum() const = 0;
-    /** @copybrief getHistBinNum @see getHistBinNum */
-    CV_WRAP virtual void setHistBinNum(int val) = 0;
+/** @copybrief getRangeMaxVal @see getRangeMaxVal */
+CV_WRAP virtual void setRangeMaxVal(int val) = 0;
+
+/** @brief Threshold that is used to determine saturated pixels, i.e. pixels where at least one of the
+    channels exceeds \f$\texttt{saturation_threshold}\times\texttt{range_max_val}\f$ are ignored.
+@see setSaturationThreshold */
+CV_WRAP virtual float getSaturationThreshold() const = 0;
+
+/** @copybrief getSaturationThreshold @see getSaturationThreshold */
+CV_WRAP virtual void setSaturationThreshold(float val) = 0;
+
+/** @brief Defines the size of one dimension of a three-dimensional RGB histogram that is used internally
+    by the algorithm. It often makes sense to increase the number of bins for images with higher bit depth
+    (e.g. 256 bins for a 12 bit image).
+@see setHistBinNum */
+CV_WRAP virtual int getHistBinNum() const = 0;
+
+/** @copybrief getHistBinNum @see getHistBinNum */
+CV_WRAP virtual void setHistBinNum(int val) = 0;
+
 };
 
 /** @brief Creates an instance of LearningBasedWB
 
 @param path_to_model Path to a .yml file with the model. If not specified, the default model is used
  */
-CV_EXPORTS_W Ptr<LearningBasedWB> createLearningBasedWB(const String& path_to_model = String());
+CV_EXPORTS_W Ptr<LearningBasedWB>
+
+createLearningBasedWB(const String &path_to_model = String());
 
 /** @brief Implements an efficient fixed-point approximation for applying channel gains, which is
     the last step of multiple white balance algorithms.

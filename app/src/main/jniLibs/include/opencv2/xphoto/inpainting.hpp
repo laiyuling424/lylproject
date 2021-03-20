@@ -50,41 +50,38 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace xphoto
-{
+namespace cv {
+    namespace xphoto {
 
 //! @addtogroup xphoto
 //! @{
 
-    //! various inpainting algorithms
-    enum InpaintTypes
-    {
-        /** This algorithm searches for dominant correspondences (transformations) of
-        image patches and tries to seamlessly fill-in the area to be inpainted using this
-        transformations */
-        INPAINT_SHIFTMAP = 0
-    };
+        //! various inpainting algorithms
+        enum InpaintTypes {
+            /** This algorithm searches for dominant correspondences (transformations) of
+            image patches and tries to seamlessly fill-in the area to be inpainted using this
+            transformations */
+            INPAINT_SHIFTMAP = 0
+        };
 
-    /** @brief The function implements different single-image inpainting algorithms.
+        /** @brief The function implements different single-image inpainting algorithms.
 
-    See the original paper @cite He2012 for details.
+        See the original paper @cite He2012 for details.
 
-    @param src source image, it could be of any type and any number of channels from 1 to 4. In case of
-    3- and 4-channels images the function expect them in CIELab colorspace or similar one, where first
-    color component shows intensity, while second and third shows colors. Nonetheless you can try any
-    colorspaces.
-    @param mask mask (CV_8UC1), where non-zero pixels indicate valid image area, while zero pixels
-    indicate area to be inpainted
-    @param dst destination image
-    @param algorithmType see xphoto::InpaintTypes
-    */
-    CV_EXPORTS_W void inpaint(const Mat &src, const Mat &mask, Mat &dst, const int algorithmType);
+        @param src source image, it could be of any type and any number of channels from 1 to 4. In case of
+        3- and 4-channels images the function expect them in CIELab colorspace or similar one, where first
+        color component shows intensity, while second and third shows colors. Nonetheless you can try any
+        colorspaces.
+        @param mask mask (CV_8UC1), where non-zero pixels indicate valid image area, while zero pixels
+        indicate area to be inpainted
+        @param dst destination image
+        @param algorithmType see xphoto::InpaintTypes
+        */
+        CV_EXPORTS_W void inpaint(const Mat &src, const Mat &mask, Mat &dst, const int algorithmType);
 
 //! @}
 
-}
+    }
 }
 
 #endif // __OPENCV_INPAINTING_HPP__

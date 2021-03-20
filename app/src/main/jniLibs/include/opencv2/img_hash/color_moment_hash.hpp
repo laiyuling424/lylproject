@@ -8,7 +8,7 @@
 #include "img_hash_base.hpp"
 
 namespace cv {
-namespace img_hash {
+    namespace img_hash {
 
 //! @addtogroup img_hash
 //! @{
@@ -17,13 +17,18 @@ namespace img_hash {
 
 See @cite tang2012perceptual for details.
 */
-class CV_EXPORTS_W ColorMomentHash : public ImgHashBase
-{
-public:
-    CV_WRAP static Ptr<ColorMomentHash> create();
-protected:
-    ColorMomentHash() {}
-};
+        class CV_EXPORTS_W ColorMomentHash
+
+        : public ImgHashBase {
+        public:
+        CV_WRAP static Ptr<ColorMomentHash>
+
+        create();
+
+        protected:
+
+        ColorMomentHash() {}
+    };
 
 /** @brief Computes color moment hash of the input, the algorithm
     is come from the paper "Perceptual  Hashing  for  Color  Images
@@ -32,10 +37,11 @@ protected:
     type should be CV_8UC4, CV_8UC3 or CV_8UC1.
     @param outputArr 42 hash values with type CV_64F(double)
      */
-CV_EXPORTS_W void colorMomentHash(cv::InputArray inputArr, cv::OutputArray outputArr);
+    CV_EXPORTS_W void colorMomentHash(cv::InputArray inputArr, cv::OutputArray outputArr);
 
 //! @}
 
-}} // cv::img_hash::
+}
+} // cv::img_hash::
 
 #endif // OPENCV_COLOR_MOMENT_HASH_HPP

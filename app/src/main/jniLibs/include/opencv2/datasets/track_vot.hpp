@@ -50,43 +50,45 @@
 
 using namespace std;
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_track
 //! @{
 
-struct TRACK_votObj : public Object
-{
-    int id;
-    std::string imagePath;
-    vector <Point2d> gtbb;
-};
+        struct TRACK_votObj : public Object {
+            int id;
+            std::string imagePath;
+            vector <Point2d> gtbb;
+        };
 
-class CV_EXPORTS TRACK_vot : public Dataset
-{
-public:
-    static Ptr<TRACK_vot> create();
+        class CV_EXPORTS TRACK_vot
 
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        : public Dataset {
+        public:
 
-    virtual int getDatasetsNum() = 0;
+        static Ptr <TRACK_vot> create();
 
-    virtual int getDatasetLength(int id) = 0;
+        virtual void load(const std::string &path)
 
-    virtual bool initDataset(int id) = 0;
+        CV_OVERRIDE = 0;
 
-    virtual bool getNextFrame(Mat &frame) = 0;
+        virtual int getDatasetsNum() = 0;
 
-    virtual vector <Point2d> getGT() = 0;
+        virtual int getDatasetLength(int id) = 0;
 
-protected:
-    vector <vector <Ptr<TRACK_votObj> > > data;
-    int activeDatasetID;
-    int frameCounter;
-};
+        virtual bool initDataset(int id) = 0;
+
+        virtual bool getNextFrame(Mat &frame) = 0;
+
+        virtual vector <Point2d> getGT() = 0;
+
+        protected:
+        vector <vector<Ptr < TRACK_votObj>> >
+        data;
+        int activeDatasetID;
+        int frameCounter;
+    };
 
 //! @}
 

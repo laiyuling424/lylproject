@@ -45,7 +45,7 @@ the use of this software, even if advised of the possibility of such damage.
 
 
 namespace cv {
-namespace aruco {
+    namespace aruco {
 
 //! @addtogroup aruco
 //! @{
@@ -59,76 +59,86 @@ namespace aruco {
  * calibration and pose estimation.
  * This class also allows the easy creation and drawing of ChArUco boards.
  */
-class CV_EXPORTS_W CharucoBoard : public Board {
+        class CV_EXPORTS_W CharucoBoard
 
-    public:
-    // vector of chessboard 3D corners precalculated
-    CV_PROP std::vector< Point3f > chessboardCorners;
+        : public Board {
 
-    // for each charuco corner, nearest marker id and nearest marker corner id of each marker
-    CV_PROP std::vector< std::vector< int > > nearestMarkerIdx;
-    CV_PROP std::vector< std::vector< int > > nearestMarkerCorners;
+        public:
+        // vector of chessboard 3D corners precalculated
+        CV_PROP std::vector<Point3f>
+        chessboardCorners;
 
-    /**
-     * @brief Draw a ChArUco board
-     *
-     * @param outSize size of the output image in pixels.
-     * @param img output image with the board. The size of this image will be outSize
-     * and the board will be on the center, keeping the board proportions.
-     * @param marginSize minimum margins (in pixels) of the board in the output image
-     * @param borderBits width of the marker borders.
-     *
-     * This function return the image of the ChArUco board, ready to be printed.
-     */
-    CV_WRAP void draw(Size outSize, OutputArray img, int marginSize = 0, int borderBits = 1);
+        // for each charuco corner, nearest marker id and nearest marker corner id of each marker
+        CV_PROP std::vector<std::vector < int>
+        >
+        nearestMarkerIdx;
+        CV_PROP std::vector<std::vector < int>
+        >
+        nearestMarkerCorners;
 
-
-    /**
-     * @brief Create a CharucoBoard object
-     *
-     * @param squaresX number of chessboard squares in X direction
-     * @param squaresY number of chessboard squares in Y direction
-     * @param squareLength chessboard square side length (normally in meters)
-     * @param markerLength marker side length (same unit than squareLength)
-     * @param dictionary dictionary of markers indicating the type of markers.
-     * The first markers in the dictionary are used to fill the white chessboard squares.
-     * @return the output CharucoBoard object
-     *
-     * This functions creates a CharucoBoard object given the number of squares in each direction
-     * and the size of the markers and chessboard squares.
-     */
-    CV_WRAP static Ptr<CharucoBoard> create(int squaresX, int squaresY, float squareLength,
-                                            float markerLength, const Ptr<Dictionary> &dictionary);
-
-    /**
-      *
-      */
-    CV_WRAP Size getChessboardSize() const { return Size(_squaresX, _squaresY); }
-
-    /**
-      *
-      */
-    CV_WRAP float getSquareLength() const { return _squareLength; }
-
-    /**
-      *
-      */
-    CV_WRAP float getMarkerLength() const { return _markerLength; }
-
-    private:
-    void _getNearestMarkerCorners();
-
-    // number of markers in X and Y directions
-    int _squaresX, _squaresY;
-
-    // size of chessboard squares side (normally in meters)
-    float _squareLength;
-
-    // marker side lenght (normally in meters)
-    float _markerLength;
-};
+        /**
+         * @brief Draw a ChArUco board
+         *
+         * @param outSize size of the output image in pixels.
+         * @param img output image with the board. The size of this image will be outSize
+         * and the board will be on the center, keeping the board proportions.
+         * @param marginSize minimum margins (in pixels) of the board in the output image
+         * @param borderBits width of the marker borders.
+         *
+         * This function return the image of the ChArUco board, ready to be printed.
+         */
+        CV_WRAP void draw(Size outSize, OutputArray img, int marginSize = 0, int borderBits = 1);
 
 
+        /**
+         * @brief Create a CharucoBoard object
+         *
+         * @param squaresX number of chessboard squares in X direction
+         * @param squaresY number of chessboard squares in Y direction
+         * @param squareLength chessboard square side length (normally in meters)
+         * @param markerLength marker side length (same unit than squareLength)
+         * @param dictionary dictionary of markers indicating the type of markers.
+         * The first markers in the dictionary are used to fill the white chessboard squares.
+         * @return the output CharucoBoard object
+         *
+         * This functions creates a CharucoBoard object given the number of squares in each direction
+         * and the size of the markers and chessboard squares.
+         */
+        CV_WRAP static Ptr<CharucoBoard>
+
+        create(int squaresX, int squaresY, float squareLength,
+               float markerLength, const Ptr <Dictionary> &dictionary);
+
+        /**
+          *
+          */
+        CV_WRAP Size
+
+        getChessboardSize() const { return Size(_squaresX, _squaresY); }
+
+        /**
+          *
+          */
+        CV_WRAP float getSquareLength() const { return _squareLength; }
+
+        /**
+          *
+          */
+        CV_WRAP float getMarkerLength() const { return _markerLength; }
+
+        private:
+
+        void _getNearestMarkerCorners();
+
+        // number of markers in X and Y directions
+        int _squaresX, _squaresY;
+
+        // size of chessboard squares side (normally in meters)
+        float _squareLength;
+
+        // marker side lenght (normally in meters)
+        float _markerLength;
+    };
 
 
 /**
@@ -155,13 +165,11 @@ class CV_EXPORTS_W CharucoBoard : public Board {
  * also returned in charucoIds.
  * The function returns the number of interpolated corners.
  */
-CV_EXPORTS_W int interpolateCornersCharuco(InputArrayOfArrays markerCorners, InputArray markerIds,
-                                           InputArray image, const Ptr<CharucoBoard> &board,
-                                           OutputArray charucoCorners, OutputArray charucoIds,
-                                           InputArray cameraMatrix = noArray(),
-                                           InputArray distCoeffs = noArray(), int minMarkers = 2);
-
-
+    CV_EXPORTS_W int interpolateCornersCharuco(InputArrayOfArrays markerCorners, InputArray markerIds,
+                                               InputArray image, const Ptr <CharucoBoard> &board,
+                                               OutputArray charucoCorners, OutputArray charucoIds,
+                                               InputArray cameraMatrix = noArray(),
+                                               InputArray distCoeffs = noArray(), int minMarkers = 2);
 
 
 /**
@@ -182,12 +190,10 @@ CV_EXPORTS_W int interpolateCornersCharuco(InputArrayOfArrays markerCorners, Inp
  * The function checks if the input corners are enough and valid to perform pose estimation.
  * If pose estimation is valid, returns true, else returns false.
  */
-CV_EXPORTS_W bool estimatePoseCharucoBoard(InputArray charucoCorners, InputArray charucoIds,
-                                           const Ptr<CharucoBoard> &board, InputArray cameraMatrix,
-                                           InputArray distCoeffs, OutputArray rvec, OutputArray tvec,
-                                           bool useExtrinsicGuess = false);
-
-
+    CV_EXPORTS_W bool estimatePoseCharucoBoard(InputArray charucoCorners, InputArray charucoIds,
+                                               const Ptr <CharucoBoard> &board, InputArray cameraMatrix,
+                                               InputArray distCoeffs, OutputArray rvec, OutputArray tvec,
+                                               bool useExtrinsicGuess = false);
 
 
 /**
@@ -201,10 +207,9 @@ CV_EXPORTS_W bool estimatePoseCharucoBoard(InputArray charucoCorners, InputArray
  * This function draws a set of detected Charuco corners. If identifiers vector is provided, it also
  * draws the id of each corner.
  */
-CV_EXPORTS_W void drawDetectedCornersCharuco(InputOutputArray image, InputArray charucoCorners,
-                                             InputArray charucoIds = noArray(),
-                                             Scalar cornerColor = Scalar(255, 0, 0));
-
+    CV_EXPORTS_W void drawDetectedCornersCharuco(InputOutputArray image, InputArray charucoCorners,
+                                                 InputArray charucoIds = noArray(),
+                                                 Scalar cornerColor = Scalar(255, 0, 0));
 
 
 /**
@@ -241,22 +246,23 @@ CV_EXPORTS_W void drawDetectedCornersCharuco(InputOutputArray image, InputArray 
  * receives a list of detected corners and its identifiers from several views of the Board.
  * The function returns the final re-projection error.
  */
-CV_EXPORTS_AS(calibrateCameraCharucoExtended) double calibrateCameraCharuco(
-    InputArrayOfArrays charucoCorners, InputArrayOfArrays charucoIds, const Ptr<CharucoBoard> &board,
-    Size imageSize, InputOutputArray cameraMatrix, InputOutputArray distCoeffs,
-    OutputArrayOfArrays rvecs, OutputArrayOfArrays tvecs,
-    OutputArray stdDeviationsIntrinsics, OutputArray stdDeviationsExtrinsics,
-    OutputArray perViewErrors, int flags = 0,
-    TermCriteria criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 30, DBL_EPSILON));
+    CV_EXPORTS_AS(calibrateCameraCharucoExtended)
+
+    double calibrateCameraCharuco(
+            InputArrayOfArrays charucoCorners, InputArrayOfArrays charucoIds, const Ptr <CharucoBoard> &board,
+            Size imageSize, InputOutputArray cameraMatrix, InputOutputArray distCoeffs,
+            OutputArrayOfArrays rvecs, OutputArrayOfArrays tvecs,
+            OutputArray stdDeviationsIntrinsics, OutputArray stdDeviationsExtrinsics,
+            OutputArray perViewErrors, int flags = 0,
+            TermCriteria criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 30, DBL_EPSILON));
 
 /** @brief It's the same function as #calibrateCameraCharuco but without calibration error estimation.
 */
-CV_EXPORTS_W double calibrateCameraCharuco(
-  InputArrayOfArrays charucoCorners, InputArrayOfArrays charucoIds, const Ptr<CharucoBoard> &board,
-  Size imageSize, InputOutputArray cameraMatrix, InputOutputArray distCoeffs,
-  OutputArrayOfArrays rvecs = noArray(), OutputArrayOfArrays tvecs = noArray(), int flags = 0,
-  TermCriteria criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 30, DBL_EPSILON));
-
+    CV_EXPORTS_W double calibrateCameraCharuco(
+            InputArrayOfArrays charucoCorners, InputArrayOfArrays charucoIds, const Ptr <CharucoBoard> &board,
+            Size imageSize, InputOutputArray cameraMatrix, InputOutputArray distCoeffs,
+            OutputArrayOfArrays rvecs = noArray(), OutputArrayOfArrays tvecs = noArray(), int flags = 0,
+            TermCriteria criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 30, DBL_EPSILON));
 
 
 /**
@@ -281,12 +287,11 @@ CV_EXPORTS_W double calibrateCameraCharuco(
  * are provided, the diamond search is based on reprojection. If not, diamond search is based on
  * homography. Homography is faster than reprojection but can slightly reduce the detection rate.
  */
-CV_EXPORTS_W void detectCharucoDiamond(InputArray image, InputArrayOfArrays markerCorners,
-                                       InputArray markerIds, float squareMarkerLengthRate,
-                                       OutputArrayOfArrays diamondCorners, OutputArray diamondIds,
-                                       InputArray cameraMatrix = noArray(),
-                                       InputArray distCoeffs = noArray());
-
+    CV_EXPORTS_W void detectCharucoDiamond(InputArray image, InputArrayOfArrays markerCorners,
+                                           InputArray markerIds, float squareMarkerLengthRate,
+                                           OutputArrayOfArrays diamondCorners, OutputArray diamondIds,
+                                           InputArray cameraMatrix = noArray(),
+                                           InputArray distCoeffs = noArray());
 
 
 /**
@@ -307,9 +312,9 @@ CV_EXPORTS_W void detectCharucoDiamond(InputArray image, InputArrayOfArrays mark
  * are painted and the markers identifiers if provided.
  * Useful for debugging purposes.
  */
-CV_EXPORTS_W void drawDetectedDiamonds(InputOutputArray image, InputArrayOfArrays diamondCorners,
-                                       InputArray diamondIds = noArray(),
-                                       Scalar borderColor = Scalar(0, 0, 255));
+    CV_EXPORTS_W void drawDetectedDiamonds(InputOutputArray image, InputArrayOfArrays diamondCorners,
+                                           InputArray diamondIds = noArray(),
+                                           Scalar borderColor = Scalar(0, 0, 255));
 
 
 
@@ -329,9 +334,9 @@ CV_EXPORTS_W void drawDetectedDiamonds(InputOutputArray image, InputArrayOfArray
  * This function return the image of a ChArUco marker, ready to be printed.
  */
 // TODO cannot be exported yet; conversion from/to Vec4i is not wrapped in core
-CV_EXPORTS void drawCharucoDiamond(const Ptr<Dictionary> &dictionary, Vec4i ids, int squareLength,
-                                   int markerLength, OutputArray img, int marginSize = 0,
-                                   int borderBits = 1);
+    CV_EXPORTS void drawCharucoDiamond(const Ptr <Dictionary> &dictionary, Vec4i ids, int squareLength,
+                                       int markerLength, OutputArray img, int marginSize = 0,
+                                       int borderBits = 1);
 
 
 

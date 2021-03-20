@@ -47,59 +47,61 @@
 #include "opencv2/phase_unwrapping/phase_unwrapping.hpp"
 
 namespace cv {
-namespace phase_unwrapping {
+    namespace phase_unwrapping {
 //! @addtogroup phase_unwrapping
 //! @{
 
-    /** @brief Class implementing two-dimensional phase unwrapping based on @cite histogramUnwrapping
-     * This algorithm belongs to the quality-guided phase unwrapping methods.
-     * First, it computes a reliability map from second differences between a pixel and its eight neighbours.
-     * Reliability values lie between 0 and 16*pi*pi. Then, this reliability map is used to compute
-     * the reliabilities of "edges". An edge is an entity defined by two pixels that are connected
-     * horizontally or vertically. Its reliability is found by adding the the reliabilities of the
-     * two pixels connected through it. Edges are sorted in a histogram based on their reliability values.
-     * This histogram is then used to unwrap pixels, starting from the highest quality pixel.
+        /** @brief Class implementing two-dimensional phase unwrapping based on @cite histogramUnwrapping
+         * This algorithm belongs to the quality-guided phase unwrapping methods.
+         * First, it computes a reliability map from second differences between a pixel and its eight neighbours.
+         * Reliability values lie between 0 and 16*pi*pi. Then, this reliability map is used to compute
+         * the reliabilities of "edges". An edge is an entity defined by two pixels that are connected
+         * horizontally or vertically. Its reliability is found by adding the the reliabilities of the
+         * two pixels connected through it. Edges are sorted in a histogram based on their reliability values.
+         * This histogram is then used to unwrap pixels, starting from the highest quality pixel.
 
-     * The wrapped phase map and the unwrapped result are stored in CV_32FC1 Mat.
-     */
-class CV_EXPORTS_W HistogramPhaseUnwrapping : public PhaseUnwrapping
-{
+         * The wrapped phase map and the unwrapped result are stored in CV_32FC1 Mat.
+         */
+        class CV_EXPORTS_W HistogramPhaseUnwrapping
 
-public:
-    /**
-     * @brief Parameters of phaseUnwrapping constructor.
+        : public PhaseUnwrapping {
 
-     * @param width Phase map width.
-     * @param height Phase map height.
-     * @param histThresh Bins in the histogram are not of equal size. Default value is 3*pi*pi. The one before "histThresh" value are smaller.
-     * @param nbrOfSmallBins Number of bins between 0 and "histThresh". Default value is 10.
-     * @param nbrOfLargeBins Number of bins between "histThresh" and 32*pi*pi (highest edge reliability value). Default value is 5.
-     */
-    struct CV_EXPORTS Params
-    {
-        Params();
-        int width;
-        int height;
-        float histThresh;
-        int nbrOfSmallBins;
-        int nbrOfLargeBins;
+        public:
+        /**
+         * @brief Parameters of phaseUnwrapping constructor.
+
+         * @param width Phase map width.
+         * @param height Phase map height.
+         * @param histThresh Bins in the histogram are not of equal size. Default value is 3*pi*pi. The one before "histThresh" value are smaller.
+         * @param nbrOfSmallBins Number of bins between 0 and "histThresh". Default value is 10.
+         * @param nbrOfLargeBins Number of bins between "histThresh" and 32*pi*pi (highest edge reliability value). Default value is 5.
+         */
+        struct CV_EXPORTS Params
+                {
+                        Params();
+                int width;
+                int height;
+                float histThresh;
+                int nbrOfSmallBins;
+                int nbrOfLargeBins;
+                };
+
+        /**
+         * @brief Constructor
+
+         * @param parameters HistogramPhaseUnwrapping parameters HistogramPhaseUnwrapping::Params: width,height of the phase map and histogram characteristics.
+         */
+        static Ptr <HistogramPhaseUnwrapping> create(const HistogramPhaseUnwrapping::Params &parameters =
+        HistogramPhaseUnwrapping::Params());
+
+        /**
+         * @brief Get the reliability map computed from the wrapped phase map.
+
+         * @param reliabilityMap Image where the reliability map is stored.
+         */
+        CV_WRAP
+        virtual void getInverseReliabilityMap(OutputArray reliabilityMap) = 0;
     };
-    /**
-     * @brief Constructor
-
-     * @param parameters HistogramPhaseUnwrapping parameters HistogramPhaseUnwrapping::Params: width,height of the phase map and histogram characteristics.
-     */
-    static Ptr<HistogramPhaseUnwrapping> create( const HistogramPhaseUnwrapping::Params &parameters =
-                                                 HistogramPhaseUnwrapping::Params() );
-
-    /**
-     * @brief Get the reliability map computed from the wrapped phase map.
-
-     * @param reliabilityMap Image where the reliability map is stored.
-     */
-    CV_WRAP
-    virtual void getInverseReliabilityMap( OutputArray reliabilityMap ) = 0;
-};
 
 //! @}
 }

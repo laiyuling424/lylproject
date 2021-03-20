@@ -49,46 +49,46 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_fr
 //! @{
 
-enum genderType
-{
-    male = 0,
-    female,
-    none
-};
+        enum genderType {
+            male = 0,
+            female,
+            none
+        };
 
-struct FR_adienceObj : public Object
-{
-    std::string user_id;
-    std::string original_image;
-    int face_id;
-    std::string age;
-    genderType gender;
-    int x;
-    int y;
-    int dx;
-    int dy;
-    int tilt_ang;
-    int fiducial_yaw_angle;
-    int fiducial_score;
-};
+        struct FR_adienceObj : public Object {
+            std::string user_id;
+            std::string original_image;
+            int face_id;
+            std::string age;
+            genderType gender;
+            int x;
+            int y;
+            int dx;
+            int dy;
+            int tilt_ang;
+            int fiducial_yaw_angle;
+            int fiducial_score;
+        };
 
-class CV_EXPORTS FR_adience : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS FR_adience
 
-    static Ptr<FR_adience> create();
+        : public Dataset {
+        public:
 
-    std::vector<std::string> paths;
-};
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <FR_adience> create();
+
+        std::vector <std::string> paths;
+    };
 
 //! @}
 

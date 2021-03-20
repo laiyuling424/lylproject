@@ -49,108 +49,111 @@
 #define OPENCV_DNN_DNN_DICT_HPP
 
 namespace cv {
-namespace dnn {
-CV__DNN_EXPERIMENTAL_NS_BEGIN
+    namespace dnn {
+        CV__DNN_EXPERIMENTAL_NS_BEGIN
 //! @addtogroup dnn
 //! @{
 
 /** @brief This struct stores the scalar value (or array) of one of the following type: double, cv::String or int64.
  *  @todo Maybe int64 is useless because double type exactly stores at least 2^52 integers.
  */
-struct CV_EXPORTS_W DictValue
-{
-    DictValue(const DictValue &r);
-    DictValue(int64 i = 0)      : type(Param::INT), pi(new AutoBuffer<int64,1>) { (*pi)[0] = i; }       //!< Constructs integer scalar
-    CV_WRAP DictValue(int i)            : type(Param::INT), pi(new AutoBuffer<int64,1>) { (*pi)[0] = i; }       //!< Constructs integer scalar
-    DictValue(unsigned p)       : type(Param::INT), pi(new AutoBuffer<int64,1>) { (*pi)[0] = p; }       //!< Constructs integer scalar
-    CV_WRAP DictValue(double p)         : type(Param::REAL), pd(new AutoBuffer<double,1>) { (*pd)[0] = p; }     //!< Constructs floating point scalar
-    CV_WRAP DictValue(const String &s)  : type(Param::STRING), ps(new AutoBuffer<String,1>) { (*ps)[0] = s; }   //!< Constructs string scalar
-    DictValue(const char *s)    : type(Param::STRING), ps(new AutoBuffer<String,1>) { (*ps)[0] = s; }   //!< @overload
+            struct CV_EXPORTS_W DictValue {
+                DictValue(const DictValue &r);
 
-    template<typename TypeIter>
-    static DictValue arrayInt(TypeIter begin, int size);    //!< Constructs integer array
-    template<typename TypeIter>
-    static DictValue arrayReal(TypeIter begin, int size);   //!< Constructs floating point array
-    template<typename TypeIter>
-    static DictValue arrayString(TypeIter begin, int size); //!< Constructs array of strings
+                DictValue(int64 i = 0) : type(Param::INT), pi(new AutoBuffer<int64, 1>) { (*pi)[0] = i; }       //!< Constructs integer scalar
+                CV_WRAP DictValue(int i) : type(Param::INT), pi(new AutoBuffer<int64, 1>) { (*pi)[0] = i; }       //!< Constructs integer scalar
+                DictValue(unsigned p) : type(Param::INT), pi(new AutoBuffer<int64, 1>) { (*pi)[0] = p; }       //!< Constructs integer scalar
+                CV_WRAP DictValue(double p) : type(Param::REAL), pd(new AutoBuffer<double, 1>) { (*pd)[0] = p; }     //!< Constructs floating point scalar
+                CV_WRAP DictValue(const String &s) : type(Param::STRING), ps(new AutoBuffer<String, 1>) { (*ps)[0] = s; }   //!< Constructs string scalar
+                DictValue(const char *s) : type(Param::STRING), ps(new AutoBuffer<String, 1>) { (*ps)[0] = s; }   //!< @overload
 
-    template<typename T>
-    T get(int idx = -1) const; //!< Tries to convert array element with specified index to requested type and returns its.
+                template<typename TypeIter>
+                static DictValue arrayInt(TypeIter begin, int size);    //!< Constructs integer array
+                template<typename TypeIter>
+                static DictValue arrayReal(TypeIter begin, int size);   //!< Constructs floating point array
+                template<typename TypeIter>
+                static DictValue arrayString(TypeIter begin, int size); //!< Constructs array of strings
 
-    int size() const;
+                template<typename T>
+                T get(int idx = -1) const; //!< Tries to convert array element with specified index to requested type and returns its.
 
-    CV_WRAP bool isInt() const;
-    CV_WRAP bool isString() const;
-    CV_WRAP bool isReal() const;
+                int size() const;
 
-    CV_WRAP int getIntValue(int idx = -1) const;
-    CV_WRAP double getRealValue(int idx = -1) const;
-    CV_WRAP String getStringValue(int idx = -1) const;
+                CV_WRAP bool isInt() const;
 
-    DictValue &operator=(const DictValue &r);
+                CV_WRAP bool isString() const;
 
-    friend std::ostream &operator<<(std::ostream &stream, const DictValue &dictv);
+                CV_WRAP bool isReal() const;
 
-    ~DictValue();
+                CV_WRAP int getIntValue(int idx = -1) const;
 
-private:
+                CV_WRAP double getRealValue(int idx = -1) const;
 
-    int type;
+                CV_WRAP String getStringValue(int idx = -1) const;
 
-    union
-    {
-        AutoBuffer<int64, 1> *pi;
-        AutoBuffer<double, 1> *pd;
-        AutoBuffer<String, 1> *ps;
-        void *pv;
-    };
+                DictValue &operator=(const DictValue &r);
 
-    DictValue(int _type, void *_p) : type(_type), pv(_p) {}
-    void release();
-};
+                friend std::ostream &operator<<(std::ostream &stream, const DictValue &dictv);
+
+                ~DictValue();
+
+            private:
+
+                int type;
+
+                union {
+                    AutoBuffer<int64, 1> *pi;
+                    AutoBuffer<double, 1> *pd;
+                    AutoBuffer<String, 1> *ps;
+                    void *pv;
+                };
+
+                DictValue(int _type, void *_p) : type(_type), pv(_p) {}
+
+                void release();
+            };
 
 /** @brief This class implements name-value dictionary, values are instances of DictValue. */
-class CV_EXPORTS Dict
-{
-    typedef std::map<String, DictValue> _Dict;
-    _Dict dict;
+            class CV_EXPORTS Dict {
+                typedef std::map<String, DictValue> _Dict;
+                _Dict dict;
 
-public:
+            public:
 
-    //! Checks a presence of the @p key in the dictionary.
-    bool has(const String &key) const;
+                //! Checks a presence of the @p key in the dictionary.
+                bool has(const String &key) const;
 
-    //! If the @p key in the dictionary then returns pointer to its value, else returns NULL.
-    DictValue *ptr(const String &key);
+                //! If the @p key in the dictionary then returns pointer to its value, else returns NULL.
+                DictValue *ptr(const String &key);
 
-    /** @overload */
-    const DictValue *ptr(const String &key) const;
+                /** @overload */
+                const DictValue *ptr(const String &key) const;
 
-    //! If the @p key in the dictionary then returns its value, else an error will be generated.
-    const DictValue &get(const String &key) const;
+                //! If the @p key in the dictionary then returns its value, else an error will be generated.
+                const DictValue &get(const String &key) const;
 
-    /** @overload */
-    template <typename T>
-    T get(const String &key) const;
+                /** @overload */
+                template<typename T>
+                T get(const String &key) const;
 
-    //! If the @p key in the dictionary then returns its value, else returns @p defaultValue.
-    template <typename T>
-    T get(const String &key, const T &defaultValue) const;
+                //! If the @p key in the dictionary then returns its value, else returns @p defaultValue.
+                template<typename T>
+                T get(const String &key, const T &defaultValue) const;
 
-    //! Sets new @p value for the @p key, or adds new key-value pair into the dictionary.
-    template<typename T>
-    const T &set(const String &key, const T &value);
+                //! Sets new @p value for the @p key, or adds new key-value pair into the dictionary.
+                template<typename T>
+                const T &set(const String &key, const T &value);
 
-    friend std::ostream &operator<<(std::ostream &stream, const Dict &dict);
+                friend std::ostream &operator<<(std::ostream &stream, const Dict &dict);
 
-    std::map<String, DictValue>::const_iterator begin() const;
+                std::map<String, DictValue>::const_iterator begin() const;
 
-    std::map<String, DictValue>::const_iterator end() const;
-};
+                std::map<String, DictValue>::const_iterator end() const;
+            };
 
 //! @}
-CV__DNN_EXPERIMENTAL_NS_END
-}
+        CV__DNN_EXPERIMENTAL_NS_END
+    }
 }
 
 #endif

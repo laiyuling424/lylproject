@@ -1,10 +1,10 @@
 package com.lyl.view.textcolor
 
 import android.animation.ObjectAnimator
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.lyl.view.R
 import kotlinx.android.synthetic.main.activity_text_color.*
 
@@ -13,6 +13,7 @@ class SimpleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_color)
     }
+
     // onClick事件写在了不居中  --> android:onClick="left"
     fun left(view: View) {
         // 设置朝向

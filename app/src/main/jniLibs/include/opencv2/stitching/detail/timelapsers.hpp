@@ -47,41 +47,45 @@
 #include "opencv2/core.hpp"
 
 namespace cv {
-namespace detail {
+    namespace detail {
 
 //! @addtogroup stitching
 //! @{
 
 //  Base Timelapser class, takes a sequence of images, applies appropriate shift, stores result in dst_.
 
-class CV_EXPORTS Timelapser
-{
-public:
+        class CV_EXPORTS Timelapser
+                {
+                        public:
 
-    enum {AS_IS, CROP};
+                        enum { AS_IS, CROP };
 
-    virtual ~Timelapser() {}
+                        virtual ~Timelapser() {}
 
-    static Ptr<Timelapser> createDefault(int type);
+                        static Ptr<Timelapser> createDefault(int type);
 
-    virtual void initialize(const std::vector<Point> &corners, const std::vector<Size> &sizes);
-    virtual void process(InputArray img, InputArray mask, Point tl);
-    virtual const UMat& getDst() {return dst_;}
+                        virtual void initialize(const std::vector<Point> &corners, const std::vector<Size> &sizes);
+                        virtual void process(InputArray img, InputArray mask, Point tl);
+                        virtual const UMat& getDst() { return dst_; }
 
-protected:
+                        protected:
 
-    virtual bool test_point(Point pt);
+                        virtual bool test_point(Point pt);
 
-    UMat dst_;
-    Rect dst_roi_;
-};
+                        UMat dst_;
+                        Rect dst_roi_;
+                };
 
 
-class CV_EXPORTS TimelapserCrop : public Timelapser
-{
-public:
-    virtual void initialize(const std::vector<Point> &corners, const std::vector<Size> &sizes) CV_OVERRIDE;
-};
+        class CV_EXPORTS TimelapserCrop
+
+        : public Timelapser {
+        public:
+
+        virtual void initialize(const std::vector <Point> &corners, const std::vector <Size> &sizes)
+
+        CV_OVERRIDE;
+    };
 
 //! @}
 

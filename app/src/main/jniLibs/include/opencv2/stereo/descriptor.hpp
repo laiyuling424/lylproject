@@ -45,6 +45,7 @@
 \*****************************************************************************************************************/
 
 #include <stdint.h>
+
 #ifndef _OPENCV_DESCRIPTOR_HPP_
 #define _OPENCV_DESCRIPTOR_HPP_
 #ifdef __cplusplus

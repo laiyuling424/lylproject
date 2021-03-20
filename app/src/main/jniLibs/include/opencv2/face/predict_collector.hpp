@@ -53,75 +53,77 @@ the use of this software, even if advised of the possibility of such damage.
 #include "opencv2/core/cvstd.hpp"
 
 namespace cv {
-namespace face {
+    namespace face {
 //! @addtogroup face
 //! @{
 /** @brief Abstract base class for all strategies of prediction result handling
 */
-class CV_EXPORTS_W PredictCollector
-{
-public:
-    virtual ~PredictCollector() {}
+        class CV_EXPORTS_W PredictCollector {
+        public:
+            virtual ~PredictCollector() {}
 
-    /** @brief Interface method called by face recognizer before results processing
-    @param size total size of prediction evaluation that recognizer could perform
-    */
-    virtual void init(size_t size) { (void)size; }
+            /** @brief Interface method called by face recognizer before results processing
+            @param size total size of prediction evaluation that recognizer could perform
+            */
+            virtual void init(size_t size) { (void) size; }
 
-    /** @brief Interface method called by face recognizer for each result
-    @param label current prediction label
-    @param dist current prediction distance (confidence)
-    */
-    virtual bool collect(int label, double dist) = 0;
-};
+            /** @brief Interface method called by face recognizer for each result
+            @param label current prediction label
+            @param dist current prediction distance (confidence)
+            */
+            virtual bool collect(int label, double dist) = 0;
+        };
 
 /** @brief Default predict collector
 
 Trace minimal distance with treshhold checking (that is default behavior for most predict logic)
 */
-class CV_EXPORTS_W StandardCollector : public PredictCollector
-{
-public:
-    struct PredictResult
-    {
-        int label;
-        double distance;
-        PredictResult(int label_ = -1, double distance_ = DBL_MAX) : label(label_), distance(distance_) {}
-    };
-protected:
-    double threshold;
-    PredictResult minRes;
-    std::vector<PredictResult> data;
-public:
-    /** @brief Constructor
-    @param threshold_ set threshold
-    */
-    StandardCollector(double threshold_ = DBL_MAX);
-    /** @brief overloaded interface method */
-    void init(size_t size) CV_OVERRIDE;
-    /** @brief overloaded interface method */
-    bool collect(int label, double dist) CV_OVERRIDE;
-    /** @brief Returns label with minimal distance */
-    CV_WRAP int getMinLabel() const;
-    /** @brief Returns minimal distance value */
-    CV_WRAP double getMinDist() const;
-    /** @brief Return results as vector
-    @param sorted If set, results will be sorted by distance
-    Each values is a pair of label and distance.
-    */
-    CV_WRAP std::vector< std::pair<int, double> > getResults(bool sorted = false) const;
-    /** @brief Return results as map
-    Labels are keys, values are minimal distances
-    */
-    std::map<int, double> getResultsMap() const;
-    /** @brief Static constructor
-    @param threshold set threshold
-    */
-    CV_WRAP static Ptr<StandardCollector> create(double threshold = DBL_MAX);
-};
+        class CV_EXPORTS_W StandardCollector : public PredictCollector {
+        public:
+            struct PredictResult {
+                int label;
+                double distance;
+
+                PredictResult(int label_ = -1, double distance_ = DBL_MAX) : label(label_), distance(distance_) {}
+            };
+
+        protected:
+            double threshold;
+            PredictResult minRes;
+            std::vector<PredictResult> data;
+        public:
+            /** @brief Constructor
+            @param threshold_ set threshold
+            */
+            StandardCollector(double threshold_ = DBL_MAX);
+
+            /** @brief overloaded interface method */
+            void init(size_t size) CV_OVERRIDE;
+
+            /** @brief overloaded interface method */
+            bool collect(int label, double dist) CV_OVERRIDE;
+            /** @brief Returns label with minimal distance */
+            CV_WRAP int getMinLabel() const;
+            /** @brief Returns minimal distance value */
+            CV_WRAP double getMinDist() const;
+            /** @brief Return results as vector
+            @param sorted If set, results will be sorted by distance
+            Each values is a pair of label and distance.
+            */
+            CV_WRAP std::vector<std::pair<int, double> > getResults(bool sorted = false) const;
+
+            /** @brief Return results as map
+            Labels are keys, values are minimal distances
+            */
+            std::map<int, double> getResultsMap() const;
+            /** @brief Static constructor
+            @param threshold set threshold
+            */
+            CV_WRAP static Ptr <StandardCollector> create(double threshold = DBL_MAX);
+        };
 
 //! @}
-}
+    }
 }
 
 #endif

@@ -42,7 +42,7 @@
 #include "map.hpp"
 
 namespace cv {
-namespace reg {
+    namespace reg {
 
 //! @addtogroup reg
 //! @{
@@ -51,63 +51,64 @@ namespace reg {
 
 The class is only used to define the common interface for any possible mapping algorithm.
  */
-class CV_EXPORTS_W Mapper
-{
-public:
-    virtual ~Mapper(void) {}
+        class CV_EXPORTS_W Mapper
+                {
+                        public:
+                        virtual ~Mapper(void) {}
 
-    /*
-     * Calculate mapping between two images
-     * \param[in] img1 Reference image
-     * \param[in] img2 Warped image
-     * \param[in] If present, it is an initial rough estimation that the mapper will try to refine.
-     * \return Map from img1 to img2, stored in a smart pointer.
-     */
-    CV_WRAP virtual cv::Ptr<Map> calculate(InputArray img1, InputArray img2, cv::Ptr<Map> init = cv::Ptr<Map>()) const = 0;
+                        /*
+                         * Calculate mapping between two images
+                         * \param[in] img1 Reference image
+                         * \param[in] img2 Warped image
+                         * \param[in] If present, it is an initial rough estimation that the mapper will try to refine.
+                         * \return Map from img1 to img2, stored in a smart pointer.
+                         */
+                        CV_WRAP virtual cv::Ptr<Map> calculate(InputArray img1, InputArray img2, cv::Ptr<Map> init = cv::Ptr<Map>()) const = 0;
 
-    /*
-     * Returns a map compatible with the Mapper class
-     * \return Pointer to identity Map
-     */
-    CV_WRAP virtual cv::Ptr<Map> getMap() const = 0;
+                        /*
+                         * Returns a map compatible with the Mapper class
+                         * \return Pointer to identity Map
+                         */
+                        CV_WRAP virtual cv::Ptr<Map> getMap() const = 0;
 
-protected:
-    /*
-     * Calculates gradient and difference between images
-     * \param[in] img1 Image one
-     * \param[in] img2 Image two
-     * \param[out] Ix Gradient x-coordinate
-     * \param[out] Iy Gradient y-coordinate
-     * \param[out] It Difference of images
-     */
-    void gradient(const cv::Mat& img1, const cv::Mat& img2,
-                  cv::Mat& Ix, cv::Mat& Iy, cv::Mat& It) const;
+                        protected:
+                        /*
+                         * Calculates gradient and difference between images
+                         * \param[in] img1 Image one
+                         * \param[in] img2 Image two
+                         * \param[out] Ix Gradient x-coordinate
+                         * \param[out] Iy Gradient y-coordinate
+                         * \param[out] It Difference of images
+                         */
+                        void gradient(const cv::Mat& img1, const cv::Mat& img2,
+                        cv::Mat& Ix, cv::Mat& Iy, cv::Mat& It) const;
 
-    /*
-     * Fills matrices with pixel coordinates of an image
-     * \param[in] img Image
-     * \param[out] grid_r Row (y-coordinate)
-     * \param[out] grid_c Column (x-coordinate)
-     */
-    void grid(const Mat& img, Mat& grid_r, Mat& grid_c) const;
+                        /*
+                         * Fills matrices with pixel coordinates of an image
+                         * \param[in] img Image
+                         * \param[out] grid_r Row (y-coordinate)
+                         * \param[out] grid_c Column (x-coordinate)
+                         */
+                        void grid(const Mat& img, Mat& grid_r, Mat& grid_c) const;
 
-    /*
-     * Per-element square of a matrix
-     * \param[in] mat1 Input matrix
-     * \return mat1[i,j]^2
-     */
-    cv::Mat sqr(const cv::Mat& mat1) const
-    {
-        cv::Mat res;
-        res.create(mat1.size(), mat1.type());
-        res = mat1.mul(mat1);
-        return res;
-    }
-};
+                        /*
+                         * Per-element square of a matrix
+                         * \param[in] mat1 Input matrix
+                         * \return mat1[i,j]^2
+                         */
+                        cv::Mat sqr(const cv::Mat& mat1) const
+                        {
+                            cv::Mat res;
+                            res.create(mat1.size(), mat1.type());
+                            res = mat1.mul(mat1);
+                            return res;
+                        }
+                };
 
 //! @}
 
-}}  // namespace cv::reg
+    }
+}  // namespace cv::reg
 
 #endif  // MAPPER_H_
 

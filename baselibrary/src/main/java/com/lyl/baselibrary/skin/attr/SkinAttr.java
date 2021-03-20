@@ -18,6 +18,6 @@ public class SkinAttr {
     }
 
     public void skin(View view) {
-        mSkinType.skin(view,mResName);
+        mSkinType.skin(view, mResName);
     }
 }

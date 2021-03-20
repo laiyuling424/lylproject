@@ -502,44 +502,41 @@ Usage:
 
 */
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets
 //! @{
 
-struct Object
-{
-};
+        struct Object {
+        };
 
-class CV_EXPORTS Dataset
-{
-public:
-    Dataset() {}
-    virtual ~Dataset() {}
+        class CV_EXPORTS Dataset
+                {
+                        public:
+                        Dataset() {}
+                        virtual ~Dataset() {}
 
-    virtual void load(const std::string &path) = 0;
+                        virtual void load(const std::string &path) = 0;
 
-    std::vector< Ptr<Object> >& getTrain(int splitNum = 0);
-    std::vector< Ptr<Object> >& getTest(int splitNum = 0);
-    std::vector< Ptr<Object> >& getValidation(int splitNum = 0);
+                        std::vector< Ptr<Object> >& getTrain(int splitNum = 0);
+                        std::vector< Ptr<Object> >& getTest(int splitNum = 0);
+                        std::vector< Ptr<Object> >& getValidation(int splitNum = 0);
 
-    int getNumSplits() const;
+                        int getNumSplits() const;
 
-protected:
-    std::vector< std::vector< Ptr<Object> > > train;
-    std::vector< std::vector< Ptr<Object> > > test;
-    std::vector< std::vector< Ptr<Object> > > validation;
+                        protected:
+                        std::vector< std::vector< Ptr<Object> > > train;
+                        std::vector< std::vector< Ptr<Object> > > test;
+                        std::vector< std::vector< Ptr<Object> > > validation;
 
-private:
-    std::vector< Ptr<Object> > empty;
-};
+                        private:
+                        std::vector< Ptr<Object> > empty;
+                };
 
 //! @}
 
-}
+    }
 }
 
 #endif

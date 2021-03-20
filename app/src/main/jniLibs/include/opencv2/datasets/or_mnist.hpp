@@ -49,27 +49,28 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_or
 //! @{
 
-struct OR_mnistObj : public Object
-{
-    char label; // 0..9
-    Mat image; // [28][28]
-};
+        struct OR_mnistObj : public Object {
+            char label; // 0..9
+            Mat image; // [28][28]
+        };
 
-class CV_EXPORTS OR_mnist : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS OR_mnist
 
-    static Ptr<OR_mnist> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <OR_mnist> create();
+    };
 
 //! @}
 

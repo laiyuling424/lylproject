@@ -45,28 +45,30 @@
 #include "opencv2/core.hpp"
 
 namespace cv {
-namespace phase_unwrapping {
+    namespace phase_unwrapping {
 //! @addtogroup phase_unwrapping
 //! @{
 
-    /**
-     @brief Abstract base class for phase unwrapping.
-    */
-class CV_EXPORTS_W PhaseUnwrapping : public virtual Algorithm
-{
-public:
-    /**
-     * @brief Unwraps a 2D phase map.
+        /**
+         @brief Abstract base class for phase unwrapping.
+        */
+        class CV_EXPORTS_W PhaseUnwrapping
 
-     * @param wrappedPhaseMap The wrapped phase map that needs to be unwrapped.
-     * @param unwrappedPhaseMap The unwrapped phase map.
-     * @param shadowMask Optional parameter used when some pixels do not hold any phase information in the wrapped phase map.
-     */
-    CV_WRAP
-    virtual void unwrapPhaseMap( InputArray wrappedPhaseMap, OutputArray unwrappedPhaseMap,
-                                 InputArray shadowMask = noArray() ) = 0;
+        : public virtual Algorithm {
+        public:
 
-};
+        /**
+         * @brief Unwraps a 2D phase map.
+
+         * @param wrappedPhaseMap The wrapped phase map that needs to be unwrapped.
+         * @param unwrappedPhaseMap The unwrapped phase map.
+         * @param shadowMask Optional parameter used when some pixels do not hold any phase information in the wrapped phase map.
+         */
+        CV_WRAP
+        virtual void unwrapPhaseMap(InputArray wrappedPhaseMap, OutputArray unwrappedPhaseMap,
+                                    InputArray shadowMask = noArray()) = 0;
+
+    };
 
 //! @}
 }

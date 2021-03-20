@@ -41,7 +41,7 @@
 #include "map.hpp"
 
 namespace cv {
-namespace reg {
+    namespace reg {
 
 //! @addtogroup reg
 //! @{
@@ -49,65 +49,80 @@ namespace reg {
 /*!
  * Defines an affine transformation
  */
-class CV_EXPORTS_W MapAffine : public Map
-{
-public:
-    /*!
-     * Default constructor builds an identity map
-     */
-    CV_WRAP MapAffine();
+        class CV_EXPORTS_W MapAffine
 
-    /*!
-     * Constructor providing explicit values
-     * \param[in] linTr Linear part of the affine transformation
-     * \param[in] shift Displacement part of the affine transformation
-     */
-    CV_WRAP MapAffine(InputArray linTr, InputArray shift);
+        : public Map {
+        public:
 
-    /*!
-     * Destructor
-     */
-    ~MapAffine();
+        /*!
+         * Default constructor builds an identity map
+         */
+        CV_WRAP MapAffine();
 
-    CV_WRAP void inverseWarp(InputArray img1, OutputArray img2) const CV_OVERRIDE;
+        /*!
+         * Constructor providing explicit values
+         * \param[in] linTr Linear part of the affine transformation
+         * \param[in] shift Displacement part of the affine transformation
+         */
+        CV_WRAP MapAffine(InputArray linTr, InputArray shift);
 
-    CV_WRAP cv::Ptr<Map> inverseMap() const CV_OVERRIDE;
+        /*!
+         * Destructor
+         */
+        ~
 
-    CV_WRAP void compose(cv::Ptr<Map> map) CV_OVERRIDE;
+        MapAffine();
 
-    CV_WRAP void scale(double factor) CV_OVERRIDE;
+        CV_WRAP void inverseWarp(InputArray img1, OutputArray img2) const
 
-    /*!
-     * Return linear part of the affine transformation
-     * \return Linear part of the affine transformation
-     */
-     const cv::Matx<double, 2, 2>& getLinTr() const {
-        return linTr_;
-    }
+        CV_OVERRIDE;
 
-    CV_WRAP void getLinTr(OutputArray linTr) const {
-        Mat(linTr_).copyTo(linTr);
-    }
+        CV_WRAP cv::Ptr<Map>
 
-    /*!
-     * Return displacement part of the affine transformation
-     * \return Displacement part of the affine transformation
-     */
-    const cv::Vec<double, 2>& getShift() const {
-        return shift_;
-    }
+        inverseMap() const
 
-    CV_WRAP void getShift(OutputArray shift) const {
-        Mat(shift_).copyTo(shift);
-    }
+        CV_OVERRIDE;
 
-private:
-    cv::Matx<double, 2, 2> linTr_;
-    cv::Vec<double, 2> shift_;
-};
+        CV_WRAP void compose(cv::Ptr<Map> map)
+
+        CV_OVERRIDE;
+
+        CV_WRAP void scale(double factor)
+
+        CV_OVERRIDE;
+
+        /*!
+         * Return linear part of the affine transformation
+         * \return Linear part of the affine transformation
+         */
+        const cv::Matx<double, 2, 2> &getLinTr() const {
+            return linTr_;
+        }
+
+        CV_WRAP void getLinTr(OutputArray linTr) const {
+            Mat(linTr_).copyTo(linTr);
+        }
+
+        /*!
+         * Return displacement part of the affine transformation
+         * \return Displacement part of the affine transformation
+         */
+        const cv::Vec<double, 2> &getShift() const {
+            return shift_;
+        }
+
+        CV_WRAP void getShift(OutputArray shift) const {
+            Mat(shift_).copyTo(shift);
+        }
+
+        private:
+        cv::Matx<double, 2, 2> linTr_;
+        cv::Vec<double, 2> shift_;
+    };
 
 //! @}
 
-}}  // namespace cv::reg
+}
+}  // namespace cv::reg
 
 #endif  // MAPAFFINE_H_

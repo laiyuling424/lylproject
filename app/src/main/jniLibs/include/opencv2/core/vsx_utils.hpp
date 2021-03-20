@@ -8,7 +8,9 @@
 #include "opencv2/core/cvdef.h"
 
 #ifndef SKIP_INCLUDES
+
 #   include <assert.h>
+
 #endif
 
 //! @addtogroup core_utils_vsx

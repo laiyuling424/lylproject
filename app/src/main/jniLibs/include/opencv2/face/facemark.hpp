@@ -23,7 +23,7 @@ Mentor: Delia Passalacqua
 
 
 namespace cv {
-namespace face {
+    namespace face {
 
 
 /** @brief Abstract base class for all facemark models
@@ -44,52 +44,51 @@ The typical pipeline for facemark detection is as follows:
 - Load the trained model using Facemark::loadModel.
 - Perform the fitting on an image via Facemark::fit.
 */
-class CV_EXPORTS_W Facemark : public virtual Algorithm
-{
-public:
+        class CV_EXPORTS_W Facemark : public virtual Algorithm {
+        public:
 
-    /** @brief A function to load the trained model before the fitting process.
-    @param model A string represent the filename of a trained model.
+            /** @brief A function to load the trained model before the fitting process.
+            @param model A string represent the filename of a trained model.
 
-    <B>Example of usage</B>
-    @code
-    facemark->loadModel("../data/lbf.model");
-    @endcode
-    */
-    CV_WRAP virtual void loadModel( String model ) = 0;
-    // virtual void saveModel(String fs)=0;
+            <B>Example of usage</B>
+            @code
+            facemark->loadModel("../data/lbf.model");
+            @endcode
+            */
+            CV_WRAP virtual void loadModel(String model) = 0;
+            // virtual void saveModel(String fs)=0;
 
-    /** @brief Detect facial landmarks from an image.
-    @param image Input image.
-    @param faces Output of the function which represent region of interest of the detected faces.
-    Each face is stored in cv::Rect container.
-    @param landmarks The detected landmark points for each faces.
+            /** @brief Detect facial landmarks from an image.
+            @param image Input image.
+            @param faces Output of the function which represent region of interest of the detected faces.
+            Each face is stored in cv::Rect container.
+            @param landmarks The detected landmark points for each faces.
 
-    <B>Example of usage</B>
-    @code
-    Mat image = imread("image.jpg");
-    std::vector<Rect> faces;
-    std::vector<std::vector<Point2f> > landmarks;
-    facemark->fit(image, faces, landmarks);
-    @endcode
-    */
-    CV_WRAP virtual bool fit( InputArray image,
-                              InputArray faces,
-                              OutputArrayOfArrays landmarks ) = 0;
-}; /* Facemark*/
+            <B>Example of usage</B>
+            @code
+            Mat image = imread("image.jpg");
+            std::vector<Rect> faces;
+            std::vector<std::vector<Point2f> > landmarks;
+            facemark->fit(image, faces, landmarks);
+            @endcode
+            */
+            CV_WRAP virtual bool fit(InputArray image,
+                                     InputArray faces,
+                                     OutputArrayOfArrays landmarks) = 0;
+        }; /* Facemark*/
 
 
 //! construct an AAM facemark detector
-CV_EXPORTS_W Ptr<Facemark> createFacemarkAAM();
+        CV_EXPORTS_W Ptr <Facemark> createFacemarkAAM();
 
 //! construct an LBF facemark detector
-CV_EXPORTS_W Ptr<Facemark> createFacemarkLBF();
+        CV_EXPORTS_W Ptr <Facemark> createFacemarkLBF();
 
 //! construct a Kazemi facemark detector
-CV_EXPORTS_W Ptr<Facemark> createFacemarkKazemi();
+        CV_EXPORTS_W Ptr <Facemark> createFacemarkKazemi();
 
 
-} // face
+    } // face
 } // cv
 
 #endif //__OPENCV_FACELANDMARK_HPP__

@@ -102,10 +102,13 @@ class SkinFactory : LayoutInflater.Factory2 {
         //android:background="@color/zzzzz"
         //属性的名字 background
         var name: String? = null
+
         //属性的id
         var resId: Int? = null
+
         //属性的值的名字  zzzzz
         var entryName: String? = null
+
         //属性值的类型
         var typeName: String? = null
 

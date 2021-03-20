@@ -50,23 +50,19 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-    namespace xphoto
-    {
+namespace cv {
+    namespace xphoto {
         //! @addtogroup xphoto
         //! @{
 
         //! BM3D transform types
-        enum TransformTypes
-        {
+        enum TransformTypes {
             /** Un-normalized Haar transform */
             HAAR = 0
         };
 
         //! BM3D algorithm steps
-        enum Bm3dSteps
-        {
+        enum Bm3dSteps {
             /** Execute all steps of the algorithm */
             BM3D_STEPALL = 0,
             /** Execute only first step of the algorithm */
@@ -113,20 +109,20 @@ namespace cv
         fastNlMeansDenoising
         */
         CV_EXPORTS_W void bm3dDenoising(
-            InputArray src,
-            InputOutputArray dstStep1,
-            OutputArray dstStep2,
-            float h = 1,
-            int templateWindowSize = 4,
-            int searchWindowSize = 16,
-            int blockMatchingStep1 = 2500,
-            int blockMatchingStep2 = 400,
-            int groupSize = 8,
-            int slidingStep = 1,
-            float beta = 2.0f,
-            int normType = cv::NORM_L2,
-            int step = cv::xphoto::BM3D_STEPALL,
-            int transformType = cv::xphoto::HAAR);
+                InputArray src,
+                InputOutputArray dstStep1,
+                OutputArray dstStep2,
+                float h = 1,
+                int templateWindowSize = 4,
+                int searchWindowSize = 16,
+                int blockMatchingStep1 = 2500,
+                int blockMatchingStep2 = 400,
+                int groupSize = 8,
+                int slidingStep = 1,
+                float beta = 2.0f,
+                int normType = cv::NORM_L2,
+                int step = cv::xphoto::BM3D_STEPALL,
+                int transformType = cv::xphoto::HAAR);
 
         /** @brief Performs image denoising using the Block-Matching and 3D-filtering algorithm
         <http://www.cs.tut.fi/~foi/GCF-BM3D/BM3D_TIP_2007.pdf> with several computational
@@ -166,19 +162,19 @@ namespace cv
         fastNlMeansDenoising
         */
         CV_EXPORTS_W void bm3dDenoising(
-            InputArray src,
-            OutputArray dst,
-            float h = 1,
-            int templateWindowSize = 4,
-            int searchWindowSize = 16,
-            int blockMatchingStep1 = 2500,
-            int blockMatchingStep2 = 400,
-            int groupSize = 8,
-            int slidingStep = 1,
-            float beta = 2.0f,
-            int normType = cv::NORM_L2,
-            int step = cv::xphoto::BM3D_STEPALL,
-            int transformType = cv::xphoto::HAAR);
+                InputArray src,
+                OutputArray dst,
+                float h = 1,
+                int templateWindowSize = 4,
+                int searchWindowSize = 16,
+                int blockMatchingStep1 = 2500,
+                int blockMatchingStep2 = 400,
+                int groupSize = 8,
+                int slidingStep = 1,
+                float beta = 2.0f,
+                int normType = cv::NORM_L2,
+                int step = cv::xphoto::BM3D_STEPALL,
+                int transformType = cv::xphoto::HAAR);
         //! @}
     }
 }

@@ -48,127 +48,130 @@
 #include "opencv2/core.hpp"
 #include "opencv2/videostab/global_motion.hpp"
 
-namespace cv
-{
-namespace videostab
-{
+namespace cv {
+    namespace videostab {
 
 //! @addtogroup videostab_motion
 //! @{
 
-class CV_EXPORTS IMotionStabilizer
-{
-public:
-    virtual ~IMotionStabilizer() {}
+        class CV_EXPORTS IMotionStabilizer {
+        public:
+            virtual ~IMotionStabilizer() {}
 
-    //! assumes that [0, size-1) is in or equals to [range.first, range.second)
-    virtual void stabilize(
-            int size, const std::vector<Mat> &motions, std::pair<int,int> range,
-            Mat *stabilizationMotions) = 0;
-};
+            //! assumes that [0, size-1) is in or equals to [range.first, range.second)
+            virtual void stabilize(
+                    int size, const std::vector<Mat> &motions, std::pair<int, int> range,
+                    Mat *stabilizationMotions) = 0;
+        };
 
-class CV_EXPORTS MotionStabilizationPipeline : public IMotionStabilizer
-{
-public:
-    void pushBack(Ptr<IMotionStabilizer> stabilizer) { stabilizers_.push_back(stabilizer); }
-    bool empty() const { return stabilizers_.empty(); }
+        class CV_EXPORTS MotionStabilizationPipeline : public IMotionStabilizer {
+        public:
+            void pushBack(Ptr <IMotionStabilizer> stabilizer) { stabilizers_.push_back(stabilizer); }
 
-    virtual void stabilize(
-            int size, const std::vector<Mat> &motions, std::pair<int,int> range,
-            Mat *stabilizationMotions) CV_OVERRIDE;
+            bool empty() const { return stabilizers_.empty(); }
 
-private:
-    std::vector<Ptr<IMotionStabilizer> > stabilizers_;
-};
+            virtual void stabilize(
+                    int size, const std::vector<Mat> &motions, std::pair<int, int> range,
+                    Mat *stabilizationMotions) CV_OVERRIDE;
 
-class CV_EXPORTS MotionFilterBase : public IMotionStabilizer
-{
-public:
-    virtual ~MotionFilterBase() {}
+        private:
+            std::vector<Ptr < IMotionStabilizer> >
+            stabilizers_;
+        };
 
-    virtual Mat stabilize(
-            int idx, const std::vector<Mat> &motions, std::pair<int,int> range) = 0;
+        class CV_EXPORTS MotionFilterBase : public IMotionStabilizer {
+        public:
+            virtual ~MotionFilterBase() {}
 
-    virtual void stabilize(
-            int size, const std::vector<Mat> &motions, std::pair<int,int> range,
-            Mat *stabilizationMotions) CV_OVERRIDE;
-};
+            virtual Mat stabilize(
+                    int idx, const std::vector<Mat> &motions, std::pair<int, int> range) = 0;
 
-class CV_EXPORTS GaussianMotionFilter : public MotionFilterBase
-{
-public:
-    GaussianMotionFilter(int radius = 15, float stdev = -1.f);
+            virtual void stabilize(
+                    int size, const std::vector<Mat> &motions, std::pair<int, int> range,
+                    Mat *stabilizationMotions) CV_OVERRIDE;
+        };
 
-    void setParams(int radius, float stdev = -1.f);
-    int radius() const { return radius_; }
-    float stdev() const { return stdev_; }
+        class CV_EXPORTS GaussianMotionFilter : public MotionFilterBase {
+        public:
+            GaussianMotionFilter(int radius = 15, float stdev = -1.f);
 
-    virtual Mat stabilize(
-            int idx, const std::vector<Mat> &motions, std::pair<int,int> range) CV_OVERRIDE;
+            void setParams(int radius, float stdev = -1.f);
 
-private:
-    int radius_;
-    float stdev_;
-    std::vector<float> weight_;
-};
+            int radius() const { return radius_; }
 
-inline GaussianMotionFilter::GaussianMotionFilter(int _radius, float _stdev) { setParams(_radius, _stdev); }
+            float stdev() const { return stdev_; }
 
-class CV_EXPORTS LpMotionStabilizer : public IMotionStabilizer
-{
-public:
-    LpMotionStabilizer(MotionModel model = MM_SIMILARITY);
+            virtual Mat stabilize(
+                    int idx, const std::vector<Mat> &motions, std::pair<int, int> range) CV_OVERRIDE;
 
-    void setMotionModel(MotionModel val) { model_ = val; }
-    MotionModel motionModel() const { return model_; }
+        private:
+            int radius_;
+            float stdev_;
+            std::vector<float> weight_;
+        };
 
-    void setFrameSize(Size val) { frameSize_ = val; }
-    Size frameSize() const { return frameSize_; }
+        inline GaussianMotionFilter::GaussianMotionFilter(int _radius, float _stdev) { setParams(_radius, _stdev); }
 
-    void setTrimRatio(float val) { trimRatio_ = val; }
-    float trimRatio() const { return trimRatio_; }
+        class CV_EXPORTS LpMotionStabilizer : public IMotionStabilizer {
+        public:
+            LpMotionStabilizer(MotionModel model = MM_SIMILARITY);
 
-    void setWeight1(float val) { w1_ = val; }
-    float weight1() const { return w1_; }
+            void setMotionModel(MotionModel val) { model_ = val; }
 
-    void setWeight2(float val) { w2_ = val; }
-    float weight2() const { return w2_; }
+            MotionModel motionModel() const { return model_; }
 
-    void setWeight3(float val) { w3_ = val; }
-    float weight3() const { return w3_; }
+            void setFrameSize(Size val) { frameSize_ = val; }
 
-    void setWeight4(float val) { w4_ = val; }
-    float weight4() const { return w4_; }
+            Size frameSize() const { return frameSize_; }
 
-    virtual void stabilize(
-            int size, const std::vector<Mat> &motions, std::pair<int,int> range,
-            Mat *stabilizationMotions) CV_OVERRIDE;
+            void setTrimRatio(float val) { trimRatio_ = val; }
 
-private:
-    MotionModel model_;
-    Size frameSize_;
-    float trimRatio_;
-    float w1_, w2_, w3_, w4_;
+            float trimRatio() const { return trimRatio_; }
 
-    std::vector<double> obj_, collb_, colub_;
-    std::vector<int> rows_, cols_;
-    std::vector<double> elems_, rowlb_, rowub_;
+            void setWeight1(float val) { w1_ = val; }
 
-    void set(int row, int col, double coef)
-    {
-        rows_.push_back(row);
-        cols_.push_back(col);
-        elems_.push_back(coef);
-    }
-};
+            float weight1() const { return w1_; }
 
-CV_EXPORTS Mat ensureInclusionConstraint(const Mat &M, Size size, float trimRatio);
+            void setWeight2(float val) { w2_ = val; }
 
-CV_EXPORTS float estimateOptimalTrimRatio(const Mat &M, Size size);
+            float weight2() const { return w2_; }
+
+            void setWeight3(float val) { w3_ = val; }
+
+            float weight3() const { return w3_; }
+
+            void setWeight4(float val) { w4_ = val; }
+
+            float weight4() const { return w4_; }
+
+            virtual void stabilize(
+                    int size, const std::vector<Mat> &motions, std::pair<int, int> range,
+                    Mat *stabilizationMotions) CV_OVERRIDE;
+
+        private:
+            MotionModel model_;
+            Size frameSize_;
+            float trimRatio_;
+            float w1_, w2_, w3_, w4_;
+
+            std::vector<double> obj_, collb_, colub_;
+            std::vector<int> rows_, cols_;
+            std::vector<double> elems_, rowlb_, rowub_;
+
+            void set(int row, int col, double coef) {
+                rows_.push_back(row);
+                cols_.push_back(col);
+                elems_.push_back(coef);
+            }
+        };
+
+        CV_EXPORTS Mat ensureInclusionConstraint(const Mat &M, Size size, float trimRatio);
+
+        CV_EXPORTS float estimateOptimalTrimRatio(const Mat &M, Size size);
 
 //! @}
 
-} // namespace videostab
+    } // namespace videostab
 } // namespace
 
 #endif

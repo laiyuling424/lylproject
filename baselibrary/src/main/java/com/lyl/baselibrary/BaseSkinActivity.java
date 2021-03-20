@@ -65,9 +65,9 @@ public abstract class BaseSkinActivity extends Activity implements LayoutInflate
         // Log.e(TAG, view + "");
 
         // 2.1 一个activity的布局肯定对应多个这样的 SkinView
-        if(view != null) {
+        if (view != null) {
             List<SkinAttr> skinAttrs = SkinAttrSupport.getSkinAttrs(context, attrs);
-            SkinView skinView = new SkinView(view,skinAttrs);
+            SkinView skinView = new SkinView(view, skinAttrs);
             // 3.统一交给SkinManager管理
             managerSkinView(skinView);
 
@@ -80,9 +80,9 @@ public abstract class BaseSkinActivity extends Activity implements LayoutInflate
     /**
      * 统一管理SkinView
      */
-    private void managerSkinView(SkinView skinView){
+    private void managerSkinView(SkinView skinView) {
         List<SkinView> skinViews = SkinManager.getInstance().getSkinViews(this);
-        if(skinViews == null){
+        if (skinViews == null) {
             skinViews = new ArrayList<>();
             SkinManager.getInstance().register(this, skinViews);
         }

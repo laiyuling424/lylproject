@@ -49,26 +49,27 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_hpe
 //! @{
 
-struct HPE_parseObj : public Object
-{
-    std::string name;
-};
+        struct HPE_parseObj : public Object {
+            std::string name;
+        };
 
-class CV_EXPORTS HPE_parse : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS HPE_parse
 
-    static Ptr<HPE_parse> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <HPE_parse> create();
+    };
 
 //! @}
 

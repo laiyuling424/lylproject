@@ -49,7 +49,7 @@
 #include "camera.hpp"
 
 namespace cv {
-namespace detail {
+    namespace detail {
 
 //! @addtogroup stitching_rotation
 //! @{
@@ -62,52 +62,49 @@ cameras.
 @note The coordinate system origin is implementation-dependent, but you can always normalize the
 rotations in respect to the first camera, for instance. :
  */
-class CV_EXPORTS Estimator
-{
-public:
-    virtual ~Estimator() {}
+        class CV_EXPORTS Estimator {
+        public:
+            virtual ~Estimator() {}
 
-    /** @brief Estimates camera parameters.
+            /** @brief Estimates camera parameters.
 
-    @param features Features of images
-    @param pairwise_matches Pairwise matches of images
-    @param cameras Estimated camera parameters
-    @return True in case of success, false otherwise
-     */
-    bool operator ()(const std::vector<ImageFeatures> &features,
-                     const std::vector<MatchesInfo> &pairwise_matches,
-                     std::vector<CameraParams> &cameras)
-        { return estimate(features, pairwise_matches, cameras); }
+            @param features Features of images
+            @param pairwise_matches Pairwise matches of images
+            @param cameras Estimated camera parameters
+            @return True in case of success, false otherwise
+             */
+            bool operator()(const std::vector<ImageFeatures> &features,
+                            const std::vector<MatchesInfo> &pairwise_matches,
+                            std::vector<CameraParams> &cameras) { return estimate(features, pairwise_matches, cameras); }
 
-protected:
-    /** @brief This method must implement camera parameters estimation logic in order to make the wrapper
-    detail::Estimator::operator()_ work.
+        protected:
+            /** @brief This method must implement camera parameters estimation logic in order to make the wrapper
+            detail::Estimator::operator()_ work.
 
-    @param features Features of images
-    @param pairwise_matches Pairwise matches of images
-    @param cameras Estimated camera parameters
-    @return True in case of success, false otherwise
-     */
-    virtual bool estimate(const std::vector<ImageFeatures> &features,
-                          const std::vector<MatchesInfo> &pairwise_matches,
-                          std::vector<CameraParams> &cameras) = 0;
-};
+            @param features Features of images
+            @param pairwise_matches Pairwise matches of images
+            @param cameras Estimated camera parameters
+            @return True in case of success, false otherwise
+             */
+            virtual bool estimate(const std::vector<ImageFeatures> &features,
+                                  const std::vector<MatchesInfo> &pairwise_matches,
+                                  std::vector<CameraParams> &cameras) = 0;
+        };
 
 /** @brief Homography based rotation estimator.
  */
-class CV_EXPORTS HomographyBasedEstimator : public Estimator
-{
-public:
-    HomographyBasedEstimator(bool is_focals_estimated = false)
-        : is_focals_estimated_(is_focals_estimated) {}
+        class CV_EXPORTS HomographyBasedEstimator : public Estimator {
+        public:
+            HomographyBasedEstimator(bool is_focals_estimated = false)
+                    : is_focals_estimated_(is_focals_estimated) {}
 
-private:
-    virtual bool estimate(const std::vector<ImageFeatures> &features,
-                          const std::vector<MatchesInfo> &pairwise_matches,
-                          std::vector<CameraParams> &cameras) CV_OVERRIDE;
+        private:
+            virtual bool estimate(const std::vector<ImageFeatures> &features,
+                                  const std::vector<MatchesInfo> &pairwise_matches,
+                                  std::vector<CameraParams> &cameras) CV_OVERRIDE;
 
-    bool is_focals_estimated_;
-};
+            bool is_focals_estimated_;
+        };
 
 /** @brief Affine transformation based estimator.
 
@@ -116,120 +113,124 @@ final transformation for each camera.
 
 @sa cv::detail::HomographyBasedEstimator
  */
-class CV_EXPORTS AffineBasedEstimator : public Estimator
-{
-private:
-    virtual bool estimate(const std::vector<ImageFeatures> &features,
-                          const std::vector<MatchesInfo> &pairwise_matches,
-                          std::vector<CameraParams> &cameras) CV_OVERRIDE;
-};
+        class CV_EXPORTS AffineBasedEstimator : public Estimator {
+        private:
+            virtual bool estimate(const std::vector<ImageFeatures> &features,
+                                  const std::vector<MatchesInfo> &pairwise_matches,
+                                  std::vector<CameraParams> &cameras) CV_OVERRIDE;
+        };
 
 /** @brief Base class for all camera parameters refinement methods.
  */
-class CV_EXPORTS BundleAdjusterBase : public Estimator
-{
-public:
-    const Mat refinementMask() const { return refinement_mask_.clone(); }
-    void setRefinementMask(const Mat &mask)
-    {
-        CV_Assert(mask.type() == CV_8U && mask.size() == Size(3, 3));
-        refinement_mask_ = mask.clone();
-    }
+        class CV_EXPORTS BundleAdjusterBase : public Estimator {
+        public:
+            const Mat refinementMask() const { return refinement_mask_.clone(); }
 
-    double confThresh() const { return conf_thresh_; }
-    void setConfThresh(double conf_thresh) { conf_thresh_ = conf_thresh; }
+            void setRefinementMask(const Mat &mask) {
+                CV_Assert(mask.type() == CV_8U && mask.size() == Size(3, 3));
+                refinement_mask_ = mask.clone();
+            }
 
-    TermCriteria termCriteria() { return term_criteria_; }
-    void setTermCriteria(const TermCriteria& term_criteria) { term_criteria_ = term_criteria; }
+            double confThresh() const { return conf_thresh_; }
 
-protected:
-    /** @brief Construct a bundle adjuster base instance.
+            void setConfThresh(double conf_thresh) { conf_thresh_ = conf_thresh; }
 
-    @param num_params_per_cam Number of parameters per camera
-    @param num_errs_per_measurement Number of error terms (components) per match
-     */
-    BundleAdjusterBase(int num_params_per_cam, int num_errs_per_measurement)
-        : num_images_(0), total_num_matches_(0),
-          num_params_per_cam_(num_params_per_cam),
-          num_errs_per_measurement_(num_errs_per_measurement),
-          features_(0), pairwise_matches_(0), conf_thresh_(0)
-    {
-        setRefinementMask(Mat::ones(3, 3, CV_8U));
-        setConfThresh(1.);
-        setTermCriteria(TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 1000, DBL_EPSILON));
-    }
+            TermCriteria termCriteria() { return term_criteria_; }
 
-    // Runs bundle adjustment
-    virtual bool estimate(const std::vector<ImageFeatures> &features,
-                          const std::vector<MatchesInfo> &pairwise_matches,
-                          std::vector<CameraParams> &cameras) CV_OVERRIDE;
+            void setTermCriteria(const TermCriteria &term_criteria) { term_criteria_ = term_criteria; }
 
-    /** @brief Sets initial camera parameter to refine.
+        protected:
+            /** @brief Construct a bundle adjuster base instance.
 
-    @param cameras Camera parameters
-     */
-    virtual void setUpInitialCameraParams(const std::vector<CameraParams> &cameras) = 0;
-    /** @brief Gets the refined camera parameters.
+            @param num_params_per_cam Number of parameters per camera
+            @param num_errs_per_measurement Number of error terms (components) per match
+             */
+            BundleAdjusterBase(int num_params_per_cam, int num_errs_per_measurement)
+                    : num_images_(0), total_num_matches_(0),
+                      num_params_per_cam_(num_params_per_cam),
+                      num_errs_per_measurement_(num_errs_per_measurement),
+                      features_(0), pairwise_matches_(0), conf_thresh_(0) {
+                setRefinementMask(Mat::ones(3, 3, CV_8U));
+                setConfThresh(1.);
+                setTermCriteria(TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 1000, DBL_EPSILON));
+            }
 
-    @param cameras Refined camera parameters
-     */
-    virtual void obtainRefinedCameraParams(std::vector<CameraParams> &cameras) const = 0;
-    /** @brief Calculates error vector.
+            // Runs bundle adjustment
+            virtual bool estimate(const std::vector<ImageFeatures> &features,
+                                  const std::vector<MatchesInfo> &pairwise_matches,
+                                  std::vector<CameraParams> &cameras) CV_OVERRIDE;
 
-    @param err Error column-vector of length total_num_matches \* num_errs_per_measurement
-     */
-    virtual void calcError(Mat &err) = 0;
-    /** @brief Calculates the cost function jacobian.
+            /** @brief Sets initial camera parameter to refine.
 
-    @param jac Jacobian matrix of dimensions
-    (total_num_matches \* num_errs_per_measurement) x (num_images \* num_params_per_cam)
-     */
-    virtual void calcJacobian(Mat &jac) = 0;
+            @param cameras Camera parameters
+             */
+            virtual void setUpInitialCameraParams(const std::vector<CameraParams> &cameras) = 0;
 
-    // 3x3 8U mask, where 0 means don't refine respective parameter, != 0 means refine
-    Mat refinement_mask_;
+            /** @brief Gets the refined camera parameters.
 
-    int num_images_;
-    int total_num_matches_;
+            @param cameras Refined camera parameters
+             */
+            virtual void obtainRefinedCameraParams(std::vector<CameraParams> &cameras) const = 0;
 
-    int num_params_per_cam_;
-    int num_errs_per_measurement_;
+            /** @brief Calculates error vector.
 
-    const ImageFeatures *features_;
-    const MatchesInfo *pairwise_matches_;
+            @param err Error column-vector of length total_num_matches \* num_errs_per_measurement
+             */
+            virtual void calcError(Mat &err) = 0;
 
-    // Threshold to filter out poorly matched image pairs
-    double conf_thresh_;
+            /** @brief Calculates the cost function jacobian.
 
-    //Levenberg-Marquardt algorithm termination criteria
-    TermCriteria term_criteria_;
+            @param jac Jacobian matrix of dimensions
+            (total_num_matches \* num_errs_per_measurement) x (num_images \* num_params_per_cam)
+             */
+            virtual void calcJacobian(Mat &jac) = 0;
 
-    // Camera parameters matrix (CV_64F)
-    Mat cam_params_;
+            // 3x3 8U mask, where 0 means don't refine respective parameter, != 0 means refine
+            Mat refinement_mask_;
 
-    // Connected images pairs
-    std::vector<std::pair<int,int> > edges_;
-};
+            int num_images_;
+            int total_num_matches_;
+
+            int num_params_per_cam_;
+            int num_errs_per_measurement_;
+
+            const ImageFeatures *features_;
+            const MatchesInfo *pairwise_matches_;
+
+            // Threshold to filter out poorly matched image pairs
+            double conf_thresh_;
+
+            //Levenberg-Marquardt algorithm termination criteria
+            TermCriteria term_criteria_;
+
+            // Camera parameters matrix (CV_64F)
+            Mat cam_params_;
+
+            // Connected images pairs
+            std::vector<std::pair<int, int> > edges_;
+        };
 
 
 /** @brief Stub bundle adjuster that does nothing.
  */
-class CV_EXPORTS NoBundleAdjuster : public BundleAdjusterBase
-{
-public:
-    NoBundleAdjuster() : BundleAdjusterBase(0, 0) {}
+        class CV_EXPORTS NoBundleAdjuster : public BundleAdjusterBase {
+        public:
+            NoBundleAdjuster() : BundleAdjusterBase(0, 0) {}
 
-private:
-    bool estimate(const std::vector<ImageFeatures> &, const std::vector<MatchesInfo> &,
-                  std::vector<CameraParams> &) CV_OVERRIDE
-    {
-        return true;
-    }
-    void setUpInitialCameraParams(const std::vector<CameraParams> &) CV_OVERRIDE {}
-    void obtainRefinedCameraParams(std::vector<CameraParams> &) const CV_OVERRIDE {}
-    void calcError(Mat &) CV_OVERRIDE {}
-    void calcJacobian(Mat &) CV_OVERRIDE {}
-};
+        private:
+            bool estimate(const std::vector<ImageFeatures> &, const std::vector<MatchesInfo> &,
+                          std::vector<CameraParams> &) CV_OVERRIDE {
+                return true;
+            }
+
+            void setUpInitialCameraParams(const std::vector<CameraParams> &) CV_OVERRIDE {}
+
+            void obtainRefinedCameraParams(std::vector<CameraParams> &) const CV_OVERRIDE {}
+
+            void calcError(Mat &) CV_OVERRIDE {}
+
+            void calcJacobian(Mat &) CV_OVERRIDE {}
+        };
 
 
 /** @brief Implementation of the camera parameters refinement algorithm which minimizes sum of the reprojection
@@ -238,19 +239,21 @@ error squares
 It can estimate focal length, aspect ratio, principal point.
 You can affect only on them via the refinement mask.
  */
-class CV_EXPORTS BundleAdjusterReproj : public BundleAdjusterBase
-{
-public:
-    BundleAdjusterReproj() : BundleAdjusterBase(7, 2) {}
+        class CV_EXPORTS BundleAdjusterReproj : public BundleAdjusterBase {
+        public:
+            BundleAdjusterReproj() : BundleAdjusterBase(7, 2) {}
 
-private:
-    void setUpInitialCameraParams(const std::vector<CameraParams> &cameras) CV_OVERRIDE;
-    void obtainRefinedCameraParams(std::vector<CameraParams> &cameras) const CV_OVERRIDE;
-    void calcError(Mat &err) CV_OVERRIDE;
-    void calcJacobian(Mat &jac) CV_OVERRIDE;
+        private:
+            void setUpInitialCameraParams(const std::vector<CameraParams> &cameras) CV_OVERRIDE;
 
-    Mat err1_, err2_;
-};
+            void obtainRefinedCameraParams(std::vector<CameraParams> &cameras) const CV_OVERRIDE;
+
+            void calcError(Mat &err) CV_OVERRIDE;
+
+            void calcJacobian(Mat &jac) CV_OVERRIDE;
+
+            Mat err1_, err2_;
+        };
 
 
 /** @brief Implementation of the camera parameters refinement algorithm which minimizes sum of the distances
@@ -258,19 +261,21 @@ between the rays passing through the camera center and a feature. :
 
 It can estimate focal length. It ignores the refinement mask for now.
  */
-class CV_EXPORTS BundleAdjusterRay : public BundleAdjusterBase
-{
-public:
-    BundleAdjusterRay() : BundleAdjusterBase(4, 3) {}
+        class CV_EXPORTS BundleAdjusterRay : public BundleAdjusterBase {
+        public:
+            BundleAdjusterRay() : BundleAdjusterBase(4, 3) {}
 
-private:
-    void setUpInitialCameraParams(const std::vector<CameraParams> &cameras) CV_OVERRIDE;
-    void obtainRefinedCameraParams(std::vector<CameraParams> &cameras) const CV_OVERRIDE;
-    void calcError(Mat &err) CV_OVERRIDE;
-    void calcJacobian(Mat &jac) CV_OVERRIDE;
+        private:
+            void setUpInitialCameraParams(const std::vector<CameraParams> &cameras) CV_OVERRIDE;
 
-    Mat err1_, err2_;
-};
+            void obtainRefinedCameraParams(std::vector<CameraParams> &cameras) const CV_OVERRIDE;
+
+            void calcError(Mat &err) CV_OVERRIDE;
+
+            void calcJacobian(Mat &jac) CV_OVERRIDE;
+
+            Mat err1_, err2_;
+        };
 
 
 /** @brief Bundle adjuster that expects affine transformation
@@ -282,19 +287,21 @@ It estimates all transformation parameters. Refinement mask is ignored.
 
 @sa AffineBasedEstimator AffineBestOf2NearestMatcher BundleAdjusterAffinePartial
  */
-class CV_EXPORTS BundleAdjusterAffine : public BundleAdjusterBase
-{
-public:
-    BundleAdjusterAffine() : BundleAdjusterBase(6, 2) {}
+        class CV_EXPORTS BundleAdjusterAffine : public BundleAdjusterBase {
+        public:
+            BundleAdjusterAffine() : BundleAdjusterBase(6, 2) {}
 
-private:
-    void setUpInitialCameraParams(const std::vector<CameraParams> &cameras) CV_OVERRIDE;
-    void obtainRefinedCameraParams(std::vector<CameraParams> &cameras) const CV_OVERRIDE;
-    void calcError(Mat &err) CV_OVERRIDE;
-    void calcJacobian(Mat &jac) CV_OVERRIDE;
+        private:
+            void setUpInitialCameraParams(const std::vector<CameraParams> &cameras) CV_OVERRIDE;
 
-    Mat err1_, err2_;
-};
+            void obtainRefinedCameraParams(std::vector<CameraParams> &cameras) const CV_OVERRIDE;
+
+            void calcError(Mat &err) CV_OVERRIDE;
+
+            void calcJacobian(Mat &jac) CV_OVERRIDE;
+
+            Mat err1_, err2_;
+        };
 
 
 /** @brief Bundle adjuster that expects affine transformation with 4 DOF
@@ -306,54 +313,55 @@ It estimates all transformation parameters. Refinement mask is ignored.
 
 @sa AffineBasedEstimator AffineBestOf2NearestMatcher BundleAdjusterAffine
  */
-class CV_EXPORTS BundleAdjusterAffinePartial : public BundleAdjusterBase
-{
-public:
-    BundleAdjusterAffinePartial() : BundleAdjusterBase(4, 2) {}
+        class CV_EXPORTS BundleAdjusterAffinePartial : public BundleAdjusterBase {
+        public:
+            BundleAdjusterAffinePartial() : BundleAdjusterBase(4, 2) {}
 
-private:
-    void setUpInitialCameraParams(const std::vector<CameraParams> &cameras) CV_OVERRIDE;
-    void obtainRefinedCameraParams(std::vector<CameraParams> &cameras) const CV_OVERRIDE;
-    void calcError(Mat &err) CV_OVERRIDE;
-    void calcJacobian(Mat &jac) CV_OVERRIDE;
+        private:
+            void setUpInitialCameraParams(const std::vector<CameraParams> &cameras) CV_OVERRIDE;
 
-    Mat err1_, err2_;
-};
+            void obtainRefinedCameraParams(std::vector<CameraParams> &cameras) const CV_OVERRIDE;
+
+            void calcError(Mat &err) CV_OVERRIDE;
+
+            void calcJacobian(Mat &jac) CV_OVERRIDE;
+
+            Mat err1_, err2_;
+        };
 
 
-enum WaveCorrectKind
-{
-    WAVE_CORRECT_HORIZ,
-    WAVE_CORRECT_VERT
-};
+        enum WaveCorrectKind {
+            WAVE_CORRECT_HORIZ,
+            WAVE_CORRECT_VERT
+        };
 
 /** @brief Tries to make panorama more horizontal (or vertical).
 
 @param rmats Camera rotation matrices.
 @param kind Correction kind, see detail::WaveCorrectKind.
  */
-void CV_EXPORTS waveCorrect(std::vector<Mat> &rmats, WaveCorrectKind kind);
+        void CV_EXPORTS waveCorrect(std::vector<Mat> &rmats, WaveCorrectKind kind);
 
 
 //////////////////////////////////////////////////////////////////////////////
 // Auxiliary functions
 
 // Returns matches graph representation in DOT language
-String CV_EXPORTS matchesGraphAsString(std::vector<String> &pathes, std::vector<MatchesInfo> &pairwise_matches,
-                                            float conf_threshold);
+        String CV_EXPORTS matchesGraphAsString(std::vector<String> &pathes, std::vector<MatchesInfo> &pairwise_matches,
+                                               float conf_threshold);
 
-std::vector<int> CV_EXPORTS leaveBiggestComponent(
-        std::vector<ImageFeatures> &features,
-        std::vector<MatchesInfo> &pairwise_matches,
-        float conf_threshold);
+        std::vector<int> CV_EXPORTS leaveBiggestComponent(
+                std::vector<ImageFeatures> &features,
+                std::vector<MatchesInfo> &pairwise_matches,
+                float conf_threshold);
 
-void CV_EXPORTS findMaxSpanningTree(
-        int num_images, const std::vector<MatchesInfo> &pairwise_matches,
-        Graph &span_tree, std::vector<int> &centers);
+        void CV_EXPORTS findMaxSpanningTree(
+                int num_images, const std::vector<MatchesInfo> &pairwise_matches,
+                Graph &span_tree, std::vector<int> &centers);
 
 //! @} stitching_rotation
 
-} // namespace detail
+    } // namespace detail
 } // namespace cv
 
 #endif // OPENCV_STITCHING_MOTION_ESTIMATORS_HPP

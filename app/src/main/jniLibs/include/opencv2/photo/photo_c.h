@@ -54,16 +54,15 @@ extern "C" {
   */
 
 /* Inpainting algorithms */
-enum InpaintingModes
-{
-    CV_INPAINT_NS      =0,
-    CV_INPAINT_TELEA   =1
+enum InpaintingModes {
+    CV_INPAINT_NS = 0,
+    CV_INPAINT_TELEA = 1
 };
 
 
 /* Inpaints the selected region in the image */
-CVAPI(void) cvInpaint( const CvArr* src, const CvArr* inpaint_mask,
-                       CvArr* dst, double inpaintRange, int flags );
+CVAPI(void) cvInpaint(const CvArr *src, const CvArr *inpaint_mask,
+                      CvArr *dst, double inpaintRange, int flags);
 
 /** @} */
 

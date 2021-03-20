@@ -46,71 +46,71 @@
 #include <vector>
 #include "opencv2/core.hpp"
 
-namespace cv
-{
-namespace videostab
-{
+namespace cv {
+    namespace videostab {
 
 //! @addtogroup videostab
 //! @{
 
-CV_EXPORTS float calcBlurriness(const Mat &frame);
+        CV_EXPORTS float calcBlurriness(const Mat &frame);
 
-class CV_EXPORTS DeblurerBase
-{
-public:
-    DeblurerBase() : radius_(0), frames_(0), motions_(0), blurrinessRates_(0) {}
+        class CV_EXPORTS DeblurerBase {
+        public:
+            DeblurerBase() : radius_(0), frames_(0), motions_(0), blurrinessRates_(0) {}
 
-    virtual ~DeblurerBase() {}
+            virtual ~DeblurerBase() {}
 
-    virtual void setRadius(int val) { radius_ = val; }
-    virtual int radius() const { return radius_; }
+            virtual void setRadius(int val) { radius_ = val; }
 
-    virtual void deblur(int idx, Mat &frame) = 0;
+            virtual int radius() const { return radius_; }
+
+            virtual void deblur(int idx, Mat &frame) = 0;
 
 
-    // data from stabilizer
+            // data from stabilizer
 
-    virtual void setFrames(const std::vector<Mat> &val) { frames_ = &val; }
-    virtual const std::vector<Mat>& frames() const { return *frames_; }
+            virtual void setFrames(const std::vector<Mat> &val) { frames_ = &val; }
 
-    virtual void setMotions(const std::vector<Mat> &val) { motions_ = &val; }
-    virtual const std::vector<Mat>& motions() const { return *motions_; }
+            virtual const std::vector<Mat> &frames() const { return *frames_; }
 
-    virtual void setBlurrinessRates(const std::vector<float> &val) { blurrinessRates_ = &val; }
-    virtual const std::vector<float>& blurrinessRates() const { return *blurrinessRates_; }
+            virtual void setMotions(const std::vector<Mat> &val) { motions_ = &val; }
 
-protected:
-    int radius_;
-    const std::vector<Mat> *frames_;
-    const std::vector<Mat> *motions_;
-    const std::vector<float> *blurrinessRates_;
-};
+            virtual const std::vector<Mat> &motions() const { return *motions_; }
 
-class CV_EXPORTS NullDeblurer : public DeblurerBase
-{
-public:
-    virtual void deblur(int /*idx*/, Mat &/*frame*/) CV_OVERRIDE {}
-};
+            virtual void setBlurrinessRates(const std::vector<float> &val) { blurrinessRates_ = &val; }
 
-class CV_EXPORTS WeightingDeblurer : public DeblurerBase
-{
-public:
-    WeightingDeblurer();
+            virtual const std::vector<float> &blurrinessRates() const { return *blurrinessRates_; }
 
-    void setSensitivity(float val) { sensitivity_ = val; }
-    float sensitivity() const { return sensitivity_; }
+        protected:
+            int radius_;
+            const std::vector<Mat> *frames_;
+            const std::vector<Mat> *motions_;
+            const std::vector<float> *blurrinessRates_;
+        };
 
-    virtual void deblur(int idx, Mat &frame) CV_OVERRIDE;
+        class CV_EXPORTS NullDeblurer : public DeblurerBase {
+        public:
+            virtual void deblur(int /*idx*/, Mat &/*frame*/) CV_OVERRIDE {}
+        };
 
-private:
-    float sensitivity_;
-    Mat_<float> bSum_, gSum_, rSum_, wSum_;
-};
+        class CV_EXPORTS WeightingDeblurer : public DeblurerBase {
+        public:
+            WeightingDeblurer();
+
+            void setSensitivity(float val) { sensitivity_ = val; }
+
+            float sensitivity() const { return sensitivity_; }
+
+            virtual void deblur(int idx, Mat &frame) CV_OVERRIDE;
+
+        private:
+            float sensitivity_;
+            Mat_<float> bSum_, gSum_, rSum_, wSum_;
+        };
 
 //! @}
 
-} // namespace videostab
+    } // namespace videostab
 } // namespace cv
 
 #endif

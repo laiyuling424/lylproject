@@ -44,7 +44,7 @@
 #include "mapshift.hpp"
 
 namespace cv {
-namespace reg {
+    namespace reg {
 
 //! @addtogroup reg
 //! @{
@@ -52,54 +52,69 @@ namespace reg {
 /*!
  * Calculates a map using a gaussian pyramid
  */
-class CV_EXPORTS_W MapperPyramid: public Mapper
-{
-public:
-    /*
-     * Constructor
-     * \param[in] baseMapper Base mapper used for the refinements
-     */
-    CV_WRAP MapperPyramid(Ptr<Mapper> baseMapper);
+        class CV_EXPORTS_W MapperPyramid
 
-    CV_WRAP virtual cv::Ptr<Map> calculate(InputArray img1, InputArray img2, cv::Ptr<Map> init = cv::Ptr<Map>()) const CV_OVERRIDE;
+        : public Mapper {
+        public:
 
-    CV_WRAP cv::Ptr<Map> getMap() const CV_OVERRIDE;
+        /*
+         * Constructor
+         * \param[in] baseMapper Base mapper used for the refinements
+         */
+        CV_WRAP MapperPyramid(Ptr <Mapper> baseMapper);
 
-    CV_PROP_RW int numLev_;           /*!< Number of levels of the pyramid */
-    CV_PROP_RW int numIterPerScale_;  /*!< Number of iterations at a given scale of the pyramid */
+        CV_WRAP virtual cv::Ptr<Map>
+        calculate(InputArray
+        img1,
+        InputArray img2, cv::Ptr<Map>
+        init = cv::Ptr<Map>()
+        )
+        const CV_OVERRIDE;
 
-private:
-    MapperPyramid& operator=(const MapperPyramid&);
-    const Mapper& baseMapper_;  /*!< Mapper used in inner level */
-};
+        CV_WRAP cv::Ptr<Map>
+
+        getMap() const
+
+        CV_OVERRIDE;
+
+        CV_PROP_RW int numLev_;           /*!< Number of levels of the pyramid */
+        CV_PROP_RW int numIterPerScale_;  /*!< Number of iterations at a given scale of the pyramid */
+
+        private:
+
+        MapperPyramid &operator=(const MapperPyramid &);
+
+        const Mapper &baseMapper_;  /*!< Mapper used in inner level */
+    };
 
 /*!
  * Converts a pointer to a Map returned by MapperPyramid::calculate into the specified Map pointer type
  */
-class CV_EXPORTS_W MapTypeCaster
-{
-public:
-    CV_WRAP static Ptr<MapAffine> toAffine(Ptr<Map> sourceMap)
-    {
-        MapAffine& affineMap = dynamic_cast<MapAffine&>(*sourceMap);
-        return Ptr<MapAffine>(new MapAffine(affineMap));
-    }
+    class CV_EXPORTS_W MapTypeCaster
+            {
+                    public:
+                    CV_WRAP static Ptr<MapAffine> toAffine(Ptr<Map> sourceMap)
+                    {
+                        MapAffine &affineMap = dynamic_cast<MapAffine &>(*sourceMap);
+                        return Ptr<MapAffine>(new MapAffine(affineMap));
+                    }
 
-    CV_WRAP static Ptr<MapShift> toShift(Ptr<Map> sourceMap)
-    {
-        MapShift& shiftMap = dynamic_cast<MapShift&>(*sourceMap);
-        return Ptr<MapShift>(new MapShift(shiftMap));
-    }
+                    CV_WRAP static Ptr<MapShift> toShift(Ptr<Map> sourceMap)
+                    {
+                        MapShift &shiftMap = dynamic_cast<MapShift &>(*sourceMap);
+                        return Ptr<MapShift>(new MapShift(shiftMap));
+                    }
 
-    CV_WRAP static Ptr<MapProjec> toProjec(Ptr<Map> sourceMap)
-    {
-        MapProjec& projecMap = dynamic_cast<MapProjec&>(*sourceMap);
-        return Ptr<MapProjec>(new MapProjec(projecMap));
-    }
-};
+                    CV_WRAP static Ptr<MapProjec> toProjec(Ptr<Map> sourceMap)
+                    {
+                        MapProjec &projecMap = dynamic_cast<MapProjec &>(*sourceMap);
+                        return Ptr<MapProjec>(new MapProjec(projecMap));
+                    }
+            };
 
 //! @}
 
-}}  // namespace cv::reg
+}
+}  // namespace cv::reg
 
 #endif  // MAPPERPYRAMID_H_

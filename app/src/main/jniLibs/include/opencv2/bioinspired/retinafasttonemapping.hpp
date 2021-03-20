@@ -75,8 +75,8 @@
 
 #include "opencv2/core.hpp" // for all OpenCV core functionalities access, including cv::Exception support
 
-namespace cv{
-namespace bioinspired{
+namespace cv {
+    namespace bioinspired {
 
 //! @addtogroup bioinspired
 //! @{
@@ -96,39 +96,43 @@ Meylan L., Alleysson D., and Susstrunk S., A Model of Retinal Local Adaptation f
 regarding spatio-temporal filter and the bigger retina model :
 Vision: Images, Signals and Neural Networks: Models of Neural Processing in Visual Perception (Progress in Neural Processing),By: Jeanny Herault, ISBN: 9814273686. WAPI (Tower ID): 113266891.
 */
-class CV_EXPORTS_W RetinaFastToneMapping : public Algorithm
-{
-public:
+        class CV_EXPORTS_W RetinaFastToneMapping
 
-    /** @brief applies a luminance correction (initially High Dynamic Range (HDR) tone mapping)
+        : public Algorithm {
+        public:
 
-    using only the 2 local adaptation stages of the retina parvocellular channel : photoreceptors
-    level and ganlion cells level. Spatio temporal filtering is applied but limited to temporal
-    smoothing and eventually high frequencies attenuation. This is a lighter method than the one
-    available using the regular retina::run method. It is then faster but it does not include
-    complete temporal filtering nor retina spectral whitening. Then, it can have a more limited
-    effect on images with a very high dynamic range. This is an adptation of the original still
-    image HDR tone mapping algorithm of David Alleyson, Sabine Susstruck and Laurence Meylan's
-    work, please cite: -> Meylan L., Alleysson D., and Susstrunk S., A Model of Retinal Local
-    Adaptation for the Tone Mapping of Color Filter Array Images, Journal of Optical Society of
-    America, A, Vol. 24, N 9, September, 1st, 2007, pp. 2807-2816
+        /** @brief applies a luminance correction (initially High Dynamic Range (HDR) tone mapping)
 
-    @param inputImage the input image to process RGB or gray levels
-    @param outputToneMappedImage the output tone mapped image
-    */
-    CV_WRAP virtual void applyFastToneMapping(InputArray inputImage, OutputArray outputToneMappedImage)=0;
+        using only the 2 local adaptation stages of the retina parvocellular channel : photoreceptors
+        level and ganlion cells level. Spatio temporal filtering is applied but limited to temporal
+        smoothing and eventually high frequencies attenuation. This is a lighter method than the one
+        available using the regular retina::run method. It is then faster but it does not include
+        complete temporal filtering nor retina spectral whitening. Then, it can have a more limited
+        effect on images with a very high dynamic range. This is an adptation of the original still
+        image HDR tone mapping algorithm of David Alleyson, Sabine Susstruck and Laurence Meylan's
+        work, please cite: -> Meylan L., Alleysson D., and Susstrunk S., A Model of Retinal Local
+        Adaptation for the Tone Mapping of Color Filter Array Images, Journal of Optical Society of
+        America, A, Vol. 24, N 9, September, 1st, 2007, pp. 2807-2816
 
-    /** @brief updates tone mapping behaviors by adjusing the local luminance computation area
+        @param inputImage the input image to process RGB or gray levels
+        @param outputToneMappedImage the output tone mapped image
+        */
+        CV_WRAP virtual void applyFastToneMapping(InputArray inputImage, OutputArray outputToneMappedImage) = 0;
 
-    @param photoreceptorsNeighborhoodRadius the first stage local adaptation area
-    @param ganglioncellsNeighborhoodRadius the second stage local adaptation area
-    @param meanLuminanceModulatorK the factor applied to modulate the meanLuminance information
-    (default is 1, see reference paper)
-     */
-    CV_WRAP virtual void setup(const float photoreceptorsNeighborhoodRadius=3.f, const float ganglioncellsNeighborhoodRadius=1.f, const float meanLuminanceModulatorK=1.f)=0;
+        /** @brief updates tone mapping behaviors by adjusing the local luminance computation area
 
-    CV_WRAP static Ptr<RetinaFastToneMapping> create(Size inputSize);
-};
+        @param photoreceptorsNeighborhoodRadius the first stage local adaptation area
+        @param ganglioncellsNeighborhoodRadius the second stage local adaptation area
+        @param meanLuminanceModulatorK the factor applied to modulate the meanLuminance information
+        (default is 1, see reference paper)
+         */
+        CV_WRAP virtual void setup(const float photoreceptorsNeighborhoodRadius = 3.f, const float ganglioncellsNeighborhoodRadius = 1.f,
+                                   const float meanLuminanceModulatorK = 1.f) = 0;
+
+        CV_WRAP static Ptr<RetinaFastToneMapping>
+        create(Size
+        inputSize);
+    };
 
 
 //! @}

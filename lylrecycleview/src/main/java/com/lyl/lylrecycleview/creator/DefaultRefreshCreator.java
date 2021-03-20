@@ -8,7 +8,6 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 
 import com.lyl.lylrecycleview.R;
-import com.lyl.lylrecycleview.creator.RefreshViewCreator;
 
 /**
  * Create By: lyl

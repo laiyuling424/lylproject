@@ -49,38 +49,38 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_hpe
 //! @{
 
-struct HPE_humanevaObj : public Object
-{
-    char person; // 1..4
-    std::string action;
-    int type1;
-    std::string type2;
-    Matx13d ofs;
-    std::string fileName;
-    std::vector<std::string> imageNames; // for HumanEva_II
-};
+        struct HPE_humanevaObj : public Object {
+            char person; // 1..4
+            std::string action;
+            int type1;
+            std::string type2;
+            Matx13d ofs;
+            std::string fileName;
+            std::vector <std::string> imageNames; // for HumanEva_II
+        };
 
-enum datasetType
-{
-    humaneva_1 = 1,
-    humaneva_2
-};
+        enum datasetType {
+            humaneva_1 = 1,
+            humaneva_2
+        };
 
-class CV_EXPORTS HPE_humaneva : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS HPE_humaneva
 
-    static Ptr<HPE_humaneva> create(int num=humaneva_1);
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <HPE_humaneva> create(int num = humaneva_1);
+    };
 
 //! @}
 

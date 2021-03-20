@@ -47,104 +47,106 @@
 #include "opencv2/opencv_modules.hpp"
 
 #ifdef HAVE_OPENCV_CUDAOPTFLOW
-  #include "opencv2/cudaoptflow.hpp"
+#include "opencv2/cudaoptflow.hpp"
 #endif
 
-namespace cv
-{
-namespace videostab
-{
+namespace cv {
+    namespace videostab {
 
 //! @addtogroup videostab
 //! @{
 
-class CV_EXPORTS ISparseOptFlowEstimator
-{
-public:
-    virtual ~ISparseOptFlowEstimator() {}
-    virtual void run(
-            InputArray frame0, InputArray frame1, InputArray points0, InputOutputArray points1,
-            OutputArray status, OutputArray errors) = 0;
-};
+        class CV_EXPORTS ISparseOptFlowEstimator {
+        public:
+            virtual ~ISparseOptFlowEstimator() {}
 
-class CV_EXPORTS IDenseOptFlowEstimator
-{
-public:
-    virtual ~IDenseOptFlowEstimator() {}
-    virtual void run(
-            InputArray frame0, InputArray frame1, InputOutputArray flowX, InputOutputArray flowY,
-            OutputArray errors) = 0;
-};
+            virtual void run(
+                    InputArray frame0, InputArray frame1, InputArray points0, InputOutputArray points1,
+                    OutputArray status, OutputArray errors) = 0;
+        };
 
-class CV_EXPORTS PyrLkOptFlowEstimatorBase
-{
-public:
-    PyrLkOptFlowEstimatorBase() { setWinSize(Size(21, 21)); setMaxLevel(3); }
+        class CV_EXPORTS IDenseOptFlowEstimator {
+        public:
+            virtual ~IDenseOptFlowEstimator() {}
 
-    virtual void setWinSize(Size val) { winSize_ = val; }
-    virtual Size winSize() const { return winSize_; }
+            virtual void run(
+                    InputArray frame0, InputArray frame1, InputOutputArray flowX, InputOutputArray flowY,
+                    OutputArray errors) = 0;
+        };
 
-    virtual void setMaxLevel(int val) { maxLevel_ = val; }
-    virtual int maxLevel() const { return maxLevel_; }
-    virtual ~PyrLkOptFlowEstimatorBase() {}
+        class CV_EXPORTS PyrLkOptFlowEstimatorBase {
+        public:
+            PyrLkOptFlowEstimatorBase() {
+                setWinSize(Size(21, 21));
+                setMaxLevel(3);
+            }
 
-protected:
-    Size winSize_;
-    int maxLevel_;
-};
+            virtual void setWinSize(Size val) { winSize_ = val; }
 
-class CV_EXPORTS SparsePyrLkOptFlowEstimator
-        : public PyrLkOptFlowEstimatorBase, public ISparseOptFlowEstimator
-{
-public:
-    virtual void run(
-            InputArray frame0, InputArray frame1, InputArray points0, InputOutputArray points1,
-            OutputArray status, OutputArray errors) CV_OVERRIDE;
-};
+            virtual Size winSize() const { return winSize_; }
+
+            virtual void setMaxLevel(int val) { maxLevel_ = val; }
+
+            virtual int maxLevel() const { return maxLevel_; }
+
+            virtual ~PyrLkOptFlowEstimatorBase() {}
+
+        protected:
+            Size winSize_;
+            int maxLevel_;
+        };
+
+        class CV_EXPORTS SparsePyrLkOptFlowEstimator
+                : public PyrLkOptFlowEstimatorBase, public ISparseOptFlowEstimator {
+        public:
+            virtual void run(
+                    InputArray frame0, InputArray frame1, InputArray points0, InputOutputArray points1,
+                    OutputArray status, OutputArray errors) CV_OVERRIDE;
+        };
 
 #ifdef HAVE_OPENCV_CUDAOPTFLOW
 
-class CV_EXPORTS SparsePyrLkOptFlowEstimatorGpu
-        : public PyrLkOptFlowEstimatorBase, public ISparseOptFlowEstimator
-{
-public:
-    SparsePyrLkOptFlowEstimatorGpu();
+        class CV_EXPORTS SparsePyrLkOptFlowEstimatorGpu
+                : public PyrLkOptFlowEstimatorBase, public ISparseOptFlowEstimator
+        {
+        public:
+            SparsePyrLkOptFlowEstimatorGpu();
 
-    virtual void run(
-            InputArray frame0, InputArray frame1, InputArray points0, InputOutputArray points1,
-            OutputArray status, OutputArray errors) CV_OVERRIDE;
+            virtual void run(
+                    InputArray frame0, InputArray frame1, InputArray points0, InputOutputArray points1,
+                    OutputArray status, OutputArray errors) CV_OVERRIDE;
 
-    void run(const cuda::GpuMat &frame0, const cuda::GpuMat &frame1, const cuda::GpuMat &points0, cuda::GpuMat &points1,
-             cuda::GpuMat &status, cuda::GpuMat &errors);
+            void run(const cuda::GpuMat &frame0, const cuda::GpuMat &frame1, const cuda::GpuMat &points0, cuda::GpuMat &points1,
+                     cuda::GpuMat &status, cuda::GpuMat &errors);
 
-    void run(const cuda::GpuMat &frame0, const cuda::GpuMat &frame1, const cuda::GpuMat &points0, cuda::GpuMat &points1,
-             cuda::GpuMat &status);
+            void run(const cuda::GpuMat &frame0, const cuda::GpuMat &frame1, const cuda::GpuMat &points0, cuda::GpuMat &points1,
+                     cuda::GpuMat &status);
 
-private:
-    Ptr<cuda::SparsePyrLKOpticalFlow> optFlowEstimator_;
-    cuda::GpuMat frame0_, frame1_, points0_, points1_, status_, errors_;
-};
+        private:
+            Ptr<cuda::SparsePyrLKOpticalFlow> optFlowEstimator_;
+            cuda::GpuMat frame0_, frame1_, points0_, points1_, status_, errors_;
+        };
 
-class CV_EXPORTS DensePyrLkOptFlowEstimatorGpu
-        : public PyrLkOptFlowEstimatorBase, public IDenseOptFlowEstimator
-{
-public:
-    DensePyrLkOptFlowEstimatorGpu();
+        class CV_EXPORTS DensePyrLkOptFlowEstimatorGpu
+                : public PyrLkOptFlowEstimatorBase, public IDenseOptFlowEstimator
+        {
+        public:
+            DensePyrLkOptFlowEstimatorGpu();
 
-    virtual void run(
-            InputArray frame0, InputArray frame1, InputOutputArray flowX, InputOutputArray flowY,
-            OutputArray errors) CV_OVERRIDE;
+            virtual void run(
+                    InputArray frame0, InputArray frame1, InputOutputArray flowX, InputOutputArray flowY,
+                    OutputArray errors) CV_OVERRIDE;
 
-private:
-    Ptr<cuda::DensePyrLKOpticalFlow> optFlowEstimator_;
-    cuda::GpuMat frame0_, frame1_, flowX_, flowY_, errors_;
-};
+        private:
+            Ptr<cuda::DensePyrLKOpticalFlow> optFlowEstimator_;
+            cuda::GpuMat frame0_, frame1_, flowX_, flowY_, errors_;
+        };
 
 #endif
 
 //! @}
 
-} // namespace videostab
+    } // namespace videostab
 } // namespace cv
 
 #endif

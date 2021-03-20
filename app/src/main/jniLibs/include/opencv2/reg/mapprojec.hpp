@@ -42,7 +42,7 @@
 
 
 namespace cv {
-namespace reg {
+    namespace reg {
 
 //! @addtogroup reg
 //! @{
@@ -50,60 +50,75 @@ namespace reg {
 /*!
  * Defines an transformation that consists on a projective transformation
  */
-class CV_EXPORTS_W MapProjec : public Map
-{
-public:
-    /*!
-     * Default constructor builds an identity map
-     */
-    CV_WRAP MapProjec();
+        class CV_EXPORTS_W MapProjec
 
-    /*!
-     * Constructor providing explicit values
-     * \param[in] projTr Projective transformation
-     */
-    CV_WRAP MapProjec(InputArray projTr);
+        : public Map {
+        public:
 
-    /*!
-     * Destructor
-     */
-    ~MapProjec();
+        /*!
+         * Default constructor builds an identity map
+         */
+        CV_WRAP MapProjec();
 
-    CV_WRAP void inverseWarp(InputArray img1, OutputArray img2) const CV_OVERRIDE;
+        /*!
+         * Constructor providing explicit values
+         * \param[in] projTr Projective transformation
+         */
+        CV_WRAP MapProjec(InputArray projTr);
 
-    CV_WRAP cv::Ptr<Map> inverseMap() const CV_OVERRIDE;
+        /*!
+         * Destructor
+         */
+        ~
 
-    CV_WRAP void compose(cv::Ptr<Map> map) CV_OVERRIDE;
+        MapProjec();
 
-    CV_WRAP void scale(double factor) CV_OVERRIDE;
+        CV_WRAP void inverseWarp(InputArray img1, OutputArray img2) const
 
-    /*!
-     * Returns projection matrix
-     * \return Projection matrix
-     */
-    const cv::Matx<double, 3, 3>& getProjTr() const {
-        return projTr_;
-    }
+        CV_OVERRIDE;
 
-    CV_WRAP void getProjTr(OutputArray projTr) const {
-        Mat(projTr_).copyTo(projTr);
-    }
+        CV_WRAP cv::Ptr<Map>
 
-    /*!
-     * Normalizes object's homography
-     */
-    CV_WRAP void normalize() {
-        double z = 1./projTr_(2, 2);
-        for(size_t v_i = 0; v_i < sizeof(projTr_.val)/sizeof(projTr_.val[0]); ++v_i)
-            projTr_.val[v_i] *= z;
-    }
+        inverseMap() const
 
-private:
-    cv::Matx<double, 3, 3> projTr_;       /*< Projection matrix */
-};
+        CV_OVERRIDE;
+
+        CV_WRAP void compose(cv::Ptr<Map> map)
+
+        CV_OVERRIDE;
+
+        CV_WRAP void scale(double factor)
+
+        CV_OVERRIDE;
+
+        /*!
+         * Returns projection matrix
+         * \return Projection matrix
+         */
+        const cv::Matx<double, 3, 3> &getProjTr() const {
+            return projTr_;
+        }
+
+        CV_WRAP void getProjTr(OutputArray projTr) const {
+            Mat(projTr_).copyTo(projTr);
+        }
+
+        /*!
+         * Normalizes object's homography
+         */
+        CV_WRAP void normalize() {
+            double z = 1. / projTr_(2, 2);
+            for (size_t v_i = 0; v_i < sizeof(projTr_.val) / sizeof(projTr_.val[0]); ++v_i)
+                projTr_.val[v_i] *= z;
+        }
+
+        private:
+        cv::Matx<double, 3, 3> projTr_;       /*< Projection matrix */
+    };
 
 //! @}
 
-}}  // namespace cv::reg
+}
+}  // namespace cv::reg
 
 #endif  // MAPPROJEC_H_

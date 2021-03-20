@@ -46,10 +46,8 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace ppf_match_3d
-{
+namespace cv {
+    namespace ppf_match_3d {
 
 //! @addtogroup surface_matching
 //! @{
@@ -61,14 +59,19 @@ namespace ppf_match_3d
  *  and whether it should be loaded or not
  *  @return Returns the matrix on successfull load
  */
-CV_EXPORTS_W Mat loadPLYSimple(const char* fileName, int withNormals = 0);
+        CV_EXPORTS_W Mat
+
+        loadPLYSimple(const char *fileName, int withNormals = 0);
 
 /**
  *  @brief Write a point cloud to PLY file
  *  @param [in] PC Input point cloud
  *  @param [in] fileName The PLY model file to write
 */
-CV_EXPORTS_W void writePLY(Mat PC, const char* fileName);
+        CV_EXPORTS_W void writePLY(Mat
+        PC,
+        const char *fileName
+        );
 
 /**
 *  @brief Used for debbuging pruposes, writes a point cloud to a PLY file with the tip
@@ -76,10 +79,19 @@ CV_EXPORTS_W void writePLY(Mat PC, const char* fileName);
 *  @param [in] PC Input point cloud
 *  @param [in] fileName The PLY model file to write
 */
-CV_EXPORTS_W void writePLYVisibleNormals(Mat PC, const char* fileName);
+        CV_EXPORTS_W void writePLYVisibleNormals(Mat
+        PC,
+        const char *fileName
+        );
 
-Mat samplePCUniform(Mat PC, int sampleStep);
-Mat samplePCUniformInd(Mat PC, int sampleStep, std::vector<int>& indices);
+        Mat samplePCUniform(Mat
+        PC,
+        int sampleStep
+        );
+        Mat samplePCUniformInd(Mat
+        PC,
+        int sampleStep, std::vector<int>
+        & indices);
 
 /**
  *  Sample a point cloud using uniform steps
@@ -94,17 +106,50 @@ Mat samplePCUniformInd(Mat PC, int sampleStep, std::vector<int>& indices);
  *  by the distance to the origin. This parameter enables/disables the use of weighting.
  *  @return Sampled point cloud
 */
-CV_EXPORTS_W Mat samplePCByQuantization(Mat pc, Vec2f& xrange, Vec2f& yrange, Vec2f& zrange, float sample_step_relative, int weightByCenter=0);
+        CV_EXPORTS_W Mat
+        samplePCByQuantization(Mat
+        pc,
+        Vec2f &xrange, Vec2f
+        & yrange,
+        Vec2f &zrange,
+        float sample_step_relative,
+        int weightByCenter = 0
+        );
 
-void computeBboxStd(Mat pc, Vec2f& xRange, Vec2f& yRange, Vec2f& zRange);
+        void computeBboxStd(Mat
+        pc,
+        Vec2f &xRange, Vec2f
+        & yRange,
+        Vec2f &zRange
+        );
 
-void* indexPCFlann(Mat pc);
-void destroyFlann(void* flannIndex);
-void queryPCFlann(void* flannIndex, Mat& pc, Mat& indices, Mat& distances);
-void queryPCFlann(void* flannIndex, Mat& pc, Mat& indices, Mat& distances, const int numNeighbors);
+        void *indexPCFlann(Mat
+        pc);
 
-Mat normalizePCCoeff(Mat pc, float scale, float* Cx, float* Cy, float* Cz, float* MinVal, float* MaxVal);
-Mat transPCCoeff(Mat pc, float scale, float Cx, float Cy, float Cz, float MinVal, float MaxVal);
+        void destroyFlann(void *flannIndex);
+
+        void queryPCFlann(void *flannIndex, Mat &pc, Mat &indices, Mat &distances);
+
+        void queryPCFlann(void *flannIndex, Mat &pc, Mat &indices, Mat &distances, const int numNeighbors);
+
+        Mat normalizePCCoeff(Mat
+        pc,
+        float scale,
+        float *Cx,
+        float *Cy,
+        float *Cz,
+        float *MinVal,
+        float *MaxVal
+        );
+        Mat transPCCoeff(Mat
+        pc,
+        float scale,
+        float Cx,
+        float Cy,
+        float Cz,
+        float MinVal,
+        float MaxVal
+        );
 
 /**
  *  Transforms the point cloud with a given a homogeneous 4x4 pose matrix (in double precision)
@@ -114,20 +159,28 @@ Mat transPCCoeff(Mat pc, float scale, float Cx, float Cy, float Cz, float MinVal
  *  @param [in] Pose 4x4 pose matrix, but linearized in row-major form.
  *  @return Transformed point cloud
 */
-CV_EXPORTS_W Mat transformPCPose(Mat pc, const Matx44d& Pose);
+        CV_EXPORTS_W Mat
+        transformPCPose(Mat
+        pc,
+        const Matx44d &Pose
+        );
 
 /**
  *  Generate a random 4x4 pose matrix
  *  @param [out] Pose The random pose
 */
-CV_EXPORTS_W void getRandomPose(Matx44d& Pose);
+        CV_EXPORTS_W void getRandomPose(Matx44d &Pose);
 
 /**
  *  Adds a uniform noise in the given scale to the input point cloud
  *  @param [in] pc Input point cloud (CV_32F family).
  *  @param [in] scale Input scale of the noise. The larger the scale, the more noisy the output
 */
-CV_EXPORTS_W Mat addNoisePC(Mat pc, double scale);
+        CV_EXPORTS_W Mat
+        addNoisePC(Mat
+        pc,
+        double scale
+        );
 
 /**
  *  @brief Compute the normals of an arbitrary point cloud
@@ -143,11 +196,17 @@ CV_EXPORTS_W Mat addNoisePC(Mat pc, double scale);
  *  @param [in] viewpoint
  *  @return Returns 0 on success
  */
-CV_EXPORTS_W int computeNormalsPC3d(const Mat& PC, CV_OUT Mat& PCNormals, const int NumNeighbors, const bool FlipViewpoint, const Vec3f& viewpoint);
+        CV_EXPORTS_W int computeNormalsPC3d(const Mat &PC, CV_OUT Mat &
+
+        PCNormals,
+        const int NumNeighbors,
+        const bool FlipViewpoint,
+        const Vec3f &viewpoint
+        );
 
 //! @}
 
-} // namespace ppf_match_3d
+    } // namespace ppf_match_3d
 } // namespace cv
 
 #endif

@@ -48,10 +48,8 @@
 #include <algorithm>
 #include "opencv2/core.hpp"
 
-namespace cv
-{
-namespace videostab
-{
+namespace cv {
+    namespace videostab {
 
 //! @addtogroup videostab_marching
 //! @{
@@ -60,60 +58,66 @@ namespace videostab
 
   See http://iwi.eldoc.ub.rug.nl/FILES/root/2004/JGraphToolsTelea/2004JGraphToolsTelea.pdf
  */
-class CV_EXPORTS FastMarchingMethod
-{
-public:
-    FastMarchingMethod() : inf_(1e6f), size_(0) {}
+        class CV_EXPORTS FastMarchingMethod {
+        public:
+            FastMarchingMethod() : inf_(1e6f), size_(0) {}
 
-    /** @brief Template method that runs the Fast Marching Method.
+            /** @brief Template method that runs the Fast Marching Method.
 
-    @param mask Image mask. 0 value indicates that the pixel value must be inpainted, 255 indicates
-    that the pixel value is known, other values aren't acceptable.
-    @param inpaint Inpainting functor that overloads void operator ()(int x, int y).
-    @return Inpainting functor.
-     */
-    template <typename Inpaint>
-    Inpaint run(const Mat &mask, Inpaint inpaint);
+            @param mask Image mask. 0 value indicates that the pixel value must be inpainted, 255 indicates
+            that the pixel value is known, other values aren't acceptable.
+            @param inpaint Inpainting functor that overloads void operator ()(int x, int y).
+            @return Inpainting functor.
+             */
+            template<typename Inpaint>
+            Inpaint run(const Mat &mask, Inpaint inpaint);
 
-    /**
-    @return Distance map that's created during working of the method.
-    */
-    Mat distanceMap() const { return dist_; }
+            /**
+            @return Distance map that's created during working of the method.
+            */
+            Mat distanceMap() const { return dist_; }
 
-private:
-    enum { INSIDE = 0, BAND = 1, KNOWN = 255 };
+        private:
+            enum {
+                INSIDE = 0, BAND = 1, KNOWN = 255
+            };
 
-    struct DXY
-    {
-        float dist;
-        int x, y;
+            struct DXY {
+                float dist;
+                int x, y;
 
-        DXY() : dist(0), x(0), y(0) {}
-        DXY(float _dist, int _x, int _y) : dist(_dist), x(_x), y(_y) {}
-        bool operator <(const DXY &dxy) const { return dist < dxy.dist; }
-    };
+                DXY() : dist(0), x(0), y(0) {}
 
-    float solve(int x1, int y1, int x2, int y2) const;
-    int& indexOf(const DXY &dxy) { return index_(dxy.y, dxy.x); }
+                DXY(float _dist, int _x, int _y) : dist(_dist), x(_x), y(_y) {}
 
-    void heapUp(int idx);
-    void heapDown(int idx);
-    void heapAdd(const DXY &dxy);
-    void heapRemoveMin();
+                bool operator<(const DXY &dxy) const { return dist < dxy.dist; }
+            };
 
-    float inf_;
+            float solve(int x1, int y1, int x2, int y2) const;
 
-    cv::Mat_<uchar> flag_; // flag map
-    cv::Mat_<float> dist_; // distance map
+            int &indexOf(const DXY &dxy) { return index_(dxy.y, dxy.x); }
 
-    cv::Mat_<int> index_; // index of point in the narrow band
-    std::vector<DXY> narrowBand_; // narrow band heap
-    int size_; // narrow band size
-};
+            void heapUp(int idx);
+
+            void heapDown(int idx);
+
+            void heapAdd(const DXY &dxy);
+
+            void heapRemoveMin();
+
+            float inf_;
+
+            cv::Mat_<uchar> flag_; // flag map
+            cv::Mat_<float> dist_; // distance map
+
+            cv::Mat_<int> index_; // index of point in the narrow band
+            std::vector<DXY> narrowBand_; // narrow band heap
+            int size_; // narrow band size
+        };
 
 //! @}
 
-} // namespace videostab
+    } // namespace videostab
 } // namespace cv
 
 #include "fast_marching_inl.hpp"

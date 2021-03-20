@@ -18,12 +18,12 @@ import java.lang.reflect.Method;
  */
 public class SkinResource {
 
+    private static final String TAG = "SkinResource";
     // 资源通过这个对象获取
     private Resources mSkinResource;
     private String mPackageName;
-    private static final String TAG = "SkinResource";
 
-    public SkinResource(Context context,String skinPath) {
+    public SkinResource(Context context, String skinPath) {
         try {
             // 读取本地的一个 .skin里面的资源
             Resources superRes = context.getResources();
@@ -50,16 +50,17 @@ public class SkinResource {
 
     /**
      * 通过名字获取Drawable
+     *
      * @param resName
      * @return
      */
-    public Drawable getDrawableByName(String resName){
+    public Drawable getDrawableByName(String resName) {
         try {
             int resId = mSkinResource.getIdentifier(resName, "drawable", mPackageName);
-            Log.e(TAG,"resId -> "+resId+" mPackageName -> "+mPackageName +" resName -> "+resName);
+            Log.e(TAG, "resId -> " + resId + " mPackageName -> " + mPackageName + " resName -> " + resName);
             Drawable drawable = mSkinResource.getDrawable(resId);
             return drawable;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -67,15 +68,16 @@ public class SkinResource {
 
     /**
      * 通过名字获取颜色
+     *
      * @param resName
      * @return
      */
-    public ColorStateList getColorByName(String resName){
+    public ColorStateList getColorByName(String resName) {
         try {
             int resId = mSkinResource.getIdentifier(resName, "color", mPackageName);
             ColorStateList color = mSkinResource.getColorStateList(resId);
             return color;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

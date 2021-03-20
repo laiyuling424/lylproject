@@ -50,54 +50,60 @@
 
 using namespace std;
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_track
 //! @{
 
-struct TRACK_alovObj : public Object
-{
-    int id;
-    std::string imagePath;
-    vector <Point2f> gtbb;
-};
+        struct TRACK_alovObj : public Object {
+            int id;
+            std::string imagePath;
+            vector <Point2f> gtbb;
+        };
 
-const string sectionNames[] = { "01-Light", "02-SurfaceCover", "03-Specularity", "04-Transparency", "05-Shape", "06-MotionSmoothness", "07-MotionCoherence",
-"08-Clutter", "09-Confusion", "10-LowContrast", "11-Occlusion", "12-MovingCamera", "13-ZoomingCamera", "14-LongDuration" };
+        const string sectionNames[] = {"01-Light", "02-SurfaceCover", "03-Specularity", "04-Transparency", "05-Shape", "06-MotionSmoothness",
+                                       "07-MotionCoherence",
+                                       "08-Clutter", "09-Confusion", "10-LowContrast", "11-Occlusion", "12-MovingCamera", "13-ZoomingCamera",
+                                       "14-LongDuration"};
 
-const int sectionSizes[] = { 33, 15, 18, 20, 24, 22, 12, 15, 37, 23, 34, 22, 29, 10 };
+        const int sectionSizes[] = {33, 15, 18, 20, 24, 22, 12, 15, 37, 23, 34, 22, 29, 10};
 
-class CV_EXPORTS TRACK_alov : public Dataset
-{
-public:
-    static Ptr<TRACK_alov> create();
+        class CV_EXPORTS TRACK_alov
 
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        : public Dataset {
+        public:
 
-    //Load only frames with annotations (~every 5-th frame)
-    virtual void loadAnnotatedOnly(const std::string &path) = 0;
+        static Ptr <TRACK_alov> create();
 
-    virtual int getDatasetsNum() = 0;
+        virtual void load(const std::string &path)
 
-    virtual int getDatasetLength(int id) = 0;
+        CV_OVERRIDE = 0;
 
-    virtual bool initDataset(int id) = 0;
+        //Load only frames with annotations (~every 5-th frame)
+        virtual void loadAnnotatedOnly(const std::string &path) = 0;
 
-    virtual bool getNextFrame(Mat &frame) = 0;
-    virtual vector <Point2f> getNextGT() = 0;
+        virtual int getDatasetsNum() = 0;
 
-    //Get frame/GT by datasetID (1..N) frameID (1..K)
-    virtual bool getFrame(Mat &frame, int datasetID, int frameID) = 0;
-    virtual vector <Point2f> getGT(int datasetID, int frameID) = 0;
+        virtual int getDatasetLength(int id) = 0;
 
-protected:
-    vector <vector <Ptr<TRACK_alovObj> > > data;
-    int activeDatasetID;
-    int frameCounter;
-};
+        virtual bool initDataset(int id) = 0;
+
+        virtual bool getNextFrame(Mat &frame) = 0;
+
+        virtual vector <Point2f> getNextGT() = 0;
+
+        //Get frame/GT by datasetID (1..N) frameID (1..K)
+        virtual bool getFrame(Mat &frame, int datasetID, int frameID) = 0;
+
+        virtual vector <Point2f> getGT(int datasetID, int frameID) = 0;
+
+        protected:
+        vector <vector<Ptr < TRACK_alovObj>> >
+        data;
+        int activeDatasetID;
+        int frameCounter;
+    };
 
 //! @}
 

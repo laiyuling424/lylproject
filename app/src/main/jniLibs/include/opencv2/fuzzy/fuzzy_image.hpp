@@ -45,65 +45,65 @@
 #include "types.hpp"
 #include "opencv2/core.hpp"
 
-namespace cv
-{
+namespace cv {
 
-namespace ft
-{
-    //! @addtogroup f_image
-    //! @{
+    namespace ft {
+        //! @addtogroup f_image
+        //! @{
 
-    /** @brief Creates kernel from basic functions.
-    @param A Basic function used in axis **x**.
-    @param B Basic function used in axis **y**.
-    @param kernel Final 32-bit kernel derived from **A** and **B**.
-    @param chn Number of kernel channels.
+        /** @brief Creates kernel from basic functions.
+        @param A Basic function used in axis **x**.
+        @param B Basic function used in axis **y**.
+        @param kernel Final 32-bit kernel derived from **A** and **B**.
+        @param chn Number of kernel channels.
 
-    The function creates kernel usable for latter fuzzy image processing.
-    */
-    CV_EXPORTS_AS(createKernel1) void createKernel(InputArray A, InputArray B, OutputArray kernel, const int chn);
+        The function creates kernel usable for latter fuzzy image processing.
+        */
+        CV_EXPORTS_AS(createKernel1)
 
-    /** @brief Creates kernel from general functions.
-    @param function Function type could be one of the following:
-        -   **LINEAR** Linear basic function.
-    @param radius Radius of the basic function.
-    @param kernel Final 32-bit kernel.
-    @param chn Number of kernel channels.
+        void createKernel(InputArray A, InputArray B, OutputArray kernel, const int chn);
 
-    The function creates kernel from predefined functions.
-    */
-    CV_EXPORTS_W void createKernel(int function, int radius, OutputArray kernel, const int chn);
+        /** @brief Creates kernel from general functions.
+        @param function Function type could be one of the following:
+            -   **LINEAR** Linear basic function.
+        @param radius Radius of the basic function.
+        @param kernel Final 32-bit kernel.
+        @param chn Number of kernel channels.
 
-    /** @brief Image inpainting
-    @param image Input image.
-    @param mask Mask used for unwanted area marking.
-    @param output Output 32-bit image.
-    @param radius Radius of the basic function.
-    @param function Function type could be one of the following:
-        -   `ft::LINEAR` Linear basic function.
-    @param algorithm Algorithm could be one of the following:
-        -   `ft::ONE_STEP` One step algorithm.
-        -   `ft::MULTI_STEP` This algorithm automaticaly increases radius of the basic function.
-        -   `ft::ITERATIVE` Iterative algorithm running in more steps using partial computations.
+        The function creates kernel from predefined functions.
+        */
+        CV_EXPORTS_W void createKernel(int function, int radius, OutputArray kernel, const int chn);
 
-    This function provides inpainting technique based on the fuzzy mathematic.
+        /** @brief Image inpainting
+        @param image Input image.
+        @param mask Mask used for unwanted area marking.
+        @param output Output 32-bit image.
+        @param radius Radius of the basic function.
+        @param function Function type could be one of the following:
+            -   `ft::LINEAR` Linear basic function.
+        @param algorithm Algorithm could be one of the following:
+            -   `ft::ONE_STEP` One step algorithm.
+            -   `ft::MULTI_STEP` This algorithm automaticaly increases radius of the basic function.
+            -   `ft::ITERATIVE` Iterative algorithm running in more steps using partial computations.
 
-    @note
-        The algorithms are described in paper @cite Perf:rec.
-    */
-    CV_EXPORTS_W void inpaint(InputArray image, InputArray mask, OutputArray output, int radius, int function, int algorithm);
+        This function provides inpainting technique based on the fuzzy mathematic.
 
-    /** @brief Image filtering
-    @param image Input image.
-    @param kernel Final 32-bit kernel.
-    @param output Output 32-bit image.
+        @note
+            The algorithms are described in paper @cite Perf:rec.
+        */
+        CV_EXPORTS_W void inpaint(InputArray image, InputArray mask, OutputArray output, int radius, int function, int algorithm);
 
-    Filtering of the input image by means of F-transform.
-    */
-    CV_EXPORTS_W void filter(InputArray image, InputArray kernel, OutputArray output);
+        /** @brief Image filtering
+        @param image Input image.
+        @param kernel Final 32-bit kernel.
+        @param output Output 32-bit image.
 
-    //! @}
-}
+        Filtering of the input image by means of F-transform.
+        */
+        CV_EXPORTS_W void filter(InputArray image, InputArray kernel, OutputArray output);
+
+        //! @}
+    }
 }
 
 #endif // __OPENCV_FUZZY_IMAGE_H__

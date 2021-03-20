@@ -46,7 +46,7 @@
 #include "opencv2/structured_light/structured_light.hpp"
 
 namespace cv {
-namespace structured_light {
+    namespace structured_light {
 //! @addtogroup structured_light
 //! @{
 
@@ -65,83 +65,92 @@ namespace structured_light {
  *  when it is not lit (lowest value). So for a a projector with resolution 1024x768, the number of pattern images will be Ncols * 2 + Nrows * 2 = 40.
  *
  */
-class CV_EXPORTS_W GrayCodePattern : public StructuredLightPattern
-{
- public:
+        class CV_EXPORTS_W GrayCodePattern
 
-  /** @brief Parameters of StructuredLightPattern constructor.
-   *  @param width Projector's width. Default value is 1024.
-   *  @param height Projector's height. Default value is 768.
-   */
-  struct CV_EXPORTS Params
-  {
-    Params();
-    int width;
-    int height;
-  };
+        : public StructuredLightPattern {
+        public:
 
-  /** @brief Constructor
-   @param parameters GrayCodePattern parameters GrayCodePattern::Params: the width and the height of the projector.
-   */
-  static Ptr<GrayCodePattern> create( const GrayCodePattern::Params &parameters = GrayCodePattern::Params() );
+        /** @brief Parameters of StructuredLightPattern constructor.
+         *  @param width Projector's width. Default value is 1024.
+         *  @param height Projector's height. Default value is 768.
+         */
+        struct CV_EXPORTS Params
+                {
+                        Params();
+                int width;
+                int height;
+                };
 
-  // alias for scripting
-  CV_WRAP
-  static Ptr<GrayCodePattern> create( int width, int height );
+        /** @brief Constructor
+         @param parameters GrayCodePattern parameters GrayCodePattern::Params: the width and the height of the projector.
+         */
+        static Ptr <GrayCodePattern> create(const GrayCodePattern::Params &parameters = GrayCodePattern::Params());
 
-  /** @brief Get the number of pattern images needed for the graycode pattern.
-   *
-   * @return The number of pattern images needed for the graycode pattern.
-   *
-   */
-   CV_WRAP
-   virtual size_t getNumberOfPatternImages() const = 0;
+        // alias for scripting
+        CV_WRAP
+        static Ptr<GrayCodePattern>
 
-  /** @brief Sets the value for white threshold, needed for decoding.
-   *
-   *  White threshold is a number between 0-255 that represents the minimum brightness difference required for valid pixels, between the graycode pattern and its inverse images; used in getProjPixel method.
-   *
-   *  @param value The desired white threshold value.
-   *
-   */
-  CV_WRAP
-  virtual void setWhiteThreshold( size_t value ) = 0;
+        create(int width, int height);
 
-  /** @brief Sets the value for black threshold, needed for decoding (shadowsmasks computation).
-   *
-   *  Black threshold is a number between 0-255 that represents the minimum brightness difference required for valid pixels, between the fully illuminated (white) and the not illuminated images (black); used in computeShadowMasks method.
-   *
-   *  @param value The desired black threshold value.
-   *
-   */
-  CV_WRAP
-  virtual void setBlackThreshold( size_t value ) = 0;
+        /** @brief Get the number of pattern images needed for the graycode pattern.
+         *
+         * @return The number of pattern images needed for the graycode pattern.
+         *
+         */
+        CV_WRAP
+        virtual size_t
 
-  /** @brief Generates the all-black and all-white images needed for shadowMasks computation.
-   *
-   *  To identify shadow regions, the regions of two images where the pixels are not lit by projector's light and thus where there is not coded information,
-   *  the 3DUNDERWORLD algorithm computes a shadow mask for the two cameras views, starting from a white and a black images captured by each camera.
-   *  This method generates these two additional images to project.
-   *
-   *  @param blackImage The generated all-black CV_8U image, at projector's resolution.
-   *  @param whiteImage The generated all-white CV_8U image, at projector's resolution.
-   */
-  CV_WRAP
-  virtual void getImagesForShadowMasks( InputOutputArray blackImage, InputOutputArray whiteImage ) const = 0;
+        getNumberOfPatternImages() const = 0;
 
-  /** @brief For a (x,y) pixel of a camera returns the corresponding projector pixel.
-   *
-   *  The function decodes each pixel in the pattern images acquired by a camera into their corresponding decimal numbers representing the projector's column and row,
-   *  providing a mapping between camera's and projector's pixel.
-   *
-   *  @param patternImages The pattern images acquired by the camera, stored in a grayscale vector < Mat >.
-   *  @param x x coordinate of the image pixel.
-   *  @param y y coordinate of the image pixel.
-   *  @param projPix Projector's pixel corresponding to the camera's pixel: projPix.x and projPix.y are the image coordinates of the projector's pixel corresponding to the pixel being decoded in a camera.
-   */
-  CV_WRAP
-  virtual bool getProjPixel( InputArrayOfArrays patternImages, int x, int y, CV_OUT Point &projPix ) const = 0;
-};
+        /** @brief Sets the value for white threshold, needed for decoding.
+         *
+         *  White threshold is a number between 0-255 that represents the minimum brightness difference required for valid pixels, between the graycode pattern and its inverse images; used in getProjPixel method.
+         *
+         *  @param value The desired white threshold value.
+         *
+         */
+        CV_WRAP
+        virtual void setWhiteThreshold(size_t
+        value ) = 0;
+
+        /** @brief Sets the value for black threshold, needed for decoding (shadowsmasks computation).
+         *
+         *  Black threshold is a number between 0-255 that represents the minimum brightness difference required for valid pixels, between the fully illuminated (white) and the not illuminated images (black); used in computeShadowMasks method.
+         *
+         *  @param value The desired black threshold value.
+         *
+         */
+        CV_WRAP
+        virtual void setBlackThreshold(size_t
+        value ) = 0;
+
+        /** @brief Generates the all-black and all-white images needed for shadowMasks computation.
+         *
+         *  To identify shadow regions, the regions of two images where the pixels are not lit by projector's light and thus where there is not coded information,
+         *  the 3DUNDERWORLD algorithm computes a shadow mask for the two cameras views, starting from a white and a black images captured by each camera.
+         *  This method generates these two additional images to project.
+         *
+         *  @param blackImage The generated all-black CV_8U image, at projector's resolution.
+         *  @param whiteImage The generated all-white CV_8U image, at projector's resolution.
+         */
+        CV_WRAP
+        virtual void getImagesForShadowMasks(InputOutputArray blackImage, InputOutputArray whiteImage) const = 0;
+
+        /** @brief For a (x,y) pixel of a camera returns the corresponding projector pixel.
+         *
+         *  The function decodes each pixel in the pattern images acquired by a camera into their corresponding decimal numbers representing the projector's column and row,
+         *  providing a mapping between camera's and projector's pixel.
+         *
+         *  @param patternImages The pattern images acquired by the camera, stored in a grayscale vector < Mat >.
+         *  @param x x coordinate of the image pixel.
+         *  @param y y coordinate of the image pixel.
+         *  @param projPix Projector's pixel corresponding to the camera's pixel: projPix.x and projPix.y are the image coordinates of the projector's pixel corresponding to the pixel being decoded in a camera.
+         */
+        CV_WRAP
+        virtual bool getProjPixel(InputArrayOfArrays patternImages, int x, int y, CV_OUT Point &
+
+        projPix ) const = 0;
+    };
 
 //! @}
 }

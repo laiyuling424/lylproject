@@ -58,10 +58,8 @@ the use of this software, even if advised of the possibility of such damage.
 #include "opencv2/core.hpp"
 #include "opencv2/video.hpp"
 
-namespace cv
-{
-namespace optflow
-{
+namespace cv {
+    namespace optflow {
 
 //! @addtogroup optflow
 //! @{
@@ -71,75 +69,91 @@ namespace optflow
  * Solution will be regularized according to this prior.
  * You need to generate appropriate prior file with "learn_prior.py" script beforehand.
  */
-class CV_EXPORTS_W PCAPrior
-{
-private:
-  Mat L1;
-  Mat L2;
-  Mat c1;
-  Mat c2;
+        class CV_EXPORTS_W PCAPrior
+                {
+                        private:
+                        Mat L1;
+                        Mat L2;
+                        Mat c1;
+                        Mat c2;
 
-public:
-  PCAPrior( const char *pathToPrior );
+                        public:
+                        PCAPrior( const char *pathToPrior );
 
-  int getPadding() const { return L1.size().height; }
+                        int getPadding() const { return L1.size().height; }
 
-  int getBasisSize() const { return L1.size().width; }
+                        int getBasisSize() const { return L1.size().width; }
 
-  void fillConstraints( float *A1, float *A2, float *b1, float *b2 ) const;
-};
+                        void fillConstraints( float *A1, float *A2, float *b1, float *b2 ) const;
+                };
 
 /** @brief PCAFlow algorithm.
  */
-class CV_EXPORTS_W OpticalFlowPCAFlow : public DenseOpticalFlow
-{
-protected:
-  const Ptr<const PCAPrior> prior;
-  const Size basisSize;
-  const float sparseRate;              // (0 .. 0.1)
-  const float retainedCornersFraction; // [0 .. 1]
-  const float occlusionsThreshold;
-  const float dampingFactor;
-  const float claheClip;
-  bool useOpenCL;
+        class CV_EXPORTS_W OpticalFlowPCAFlow
 
-public:
-  /** @brief Creates an instance of PCAFlow algorithm.
-   * @param _prior Learned prior or no prior (default). @see cv::optflow::PCAPrior
-   * @param _basisSize Number of basis vectors.
-   * @param _sparseRate Controls density of sparse matches.
-   * @param _retainedCornersFraction Retained corners fraction.
-   * @param _occlusionsThreshold Occlusion threshold.
-   * @param _dampingFactor Regularization term for solving least-squares. It is not related to the prior regularization.
-   * @param _claheClip Clip parameter for CLAHE.
-   */
-  OpticalFlowPCAFlow( Ptr<const PCAPrior> _prior = Ptr<const PCAPrior>(), const Size _basisSize = Size( 18, 14 ),
-                      float _sparseRate = 0.024, float _retainedCornersFraction = 0.2,
-                      float _occlusionsThreshold = 0.0003, float _dampingFactor = 0.00002, float _claheClip = 14 );
+        : public DenseOpticalFlow {
+        protected:
+        const Ptr<const PCAPrior> prior;
+        const Size basisSize;
+        const float sparseRate;              // (0 .. 0.1)
+        const float retainedCornersFraction; // [0 .. 1]
+        const float occlusionsThreshold;
+        const float dampingFactor;
+        const float claheClip;
+        bool useOpenCL;
 
-  void calc( InputArray I0, InputArray I1, InputOutputArray flow ) CV_OVERRIDE;
-  void collectGarbage() CV_OVERRIDE;
+        public:
+        /** @brief Creates an instance of PCAFlow algorithm.
+         * @param _prior Learned prior or no prior (default). @see cv::optflow::PCAPrior
+         * @param _basisSize Number of basis vectors.
+         * @param _sparseRate Controls density of sparse matches.
+         * @param _retainedCornersFraction Retained corners fraction.
+         * @param _occlusionsThreshold Occlusion threshold.
+         * @param _dampingFactor Regularization term for solving least-squares. It is not related to the prior regularization.
+         * @param _claheClip Clip parameter for CLAHE.
+         */
+        OpticalFlowPCAFlow( Ptr<const PCAPrior>
+        _prior = Ptr <
+        const PCAPrior>(),
+        const Size _basisSize = Size(18, 14),
+        float _sparseRate = 0.024,
+        float _retainedCornersFraction = 0.2,
+        float _occlusionsThreshold = 0.0003,
+        float _dampingFactor = 0.00002,
+        float _claheClip = 14
+        );
 
-private:
-  void findSparseFeatures( UMat &from, UMat &to, std::vector<Point2f> &features,
-                           std::vector<Point2f> &predictedFeatures ) const;
+        void calc(InputArray I0, InputArray I1, InputOutputArray flow)
 
-  void removeOcclusions( UMat &from, UMat &to, std::vector<Point2f> &features,
-                         std::vector<Point2f> &predictedFeatures ) const;
+        CV_OVERRIDE;
 
-  void getSystem( OutputArray AOut, OutputArray b1Out, OutputArray b2Out, const std::vector<Point2f> &features,
-                  const std::vector<Point2f> &predictedFeatures, const Size size );
+        void collectGarbage()
 
-  void getSystem( OutputArray A1Out, OutputArray A2Out, OutputArray b1Out, OutputArray b2Out,
-                  const std::vector<Point2f> &features, const std::vector<Point2f> &predictedFeatures,
-                  const Size size );
+        CV_OVERRIDE;
 
-  OpticalFlowPCAFlow& operator=( const OpticalFlowPCAFlow& ); // make it non-assignable
-};
+        private:
+
+        void findSparseFeatures(UMat &from, UMat &to, std::vector <Point2f> &features,
+                                std::vector <Point2f> &predictedFeatures) const;
+
+        void removeOcclusions(UMat &from, UMat &to, std::vector <Point2f> &features,
+                              std::vector <Point2f> &predictedFeatures) const;
+
+        void getSystem(OutputArray AOut, OutputArray b1Out, OutputArray b2Out, const std::vector <Point2f> &features,
+                       const std::vector <Point2f> &predictedFeatures, const Size size);
+
+        void getSystem(OutputArray A1Out, OutputArray A2Out, OutputArray b1Out, OutputArray b2Out,
+                       const std::vector <Point2f> &features, const std::vector <Point2f> &predictedFeatures,
+                       const Size size);
+
+        OpticalFlowPCAFlow &operator=(const OpticalFlowPCAFlow &); // make it non-assignable
+    };
 
 /** @brief Creates an instance of PCAFlow
 */
-CV_EXPORTS_W Ptr<DenseOpticalFlow> createOptFlow_PCAFlow();
+    CV_EXPORTS_W Ptr<DenseOpticalFlow>
+
+    createOptFlow_PCAFlow();
 
 //! @}
 

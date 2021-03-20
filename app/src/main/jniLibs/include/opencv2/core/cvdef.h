@@ -165,37 +165,37 @@ namespace cv { namespace debug_build_guard { } using namespace debug_build_guard
 /** @brief Available CPU features.
 */
 enum CpuFeatures {
-    CPU_MMX             = 1,
-    CPU_SSE             = 2,
-    CPU_SSE2            = 3,
-    CPU_SSE3            = 4,
-    CPU_SSSE3           = 5,
-    CPU_SSE4_1          = 6,
-    CPU_SSE4_2          = 7,
-    CPU_POPCNT          = 8,
-    CPU_FP16            = 9,
-    CPU_AVX             = 10,
-    CPU_AVX2            = 11,
-    CPU_FMA3            = 12,
+    CPU_MMX = 1,
+    CPU_SSE = 2,
+    CPU_SSE2 = 3,
+    CPU_SSE3 = 4,
+    CPU_SSSE3 = 5,
+    CPU_SSE4_1 = 6,
+    CPU_SSE4_2 = 7,
+    CPU_POPCNT = 8,
+    CPU_FP16 = 9,
+    CPU_AVX = 10,
+    CPU_AVX2 = 11,
+    CPU_FMA3 = 12,
 
-    CPU_AVX_512F        = 13,
-    CPU_AVX_512BW       = 14,
-    CPU_AVX_512CD       = 15,
-    CPU_AVX_512DQ       = 16,
-    CPU_AVX_512ER       = 17,
-    CPU_AVX_512IFMA512  = 18, // deprecated
-    CPU_AVX_512IFMA     = 18,
-    CPU_AVX_512PF       = 19,
-    CPU_AVX_512VBMI     = 20,
-    CPU_AVX_512VL       = 21,
+    CPU_AVX_512F = 13,
+    CPU_AVX_512BW = 14,
+    CPU_AVX_512CD = 15,
+    CPU_AVX_512DQ = 16,
+    CPU_AVX_512ER = 17,
+    CPU_AVX_512IFMA512 = 18, // deprecated
+    CPU_AVX_512IFMA = 18,
+    CPU_AVX_512PF = 19,
+    CPU_AVX_512VBMI = 20,
+    CPU_AVX_512VL = 21,
 
-    CPU_NEON            = 100,
+    CPU_NEON = 100,
 
-    CPU_VSX             = 200,
+    CPU_VSX = 200,
 
-    CPU_AVX512_SKX      = 256, //!< Skylake-X with AVX-512F/CD/BW/DQ/VL
+    CPU_AVX512_SKX = 256, //!< Skylake-X with AVX-512F/CD/BW/DQ/VL
 
-    CPU_MAX_FEATURE     = 512  // see CV_HARDWARE_MAX_FEATURE
+    CPU_MAX_FEATURE = 512  // see CV_HARDWARE_MAX_FEATURE
 };
 
 
@@ -214,42 +214,37 @@ enum CpuFeatures {
 #  define CV_FP16_TYPE 0
 #endif
 
-typedef union Cv16suf
-{
+typedef union Cv16suf {
     short i;
 #if CV_FP16_TYPE
     __fp16 h;
 #endif
-    struct _fp16Format
-    {
-        unsigned int significand : 10;
-        unsigned int exponent    : 5;
-        unsigned int sign        : 1;
+    struct _fp16Format {
+        unsigned int significand: 10;
+        unsigned int exponent: 5;
+        unsigned int sign: 1;
     } fmt;
 }
-Cv16suf;
+        Cv16suf;
 
-typedef union Cv32suf
-{
+typedef union Cv32suf {
     int i;
     unsigned u;
     float f;
-    struct _fp32Format
-    {
-        unsigned int significand : 23;
-        unsigned int exponent    : 8;
-        unsigned int sign        : 1;
+    struct _fp32Format {
+        unsigned int significand: 23;
+        unsigned int exponent: 8;
+        unsigned int sign: 1;
     } fmt;
 }
-Cv32suf;
+        Cv32suf;
 
-typedef union Cv64suf
-{
+typedef union Cv64suf {
     int64 i;
     uint64 u;
     double f;
 }
-Cv64suf;
+        Cv64suf;
 
 #define OPENCV_ABI_COMPATIBILITY 300
 
@@ -332,11 +327,11 @@ Cv64suf;
     (CV_MAT_CN(type) << ((((sizeof(size_t)/4+1)*16384|0x3a50) >> CV_MAT_DEPTH(type)*2) & 3))
 
 #ifndef MIN
-#  define MIN(a,b)  ((a) > (b) ? (b) : (a))
+#  define MIN(a, b)  ((a) > (b) ? (b) : (a))
 #endif
 
 #ifndef MAX
-#  define MAX(a,b)  ((a) < (b) ? (b) : (a))
+#  define MAX(a, b)  ((a) < (b) ? (b) : (a))
 #endif
 
 /****************************************************************************************\
@@ -367,7 +362,7 @@ Cv64suf;
 \****************************************************************************************/
 
 #ifdef CV_XADD
-  // allow to use user-defined macro
+// allow to use user-defined macro
 #elif defined __GNUC__ || defined __clang__
 #  if defined __clang__ && __clang_major__ >= 3 && !defined __ANDROID__ && !defined __EMSCRIPTEN__ && !defined(__CUDACC__)
 #    ifdef __ATOMIC_ACQ_REL
@@ -377,7 +372,7 @@ Cv64suf;
 #    endif
 #  else
 #    if defined __ATOMIC_ACQ_REL && !defined __clang__
-       // version for gcc >= 4.7
+// version for gcc >= 4.7
 #      define CV_XADD(addr, delta) (int)__atomic_fetch_add((unsigned*)(addr), (unsigned)(delta), __ATOMIC_ACQ_REL)
 #    else
 #      define CV_XADD(addr, delta) (int)__sync_fetch_and_add((unsigned*)(addr), (unsigned)(delta))
@@ -387,7 +382,7 @@ Cv64suf;
 #  include <intrin.h>
 #  define CV_XADD(addr, delta) (int)_InterlockedExchangeAdd((long volatile*)addr, delta)
 #else
-   CV_INLINE CV_XADD(int* addr, int delta) { int tmp = *addr; *addr += delta; return tmp; }
+CV_INLINE CV_XADD(int* addr, int delta) { int tmp = *addr; *addr += delta; return tmp; }
 #endif
 
 
@@ -463,7 +458,9 @@ Cv64suf;
 #ifndef CV_CXX_STD_ARRAY
 #  if __cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER >= 1900/*MSVS 2015*/)
 #    define CV_CXX_STD_ARRAY 1
+
 #    include <array>
+
 #  endif
 #else
 #  if CV_CXX_STD_ARRAY == 0
@@ -512,16 +509,18 @@ typedef signed __int64 int64_t;
 typedef unsigned __int64 uint64_t;
 }
 #elif defined(_MSC_VER) || __cplusplus >= 201103L
+
 #include <cstdint>
+
 namespace cv {
-using std::int8_t;
-using std::uint8_t;
-using std::int16_t;
-using std::uint16_t;
-using std::int32_t;
-using std::uint32_t;
-using std::int64_t;
-using std::uint64_t;
+    using std::int8_t;
+    using std::uint8_t;
+    using std::int16_t;
+    using std::uint16_t;
+    using std::int32_t;
+    using std::uint32_t;
+    using std::int64_t;
+    using std::uint64_t;
 }
 #else
 #include <stdint.h>

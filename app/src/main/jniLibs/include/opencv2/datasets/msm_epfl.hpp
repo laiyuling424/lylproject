@@ -49,38 +49,38 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_msm
 //! @{
 
-struct cameraParam
-{
-    Matx33d mat1;
-    double mat2[3];
-    Matx33d mat3;
-    double mat4[3];
-    int imageWidth, imageHeight;
-};
+        struct cameraParam {
+            Matx33d mat1;
+            double mat2[3];
+            Matx33d mat3;
+            double mat4[3];
+            int imageWidth, imageHeight;
+        };
 
-struct MSM_epflObj : public Object
-{
-    std::string imageName;
-    Matx23d bounding;
-    Matx34d p;
-    cameraParam camera;
-};
+        struct MSM_epflObj : public Object {
+            std::string imageName;
+            Matx23d bounding;
+            Matx34d p;
+            cameraParam camera;
+        };
 
-class CV_EXPORTS MSM_epfl : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS MSM_epfl
 
-    static Ptr<MSM_epfl> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <MSM_epfl> create();
+    };
 
 //! @}
 

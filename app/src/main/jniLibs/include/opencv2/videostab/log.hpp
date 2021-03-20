@@ -45,36 +45,32 @@
 
 #include "opencv2/core.hpp"
 
-namespace cv
-{
-namespace videostab
-{
+namespace cv {
+    namespace videostab {
 
 //! @addtogroup videostab
 //! @{
 
-class CV_EXPORTS ILog
-{
-public:
-    virtual ~ILog() {}
-    virtual void print(const char *format, ...) = 0;
-};
+        class CV_EXPORTS ILog {
+        public:
+            virtual ~ILog() {}
 
-class CV_EXPORTS NullLog : public ILog
-{
-public:
-    virtual void print(const char * /*format*/, ...) CV_OVERRIDE {}
-};
+            virtual void print(const char *format, ...) = 0;
+        };
 
-class CV_EXPORTS LogToStdout : public ILog
-{
-public:
-    virtual void print(const char *format, ...) CV_OVERRIDE;
-};
+        class CV_EXPORTS NullLog : public ILog {
+        public:
+            virtual void print(const char * /*format*/, ...) CV_OVERRIDE {}
+        };
+
+        class CV_EXPORTS LogToStdout : public ILog {
+        public:
+            virtual void print(const char *format, ...) CV_OVERRIDE;
+        };
 
 //! @}
 
-} // namespace videostab
+    } // namespace videostab
 } // namespace cv
 
 #endif

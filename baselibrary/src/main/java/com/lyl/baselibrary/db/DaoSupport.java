@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.ArrayMap;
 import android.util.Log;
 
-
 import com.lyl.baselibrary.db.curd.QuerySupport;
 
 import java.lang.reflect.Field;
@@ -20,18 +19,15 @@ import java.util.Map;
  * Description:
  */
 public class DaoSupport<T> implements IDaoSupport<T> {
+    private static final Object[] mPutMethodArgs = new Object[2];
+    private static final Map<String, Method> mPutMethods
+            = new ArrayMap<>();
     // SQLiteDatabase
     private SQLiteDatabase mSqLiteDatabase;
     // 泛型类
     private Class<T> mClazz;
-
     private String TAG = "DaoSupport";
-
-
-    private static final Object[] mPutMethodArgs = new Object[2];
-
-    private static final Map<String, Method> mPutMethods
-            = new ArrayMap<>();
+    private QuerySupport<T> mQuerySupport;
 
     public void init(SQLiteDatabase sqLiteDatabase, Class<T> clazz) {
         this.mSqLiteDatabase = sqLiteDatabase;
@@ -69,7 +65,6 @@ public class DaoSupport<T> implements IDaoSupport<T> {
         mSqLiteDatabase.execSQL(createTableSql);
     }
 
-
     // 插入数据库 t 是任意对象
     @Override
     public long insert(T obj) {
@@ -99,11 +94,10 @@ public class DaoSupport<T> implements IDaoSupport<T> {
         mSqLiteDatabase.endTransaction();
     }
 
-    private QuerySupport<T> mQuerySupport;
     @Override
     public QuerySupport<T> querySupport() {
-        if(mQuerySupport == null){
-            mQuerySupport = new QuerySupport<>(mSqLiteDatabase,mClazz);
+        if (mQuerySupport == null) {
+            mQuerySupport = new QuerySupport<>(mSqLiteDatabase, mClazz);
         }
         return mQuerySupport;
     }

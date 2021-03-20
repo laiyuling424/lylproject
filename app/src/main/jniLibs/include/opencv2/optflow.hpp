@@ -69,17 +69,15 @@ Functions reading and writing .flo files in "Middlebury" format, see: <http://vi
 #include "opencv2/optflow/pcaflow.hpp"
 #include "opencv2/optflow/sparse_matching_gpc.hpp"
 
-namespace cv
-{
-namespace optflow
-{
-    
+namespace cv {
+    namespace optflow {
+
 //! @addtogroup optflow
 //! @{
 
 /** @overload */
-CV_EXPORTS_W void calcOpticalFlowSF( InputArray from, InputArray to, OutputArray flow,
-                                     int layers, int averaging_block_size, int max_flow);
+        CV_EXPORTS_W void calcOpticalFlowSF(InputArray from, InputArray to, OutputArray flow,
+                                            int layers, int averaging_block_size, int max_flow);
 
 /** @brief Calculate an optical flow using "SimpleFlow" algorithm.
 
@@ -107,12 +105,12 @@ See @cite Tao2012 . And site of project - <http://graphics.berkeley.edu/papers/T
 @note
    -   An example using the simpleFlow algorithm can be found at samples/simpleflow_demo.cpp
  */
-CV_EXPORTS_W void calcOpticalFlowSF( InputArray from, InputArray to, OutputArray flow, int layers,
-                                     int averaging_block_size, int max_flow,
-                                     double sigma_dist, double sigma_color, int postprocess_window,
-                                     double sigma_dist_fix, double sigma_color_fix, double occ_thr,
-                                     int upscale_averaging_radius, double upscale_sigma_dist,
-                                     double upscale_sigma_color, double speed_up_thr );
+        CV_EXPORTS_W void calcOpticalFlowSF(InputArray from, InputArray to, OutputArray flow, int layers,
+                                            int averaging_block_size, int max_flow,
+                                            double sigma_dist, double sigma_color, int postprocess_window,
+                                            double sigma_dist_fix, double sigma_color_fix, double occ_thr,
+                                            int upscale_averaging_radius, double upscale_sigma_dist,
+                                            double upscale_sigma_color, double speed_up_thr);
 
 /** @brief Fast dense optical flow based on PyrLK sparse matches interpolation.
 
@@ -132,10 +130,10 @@ CV_EXPORTS_W void calcOpticalFlowSF( InputArray from, InputArray to, OutputArray
 @param fgs_lambda see the respective parameter of the ximgproc::fastGlobalSmootherFilter()
 @param fgs_sigma  see the respective parameter of the ximgproc::fastGlobalSmootherFilter()
  */
-CV_EXPORTS_W void calcOpticalFlowSparseToDense ( InputArray from, InputArray to, OutputArray flow,
-                                                 int grid_step = 8, int k = 128, float sigma = 0.05f,
-                                                 bool use_post_proc = true, float fgs_lambda = 500.0f,
-                                                 float fgs_sigma = 1.5f );
+        CV_EXPORTS_W void calcOpticalFlowSparseToDense(InputArray from, InputArray to, OutputArray flow,
+                                                       int grid_step = 8, int k = 128, float sigma = 0.05f,
+                                                       bool use_post_proc = true, float fgs_lambda = 500.0f,
+                                                       float fgs_sigma = 1.5f);
 
 /** @brief Read a .flo file
 
@@ -145,7 +143,10 @@ The function readOpticalFlow loads a flow field from a file and returns it as a 
 Resulting Mat has a type CV_32FC2 - floating-point, 2-channel. First channel corresponds to the
 flow in the horizontal direction (u), second - vertical (v).
  */
-CV_EXPORTS_W Mat readOpticalFlow( const String& path );
+        CV_EXPORTS_W Mat
+
+        readOpticalFlow(const String &path);
+
 /** @brief Write a .flo to disk
 
 @param path Path to the file to be written
@@ -155,7 +156,7 @@ The function stores a flow field in a file, returns true on success, false other
 The flow field must be a 2-channel, floating-point matrix (CV_32FC2). First channel corresponds
 to the flow in the horizontal direction (u), second - vertical (v).
  */
-CV_EXPORTS_W bool writeOpticalFlow( const String& path, InputArray flow );
+        CV_EXPORTS_W bool writeOpticalFlow(const String &path, InputArray flow);
 
 /** @brief Variational optical flow refinement
 
@@ -167,54 +168,64 @@ respectively. \f$\Psi(s^2)=\sqrt{s^2+\epsilon^2}\f$ is a robust penalizer to lim
 influence of outliers. A complete formulation and a description of the minimization
 procedure can be found in @cite Brox2004
 */
-class CV_EXPORTS_W VariationalRefinement : public DenseOpticalFlow
-{
-public:
-    /** @brief @ref calc function overload to handle separate horizontal (u) and vertical (v) flow components
-    (to avoid extra splits/merges) */
-    CV_WRAP virtual void calcUV(InputArray I0, InputArray I1, InputOutputArray flow_u, InputOutputArray flow_v) = 0;
+        class CV_EXPORTS_W VariationalRefinement
 
-    /** @brief Number of outer (fixed-point) iterations in the minimization procedure.
-    @see setFixedPointIterations */
-    CV_WRAP virtual int getFixedPointIterations() const = 0;
-    /** @copybrief getFixedPointIterations @see getFixedPointIterations */
-    CV_WRAP virtual void setFixedPointIterations(int val) = 0;
+        : public DenseOpticalFlow {
+        public:
 
-    /** @brief Number of inner successive over-relaxation (SOR) iterations
-        in the minimization procedure to solve the respective linear system.
-    @see setSorIterations */
-    CV_WRAP virtual int getSorIterations() const = 0;
-    /** @copybrief getSorIterations @see getSorIterations */
-    CV_WRAP virtual void setSorIterations(int val) = 0;
+        /** @brief @ref calc function overload to handle separate horizontal (u) and vertical (v) flow components
+        (to avoid extra splits/merges) */
+        CV_WRAP virtual void calcUV(InputArray I0, InputArray I1, InputOutputArray flow_u, InputOutputArray flow_v) = 0;
 
-    /** @brief Relaxation factor in SOR
-    @see setOmega */
-    CV_WRAP virtual float getOmega() const = 0;
-    /** @copybrief getOmega @see getOmega */
-    CV_WRAP virtual void setOmega(float val) = 0;
+        /** @brief Number of outer (fixed-point) iterations in the minimization procedure.
+        @see setFixedPointIterations */
+        CV_WRAP virtual int getFixedPointIterations() const = 0;
 
-    /** @brief Weight of the smoothness term
-    @see setAlpha */
-    CV_WRAP virtual float getAlpha() const = 0;
-    /** @copybrief getAlpha @see getAlpha */
-    CV_WRAP virtual void setAlpha(float val) = 0;
+        /** @copybrief getFixedPointIterations @see getFixedPointIterations */
+        CV_WRAP virtual void setFixedPointIterations(int val) = 0;
 
-    /** @brief Weight of the color constancy term
-    @see setDelta */
-    CV_WRAP virtual float getDelta() const = 0;
-    /** @copybrief getDelta @see getDelta */
-    CV_WRAP virtual void setDelta(float val) = 0;
+        /** @brief Number of inner successive over-relaxation (SOR) iterations
+            in the minimization procedure to solve the respective linear system.
+        @see setSorIterations */
+        CV_WRAP virtual int getSorIterations() const = 0;
 
-    /** @brief Weight of the gradient constancy term
-    @see setGamma */
-    CV_WRAP virtual float getGamma() const = 0;
-    /** @copybrief getGamma @see getGamma */
-    CV_WRAP virtual void setGamma(float val) = 0;
-};
+        /** @copybrief getSorIterations @see getSorIterations */
+        CV_WRAP virtual void setSorIterations(int val) = 0;
+
+        /** @brief Relaxation factor in SOR
+        @see setOmega */
+        CV_WRAP virtual float getOmega() const = 0;
+
+        /** @copybrief getOmega @see getOmega */
+        CV_WRAP virtual void setOmega(float val) = 0;
+
+        /** @brief Weight of the smoothness term
+        @see setAlpha */
+        CV_WRAP virtual float getAlpha() const = 0;
+
+        /** @copybrief getAlpha @see getAlpha */
+        CV_WRAP virtual void setAlpha(float val) = 0;
+
+        /** @brief Weight of the color constancy term
+        @see setDelta */
+        CV_WRAP virtual float getDelta() const = 0;
+
+        /** @copybrief getDelta @see getDelta */
+        CV_WRAP virtual void setDelta(float val) = 0;
+
+        /** @brief Weight of the gradient constancy term
+        @see setGamma */
+        CV_WRAP virtual float getGamma() const = 0;
+
+        /** @copybrief getGamma @see getGamma */
+        CV_WRAP virtual void setGamma(float val) = 0;
+    };
 
 /** @brief Creates an instance of VariationalRefinement
 */
-CV_EXPORTS_W Ptr<VariationalRefinement> createVariationalFlowRefinement();
+    CV_EXPORTS_W Ptr<VariationalRefinement>
+
+    createVariationalFlowRefinement();
 
 /** @brief DeepFlow optical flow algorithm implementation.
 
@@ -241,16 +252,24 @@ Iterations of Succesive Over-Relaxation (solver)
 -   member float omega
 Relaxation factor in SOR
  */
-CV_EXPORTS_W Ptr<DenseOpticalFlow> createOptFlow_DeepFlow();
+    CV_EXPORTS_W Ptr<DenseOpticalFlow>
+
+    createOptFlow_DeepFlow();
 
 //! Additional interface to the SimpleFlow algorithm - calcOpticalFlowSF()
-CV_EXPORTS_W Ptr<DenseOpticalFlow> createOptFlow_SimpleFlow();
+    CV_EXPORTS_W Ptr<DenseOpticalFlow>
+
+    createOptFlow_SimpleFlow();
 
 //! Additional interface to the Farneback's algorithm - calcOpticalFlowFarneback()
-CV_EXPORTS_W Ptr<DenseOpticalFlow> createOptFlow_Farneback();
+    CV_EXPORTS_W Ptr<DenseOpticalFlow>
+
+    createOptFlow_Farneback();
 
 //! Additional interface to the SparseToDenseFlow algorithm - calcOpticalFlowSparseToDense()
-CV_EXPORTS_W Ptr<DenseOpticalFlow> createOptFlow_SparseToDense();
+    CV_EXPORTS_W Ptr<DenseOpticalFlow>
+
+    createOptFlow_SparseToDense();
 
 /** @brief DIS optical flow algorithm.
 
@@ -264,11 +283,11 @@ including spatial propagation of flow vectors (@ref getUseSpatialPropagation), a
 utilize an initial flow approximation passed to @ref calc (which is, essentially, temporal propagation,
 if the previous frame's flow field is passed).
 */
-class CV_EXPORTS_W DISOpticalFlow : public DenseOpticalFlow
-{
-public:
-    enum
-    {
+    class CV_EXPORTS_W DISOpticalFlow
+
+    : public DenseOpticalFlow {
+    public:
+    enum {
         PRESET_ULTRAFAST = 0,
         PRESET_FAST = 1,
         PRESET_MEDIUM = 2
@@ -278,6 +297,7 @@ public:
         corresponds to the original image resolution). The final flow is obtained by bilinear upscaling.
         @see setFinestScale */
     CV_WRAP virtual int getFinestScale() const = 0;
+
     /** @copybrief getFinestScale @see getFinestScale */
     CV_WRAP virtual void setFinestScale(int val) = 0;
 
@@ -285,6 +305,7 @@ public:
         enough in most cases.
         @see setPatchSize */
     CV_WRAP virtual int getPatchSize() const = 0;
+
     /** @copybrief getPatchSize @see getPatchSize */
     CV_WRAP virtual void setPatchSize(int val) = 0;
 
@@ -292,6 +313,7 @@ public:
         to higher flow quality.
         @see setPatchStride */
     CV_WRAP virtual int getPatchStride() const = 0;
+
     /** @copybrief getPatchStride @see getPatchStride */
     CV_WRAP virtual void setPatchStride(int val) = 0;
 
@@ -299,6 +321,7 @@ public:
         may improve quality in some cases.
         @see setGradientDescentIterations */
     CV_WRAP virtual int getGradientDescentIterations() const = 0;
+
     /** @copybrief getGradientDescentIterations @see getGradientDescentIterations */
     CV_WRAP virtual void setGradientDescentIterations(int val) = 0;
 
@@ -307,24 +330,28 @@ public:
         high-quality flow.
     @see setGradientDescentIterations */
     CV_WRAP virtual int getVariationalRefinementIterations() const = 0;
+
     /** @copybrief getGradientDescentIterations @see getGradientDescentIterations */
     CV_WRAP virtual void setVariationalRefinementIterations(int val) = 0;
 
     /** @brief Weight of the smoothness term
     @see setVariationalRefinementAlpha */
     CV_WRAP virtual float getVariationalRefinementAlpha() const = 0;
+
     /** @copybrief getVariationalRefinementAlpha @see getVariationalRefinementAlpha */
     CV_WRAP virtual void setVariationalRefinementAlpha(float val) = 0;
 
     /** @brief Weight of the color constancy term
     @see setVariationalRefinementDelta */
     CV_WRAP virtual float getVariationalRefinementDelta() const = 0;
+
     /** @copybrief getVariationalRefinementDelta @see getVariationalRefinementDelta */
     CV_WRAP virtual void setVariationalRefinementDelta(float val) = 0;
 
     /** @brief Weight of the gradient constancy term
     @see setVariationalRefinementGamma */
     CV_WRAP virtual float getVariationalRefinementGamma() const = 0;
+
     /** @copybrief getVariationalRefinementGamma @see getVariationalRefinementGamma */
     CV_WRAP virtual void setVariationalRefinementGamma(float val) = 0;
 
@@ -335,6 +362,7 @@ public:
         in illumination.
     @see setUseMeanNormalization */
     CV_WRAP virtual bool getUseMeanNormalization() const = 0;
+
     /** @copybrief getUseMeanNormalization @see getUseMeanNormalization */
     CV_WRAP virtual void setUseMeanNormalization(bool val) = 0;
 
@@ -344,6 +372,7 @@ public:
         option off can make the output flow field a bit smoother, however.
     @see setUseSpatialPropagation */
     CV_WRAP virtual bool getUseSpatialPropagation() const = 0;
+
     /** @copybrief getUseSpatialPropagation @see getUseSpatialPropagation */
     CV_WRAP virtual void setUseSpatialPropagation(bool val) = 0;
 };
@@ -352,7 +381,9 @@ public:
 
 @param preset one of PRESET_ULTRAFAST, PRESET_FAST and PRESET_MEDIUM
 */
-CV_EXPORTS_W Ptr<DISOpticalFlow> createOptFlow_DIS(int preset = DISOpticalFlow::PRESET_FAST);
+CV_EXPORTS_W Ptr<DISOpticalFlow>
+
+createOptFlow_DIS(int preset = DISOpticalFlow::PRESET_FAST);
 
 //! @}
 

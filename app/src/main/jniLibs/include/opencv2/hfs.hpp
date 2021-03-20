@@ -4,7 +4,8 @@
 
 #include "opencv2/core.hpp"
 
-namespace cv { namespace hfs {
+namespace cv {
+    namespace hfs {
 
 /** @defgroup hfs Hierarchical Feature Selection for Efficient Image Segmentation
 
@@ -42,8 +43,10 @@ Hierarchical Feature Selection for Efficient Image Segmentation, ECCV 2016
 
 //! @addtogroup hfs
 //! @{
-class CV_EXPORTS_W HfsSegment : public Algorithm {
-public:
+        class CV_EXPORTS_W HfsSegment
+
+        : public Algorithm {
+        public:
 
 /** @brief: set and get the parameter segEgbThresholdI.
 * This parameter is used in the second stage mentioned above.
@@ -51,8 +54,9 @@ public:
 * adjacent nodes when applying EGB algorithm. The segmentation result
 * tends to have more regions remained if this value is large and vice versa.
 */
-CV_WRAP virtual void setSegEgbThresholdI(float c) = 0;
-CV_WRAP virtual float getSegEgbThresholdI() = 0;
+        CV_WRAP virtual void setSegEgbThresholdI(float c) = 0;
+
+        CV_WRAP virtual float getSegEgbThresholdI() = 0;
 
 
 /** @brief: set and get the parameter minRegionSizeI.
@@ -60,8 +64,9 @@ CV_WRAP virtual float getSegEgbThresholdI() = 0;
 * mentioned above. After the EGB segmentation, regions that have fewer
 * pixels then this parameter will be merged into it's adjacent region.
 */
-CV_WRAP virtual void setMinRegionSizeI(int n) = 0;
-CV_WRAP virtual int getMinRegionSizeI() = 0;
+        CV_WRAP virtual void setMinRegionSizeI(int n) = 0;
+
+        CV_WRAP virtual int getMinRegionSizeI() = 0;
 
 
 /** @brief: set and get the parameter segEgbThresholdII.
@@ -70,16 +75,18 @@ CV_WRAP virtual int getMinRegionSizeI() = 0;
 * The segmentation result tends to have more regions remained if
 * this value is large and vice versa.
 */
-CV_WRAP virtual void setSegEgbThresholdII(float c) = 0;
-CV_WRAP virtual float getSegEgbThresholdII() = 0;
+        CV_WRAP virtual void setSegEgbThresholdII(float c) = 0;
+
+        CV_WRAP virtual float getSegEgbThresholdII() = 0;
 
 
 /** @brief: set and get the parameter minRegionSizeII.
 * This parameter is used in the third stage
 * mentioned above. It serves the same purpose as minRegionSizeI
 */
-CV_WRAP virtual void setMinRegionSizeII(int n) = 0;
-CV_WRAP virtual int getMinRegionSizeII() = 0;
+        CV_WRAP virtual void setMinRegionSizeII(int n) = 0;
+
+        CV_WRAP virtual int getMinRegionSizeII() = 0;
 
 
 /** @brief: set and get the parameter spatialWeight.
@@ -91,8 +98,9 @@ CV_WRAP virtual int getMinRegionSizeII() = 0;
 * The segmentation result tends to have more local consistency
 * if this value is larger.
 */
-CV_WRAP virtual void setSpatialWeight(float w) = 0;
-CV_WRAP virtual float getSpatialWeight() = 0;
+        CV_WRAP virtual void setSpatialWeight(float w) = 0;
+
+        CV_WRAP virtual float getSpatialWeight() = 0;
 
 
 /** @brief: set and get the parameter slicSpixelSize.
@@ -102,16 +110,18 @@ CV_WRAP virtual float getSpatialWeight() = 0;
 * approximately has \f$slicSpixelSize \times slicSpixelSize\f$
 * pixels in the begining.
 */
-CV_WRAP virtual void setSlicSpixelSize(int n) = 0;
-CV_WRAP virtual int getSlicSpixelSize() = 0;
+        CV_WRAP virtual void setSlicSpixelSize(int n) = 0;
+
+        CV_WRAP virtual int getSlicSpixelSize() = 0;
 
 
 /** @brief: set and get the parameter numSlicIter.
 * This parameter is used in the first stage. It
 * describes how many iteration to perform when executing SLIC.
 */
-CV_WRAP virtual void setNumSlicIter(int n) = 0;
-CV_WRAP virtual int getNumSlicIter() = 0;
+        CV_WRAP virtual void setNumSlicIter(int n) = 0;
+
+        CV_WRAP virtual int getNumSlicIter() = 0;
 
 /** @brief do segmentation gpu
 * @param src: the input image
@@ -122,13 +132,21 @@ CV_WRAP virtual int getNumSlicIter() = 0;
 * average color of all pixels in that region. And it's data type is the same as
 * the input image
 */
-CV_WRAP virtual Mat performSegmentGpu(InputArray src, bool ifDraw = true) = 0;
+        CV_WRAP virtual Mat
+        performSegmentGpu(InputArray
+        src,
+        bool ifDraw = true
+        ) = 0;
 
 /** @brief do segmentation with cpu
 * This method is only implemented for reference.
 * It is highly NOT recommanded to use it.
 */
-CV_WRAP virtual Mat performSegmentCpu(InputArray src, bool ifDraw = true) = 0;
+        CV_WRAP virtual Mat
+        performSegmentCpu(InputArray
+        src,
+        bool ifDraw = true
+        ) = 0;
 
 /** @brief: create a hfs object
 * @param height: the height of the input image
@@ -141,13 +159,16 @@ CV_WRAP virtual Mat performSegmentCpu(InputArray src, bool ifDraw = true) = 0;
 * @param slicSpixelSize: parameter slicSpixelSize
 * @param numSlicIter: parameter numSlicIter
 */
-CV_WRAP static Ptr<HfsSegment> create(int height, int width,
-    float segEgbThresholdI = 0.08f, int minRegionSizeI = 100,
-    float segEgbThresholdII = 0.28f, int minRegionSizeII = 200,
-    float spatialWeight = 0.6f, int slicSpixelSize = 8, int numSlicIter = 5);
+        CV_WRAP static Ptr<HfsSegment>
 
-};
+        create(int height, int width,
+               float segEgbThresholdI = 0.08f, int minRegionSizeI = 100,
+               float segEgbThresholdII = 0.28f, int minRegionSizeII = 200,
+               float spatialWeight = 0.6f, int slicSpixelSize = 8, int numSlicIter = 5);
+
+    };
 
 //! @}
 
-}} // namespace cv { namespace hfs {
+}
+} // namespace cv { namespace hfs {

@@ -47,7 +47,8 @@
 #include <string>
 #include <iostream>
 
-namespace cv { namespace multicalib {
+namespace cv {
+    namespace multicalib {
 
 //! @addtogroup ccalib
 //! @{
@@ -69,144 +70,151 @@ For more details, please refer to paper
     Pattern", in IROS 2013.
 */
 
-class CV_EXPORTS MultiCameraCalibration
-{
-public:
-    enum {
-        PINHOLE,
-        OMNIDIRECTIONAL
-        //FISHEYE
-    };
+        class CV_EXPORTS MultiCameraCalibration
+                {
+                        public:
+                        enum {
+                            PINHOLE,
+                                    OMNIDIRECTIONAL
+                            //FISHEYE
+                        };
 
-    // an edge connects a camera and pattern
-    struct edge
-    {
-        int cameraVertex;   // vertex index for camera in this edge
-        int photoVertex;    // vertex index for pattern in this edge
-        int photoIndex;     // photo index among photos for this camera
-        Mat transform;      // transform from pattern to camera
+                        // an edge connects a camera and pattern
+                        struct edge
+                        {
+                            int cameraVertex;   // vertex index for camera in this edge
+                            int photoVertex;    // vertex index for pattern in this edge
+                            int photoIndex;     // photo index among photos for this camera
+                            Mat transform;      // transform from pattern to camera
 
-        edge(int cv, int pv, int pi, Mat trans)
-        {
-            cameraVertex = cv;
-            photoVertex = pv;
-            photoIndex = pi;
-            transform = trans;
-        }
-    };
+                            edge(int
+                            cv, int
+                            pv, int
+                            pi, Mat
+                            trans)
+                            {
+                                cameraVertex = cv;
+                                photoVertex = pv;
+                                photoIndex = pi;
+                                transform = trans;
+                            }
+                        };
 
-    struct vertex
-    {
-        Mat pose;   // relative pose to the first camera. For camera vertex, it is the
-                    // transform from the first camera to this camera, for pattern vertex,
-                    // it is the transform from pattern to the first camera
-        int timestamp;  // timestamp of photo, only available for photo vertex
+                        struct vertex
+                        {
+                            Mat pose;   // relative pose to the first camera. For camera vertex, it is the
+                            // transform from the first camera to this camera, for pattern vertex,
+                            // it is the transform from pattern to the first camera
+                            int timestamp;  // timestamp of photo, only available for photo vertex
 
-        vertex(Mat po, int ts)
-        {
-            pose = po;
-            timestamp = ts;
-        }
+                            vertex(Mat
+                            po, int
+                            ts)
+                            {
+                                pose = po;
+                                timestamp = ts;
+                            }
 
-        vertex()
-        {
-            pose = Mat::eye(4, 4, CV_32F);
-            timestamp = -1;
-        }
-    };
-    /* @brief Constructor
-    @param cameraType camera type, PINHOLE or OMNIDIRECTIONAL
-    @param nCameras number of cameras
-    @fileName filename of string list that are used for calibration, the file is generated
-    by imagelist_creator from OpenCv samples. The first one in the list is the pattern filename.
-    @patternWidth the physical width of pattern, in user defined unit.
-    @patternHeight the physical height of pattern, in user defined unit.
-    @showExtration whether show extracted features and feature filtering.
-    @nMiniMatches minimal number of matched features for a frame.
-	@flags Calibration flags
-    @criteria optimization stopping criteria.
-    @detector feature detector that detect feature points in pattern and images.
-    @descriptor feature descriptor.
-    @matcher feature matcher.
-    */
-    MultiCameraCalibration(int cameraType, int nCameras, const std::string& fileName, float patternWidth,
-        float patternHeight, int verbose = 0, int showExtration = 0, int nMiniMatches = 20, int flags = 0,
-        TermCriteria criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 200, 1e-7),
-        Ptr<FeatureDetector> detector = AKAZE::create(AKAZE::DESCRIPTOR_MLDB, 0, 3, 0.006f),
-        Ptr<DescriptorExtractor> descriptor = AKAZE::create(AKAZE::DESCRIPTOR_MLDB,0, 3, 0.006f),
-        Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create("BruteForce-L1"));
+                            vertex()
+                            {
+                                pose = Mat::eye(4, 4, CV_32F);
+                                timestamp = -1;
+                            }
+                        };
+                        /* @brief Constructor
+                        @param cameraType camera type, PINHOLE or OMNIDIRECTIONAL
+                        @param nCameras number of cameras
+                        @fileName filename of string list that are used for calibration, the file is generated
+                        by imagelist_creator from OpenCv samples. The first one in the list is the pattern filename.
+                        @patternWidth the physical width of pattern, in user defined unit.
+                        @patternHeight the physical height of pattern, in user defined unit.
+                        @showExtration whether show extracted features and feature filtering.
+                        @nMiniMatches minimal number of matched features for a frame.
+                        @flags Calibration flags
+                        @criteria optimization stopping criteria.
+                        @detector feature detector that detect feature points in pattern and images.
+                        @descriptor feature descriptor.
+                        @matcher feature matcher.
+                        */
+                        MultiCameraCalibration(int cameraType, int nCameras, const std::string& fileName, float patternWidth,
+                        float patternHeight, int verbose = 0, int showExtration = 0, int nMiniMatches = 20, int flags = 0,
+                        TermCriteria criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 200, 1e-7),
+                        Ptr<FeatureDetector> detector = AKAZE::create(AKAZE::DESCRIPTOR_MLDB, 0, 3, 0.006f),
+                        Ptr<DescriptorExtractor> descriptor = AKAZE::create(AKAZE::DESCRIPTOR_MLDB, 0, 3, 0.006f),
+                        Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create("BruteForce-L1"));
 
-    /* @brief load images
-    */
-    void loadImages();
+                        /* @brief load images
+                        */
+                        void loadImages();
 
-    /* @brief initialize multiple camera calibration. It calibrates each camera individually.
-    */
-    void initialize();
+                        /* @brief initialize multiple camera calibration. It calibrates each camera individually.
+                        */
+                        void initialize();
 
-    /* @brief optimization extrinsic parameters
-    */
-    double optimizeExtrinsics();
+                        /* @brief optimization extrinsic parameters
+                        */
+                        double optimizeExtrinsics();
 
-    /* @brief run multi-camera camera calibration, it runs loadImage(), initialize() and optimizeExtrinsics()
-    */
-    double run();
+                        /* @brief run multi-camera camera calibration, it runs loadImage(), initialize() and optimizeExtrinsics()
+                        */
+                        double run();
 
-    /* @brief write camera parameters to file.
-    */
-    void writeParameters(const std::string& filename);
+                        /* @brief write camera parameters to file.
+                        */
+                        void writeParameters(const std::string& filename);
 
-private:
-    std::vector<std::string> readStringList();
+                        private:
+                        std::vector<std::string> readStringList();
 
-    int getPhotoVertex(int timestamp);
+                        int getPhotoVertex(int timestamp);
 
-    void graphTraverse(const Mat& G, int begin, std::vector<int>& order, std::vector<int>& pre);
+                        void graphTraverse(const Mat& G, int begin, std::vector<int>& order, std::vector<int>& pre);
 
-    void findRowNonZero(const Mat& row, Mat& idx);
+                        void findRowNonZero(const Mat& row, Mat& idx);
 
-    void computeJacobianExtrinsic(const Mat& extrinsicParams, Mat& JTJ_inv, Mat& JTE);
+                        void computeJacobianExtrinsic(const Mat& extrinsicParams, Mat& JTJ_inv, Mat& JTE);
 
-    void computePhotoCameraJacobian(const Mat& rvecPhoto, const Mat& tvecPhoto, const Mat& rvecCamera,
-        const Mat& tvecCamera, Mat& rvecTran, Mat& tvecTran, const Mat& objectPoints, const Mat& imagePoints, const Mat& K,
-        const Mat& distort, const Mat& xi, Mat& jacobianPhoto, Mat& jacobianCamera, Mat& E);
+                        void computePhotoCameraJacobian(const Mat& rvecPhoto, const Mat& tvecPhoto, const Mat& rvecCamera,
+                        const Mat& tvecCamera, Mat& rvecTran, Mat& tvecTran, const Mat& objectPoints, const Mat& imagePoints, const Mat& K,
+                        const Mat& distort, const Mat& xi, Mat& jacobianPhoto, Mat& jacobianCamera, Mat& E);
 
-    void compose_motion(InputArray _om1, InputArray _T1, InputArray _om2, InputArray _T2, Mat& om3, Mat& T3, Mat& dom3dom1,
-        Mat& dom3dT1, Mat& dom3dom2, Mat& dom3dT2, Mat& dT3dom1, Mat& dT3dT1, Mat& dT3dom2, Mat& dT3dT2);
+                        void compose_motion(InputArray _om1, InputArray _T1, InputArray _om2, InputArray _T2, Mat& om3, Mat& T3, Mat& dom3dom1,
+                        Mat& dom3dT1, Mat& dom3dom2, Mat& dom3dT2, Mat& dT3dom1, Mat& dT3dT1, Mat& dT3dom2, Mat& dT3dT2);
 
-    void JRodriguesMatlab(const Mat& src, Mat& dst);
-    void dAB(InputArray A, InputArray B, OutputArray dABdA, OutputArray dABdB);
+                        void JRodriguesMatlab(const Mat& src, Mat& dst);
+                        void dAB(InputArray A, InputArray B, OutputArray dABdA, OutputArray dABdB);
 
-    double computeProjectError(Mat& parameters);
+                        double computeProjectError(Mat& parameters);
 
-    void vector2parameters(const Mat& parameters, std::vector<Vec3f>& rvecVertex, std::vector<Vec3f>& tvecVertexs);
-    void parameters2vector(const std::vector<Vec3f>& rvecVertex, const std::vector<Vec3f>& tvecVertex, Mat& parameters);
+                        void vector2parameters(const Mat& parameters, std::vector<Vec3f>& rvecVertex, std::vector<Vec3f>& tvecVertexs);
+                        void parameters2vector(const std::vector<Vec3f>& rvecVertex, const std::vector<Vec3f>& tvecVertex, Mat& parameters);
 
-    int _camType; //PINHOLE, FISHEYE or OMNIDIRECTIONAL
-    int _nCamera;
-    int _nMiniMatches;
-    int _flags;
-	int _verbose;
-    double _error;
-    float _patternWidth, _patternHeight;
-    TermCriteria _criteria;
-    std::string _filename;
-    int _showExtraction;
-    Ptr<FeatureDetector> _detector;
-    Ptr<DescriptorExtractor> _descriptor;
-    Ptr<DescriptorMatcher> _matcher;
+                        int _camType; //PINHOLE, FISHEYE or OMNIDIRECTIONAL
+                        int _nCamera;
+                        int _nMiniMatches;
+                        int _flags;
+                        int _verbose;
+                        double _error;
+                        float _patternWidth, _patternHeight;
+                        TermCriteria _criteria;
+                        std::string _filename;
+                        int _showExtraction;
+                        Ptr<FeatureDetector> _detector;
+                        Ptr<DescriptorExtractor> _descriptor;
+                        Ptr<DescriptorMatcher> _matcher;
 
-    std::vector<edge> _edgeList;
-    std::vector<vertex> _vertexList;
-    std::vector<std::vector<cv::Mat> > _objectPointsForEachCamera;
-    std::vector<std::vector<cv::Mat> > _imagePointsForEachCamera;
-    std::vector<cv::Mat> _cameraMatrix;
-    std::vector<cv::Mat> _distortCoeffs;
-    std::vector<cv::Mat> _xi;
-    std::vector<std::vector<Mat> > _omEachCamera, _tEachCamera;
-};
+                        std::vector<edge> _edgeList;
+                        std::vector<vertex> _vertexList;
+                        std::vector<std::vector<cv::Mat> > _objectPointsForEachCamera;
+                        std::vector<std::vector<cv::Mat> > _imagePointsForEachCamera;
+                        std::vector<cv::Mat> _cameraMatrix;
+                        std::vector<cv::Mat> _distortCoeffs;
+                        std::vector<cv::Mat> _xi;
+                        std::vector<std::vector<Mat> > _omEachCamera, _tEachCamera;
+                };
 
 //! @}
 
-}} // namespace multicalib, cv
+    }
+} // namespace multicalib, cv
 #endif

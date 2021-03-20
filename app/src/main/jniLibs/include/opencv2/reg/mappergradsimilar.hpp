@@ -41,7 +41,7 @@
 #include "mapper.hpp"
 
 namespace cv {
-namespace reg {
+    namespace reg {
 
 //! @addtogroup reg
 //! @{
@@ -49,19 +49,35 @@ namespace reg {
 /*!
  * Calculates a similarity transformation between to images (scale, rotation, and shift)
  */
-class CV_EXPORTS_W MapperGradSimilar: public Mapper
-{
-public:
-    CV_WRAP MapperGradSimilar();
-    ~MapperGradSimilar();
+        class CV_EXPORTS_W MapperGradSimilar
 
-    CV_WRAP virtual cv::Ptr<Map> calculate(InputArray img1, InputArray img2, cv::Ptr<Map> init = cv::Ptr<Map>()) const CV_OVERRIDE;
+        : public Mapper {
+        public:
 
-    CV_WRAP cv::Ptr<Map> getMap() const CV_OVERRIDE;
-};
+        CV_WRAP MapperGradSimilar();
+
+        ~
+
+        MapperGradSimilar();
+
+        CV_WRAP virtual cv::Ptr<Map>
+        calculate(InputArray
+        img1,
+        InputArray img2, cv::Ptr<Map>
+        init = cv::Ptr<Map>()
+        )
+        const CV_OVERRIDE;
+
+        CV_WRAP cv::Ptr<Map>
+
+        getMap() const
+
+        CV_OVERRIDE;
+    };
 
 //! @}
 
-}}  // namespace cv::reg
+}
+}  // namespace cv::reg
 
 #endif  // MAPPERGRADSIMILAR_H_

@@ -41,7 +41,7 @@
 #include "mapper.hpp"
 
 namespace cv {
-namespace reg {
+    namespace reg {
 
 //! @addtogroup reg
 //! @{
@@ -49,19 +49,35 @@ namespace reg {
 /*!
  * Mapper for euclidean motion: rotation plus shift
  */
-class CV_EXPORTS_W MapperGradEuclid: public Mapper
-{
-public:
-    CV_WRAP MapperGradEuclid();
-    ~MapperGradEuclid();
+        class CV_EXPORTS_W MapperGradEuclid
 
-    CV_WRAP virtual cv::Ptr<Map> calculate(InputArray img1, InputArray img2, cv::Ptr<Map> init = cv::Ptr<Map>()) const CV_OVERRIDE;
+        : public Mapper {
+        public:
 
-    CV_WRAP cv::Ptr<Map> getMap() const CV_OVERRIDE;
-};
+        CV_WRAP MapperGradEuclid();
+
+        ~
+
+        MapperGradEuclid();
+
+        CV_WRAP virtual cv::Ptr<Map>
+        calculate(InputArray
+        img1,
+        InputArray img2, cv::Ptr<Map>
+        init = cv::Ptr<Map>()
+        )
+        const CV_OVERRIDE;
+
+        CV_WRAP cv::Ptr<Map>
+
+        getMap() const
+
+        CV_OVERRIDE;
+    };
 
 //! @}
 
-}}  // namespace cv::reg
+}
+}  // namespace cv::reg
 
 #endif  // MAPPERGRADEUCLID_H_

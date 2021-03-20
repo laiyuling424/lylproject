@@ -15,6 +15,7 @@ import java.util.List;
 public interface IDaoSupport<T> {
 
     void init(SQLiteDatabase sqLiteDatabase, Class<T> clazz);
+
     // 插入数据
     public long insert(T t);
 
@@ -25,7 +26,6 @@ public interface IDaoSupport<T> {
     QuerySupport<T> querySupport();
 
     // 按照语句查询
-
 
 
     int delete(String whereClause, String... whereArgs);

@@ -55,27 +55,26 @@ the papers @cite Farsiu03 and @cite Mitzel09 .
 
  */
 
-namespace cv
-{
-    namespace superres
-    {
+namespace cv {
+    namespace superres {
 
 //! @addtogroup superres
 //! @{
 
-        class CV_EXPORTS FrameSource
-        {
+        class CV_EXPORTS FrameSource {
         public:
             virtual ~FrameSource();
 
             virtual void nextFrame(OutputArray frame) = 0;
+
             virtual void reset() = 0;
         };
 
         CV_EXPORTS Ptr<FrameSource> createFrameSource_Empty();
 
-        CV_EXPORTS Ptr<FrameSource> createFrameSource_Video(const String& fileName);
-        CV_EXPORTS Ptr<FrameSource> createFrameSource_Video_CUDA(const String& fileName);
+        CV_EXPORTS Ptr<FrameSource> createFrameSource_Video(const String &fileName);
+
+        CV_EXPORTS Ptr<FrameSource> createFrameSource_Video_CUDA(const String &fileName);
 
         CV_EXPORTS Ptr<FrameSource> createFrameSource_Camera(int deviceId = 0);
 
@@ -84,20 +83,20 @@ namespace cv
         The class is only used to define the common interface for the whole family of Super Resolution
         algorithms.
          */
-        class CV_EXPORTS SuperResolution : public cv::Algorithm, public FrameSource
-        {
+        class CV_EXPORTS SuperResolution : public cv::Algorithm, public FrameSource {
         public:
             /** @brief Set input frame source for Super Resolution algorithm.
 
             @param frameSource Input frame source
              */
-            void setInput(const Ptr<FrameSource>& frameSource);
+            void setInput(const Ptr<FrameSource> &frameSource);
 
             /** @brief Process next frame from input and return output result.
 
             @param frame Output result
              */
             void nextFrame(OutputArray frame) CV_OVERRIDE;
+
             void reset() CV_OVERRIDE;
 
             /** @brief Clear all inner buffers.
@@ -107,68 +106,79 @@ namespace cv
             //! @brief Scale factor
             /** @see setScale */
             virtual int getScale() const = 0;
+
             /** @copybrief getScale @see getScale */
             virtual void setScale(int val) = 0;
 
             //! @brief Iterations count
             /** @see setIterations */
             virtual int getIterations() const = 0;
+
             /** @copybrief getIterations @see getIterations */
             virtual void setIterations(int val) = 0;
 
             //! @brief Asymptotic value of steepest descent method
             /** @see setTau */
             virtual double getTau() const = 0;
+
             /** @copybrief getTau @see getTau */
             virtual void setTau(double val) = 0;
 
             //! @brief Weight parameter to balance data term and smoothness term
             /** @see setLabmda */
             virtual double getLabmda() const = 0;
+
             /** @copybrief getLabmda @see getLabmda */
             virtual void setLabmda(double val) = 0;
 
             //! @brief Parameter of spacial distribution in Bilateral-TV
             /** @see setAlpha */
             virtual double getAlpha() const = 0;
+
             /** @copybrief getAlpha @see getAlpha */
             virtual void setAlpha(double val) = 0;
 
             //! @brief Kernel size of Bilateral-TV filter
             /** @see setKernelSize */
             virtual int getKernelSize() const = 0;
+
             /** @copybrief getKernelSize @see getKernelSize */
             virtual void setKernelSize(int val) = 0;
 
             //! @brief Gaussian blur kernel size
             /** @see setBlurKernelSize */
             virtual int getBlurKernelSize() const = 0;
+
             /** @copybrief getBlurKernelSize @see getBlurKernelSize */
             virtual void setBlurKernelSize(int val) = 0;
 
             //! @brief Gaussian blur sigma
             /** @see setBlurSigma */
             virtual double getBlurSigma() const = 0;
+
             /** @copybrief getBlurSigma @see getBlurSigma */
             virtual void setBlurSigma(double val) = 0;
 
             //! @brief Radius of the temporal search area
             /** @see setTemporalAreaRadius */
             virtual int getTemporalAreaRadius() const = 0;
+
             /** @copybrief getTemporalAreaRadius @see getTemporalAreaRadius */
             virtual void setTemporalAreaRadius(int val) = 0;
 
             //! @brief Dense optical flow algorithm
             /** @see setOpticalFlow */
             virtual Ptr<cv::superres::DenseOpticalFlowExt> getOpticalFlow() const = 0;
+
             /** @copybrief getOpticalFlow @see getOpticalFlow */
             virtual void setOpticalFlow(const Ptr<cv::superres::DenseOpticalFlowExt> &val) = 0;
 
         protected:
             SuperResolution();
 
-            virtual void initImpl(Ptr<FrameSource>& frameSource) = 0;
-            virtual void processImpl(Ptr<FrameSource>& frameSource, OutputArray output) = 0;
+            virtual void initImpl(Ptr<FrameSource> &frameSource) = 0;
+
+            virtual void processImpl(Ptr<FrameSource> &frameSource, OutputArray output) = 0;
 
             bool isUmat_;
 
@@ -197,6 +207,7 @@ namespace cv
         -   **Ptr\<DenseOpticalFlowExt\> opticalFlow** Dense optical flow algorithm.
          */
         CV_EXPORTS Ptr<SuperResolution> createSuperResolution_BTVL1();
+
         CV_EXPORTS Ptr<SuperResolution> createSuperResolution_BTVL1_CUDA();
 
 //! @} superres

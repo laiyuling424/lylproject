@@ -49,66 +49,63 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_gr
 //! @{
 
-enum actionType
-{
-    circle = 1,
-    triangle,
-    updown,
-    rightleft,
-    wave,
-    z,
-    cross,
-    comehere,
-    turnaround,
-    pat
-};
+        enum actionType {
+            circle = 1,
+            triangle,
+            updown,
+            rightleft,
+            wave,
+            z,
+            cross,
+            comehere,
+            turnaround,
+            pat
+        };
 
-enum poseType
-{
-    fist = 1,
-    index,
-    flat
-};
+        enum poseType {
+            fist = 1,
+            index,
+            flat
+        };
 
-enum illuminationType
-{
-    light = 1,
-    dark
-};
+        enum illuminationType {
+            light = 1,
+            dark
+        };
 
-enum backgroundType
-{
-    woodenBoard = 1,
-    whitePaper,
-    paperWithCharacters
-};
+        enum backgroundType {
+            woodenBoard = 1,
+            whitePaper,
+            paperWithCharacters
+        };
 
-struct GR_skigObj : public Object
-{
-    std::string rgb;
-    std::string dep;
-    char person; // 1..6
-    backgroundType background;
-    illuminationType illumination;
-    poseType pose;
-    actionType type;
-};
+        struct GR_skigObj : public Object {
+            std::string rgb;
+            std::string dep;
+            char person; // 1..6
+            backgroundType background;
+            illuminationType illumination;
+            poseType pose;
+            actionType type;
+        };
 
-class CV_EXPORTS GR_skig : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS GR_skig
 
-    static Ptr<GR_skig> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <GR_skig> create();
+    };
 
 //! @}
 

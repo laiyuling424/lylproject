@@ -62,7 +62,8 @@
   @}
  */
 
-namespace cv { namespace cuda {
+namespace cv {
+    namespace cuda {
 
 //! @addtogroup cudacore_struct
 //! @{
@@ -102,240 +103,255 @@ streams.
 
 @sa Mat
  */
-class CV_EXPORTS GpuMat
-{
-public:
-    class CV_EXPORTS Allocator
-    {
-    public:
-        virtual ~Allocator() {}
+        class CV_EXPORTS GpuMat {
+        public:
+            class CV_EXPORTS Allocator {
+            public:
+                virtual ~Allocator() {}
 
-        // allocator must fill data, step and refcount fields
-        virtual bool allocate(GpuMat* mat, int rows, int cols, size_t elemSize) = 0;
-        virtual void free(GpuMat* mat) = 0;
-    };
+                // allocator must fill data, step and refcount fields
+                virtual bool allocate(GpuMat *mat, int rows, int cols, size_t elemSize) = 0;
 
-    //! default allocator
-    static Allocator* defaultAllocator();
-    static void setDefaultAllocator(Allocator* allocator);
+                virtual void free(GpuMat *mat) = 0;
+            };
 
-    //! default constructor
-    explicit GpuMat(Allocator* allocator = defaultAllocator());
+            //! default allocator
+            static Allocator *defaultAllocator();
 
-    //! constructs GpuMat of the specified size and type
-    GpuMat(int rows, int cols, int type, Allocator* allocator = defaultAllocator());
-    GpuMat(Size size, int type, Allocator* allocator = defaultAllocator());
+            static void setDefaultAllocator(Allocator *allocator);
 
-    //! constucts GpuMat and fills it with the specified value _s
-    GpuMat(int rows, int cols, int type, Scalar s, Allocator* allocator = defaultAllocator());
-    GpuMat(Size size, int type, Scalar s, Allocator* allocator = defaultAllocator());
+            //! default constructor
+            explicit GpuMat(Allocator *allocator = defaultAllocator());
 
-    //! copy constructor
-    GpuMat(const GpuMat& m);
+            //! constructs GpuMat of the specified size and type
+            GpuMat(int rows, int cols, int type, Allocator *allocator = defaultAllocator());
 
-    //! constructor for GpuMat headers pointing to user-allocated data
-    GpuMat(int rows, int cols, int type, void* data, size_t step = Mat::AUTO_STEP);
-    GpuMat(Size size, int type, void* data, size_t step = Mat::AUTO_STEP);
+            GpuMat(Size size, int type, Allocator *allocator = defaultAllocator());
 
-    //! creates a GpuMat header for a part of the bigger matrix
-    GpuMat(const GpuMat& m, Range rowRange, Range colRange);
-    GpuMat(const GpuMat& m, Rect roi);
+            //! constucts GpuMat and fills it with the specified value _s
+            GpuMat(int rows, int cols, int type, Scalar s, Allocator *allocator = defaultAllocator());
 
-    //! builds GpuMat from host memory (Blocking call)
-    explicit GpuMat(InputArray arr, Allocator* allocator = defaultAllocator());
+            GpuMat(Size size, int type, Scalar s, Allocator *allocator = defaultAllocator());
 
-    //! destructor - calls release()
-    ~GpuMat();
+            //! copy constructor
+            GpuMat(const GpuMat &m);
 
-    //! assignment operators
-    GpuMat& operator =(const GpuMat& m);
+            //! constructor for GpuMat headers pointing to user-allocated data
+            GpuMat(int rows, int cols, int type, void *data, size_t step = Mat::AUTO_STEP);
 
-    //! allocates new GpuMat data unless the GpuMat already has specified size and type
-    void create(int rows, int cols, int type);
-    void create(Size size, int type);
+            GpuMat(Size size, int type, void *data, size_t step = Mat::AUTO_STEP);
 
-    //! decreases reference counter, deallocate the data when reference counter reaches 0
-    void release();
+            //! creates a GpuMat header for a part of the bigger matrix
+            GpuMat(const GpuMat &m, Range rowRange, Range colRange);
 
-    //! swaps with other smart pointer
-    void swap(GpuMat& mat);
+            GpuMat(const GpuMat &m, Rect roi);
 
-    /** @brief Performs data upload to GpuMat (Blocking call)
+            //! builds GpuMat from host memory (Blocking call)
+            explicit GpuMat(InputArray arr, Allocator *allocator = defaultAllocator());
 
-    This function copies data from host memory to device memory. As being a blocking call, it is
-    guaranteed that the copy operation is finished when this function returns.
-    */
-    void upload(InputArray arr);
+            //! destructor - calls release()
+            ~GpuMat();
 
-    /** @brief Performs data upload to GpuMat (Non-Blocking call)
+            //! assignment operators
+            GpuMat &operator=(const GpuMat &m);
 
-    This function copies data from host memory to device memory. As being a non-blocking call, this
-    function may return even if the copy operation is not finished.
+            //! allocates new GpuMat data unless the GpuMat already has specified size and type
+            void create(int rows, int cols, int type);
 
-    The copy operation may be overlapped with operations in other non-default streams if \p stream is
-    not the default stream and \p dst is HostMem allocated with HostMem::PAGE_LOCKED option.
-    */
-    void upload(InputArray arr, Stream& stream);
+            void create(Size size, int type);
 
-    /** @brief Performs data download from GpuMat (Blocking call)
+            //! decreases reference counter, deallocate the data when reference counter reaches 0
+            void release();
 
-    This function copies data from device memory to host memory. As being a blocking call, it is
-    guaranteed that the copy operation is finished when this function returns.
-    */
-    void download(OutputArray dst) const;
+            //! swaps with other smart pointer
+            void swap(GpuMat &mat);
 
-    /** @brief Performs data download from GpuMat (Non-Blocking call)
+            /** @brief Performs data upload to GpuMat (Blocking call)
 
-    This function copies data from device memory to host memory. As being a non-blocking call, this
-    function may return even if the copy operation is not finished.
+            This function copies data from host memory to device memory. As being a blocking call, it is
+            guaranteed that the copy operation is finished when this function returns.
+            */
+            void upload(InputArray arr);
 
-    The copy operation may be overlapped with operations in other non-default streams if \p stream is
-    not the default stream and \p dst is HostMem allocated with HostMem::PAGE_LOCKED option.
-    */
-    void download(OutputArray dst, Stream& stream) const;
+            /** @brief Performs data upload to GpuMat (Non-Blocking call)
 
-    //! returns deep copy of the GpuMat, i.e. the data is copied
-    GpuMat clone() const;
+            This function copies data from host memory to device memory. As being a non-blocking call, this
+            function may return even if the copy operation is not finished.
 
-    //! copies the GpuMat content to device memory (Blocking call)
-    void copyTo(OutputArray dst) const;
+            The copy operation may be overlapped with operations in other non-default streams if \p stream is
+            not the default stream and \p dst is HostMem allocated with HostMem::PAGE_LOCKED option.
+            */
+            void upload(InputArray arr, Stream &stream);
 
-    //! copies the GpuMat content to device memory (Non-Blocking call)
-    void copyTo(OutputArray dst, Stream& stream) const;
+            /** @brief Performs data download from GpuMat (Blocking call)
 
-    //! copies those GpuMat elements to "m" that are marked with non-zero mask elements (Blocking call)
-    void copyTo(OutputArray dst, InputArray mask) const;
+            This function copies data from device memory to host memory. As being a blocking call, it is
+            guaranteed that the copy operation is finished when this function returns.
+            */
+            void download(OutputArray dst) const;
 
-    //! copies those GpuMat elements to "m" that are marked with non-zero mask elements (Non-Blocking call)
-    void copyTo(OutputArray dst, InputArray mask, Stream& stream) const;
+            /** @brief Performs data download from GpuMat (Non-Blocking call)
 
-    //! sets some of the GpuMat elements to s (Blocking call)
-    GpuMat& setTo(Scalar s);
+            This function copies data from device memory to host memory. As being a non-blocking call, this
+            function may return even if the copy operation is not finished.
 
-    //! sets some of the GpuMat elements to s (Non-Blocking call)
-    GpuMat& setTo(Scalar s, Stream& stream);
+            The copy operation may be overlapped with operations in other non-default streams if \p stream is
+            not the default stream and \p dst is HostMem allocated with HostMem::PAGE_LOCKED option.
+            */
+            void download(OutputArray dst, Stream &stream) const;
 
-    //! sets some of the GpuMat elements to s, according to the mask (Blocking call)
-    GpuMat& setTo(Scalar s, InputArray mask);
+            //! returns deep copy of the GpuMat, i.e. the data is copied
+            GpuMat clone() const;
 
-    //! sets some of the GpuMat elements to s, according to the mask (Non-Blocking call)
-    GpuMat& setTo(Scalar s, InputArray mask, Stream& stream);
+            //! copies the GpuMat content to device memory (Blocking call)
+            void copyTo(OutputArray dst) const;
 
-    //! converts GpuMat to another datatype (Blocking call)
-    void convertTo(OutputArray dst, int rtype) const;
+            //! copies the GpuMat content to device memory (Non-Blocking call)
+            void copyTo(OutputArray dst, Stream &stream) const;
 
-    //! converts GpuMat to another datatype (Non-Blocking call)
-    void convertTo(OutputArray dst, int rtype, Stream& stream) const;
+            //! copies those GpuMat elements to "m" that are marked with non-zero mask elements (Blocking call)
+            void copyTo(OutputArray dst, InputArray mask) const;
 
-    //! converts GpuMat to another datatype with scaling (Blocking call)
-    void convertTo(OutputArray dst, int rtype, double alpha, double beta = 0.0) const;
+            //! copies those GpuMat elements to "m" that are marked with non-zero mask elements (Non-Blocking call)
+            void copyTo(OutputArray dst, InputArray mask, Stream &stream) const;
 
-    //! converts GpuMat to another datatype with scaling (Non-Blocking call)
-    void convertTo(OutputArray dst, int rtype, double alpha, Stream& stream) const;
+            //! sets some of the GpuMat elements to s (Blocking call)
+            GpuMat &setTo(Scalar s);
 
-    //! converts GpuMat to another datatype with scaling (Non-Blocking call)
-    void convertTo(OutputArray dst, int rtype, double alpha, double beta, Stream& stream) const;
+            //! sets some of the GpuMat elements to s (Non-Blocking call)
+            GpuMat &setTo(Scalar s, Stream &stream);
 
-    void assignTo(GpuMat& m, int type=-1) const;
+            //! sets some of the GpuMat elements to s, according to the mask (Blocking call)
+            GpuMat &setTo(Scalar s, InputArray mask);
 
-    //! returns pointer to y-th row
-    uchar* ptr(int y = 0);
-    const uchar* ptr(int y = 0) const;
+            //! sets some of the GpuMat elements to s, according to the mask (Non-Blocking call)
+            GpuMat &setTo(Scalar s, InputArray mask, Stream &stream);
 
-    //! template version of the above method
-    template<typename _Tp> _Tp* ptr(int y = 0);
-    template<typename _Tp> const _Tp* ptr(int y = 0) const;
+            //! converts GpuMat to another datatype (Blocking call)
+            void convertTo(OutputArray dst, int rtype) const;
 
-    template <typename _Tp> operator PtrStepSz<_Tp>() const;
-    template <typename _Tp> operator PtrStep<_Tp>() const;
+            //! converts GpuMat to another datatype (Non-Blocking call)
+            void convertTo(OutputArray dst, int rtype, Stream &stream) const;
 
-    //! returns a new GpuMat header for the specified row
-    GpuMat row(int y) const;
+            //! converts GpuMat to another datatype with scaling (Blocking call)
+            void convertTo(OutputArray dst, int rtype, double alpha, double beta = 0.0) const;
 
-    //! returns a new GpuMat header for the specified column
-    GpuMat col(int x) const;
+            //! converts GpuMat to another datatype with scaling (Non-Blocking call)
+            void convertTo(OutputArray dst, int rtype, double alpha, Stream &stream) const;
 
-    //! ... for the specified row span
-    GpuMat rowRange(int startrow, int endrow) const;
-    GpuMat rowRange(Range r) const;
+            //! converts GpuMat to another datatype with scaling (Non-Blocking call)
+            void convertTo(OutputArray dst, int rtype, double alpha, double beta, Stream &stream) const;
 
-    //! ... for the specified column span
-    GpuMat colRange(int startcol, int endcol) const;
-    GpuMat colRange(Range r) const;
+            void assignTo(GpuMat &m, int type = -1) const;
 
-    //! extracts a rectangular sub-GpuMat (this is a generalized form of row, rowRange etc.)
-    GpuMat operator ()(Range rowRange, Range colRange) const;
-    GpuMat operator ()(Rect roi) const;
+            //! returns pointer to y-th row
+            uchar *ptr(int y = 0);
 
-    //! creates alternative GpuMat header for the same data, with different
-    //! number of channels and/or different number of rows
-    GpuMat reshape(int cn, int rows = 0) const;
+            const uchar *ptr(int y = 0) const;
 
-    //! locates GpuMat header within a parent GpuMat
-    void locateROI(Size& wholeSize, Point& ofs) const;
+            //! template version of the above method
+            template<typename _Tp>
+            _Tp *ptr(int y = 0);
 
-    //! moves/resizes the current GpuMat ROI inside the parent GpuMat
-    GpuMat& adjustROI(int dtop, int dbottom, int dleft, int dright);
+            template<typename _Tp>
+            const _Tp *ptr(int y = 0) const;
 
-    //! returns true iff the GpuMat data is continuous
-    //! (i.e. when there are no gaps between successive rows)
-    bool isContinuous() const;
+            template<typename _Tp>
+            operator PtrStepSz<_Tp>() const;
 
-    //! returns element size in bytes
-    size_t elemSize() const;
+            template<typename _Tp>
+            operator PtrStep<_Tp>() const;
 
-    //! returns the size of element channel in bytes
-    size_t elemSize1() const;
+            //! returns a new GpuMat header for the specified row
+            GpuMat row(int y) const;
 
-    //! returns element type
-    int type() const;
+            //! returns a new GpuMat header for the specified column
+            GpuMat col(int x) const;
 
-    //! returns element type
-    int depth() const;
+            //! ... for the specified row span
+            GpuMat rowRange(int startrow, int endrow) const;
 
-    //! returns number of channels
-    int channels() const;
+            GpuMat rowRange(Range r) const;
 
-    //! returns step/elemSize1()
-    size_t step1() const;
+            //! ... for the specified column span
+            GpuMat colRange(int startcol, int endcol) const;
 
-    //! returns GpuMat size : width == number of columns, height == number of rows
-    Size size() const;
+            GpuMat colRange(Range r) const;
 
-    //! returns true if GpuMat data is NULL
-    bool empty() const;
+            //! extracts a rectangular sub-GpuMat (this is a generalized form of row, rowRange etc.)
+            GpuMat operator()(Range rowRange, Range colRange) const;
 
-    //! internal use method: updates the continuity flag
-    void updateContinuityFlag();
+            GpuMat operator()(Rect roi) const;
 
-    /*! includes several bit-fields:
-    - the magic signature
-    - continuity flag
-    - depth
-    - number of channels
-    */
-    int flags;
+            //! creates alternative GpuMat header for the same data, with different
+            //! number of channels and/or different number of rows
+            GpuMat reshape(int cn, int rows = 0) const;
 
-    //! the number of rows and columns
-    int rows, cols;
+            //! locates GpuMat header within a parent GpuMat
+            void locateROI(Size &wholeSize, Point &ofs) const;
 
-    //! a distance between successive rows in bytes; includes the gap if any
-    size_t step;
+            //! moves/resizes the current GpuMat ROI inside the parent GpuMat
+            GpuMat &adjustROI(int dtop, int dbottom, int dleft, int dright);
 
-    //! pointer to the data
-    uchar* data;
+            //! returns true iff the GpuMat data is continuous
+            //! (i.e. when there are no gaps between successive rows)
+            bool isContinuous() const;
 
-    //! pointer to the reference counter;
-    //! when GpuMat points to user-allocated data, the pointer is NULL
-    int* refcount;
+            //! returns element size in bytes
+            size_t elemSize() const;
 
-    //! helper fields used in locateROI and adjustROI
-    uchar* datastart;
-    const uchar* dataend;
+            //! returns the size of element channel in bytes
+            size_t elemSize1() const;
 
-    //! allocator
-    Allocator* allocator;
-};
+            //! returns element type
+            int type() const;
+
+            //! returns element type
+            int depth() const;
+
+            //! returns number of channels
+            int channels() const;
+
+            //! returns step/elemSize1()
+            size_t step1() const;
+
+            //! returns GpuMat size : width == number of columns, height == number of rows
+            Size size() const;
+
+            //! returns true if GpuMat data is NULL
+            bool empty() const;
+
+            //! internal use method: updates the continuity flag
+            void updateContinuityFlag();
+
+            /*! includes several bit-fields:
+            - the magic signature
+            - continuity flag
+            - depth
+            - number of channels
+            */
+            int flags;
+
+            //! the number of rows and columns
+            int rows, cols;
+
+            //! a distance between successive rows in bytes; includes the gap if any
+            size_t step;
+
+            //! pointer to the data
+            uchar *data;
+
+            //! pointer to the reference counter;
+            //! when GpuMat points to user-allocated data, the pointer is NULL
+            int *refcount;
+
+            //! helper fields used in locateROI and adjustROI
+            uchar *datastart;
+            const uchar *dataend;
+
+            //! allocator
+            Allocator *allocator;
+        };
 
 /** @brief Creates a continuous matrix.
 
@@ -348,7 +364,7 @@ public:
 Matrix is called continuous if its elements are stored continuously, that is, without gaps at the
 end of each row.
  */
-CV_EXPORTS void createContinuous(int rows, int cols, int type, OutputArray arr);
+        CV_EXPORTS void createContinuous(int rows, int cols, int type, OutputArray arr);
 
 /** @brief Ensures that the size of a matrix is big enough and the matrix has a proper type.
 
@@ -359,7 +375,7 @@ CV_EXPORTS void createContinuous(int rows, int cols, int type, OutputArray arr);
 
 The function does not reallocate memory if the matrix has proper attributes already.
  */
-CV_EXPORTS void ensureSizeIsEnough(int rows, int cols, int type, OutputArray arr);
+        CV_EXPORTS void ensureSizeIsEnough(int rows, int cols, int type, OutputArray arr);
 
 /** @brief BufferPool for use with CUDA streams
 
@@ -478,29 +494,29 @@ and the corresponding memory is automatically returned to the pool for later usa
     }
 @endcode
  */
-class CV_EXPORTS BufferPool
-{
-public:
+        class CV_EXPORTS BufferPool {
+        public:
 
-    //! Gets the BufferPool for the given stream.
-    explicit BufferPool(Stream& stream);
+            //! Gets the BufferPool for the given stream.
+            explicit BufferPool(Stream &stream);
 
-    //! Allocates a new GpuMat of given size and type.
-    GpuMat getBuffer(int rows, int cols, int type);
+            //! Allocates a new GpuMat of given size and type.
+            GpuMat getBuffer(int rows, int cols, int type);
 
-    //! Allocates a new GpuMat of given size and type.
-    GpuMat getBuffer(Size size, int type) { return getBuffer(size.height, size.width, type); }
+            //! Allocates a new GpuMat of given size and type.
+            GpuMat getBuffer(Size size, int type) { return getBuffer(size.height, size.width, type); }
 
-    //! Returns the allocator associated with the stream.
-    Ptr<GpuMat::Allocator> getAllocator() const { return allocator_; }
+            //! Returns the allocator associated with the stream.
+            Ptr<GpuMat::Allocator> getAllocator() const { return allocator_; }
 
-private:
-    Ptr<GpuMat::Allocator> allocator_;
-};
+        private:
+            Ptr<GpuMat::Allocator> allocator_;
+        };
 
 //! BufferPool management (must be called before Stream creation)
-CV_EXPORTS void setBufferPoolUsage(bool on);
-CV_EXPORTS void setBufferPoolConfig(int deviceId, size_t stackSize, int stackCount);
+        CV_EXPORTS void setBufferPoolUsage(bool on);
+
+        CV_EXPORTS void setBufferPoolConfig(int deviceId, size_t stackSize, int stackCount);
 
 //===================================================================================
 // HostMem
@@ -521,92 +537,103 @@ Its interface is also Mat-like but with additional memory type parameters.
 @note Allocation size of such memory types is usually limited. For more details, see *CUDA 2.2
 Pinned Memory APIs* document or *CUDA C Programming Guide*.
  */
-class CV_EXPORTS HostMem
-{
-public:
-    enum AllocType { PAGE_LOCKED = 1, SHARED = 2, WRITE_COMBINED = 4 };
+        class CV_EXPORTS HostMem {
+        public:
+            enum AllocType {
+                PAGE_LOCKED = 1, SHARED = 2, WRITE_COMBINED = 4
+            };
 
-    static MatAllocator* getAllocator(AllocType alloc_type = PAGE_LOCKED);
+            static MatAllocator *getAllocator(AllocType alloc_type = PAGE_LOCKED);
 
-    explicit HostMem(AllocType alloc_type = PAGE_LOCKED);
+            explicit HostMem(AllocType alloc_type = PAGE_LOCKED);
 
-    HostMem(const HostMem& m);
+            HostMem(const HostMem &m);
 
-    HostMem(int rows, int cols, int type, AllocType alloc_type = PAGE_LOCKED);
-    HostMem(Size size, int type, AllocType alloc_type = PAGE_LOCKED);
+            HostMem(int rows, int cols, int type, AllocType alloc_type = PAGE_LOCKED);
 
-    //! creates from host memory with coping data
-    explicit HostMem(InputArray arr, AllocType alloc_type = PAGE_LOCKED);
+            HostMem(Size size, int type, AllocType alloc_type = PAGE_LOCKED);
 
-    ~HostMem();
+            //! creates from host memory with coping data
+            explicit HostMem(InputArray arr, AllocType alloc_type = PAGE_LOCKED);
 
-    HostMem& operator =(const HostMem& m);
+            ~HostMem();
 
-    //! swaps with other smart pointer
-    void swap(HostMem& b);
+            HostMem &operator=(const HostMem &m);
 
-    //! returns deep copy of the matrix, i.e. the data is copied
-    HostMem clone() const;
+            //! swaps with other smart pointer
+            void swap(HostMem &b);
 
-    //! allocates new matrix data unless the matrix already has specified size and type.
-    void create(int rows, int cols, int type);
-    void create(Size size, int type);
+            //! returns deep copy of the matrix, i.e. the data is copied
+            HostMem clone() const;
 
-    //! creates alternative HostMem header for the same data, with different
-    //! number of channels and/or different number of rows
-    HostMem reshape(int cn, int rows = 0) const;
+            //! allocates new matrix data unless the matrix already has specified size and type.
+            void create(int rows, int cols, int type);
 
-    //! decrements reference counter and released memory if needed.
-    void release();
+            void create(Size size, int type);
 
-    //! returns matrix header with disabled reference counting for HostMem data.
-    Mat createMatHeader() const;
+            //! creates alternative HostMem header for the same data, with different
+            //! number of channels and/or different number of rows
+            HostMem reshape(int cn, int rows = 0) const;
 
-    /** @brief Maps CPU memory to GPU address space and creates the cuda::GpuMat header without reference counting
-    for it.
+            //! decrements reference counter and released memory if needed.
+            void release();
 
-    This can be done only if memory was allocated with the SHARED flag and if it is supported by the
-    hardware. Laptops often share video and CPU memory, so address spaces can be mapped, which
-    eliminates an extra copy.
-     */
-    GpuMat createGpuMatHeader() const;
+            //! returns matrix header with disabled reference counting for HostMem data.
+            Mat createMatHeader() const;
 
-    // Please see cv::Mat for descriptions
-    bool isContinuous() const;
-    size_t elemSize() const;
-    size_t elemSize1() const;
-    int type() const;
-    int depth() const;
-    int channels() const;
-    size_t step1() const;
-    Size size() const;
-    bool empty() const;
+            /** @brief Maps CPU memory to GPU address space and creates the cuda::GpuMat header without reference counting
+            for it.
 
-    // Please see cv::Mat for descriptions
-    int flags;
-    int rows, cols;
-    size_t step;
+            This can be done only if memory was allocated with the SHARED flag and if it is supported by the
+            hardware. Laptops often share video and CPU memory, so address spaces can be mapped, which
+            eliminates an extra copy.
+             */
+            GpuMat createGpuMatHeader() const;
 
-    uchar* data;
-    int* refcount;
+            // Please see cv::Mat for descriptions
+            bool isContinuous() const;
 
-    uchar* datastart;
-    const uchar* dataend;
+            size_t elemSize() const;
 
-    AllocType alloc_type;
-};
+            size_t elemSize1() const;
+
+            int type() const;
+
+            int depth() const;
+
+            int channels() const;
+
+            size_t step1() const;
+
+            Size size() const;
+
+            bool empty() const;
+
+            // Please see cv::Mat for descriptions
+            int flags;
+            int rows, cols;
+            size_t step;
+
+            uchar *data;
+            int *refcount;
+
+            uchar *datastart;
+            const uchar *dataend;
+
+            AllocType alloc_type;
+        };
 
 /** @brief Page-locks the memory of matrix and maps it for the device(s).
 
 @param m Input matrix.
  */
-CV_EXPORTS void registerPageLocked(Mat& m);
+        CV_EXPORTS void registerPageLocked(Mat &m);
 
 /** @brief Unmaps the memory of matrix and makes it pageable again.
 
 @param m Input matrix.
  */
-CV_EXPORTS void unregisterPageLocked(Mat& m);
+        CV_EXPORTS void unregisterPageLocked(Mat &m);
 
 //===================================================================================
 // Stream
@@ -639,92 +666,94 @@ void thread2()
 @note By default all CUDA routines are launched in Stream::Null() object, if the stream is not specified by user.
 In multi-threading environment the stream objects must be passed explicitly (see previous note).
  */
-class CV_EXPORTS Stream
-{
-    typedef void (Stream::*bool_type)() const;
-    void this_type_does_not_support_comparisons() const {}
+        class CV_EXPORTS Stream {
+            typedef void (Stream::*bool_type)() const;
 
-public:
-    typedef void (*StreamCallback)(int status, void* userData);
+            void this_type_does_not_support_comparisons() const {}
 
-    //! creates a new asynchronous stream
-    Stream();
+        public:
+            typedef void (*StreamCallback)(int status, void *userData);
 
-    //! creates a new asynchronous stream with custom allocator
-    Stream(const Ptr<GpuMat::Allocator>& allocator);
+            //! creates a new asynchronous stream
+            Stream();
 
-    /** @brief Returns true if the current stream queue is finished. Otherwise, it returns false.
-    */
-    bool queryIfComplete() const;
+            //! creates a new asynchronous stream with custom allocator
+            Stream(const Ptr<GpuMat::Allocator> &allocator);
 
-    /** @brief Blocks the current CPU thread until all operations in the stream are complete.
-    */
-    void waitForCompletion();
+            /** @brief Returns true if the current stream queue is finished. Otherwise, it returns false.
+            */
+            bool queryIfComplete() const;
 
-    /** @brief Makes a compute stream wait on an event.
-    */
-    void waitEvent(const Event& event);
+            /** @brief Blocks the current CPU thread until all operations in the stream are complete.
+            */
+            void waitForCompletion();
 
-    /** @brief Adds a callback to be called on the host after all currently enqueued items in the stream have
-    completed.
+            /** @brief Makes a compute stream wait on an event.
+            */
+            void waitEvent(const Event &event);
 
-    @note Callbacks must not make any CUDA API calls. Callbacks must not perform any synchronization
-    that may depend on outstanding device work or other callbacks that are not mandated to run earlier.
-    Callbacks without a mandated order (in independent streams) execute in undefined order and may be
-    serialized.
-     */
-    void enqueueHostCallback(StreamCallback callback, void* userData);
+            /** @brief Adds a callback to be called on the host after all currently enqueued items in the stream have
+            completed.
 
-    //! return Stream object for default CUDA stream
-    static Stream& Null();
+            @note Callbacks must not make any CUDA API calls. Callbacks must not perform any synchronization
+            that may depend on outstanding device work or other callbacks that are not mandated to run earlier.
+            Callbacks without a mandated order (in independent streams) execute in undefined order and may be
+            serialized.
+             */
+            void enqueueHostCallback(StreamCallback callback, void *userData);
 
-    //! returns true if stream object is not default (!= 0)
-    operator bool_type() const;
+            //! return Stream object for default CUDA stream
+            static Stream &Null();
 
-    class Impl;
+            //! returns true if stream object is not default (!= 0)
+            operator bool_type() const;
 
-private:
-    Ptr<Impl> impl_;
-    Stream(const Ptr<Impl>& impl);
+            class Impl;
 
-    friend struct StreamAccessor;
-    friend class BufferPool;
-    friend class DefaultDeviceInitializer;
-};
+        private:
+            Ptr<Impl> impl_;
 
-class CV_EXPORTS Event
-{
-public:
-    enum CreateFlags
-    {
-        DEFAULT        = 0x00,  /**< Default event flag */
-        BLOCKING_SYNC  = 0x01,  /**< Event uses blocking synchronization */
-        DISABLE_TIMING = 0x02,  /**< Event will not record timing data */
-        INTERPROCESS   = 0x04   /**< Event is suitable for interprocess use. DisableTiming must be set */
-    };
+            Stream(const Ptr<Impl> &impl);
 
-    explicit Event(CreateFlags flags = DEFAULT);
+            friend struct StreamAccessor;
 
-    //! records an event
-    void record(Stream& stream = Stream::Null());
+            friend class BufferPool;
 
-    //! queries an event's status
-    bool queryIfComplete() const;
+            friend class DefaultDeviceInitializer;
+        };
 
-    //! waits for an event to complete
-    void waitForCompletion();
+        class CV_EXPORTS Event {
+        public:
+            enum CreateFlags {
+                DEFAULT = 0x00,  /**< Default event flag */
+                BLOCKING_SYNC = 0x01,  /**< Event uses blocking synchronization */
+                DISABLE_TIMING = 0x02,  /**< Event will not record timing data */
+                INTERPROCESS = 0x04   /**< Event is suitable for interprocess use. DisableTiming must be set */
+            };
 
-    //! computes the elapsed time between events
-    static float elapsedTime(const Event& start, const Event& end);
+            explicit Event(CreateFlags flags = DEFAULT);
 
-    class Impl;
+            //! records an event
+            void record(Stream &stream = Stream::Null());
 
-private:
-    Ptr<Impl> impl_;
-    Event(const Ptr<Impl>& impl);
+            //! queries an event's status
+            bool queryIfComplete() const;
 
-    friend struct EventAccessor;
-};
+            //! waits for an event to complete
+            void waitForCompletion();
+
+            //! computes the elapsed time between events
+            static float elapsedTime(const Event &start, const Event &end);
+
+            class Impl;
+
+        private:
+            Ptr<Impl> impl_;
+
+            Event(const Ptr<Impl> &impl);
+
+            friend struct EventAccessor;
+        };
 
 //! @} cudacore_struct
 
@@ -741,7 +770,7 @@ Use this function before any other CUDA functions calls. If OpenCV is compiled w
 this function returns 0. If the CUDA driver is not installed, or is incompatible, this function
 returns -1.
  */
-CV_EXPORTS int getCudaEnabledDeviceCount();
+        CV_EXPORTS int getCudaEnabledDeviceCount();
 
 /** @brief Sets a device and initializes it for the current thread.
 
@@ -749,43 +778,42 @@ CV_EXPORTS int getCudaEnabledDeviceCount();
 
 If the call of this function is omitted, a default device is initialized at the fist CUDA usage.
  */
-CV_EXPORTS void setDevice(int device);
+        CV_EXPORTS void setDevice(int device);
 
 /** @brief Returns the current device index set by cuda::setDevice or initialized by default.
  */
-CV_EXPORTS int getDevice();
+        CV_EXPORTS int getDevice();
 
 /** @brief Explicitly destroys and cleans up all resources associated with the current device in the current
 process.
 
 Any subsequent API call to this device will reinitialize the device.
  */
-CV_EXPORTS void resetDevice();
+        CV_EXPORTS void resetDevice();
 
 /** @brief Enumeration providing CUDA computing features.
  */
-enum FeatureSet
-{
-    FEATURE_SET_COMPUTE_10 = 10,
-    FEATURE_SET_COMPUTE_11 = 11,
-    FEATURE_SET_COMPUTE_12 = 12,
-    FEATURE_SET_COMPUTE_13 = 13,
-    FEATURE_SET_COMPUTE_20 = 20,
-    FEATURE_SET_COMPUTE_21 = 21,
-    FEATURE_SET_COMPUTE_30 = 30,
-    FEATURE_SET_COMPUTE_32 = 32,
-    FEATURE_SET_COMPUTE_35 = 35,
-    FEATURE_SET_COMPUTE_50 = 50,
+        enum FeatureSet {
+            FEATURE_SET_COMPUTE_10 = 10,
+            FEATURE_SET_COMPUTE_11 = 11,
+            FEATURE_SET_COMPUTE_12 = 12,
+            FEATURE_SET_COMPUTE_13 = 13,
+            FEATURE_SET_COMPUTE_20 = 20,
+            FEATURE_SET_COMPUTE_21 = 21,
+            FEATURE_SET_COMPUTE_30 = 30,
+            FEATURE_SET_COMPUTE_32 = 32,
+            FEATURE_SET_COMPUTE_35 = 35,
+            FEATURE_SET_COMPUTE_50 = 50,
 
-    GLOBAL_ATOMICS = FEATURE_SET_COMPUTE_11,
-    SHARED_ATOMICS = FEATURE_SET_COMPUTE_12,
-    NATIVE_DOUBLE = FEATURE_SET_COMPUTE_13,
-    WARP_SHUFFLE_FUNCTIONS = FEATURE_SET_COMPUTE_30,
-    DYNAMIC_PARALLELISM = FEATURE_SET_COMPUTE_35
-};
+            GLOBAL_ATOMICS = FEATURE_SET_COMPUTE_11,
+            SHARED_ATOMICS = FEATURE_SET_COMPUTE_12,
+            NATIVE_DOUBLE = FEATURE_SET_COMPUTE_13,
+            WARP_SHUFFLE_FUNCTIONS = FEATURE_SET_COMPUTE_30,
+            DYNAMIC_PARALLELISM = FEATURE_SET_COMPUTE_35
+        };
 
 //! checks whether current device supports the given feature
-CV_EXPORTS bool deviceSupports(FeatureSet feature_set);
+        CV_EXPORTS bool deviceSupports(FeatureSet feature_set);
 
 /** @brief Class providing a set of static methods to check what NVIDIA\* card architecture the CUDA module was
 built for.
@@ -793,242 +821,247 @@ built for.
 According to the CUDA C Programming Guide Version 3.2: "PTX code produced for some specific compute
 capability can always be compiled to binary code of greater or equal compute capability".
  */
-class CV_EXPORTS TargetArchs
-{
-public:
-    /** @brief The following method checks whether the module was built with the support of the given feature:
+        class CV_EXPORTS TargetArchs {
+        public:
+            /** @brief The following method checks whether the module was built with the support of the given feature:
 
-    @param feature_set Features to be checked. See :ocvcuda::FeatureSet.
-     */
-    static bool builtWith(FeatureSet feature_set);
+            @param feature_set Features to be checked. See :ocvcuda::FeatureSet.
+             */
+            static bool builtWith(FeatureSet feature_set);
 
-    /** @brief There is a set of methods to check whether the module contains intermediate (PTX) or binary CUDA
-    code for the given architecture(s):
+            /** @brief There is a set of methods to check whether the module contains intermediate (PTX) or binary CUDA
+            code for the given architecture(s):
 
-    @param major Major compute capability version.
-    @param minor Minor compute capability version.
-     */
-    static bool has(int major, int minor);
-    static bool hasPtx(int major, int minor);
-    static bool hasBin(int major, int minor);
+            @param major Major compute capability version.
+            @param minor Minor compute capability version.
+             */
+            static bool has(int major, int minor);
 
-    static bool hasEqualOrLessPtx(int major, int minor);
-    static bool hasEqualOrGreater(int major, int minor);
-    static bool hasEqualOrGreaterPtx(int major, int minor);
-    static bool hasEqualOrGreaterBin(int major, int minor);
-};
+            static bool hasPtx(int major, int minor);
+
+            static bool hasBin(int major, int minor);
+
+            static bool hasEqualOrLessPtx(int major, int minor);
+
+            static bool hasEqualOrGreater(int major, int minor);
+
+            static bool hasEqualOrGreaterPtx(int major, int minor);
+
+            static bool hasEqualOrGreaterBin(int major, int minor);
+        };
 
 /** @brief Class providing functionality for querying the specified GPU properties.
  */
-class CV_EXPORTS DeviceInfo
-{
-public:
-    //! creates DeviceInfo object for the current GPU
-    DeviceInfo();
+        class CV_EXPORTS DeviceInfo {
+        public:
+            //! creates DeviceInfo object for the current GPU
+            DeviceInfo();
 
-    /** @brief The constructors.
+            /** @brief The constructors.
 
-    @param device_id System index of the CUDA device starting with 0.
+            @param device_id System index of the CUDA device starting with 0.
 
-    Constructs the DeviceInfo object for the specified device. If device_id parameter is missed, it
-    constructs an object for the current device.
-     */
-    DeviceInfo(int device_id);
+            Constructs the DeviceInfo object for the specified device. If device_id parameter is missed, it
+            constructs an object for the current device.
+             */
+            DeviceInfo(int device_id);
 
-    /** @brief Returns system index of the CUDA device starting with 0.
-    */
-    int deviceID() const;
+            /** @brief Returns system index of the CUDA device starting with 0.
+            */
+            int deviceID() const;
 
-    //! ASCII string identifying device
-    const char* name() const;
+            //! ASCII string identifying device
+            const char *name() const;
 
-    //! global memory available on device in bytes
-    size_t totalGlobalMem() const;
+            //! global memory available on device in bytes
+            size_t totalGlobalMem() const;
 
-    //! shared memory available per block in bytes
-    size_t sharedMemPerBlock() const;
+            //! shared memory available per block in bytes
+            size_t sharedMemPerBlock() const;
 
-    //! 32-bit registers available per block
-    int regsPerBlock() const;
+            //! 32-bit registers available per block
+            int regsPerBlock() const;
 
-    //! warp size in threads
-    int warpSize() const;
+            //! warp size in threads
+            int warpSize() const;
 
-    //! maximum pitch in bytes allowed by memory copies
-    size_t memPitch() const;
+            //! maximum pitch in bytes allowed by memory copies
+            size_t memPitch() const;
 
-    //! maximum number of threads per block
-    int maxThreadsPerBlock() const;
+            //! maximum number of threads per block
+            int maxThreadsPerBlock() const;
 
-    //! maximum size of each dimension of a block
-    Vec3i maxThreadsDim() const;
+            //! maximum size of each dimension of a block
+            Vec3i maxThreadsDim() const;
 
-    //! maximum size of each dimension of a grid
-    Vec3i maxGridSize() const;
+            //! maximum size of each dimension of a grid
+            Vec3i maxGridSize() const;
 
-    //! clock frequency in kilohertz
-    int clockRate() const;
+            //! clock frequency in kilohertz
+            int clockRate() const;
 
-    //! constant memory available on device in bytes
-    size_t totalConstMem() const;
+            //! constant memory available on device in bytes
+            size_t totalConstMem() const;
 
-    //! major compute capability
-    int majorVersion() const;
+            //! major compute capability
+            int majorVersion() const;
 
-    //! minor compute capability
-    int minorVersion() const;
+            //! minor compute capability
+            int minorVersion() const;
 
-    //! alignment requirement for textures
-    size_t textureAlignment() const;
+            //! alignment requirement for textures
+            size_t textureAlignment() const;
 
-    //! pitch alignment requirement for texture references bound to pitched memory
-    size_t texturePitchAlignment() const;
+            //! pitch alignment requirement for texture references bound to pitched memory
+            size_t texturePitchAlignment() const;
 
-    //! number of multiprocessors on device
-    int multiProcessorCount() const;
+            //! number of multiprocessors on device
+            int multiProcessorCount() const;
 
-    //! specified whether there is a run time limit on kernels
-    bool kernelExecTimeoutEnabled() const;
+            //! specified whether there is a run time limit on kernels
+            bool kernelExecTimeoutEnabled() const;
 
-    //! device is integrated as opposed to discrete
-    bool integrated() const;
+            //! device is integrated as opposed to discrete
+            bool integrated() const;
 
-    //! device can map host memory with cudaHostAlloc/cudaHostGetDevicePointer
-    bool canMapHostMemory() const;
+            //! device can map host memory with cudaHostAlloc/cudaHostGetDevicePointer
+            bool canMapHostMemory() const;
 
-    enum ComputeMode
-    {
-        ComputeModeDefault,         /**< default compute mode (Multiple threads can use cudaSetDevice with this device) */
-        ComputeModeExclusive,       /**< compute-exclusive-thread mode (Only one thread in one process will be able to use cudaSetDevice with this device) */
-        ComputeModeProhibited,      /**< compute-prohibited mode (No threads can use cudaSetDevice with this device) */
-        ComputeModeExclusiveProcess /**< compute-exclusive-process mode (Many threads in one process will be able to use cudaSetDevice with this device) */
-    };
+            enum ComputeMode {
+                ComputeModeDefault,         /**< default compute mode (Multiple threads can use cudaSetDevice with this device) */
+                ComputeModeExclusive,       /**< compute-exclusive-thread mode (Only one thread in one process will be able to use cudaSetDevice with this device) */
+                ComputeModeProhibited,      /**< compute-prohibited mode (No threads can use cudaSetDevice with this device) */
+                ComputeModeExclusiveProcess /**< compute-exclusive-process mode (Many threads in one process will be able to use cudaSetDevice with this device) */
+            };
 
-    //! compute mode
-    ComputeMode computeMode() const;
+            //! compute mode
+            ComputeMode computeMode() const;
 
-    //! maximum 1D texture size
-    int maxTexture1D() const;
+            //! maximum 1D texture size
+            int maxTexture1D() const;
 
-    //! maximum 1D mipmapped texture size
-    int maxTexture1DMipmap() const;
+            //! maximum 1D mipmapped texture size
+            int maxTexture1DMipmap() const;
 
-    //! maximum size for 1D textures bound to linear memory
-    int maxTexture1DLinear() const;
+            //! maximum size for 1D textures bound to linear memory
+            int maxTexture1DLinear() const;
 
-    //! maximum 2D texture dimensions
-    Vec2i maxTexture2D() const;
+            //! maximum 2D texture dimensions
+            Vec2i maxTexture2D() const;
 
-    //! maximum 2D mipmapped texture dimensions
-    Vec2i maxTexture2DMipmap() const;
+            //! maximum 2D mipmapped texture dimensions
+            Vec2i maxTexture2DMipmap() const;
 
-    //! maximum dimensions (width, height, pitch) for 2D textures bound to pitched memory
-    Vec3i maxTexture2DLinear() const;
+            //! maximum dimensions (width, height, pitch) for 2D textures bound to pitched memory
+            Vec3i maxTexture2DLinear() const;
 
-    //! maximum 2D texture dimensions if texture gather operations have to be performed
-    Vec2i maxTexture2DGather() const;
+            //! maximum 2D texture dimensions if texture gather operations have to be performed
+            Vec2i maxTexture2DGather() const;
 
-    //! maximum 3D texture dimensions
-    Vec3i maxTexture3D() const;
+            //! maximum 3D texture dimensions
+            Vec3i maxTexture3D() const;
 
-    //! maximum Cubemap texture dimensions
-    int maxTextureCubemap() const;
+            //! maximum Cubemap texture dimensions
+            int maxTextureCubemap() const;
 
-    //! maximum 1D layered texture dimensions
-    Vec2i maxTexture1DLayered() const;
+            //! maximum 1D layered texture dimensions
+            Vec2i maxTexture1DLayered() const;
 
-    //! maximum 2D layered texture dimensions
-    Vec3i maxTexture2DLayered() const;
+            //! maximum 2D layered texture dimensions
+            Vec3i maxTexture2DLayered() const;
 
-    //! maximum Cubemap layered texture dimensions
-    Vec2i maxTextureCubemapLayered() const;
+            //! maximum Cubemap layered texture dimensions
+            Vec2i maxTextureCubemapLayered() const;
 
-    //! maximum 1D surface size
-    int maxSurface1D() const;
+            //! maximum 1D surface size
+            int maxSurface1D() const;
 
-    //! maximum 2D surface dimensions
-    Vec2i maxSurface2D() const;
+            //! maximum 2D surface dimensions
+            Vec2i maxSurface2D() const;
 
-    //! maximum 3D surface dimensions
-    Vec3i maxSurface3D() const;
+            //! maximum 3D surface dimensions
+            Vec3i maxSurface3D() const;
 
-    //! maximum 1D layered surface dimensions
-    Vec2i maxSurface1DLayered() const;
+            //! maximum 1D layered surface dimensions
+            Vec2i maxSurface1DLayered() const;
 
-    //! maximum 2D layered surface dimensions
-    Vec3i maxSurface2DLayered() const;
+            //! maximum 2D layered surface dimensions
+            Vec3i maxSurface2DLayered() const;
 
-    //! maximum Cubemap surface dimensions
-    int maxSurfaceCubemap() const;
+            //! maximum Cubemap surface dimensions
+            int maxSurfaceCubemap() const;
 
-    //! maximum Cubemap layered surface dimensions
-    Vec2i maxSurfaceCubemapLayered() const;
+            //! maximum Cubemap layered surface dimensions
+            Vec2i maxSurfaceCubemapLayered() const;
 
-    //! alignment requirements for surfaces
-    size_t surfaceAlignment() const;
+            //! alignment requirements for surfaces
+            size_t surfaceAlignment() const;
 
-    //! device can possibly execute multiple kernels concurrently
-    bool concurrentKernels() const;
+            //! device can possibly execute multiple kernels concurrently
+            bool concurrentKernels() const;
 
-    //! device has ECC support enabled
-    bool ECCEnabled() const;
+            //! device has ECC support enabled
+            bool ECCEnabled() const;
 
-    //! PCI bus ID of the device
-    int pciBusID() const;
+            //! PCI bus ID of the device
+            int pciBusID() const;
 
-    //! PCI device ID of the device
-    int pciDeviceID() const;
+            //! PCI device ID of the device
+            int pciDeviceID() const;
 
-    //! PCI domain ID of the device
-    int pciDomainID() const;
+            //! PCI domain ID of the device
+            int pciDomainID() const;
 
-    //! true if device is a Tesla device using TCC driver, false otherwise
-    bool tccDriver() const;
+            //! true if device is a Tesla device using TCC driver, false otherwise
+            bool tccDriver() const;
 
-    //! number of asynchronous engines
-    int asyncEngineCount() const;
+            //! number of asynchronous engines
+            int asyncEngineCount() const;
 
-    //! device shares a unified address space with the host
-    bool unifiedAddressing() const;
+            //! device shares a unified address space with the host
+            bool unifiedAddressing() const;
 
-    //! peak memory clock frequency in kilohertz
-    int memoryClockRate() const;
+            //! peak memory clock frequency in kilohertz
+            int memoryClockRate() const;
 
-    //! global memory bus width in bits
-    int memoryBusWidth() const;
+            //! global memory bus width in bits
+            int memoryBusWidth() const;
 
-    //! size of L2 cache in bytes
-    int l2CacheSize() const;
+            //! size of L2 cache in bytes
+            int l2CacheSize() const;
 
-    //! maximum resident threads per multiprocessor
-    int maxThreadsPerMultiProcessor() const;
+            //! maximum resident threads per multiprocessor
+            int maxThreadsPerMultiProcessor() const;
 
-    //! gets free and total device memory
-    void queryMemory(size_t& totalMemory, size_t& freeMemory) const;
-    size_t freeMemory() const;
-    size_t totalMemory() const;
+            //! gets free and total device memory
+            void queryMemory(size_t &totalMemory, size_t &freeMemory) const;
 
-    /** @brief Provides information on CUDA feature support.
+            size_t freeMemory() const;
 
-    @param feature_set Features to be checked. See cuda::FeatureSet.
+            size_t totalMemory() const;
 
-    This function returns true if the device has the specified CUDA feature. Otherwise, it returns false
-     */
-    bool supports(FeatureSet feature_set) const;
+            /** @brief Provides information on CUDA feature support.
 
-    /** @brief Checks the CUDA module and device compatibility.
+            @param feature_set Features to be checked. See cuda::FeatureSet.
 
-    This function returns true if the CUDA module can be run on the specified device. Otherwise, it
-    returns false .
-     */
-    bool isCompatible() const;
+            This function returns true if the device has the specified CUDA feature. Otherwise, it returns false
+             */
+            bool supports(FeatureSet feature_set) const;
 
-private:
-    int device_id_;
-};
+            /** @brief Checks the CUDA module and device compatibility.
 
-CV_EXPORTS void printCudaDeviceInfo(int device);
-CV_EXPORTS void printShortCudaDeviceInfo(int device);
+            This function returns true if the CUDA module can be run on the specified device. Otherwise, it
+            returns false .
+             */
+            bool isCompatible() const;
+
+        private:
+            int device_id_;
+        };
+
+        CV_EXPORTS void printCudaDeviceInfo(int device);
+
+        CV_EXPORTS void printShortCudaDeviceInfo(int device);
 
 /** @brief Converts an array to half precision floating number.
 
@@ -1037,11 +1070,12 @@ CV_EXPORTS void printShortCudaDeviceInfo(int device);
 @param stream Stream for the asynchronous version.
 @sa convertFp16
 */
-CV_EXPORTS void convertFp16(InputArray _src, OutputArray _dst, Stream& stream = Stream::Null());
+        CV_EXPORTS void convertFp16(InputArray _src, OutputArray _dst, Stream &stream = Stream::Null());
 
 //! @} cudacore_init
 
-}} // namespace cv { namespace cuda {
+    }
+} // namespace cv { namespace cuda {
 
 
 #include "opencv2/core/cuda.inl.hpp"

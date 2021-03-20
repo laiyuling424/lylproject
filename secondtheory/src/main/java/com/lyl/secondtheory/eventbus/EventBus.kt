@@ -16,7 +16,7 @@ class EventBus private constructor() {
     }
 
     companion object {
-        val getDefault:EventBus by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+        val getDefault: EventBus by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
             EventBus()
         }
     }

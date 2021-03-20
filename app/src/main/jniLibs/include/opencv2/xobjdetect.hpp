@@ -48,57 +48,55 @@ the use of this software, even if advised of the possibility of such damage.
 
 /** @defgroup xobjdetect Extended object detection
 */
-namespace cv
-{
-namespace xobjdetect
-{
+namespace cv {
+    namespace xobjdetect {
 //! @addtogroup xobjdetect
 //! @{
 
 
 /** @brief WaldBoost detector
 */
-class CV_EXPORTS WBDetector {
-public:
-    /** @brief Read detector from FileNode.
-    @param node FileNode for input
-    */
-    virtual void read(const FileNode &node) = 0;
+        class CV_EXPORTS WBDetector{
+                public:
+                /** @brief Read detector from FileNode.
+                @param node FileNode for input
+                */
+                virtual void read(const FileNode &node) = 0;
 
-    /** @brief Write detector to FileStorage.
-    @param fs FileStorage for output
-    */
-    virtual void write(FileStorage &fs) const = 0;
+                /** @brief Write detector to FileStorage.
+                @param fs FileStorage for output
+                */
+                virtual void write(FileStorage &fs) const = 0;
 
-    /** @brief Train WaldBoost detector
-    @param pos_samples Path to directory with cropped positive samples
-    @param neg_imgs Path to directory with negative (background) images
-    */
-    virtual void train(
-        const std::string& pos_samples,
-        const std::string& neg_imgs) = 0;
+                /** @brief Train WaldBoost detector
+                @param pos_samples Path to directory with cropped positive samples
+                @param neg_imgs Path to directory with negative (background) images
+                */
+                virtual void train(
+                const std::string& pos_samples,
+                const std::string& neg_imgs) = 0;
 
-    /** @brief Detect objects on image using WaldBoost detector
-    @param img Input image for detection
-    @param bboxes Bounding boxes coordinates output vector
-    @param confidences Confidence values for bounding boxes output vector
-    */
-    virtual void detect(
-        const Mat& img,
-        std::vector<Rect> &bboxes,
-        std::vector<double> &confidences) = 0;
+                /** @brief Detect objects on image using WaldBoost detector
+                @param img Input image for detection
+                @param bboxes Bounding boxes coordinates output vector
+                @param confidences Confidence values for bounding boxes output vector
+                */
+                virtual void detect(
+                const Mat& img,
+                std::vector<Rect> &bboxes,
+                std::vector<double> &confidences) = 0;
 
-    /** @brief Create instance of WBDetector
-    */
-    static Ptr<WBDetector> create();
+                /** @brief Create instance of WBDetector
+                */
+                static Ptr<WBDetector> create();
 
-    virtual ~WBDetector(){}
-};
+                virtual ~WBDetector(){}
+        };
 
 
 //! @}
 
-} /* namespace xobjdetect */
+    } /* namespace xobjdetect */
 } /* namespace cv */
 
 #endif /* __OPENCV_XOBJDETECT_XOBJDETECT_HPP__ */

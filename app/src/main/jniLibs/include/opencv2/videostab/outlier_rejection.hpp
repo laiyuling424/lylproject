@@ -47,55 +47,52 @@
 #include "opencv2/core.hpp"
 #include "opencv2/videostab/motion_core.hpp"
 
-namespace cv
-{
-namespace videostab
-{
+namespace cv {
+    namespace videostab {
 
 //! @addtogroup videostab
 //! @{
 
-class CV_EXPORTS IOutlierRejector
-{
-public:
-    virtual ~IOutlierRejector() {}
+        class CV_EXPORTS IOutlierRejector {
+        public:
+            virtual ~IOutlierRejector() {}
 
-    virtual void process(
-            Size frameSize, InputArray points0, InputArray points1, OutputArray mask) = 0;
-};
+            virtual void process(
+                    Size frameSize, InputArray points0, InputArray points1, OutputArray mask) = 0;
+        };
 
-class CV_EXPORTS NullOutlierRejector : public IOutlierRejector
-{
-public:
-    virtual void process(
-            Size frameSize, InputArray points0, InputArray points1, OutputArray mask) CV_OVERRIDE;
-};
+        class CV_EXPORTS NullOutlierRejector : public IOutlierRejector {
+        public:
+            virtual void process(
+                    Size frameSize, InputArray points0, InputArray points1, OutputArray mask) CV_OVERRIDE;
+        };
 
-class CV_EXPORTS TranslationBasedLocalOutlierRejector : public IOutlierRejector
-{
-public:
-    TranslationBasedLocalOutlierRejector();
+        class CV_EXPORTS TranslationBasedLocalOutlierRejector : public IOutlierRejector {
+        public:
+            TranslationBasedLocalOutlierRejector();
 
-    void setCellSize(Size val) { cellSize_ = val; }
-    Size cellSize() const { return cellSize_; }
+            void setCellSize(Size val) { cellSize_ = val; }
 
-    void setRansacParams(RansacParams val) { ransacParams_ = val; }
-    RansacParams ransacParams() const { return ransacParams_; }
+            Size cellSize() const { return cellSize_; }
 
-    virtual void process(
-            Size frameSize, InputArray points0, InputArray points1, OutputArray mask) CV_OVERRIDE;
+            void setRansacParams(RansacParams val) { ransacParams_ = val; }
 
-private:
-    Size cellSize_;
-    RansacParams ransacParams_;
+            RansacParams ransacParams() const { return ransacParams_; }
 
-    typedef std::vector<int> Cell;
-    std::vector<Cell> grid_;
-};
+            virtual void process(
+                    Size frameSize, InputArray points0, InputArray points1, OutputArray mask) CV_OVERRIDE;
+
+        private:
+            Size cellSize_;
+            RansacParams ransacParams_;
+
+            typedef std::vector<int> Cell;
+            std::vector<Cell> grid_;
+        };
 
 //! @}
 
-} // namespace videostab
+    } // namespace videostab
 } // namespace cv
 
 #endif

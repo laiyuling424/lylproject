@@ -112,7 +112,7 @@ implemented mappers.
 */
 
 namespace cv {
-namespace reg {
+    namespace reg {
 
 //! @addtogroup reg
 //! @{
@@ -121,55 +121,56 @@ namespace reg {
 
 The class is only used to define the common interface for any possible map.
  */
-class CV_EXPORTS_W Map
-{
-public:
-    /*!
-     * Virtual destructor
-     */
-    virtual ~Map();
+        class CV_EXPORTS_W Map
+                {
+                        public:
+                        /*!
+                         * Virtual destructor
+                         */
+                        virtual ~Map();
 
-    /*!
-     * Warps image to a new coordinate frame. The calculation is img2(x)=img1(T^{-1}(x)), as we
-     * have to apply the inverse transformation to the points to move them to were the values
-     * of img2 are.
-     * \param[in] img1 Original image
-     * \param[out] img2 Warped image
-     */
-    CV_WRAP virtual void warp(InputArray img1, OutputArray img2) const;
+                        /*!
+                         * Warps image to a new coordinate frame. The calculation is img2(x)=img1(T^{-1}(x)), as we
+                         * have to apply the inverse transformation to the points to move them to were the values
+                         * of img2 are.
+                         * \param[in] img1 Original image
+                         * \param[out] img2 Warped image
+                         */
+                        CV_WRAP virtual void warp(InputArray img1, OutputArray img2) const;
 
-    /*!
-     * Warps image to a new coordinate frame. The calculation is img2(x)=img1(T(x)), so in fact
-     * this is the inverse warping as we are taking the value of img1 with the forward
-     * transformation of the points.
-     * \param[in] img1 Original image
-     * \param[out] img2 Warped image
-     */
-    CV_WRAP virtual void inverseWarp(InputArray img1, OutputArray img2) const = 0;
+                        /*!
+                         * Warps image to a new coordinate frame. The calculation is img2(x)=img1(T(x)), so in fact
+                         * this is the inverse warping as we are taking the value of img1 with the forward
+                         * transformation of the points.
+                         * \param[in] img1 Original image
+                         * \param[out] img2 Warped image
+                         */
+                        CV_WRAP virtual void inverseWarp(InputArray img1, OutputArray img2) const = 0;
 
-    /*!
-     * Calculates the inverse map
-     * \return Inverse map
-     */
-    CV_WRAP virtual cv::Ptr<Map> inverseMap() const = 0;
+                        /*!
+                         * Calculates the inverse map
+                         * \return Inverse map
+                         */
+                        CV_WRAP virtual cv::Ptr<Map> inverseMap() const = 0;
 
-    /*!
-     * Changes the map composing the current transformation with the one provided in the call.
-     * The order is first the current transformation, then the input argument.
-     * \param[in] map Transformation to compose with.
-     */
-    CV_WRAP virtual void compose(cv::Ptr<Map> map) = 0;
+                        /*!
+                         * Changes the map composing the current transformation with the one provided in the call.
+                         * The order is first the current transformation, then the input argument.
+                         * \param[in] map Transformation to compose with.
+                         */
+                        CV_WRAP virtual void compose(cv::Ptr<Map> map) = 0;
 
-    /*!
-     * Scales the map by a given factor as if the coordinates system is expanded/compressed
-     * by that factor.
-     * \param[in] factor Expansion if bigger than one, compression if smaller than one
-     */
-    CV_WRAP virtual void scale(double factor) = 0;
-};
+                        /*!
+                         * Scales the map by a given factor as if the coordinates system is expanded/compressed
+                         * by that factor.
+                         * \param[in] factor Expansion if bigger than one, compression if smaller than one
+                         */
+                        CV_WRAP virtual void scale(double factor) = 0;
+                };
 
 //! @}
 
-}}  // namespace cv::reg
+    }
+}  // namespace cv::reg
 
 #endif  // MAP_H_

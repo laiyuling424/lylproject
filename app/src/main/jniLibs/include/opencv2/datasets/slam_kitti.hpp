@@ -49,35 +49,35 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_slam
 //! @{
 
-struct pose
-{
-    double elem[12];
-};
+        struct pose {
+            double elem[12];
+        };
 
-struct SLAM_kittiObj : public Object
-{
-    std::string name;
-    std::vector<std::string> images[4];
-    std::vector<std::string> velodyne;
-    std::vector<double> times, p[4];
-    std::vector<pose> posesArray;
-};
+        struct SLAM_kittiObj : public Object {
+            std::string name;
+            std::vector <std::string> images[4];
+            std::vector <std::string> velodyne;
+            std::vector<double> times, p[4];
+            std::vector <pose> posesArray;
+        };
 
-class CV_EXPORTS SLAM_kitti : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS SLAM_kitti
 
-    static Ptr<SLAM_kitti> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <SLAM_kitti> create();
+    };
 
 //! @}
 

@@ -50,27 +50,28 @@
 #include <opencv2/core.hpp>
 #include <opencv2/core/matx.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_ir
 //! @{
 
-struct IR_affineObj : public Object
-{
-    std::string imageName;
-    Matx33d mat;
-};
+        struct IR_affineObj : public Object {
+            std::string imageName;
+            Matx33d mat;
+        };
 
-class CV_EXPORTS IR_affine : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS IR_affine
 
-    static Ptr<IR_affine> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <IR_affine> create();
+    };
 
 //! @}
 

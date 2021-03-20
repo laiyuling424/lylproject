@@ -13,16 +13,17 @@ public class SkinPreUtils {
     private static SkinPreUtils mInstance;
     private Context mContext;
 
-    private SkinPreUtils(Context context){
+    private SkinPreUtils(Context context) {
         this.mContext = context.getApplicationContext();
     }
 
-    public static SkinPreUtils getInstance(Context context){
-        if(mInstance == null){
-            synchronized (SkinPreUtils.class){
-                if(mInstance == null){
+    public static SkinPreUtils getInstance(Context context) {
+        if (mInstance == null) {
+            synchronized (SkinPreUtils.class) {
+                if (mInstance == null) {
 
-                }  mInstance = new SkinPreUtils(context);
+                }
+                mInstance = new SkinPreUtils(context);
             }
         }
         return mInstance;
@@ -31,20 +32,22 @@ public class SkinPreUtils {
 
     /**
      * 保存当前皮肤路径
+     *
      * @param skinPath
      */
-    public void saveSkinPath(String skinPath){
-        mContext.getSharedPreferences(SkinConfig.SKIN_INFO_NAME,Context.MODE_PRIVATE)
-                .edit().putString(SkinConfig.SKIN_PATH_NAME,skinPath).commit();
+    public void saveSkinPath(String skinPath) {
+        mContext.getSharedPreferences(SkinConfig.SKIN_INFO_NAME, Context.MODE_PRIVATE)
+                .edit().putString(SkinConfig.SKIN_PATH_NAME, skinPath).commit();
     }
 
     /**
      * 获取皮肤的路径
-     * @return  当前皮肤路径
+     *
+     * @return 当前皮肤路径
      */
-    public String getSkinPath(){
-        return mContext.getSharedPreferences(SkinConfig.SKIN_INFO_NAME,Context.MODE_PRIVATE)
-                .getString(SkinConfig.SKIN_PATH_NAME,"");
+    public String getSkinPath() {
+        return mContext.getSharedPreferences(SkinConfig.SKIN_INFO_NAME, Context.MODE_PRIVATE)
+                .getString(SkinConfig.SKIN_PATH_NAME, "");
     }
 
     /**

@@ -61,7 +61,9 @@
 \****************************************************************************************/
 
 #ifdef __cplusplus
+
 #  include <cmath>
+
 #else
 #  ifdef __BORLANDC__
 #    include <fastmath.h>
@@ -75,21 +77,21 @@
 #endif
 
 #if defined __GNUC__ && defined __arm__ && (defined __ARM_PCS_VFP || defined __ARM_VFPV3__ || defined __ARM_NEON__) && !defined __SOFTFP__ && !defined(__CUDACC__)
-    // 1. general scheme
-    #define ARM_ROUND(_value, _asm_string) \
+// 1. general scheme
+#define ARM_ROUND(_value, _asm_string) \
         int res; \
         float temp; \
         (void)temp; \
         __asm__(_asm_string : [res] "=r" (res), [temp] "=w" (temp) : [value] "w" (_value)); \
         return res
-    // 2. version for double
-    #ifdef __clang__
-        #define ARM_ROUND_DBL(value) ARM_ROUND(value, "vcvtr.s32.f64 %[temp], %[value] \n vmov %[res], %[temp]")
-    #else
-        #define ARM_ROUND_DBL(value) ARM_ROUND(value, "vcvtr.s32.f64 %[temp], %P[value] \n vmov %[res], %[temp]")
-    #endif
-    // 3. version for float
-    #define ARM_ROUND_FLT(value) ARM_ROUND(value, "vcvtr.s32.f32 %[temp], %[value]\n vmov %[res], %[temp]")
+// 2. version for double
+#ifdef __clang__
+#define ARM_ROUND_DBL(value) ARM_ROUND(value, "vcvtr.s32.f64 %[temp], %[value] \n vmov %[res], %[temp]")
+#else
+#define ARM_ROUND_DBL(value) ARM_ROUND(value, "vcvtr.s32.f64 %[temp], %P[value] \n vmov %[res], %[temp]")
+#endif
+// 3. version for float
+#define ARM_ROUND_FLT(value) ARM_ROUND(value, "vcvtr.s32.f32 %[temp], %[value]\n vmov %[res], %[temp]")
 #endif
 
 /** @brief Rounds floating-point number to the nearest integer
@@ -98,8 +100,7 @@
  result is not defined.
  */
 CV_INLINE int
-cvRound( double value )
-{
+cvRound(double value) {
 #if ((defined _MSC_VER && defined _M_X64) || (defined __GNUC__ && defined __x86_64__ \
     && defined __SSE2__ && !defined __APPLE__) || CV_SSE2) && !defined(__CUDACC__)
     __m128d t = _mm_set_sd( value );
@@ -119,7 +120,7 @@ cvRound( double value )
 # if defined ARM_ROUND_DBL
     ARM_ROUND_DBL(value);
 # else
-    return (int)lrint(value);
+    return (int) lrint(value);
 # endif
 #else
     /* it's ok if round does not comply with IEEE754 standard;
@@ -136,9 +137,8 @@ cvRound( double value )
  @param value floating-point number. If the value is outside of INT_MIN ... INT_MAX range, the
  result is not defined.
  */
-CV_INLINE int cvFloor( double value )
-{
-    int i = (int)value;
+CV_INLINE int cvFloor(double value) {
+    int i = (int) value;
     return i - (i > value);
 }
 
@@ -149,9 +149,8 @@ CV_INLINE int cvFloor( double value )
  @param value floating-point number. If the value is outside of INT_MIN ... INT_MAX range, the
  result is not defined.
  */
-CV_INLINE int cvCeil( double value )
-{
-    int i = (int)value;
+CV_INLINE int cvCeil(double value) {
+    int i = (int) value;
     return i + (i < value);
 }
 
@@ -161,12 +160,11 @@ CV_INLINE int cvCeil( double value )
 
  The function returns 1 if the argument is Not A Number (as defined by IEEE754 standard), 0
  otherwise. */
-CV_INLINE int cvIsNaN( double value )
-{
+CV_INLINE int cvIsNaN(double value) {
     Cv64suf ieee754;
     ieee754.f = value;
-    return ((unsigned)(ieee754.u >> 32) & 0x7fffffff) +
-           ((unsigned)ieee754.u != 0) > 0x7ff00000;
+    return ((unsigned) (ieee754.u >> 32) & 0x7fffffff) +
+           ((unsigned) ieee754.u != 0) > 0x7ff00000;
 }
 
 /** @brief Determines if the argument is Infinity.
@@ -175,19 +173,17 @@ CV_INLINE int cvIsNaN( double value )
 
  The function returns 1 if the argument is a plus or minus infinity (as defined by IEEE754 standard)
  and 0 otherwise. */
-CV_INLINE int cvIsInf( double value )
-{
+CV_INLINE int cvIsInf(double value) {
     Cv64suf ieee754;
     ieee754.f = value;
-    return ((unsigned)(ieee754.u >> 32) & 0x7fffffff) == 0x7ff00000 &&
-            (unsigned)ieee754.u == 0;
+    return ((unsigned) (ieee754.u >> 32) & 0x7fffffff) == 0x7ff00000 &&
+           (unsigned) ieee754.u == 0;
 }
 
 #ifdef __cplusplus
 
 /** @overload */
-CV_INLINE int cvRound(float value)
-{
+CV_INLINE int cvRound(float value) {
 #if ((defined _MSC_VER && defined _M_X64) || (defined __GNUC__ && defined __x86_64__ \
     && defined __SSE2__ && !defined __APPLE__) || CV_SSE2) && !defined(__CUDACC__)
     __m128 t = _mm_set_ss( value );
@@ -207,7 +203,7 @@ CV_INLINE int cvRound(float value)
 # if defined ARM_ROUND_FLT
     ARM_ROUND_FLT(value);
 # else
-    return (int)lrintf(value);
+    return (int) lrintf(value);
 # endif
 #else
     /* it's ok if round does not comply with IEEE754 standard;
@@ -217,48 +213,41 @@ CV_INLINE int cvRound(float value)
 }
 
 /** @overload */
-CV_INLINE int cvRound( int value )
-{
+CV_INLINE int cvRound(int value) {
     return value;
 }
 
 /** @overload */
-CV_INLINE int cvFloor( float value )
-{
-    int i = (int)value;
+CV_INLINE int cvFloor(float value) {
+    int i = (int) value;
     return i - (i > value);
 }
 
 /** @overload */
-CV_INLINE int cvFloor( int value )
-{
+CV_INLINE int cvFloor(int value) {
     return value;
 }
 
 /** @overload */
-CV_INLINE int cvCeil( float value )
-{
-    int i = (int)value;
+CV_INLINE int cvCeil(float value) {
+    int i = (int) value;
     return i + (i < value);
 }
 
 /** @overload */
-CV_INLINE int cvCeil( int value )
-{
+CV_INLINE int cvCeil(int value) {
     return value;
 }
 
 /** @overload */
-CV_INLINE int cvIsNaN( float value )
-{
+CV_INLINE int cvIsNaN(float value) {
     Cv32suf ieee754;
     ieee754.f = value;
     return (ieee754.u & 0x7fffffff) > 0x7f800000;
 }
 
 /** @overload */
-CV_INLINE int cvIsInf( float value )
-{
+CV_INLINE int cvIsInf(float value) {
     Cv32suf ieee754;
     ieee754.f = value;
     return (ieee754.u & 0x7fffffff) == 0x7f800000;

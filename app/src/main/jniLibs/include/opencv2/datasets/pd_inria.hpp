@@ -49,44 +49,44 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_pd
 //! @{
 
-enum sampleType
-{
-    POS = 0,
-    NEG = 1
-};
+        enum sampleType {
+            POS = 0,
+            NEG = 1
+        };
 
-struct PD_inriaObj : public Object
-{
-    // image file name
-    std::string filename;
+        struct PD_inriaObj : public Object {
+            // image file name
+            std::string filename;
 
-    // positive or negative
-    sampleType sType;
+            // positive or negative
+            sampleType sType;
 
-    // image size
-    int width;
-    int height;
-    int depth;
+            // image size
+            int width;
+            int height;
+            int depth;
 
-    // bounding boxes
-    std::vector< Rect > bndboxes;
-};
+            // bounding boxes
+            std::vector <Rect> bndboxes;
+        };
 
-class CV_EXPORTS PD_inria : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS PD_inria
 
-    static Ptr<PD_inria> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <PD_inria> create();
+    };
 
 //! @}
 

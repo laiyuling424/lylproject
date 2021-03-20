@@ -49,42 +49,45 @@
 #include <sstream>
 #include <complex>
 
-namespace cv
-{
-namespace saliency
-{
+namespace cv {
+    namespace saliency {
 
 //! @addtogroup saliency
 //! @{
 
 /************************************ Saliency Base Class ************************************/
 
-class CV_EXPORTS_W Saliency : public virtual Algorithm
-{
- public:
-  /**
-   * \brief Destructor
-   */
-  virtual ~Saliency();
+        class CV_EXPORTS_W Saliency
 
-  /**
-   * \brief Compute the saliency
-   * \param image        The image.
-   * \param saliencyMap      The computed saliency map.
-   * \return true if the saliency map is computed, false otherwise
-   */
-  CV_WRAP bool computeSaliency( InputArray image, OutputArray saliencyMap );
+        : public virtual Algorithm {
+        public:
+        /**
+         * \brief Destructor
+         */
+        virtual ~
 
- protected:
+        Saliency();
 
-  virtual bool computeSaliencyImpl( InputArray image, OutputArray saliencyMap ) = 0;
-  String className;
-};
+        /**
+         * \brief Compute the saliency
+         * \param image        The image.
+         * \param saliencyMap      The computed saliency map.
+         * \return true if the saliency map is computed, false otherwise
+         */
+        CV_WRAP bool computeSaliency(InputArray image, OutputArray saliencyMap);
+
+        protected:
+
+        virtual bool computeSaliencyImpl(InputArray image, OutputArray saliencyMap) = 0;
+
+        String className;
+    };
 
 /************************************ Static Saliency Base Class ************************************/
-class CV_EXPORTS_W StaticSaliency : public virtual Saliency
-{
- public:
+    class CV_EXPORTS_W StaticSaliency
+
+    : public virtual Saliency {
+    public:
 
     /** @brief This function perform a binary map of given saliency map. This is obtained in this
     way:
@@ -101,27 +104,41 @@ class CV_EXPORTS_W StaticSaliency : public virtual Saliency
     @param _saliencyMap the saliency map obtained through one of the specialized algorithms
     @param _binaryMap the binary map
      */
-  CV_WRAP bool computeBinaryMap( InputArray _saliencyMap, OutputArray _binaryMap );
- protected:
-  virtual bool computeSaliencyImpl( InputArray image, OutputArray saliencyMap ) CV_OVERRIDE = 0;
+    CV_WRAP bool computeBinaryMap(InputArray _saliencyMap, OutputArray _binaryMap);
+
+    protected:
+
+    virtual bool computeSaliencyImpl(InputArray image, OutputArray saliencyMap)
+
+    CV_OVERRIDE = 0;
 
 };
 
 /************************************ Motion Saliency Base Class ************************************/
-class CV_EXPORTS_W MotionSaliency : public virtual Saliency
+class CV_EXPORTS_W MotionSaliency
+
+: public virtual Saliency
 {
 
- protected:
-  virtual bool computeSaliencyImpl( InputArray image, OutputArray saliencyMap ) CV_OVERRIDE = 0;
+protected:
+
+virtual bool computeSaliencyImpl(InputArray image, OutputArray saliencyMap)
+
+CV_OVERRIDE = 0;
 
 };
 
 /************************************ Objectness Base Class ************************************/
-class CV_EXPORTS_W Objectness : public virtual Saliency
+class CV_EXPORTS_W Objectness
+
+: public virtual Saliency
 {
 
- protected:
-  virtual bool computeSaliencyImpl( InputArray image, OutputArray saliencyMap ) CV_OVERRIDE = 0;
+protected:
+
+virtual bool computeSaliencyImpl(InputArray image, OutputArray saliencyMap)
+
+CV_OVERRIDE = 0;
 
 };
 

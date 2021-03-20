@@ -50,30 +50,28 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace xphoto
-{
+namespace cv {
+    namespace xphoto {
 
 //! @addtogroup xphoto
 //! @{
 
-    /** @brief The function implements simple dct-based denoising
+        /** @brief The function implements simple dct-based denoising
 
-    <http://www.ipol.im/pub/art/2011/ys-dct/>.
-    @param src source image
-    @param dst destination image
-    @param sigma expected noise standard deviation
-    @param psize size of block side where dct is computed
+        <http://www.ipol.im/pub/art/2011/ys-dct/>.
+        @param src source image
+        @param dst destination image
+        @param sigma expected noise standard deviation
+        @param psize size of block side where dct is computed
 
-    @sa
-       fastNlMeansDenoising
-     */
-    CV_EXPORTS_W void dctDenoising(const Mat &src, Mat &dst, const double sigma, const int psize = 16);
+        @sa
+           fastNlMeansDenoising
+         */
+        CV_EXPORTS_W void dctDenoising(const Mat &src, Mat &dst, const double sigma, const int psize = 16);
 
 //! @}
 
-}
+    }
 }
 
 #endif // __OPENCV_DCT_IMAGE_DENOISING_HPP__

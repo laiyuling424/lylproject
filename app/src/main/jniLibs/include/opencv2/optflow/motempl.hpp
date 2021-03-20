@@ -42,10 +42,8 @@ the use of this software, even if advised of the possibility of such damage.
 
 #include "opencv2/core.hpp"
 
-namespace cv
-{
-namespace motempl
-{
+namespace cv {
+    namespace motempl {
 
 //! @addtogroup optflow
 //! @{
@@ -68,8 +66,8 @@ where the motion happened last time a long time ago are cleared.
 The function, together with calcMotionGradient and calcGlobalOrientation , implements a motion
 templates technique described in @cite Davis97 and @cite Bradski00 .
  */
-CV_EXPORTS_W void updateMotionHistory( InputArray silhouette, InputOutputArray mhi,
-                                       double timestamp, double duration );
+        CV_EXPORTS_W void updateMotionHistory(InputArray silhouette, InputOutputArray mhi,
+                                              double timestamp, double duration);
 
 /** @brief Calculates a gradient orientation of a motion history image.
 
@@ -99,8 +97,8 @@ valid.
    -   (Python) An example on how to perform a motion template technique can be found at
         opencv_source_code/samples/python2/motempl.py
  */
-CV_EXPORTS_W void calcMotionGradient( InputArray mhi, OutputArray mask, OutputArray orientation,
-                                      double delta1, double delta2, int apertureSize = 3 );
+        CV_EXPORTS_W void calcMotionGradient(InputArray mhi, OutputArray mask, OutputArray orientation,
+                                             double delta1, double delta2, int apertureSize = 3);
 
 /** @brief Calculates a global motion orientation in a selected region.
 
@@ -116,8 +114,8 @@ between 0 degrees and 360 degrees. The average direction is computed from the we
 histogram, where a recent motion has a larger weight and the motion occurred in the past has a
 smaller weight, as recorded in mhi .
  */
-CV_EXPORTS_W double calcGlobalOrientation( InputArray orientation, InputArray mask, InputArray mhi,
-                                           double timestamp, double duration );
+        CV_EXPORTS_W double calcGlobalOrientation(InputArray orientation, InputArray mask, InputArray mhi,
+                                                  double timestamp, double duration);
 
 /** @brief Splits a motion history image into a few parts corresponding to separate independent motions (for
 example, left hand, right hand).
@@ -134,14 +132,14 @@ The function finds all of the motion segments and marks them in segmask with ind
 direction for every component can be calculated with calcGlobalOrientation using the extracted mask
 of the particular component.
  */
-CV_EXPORTS_W void segmentMotion( InputArray mhi, OutputArray segmask,
-                                 CV_OUT std::vector<Rect>& boundingRects,
-                                 double timestamp, double segThresh );
-                                 
+        CV_EXPORTS_W void segmentMotion(InputArray mhi, OutputArray segmask,
+                                        CV_OUT std::vector <Rect> &boundingRects,
+                                        double timestamp, double segThresh);
+
 
 //! @}
 
+    }
 }
-}                                 
-                                 
+
 #endif

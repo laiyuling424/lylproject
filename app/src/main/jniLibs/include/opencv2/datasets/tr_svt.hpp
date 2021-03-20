@@ -49,34 +49,34 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_tr
 //! @{
 
-struct tag
-{
-    std::string value;
-    int height, width, x, y;
-};
+        struct tag {
+            std::string value;
+            int height, width, x, y;
+        };
 
-struct TR_svtObj : public Object
-{
-    std::string fileName;
-    std::vector<std::string> lex;
-    std::vector<tag> tags;
-};
+        struct TR_svtObj : public Object {
+            std::string fileName;
+            std::vector <std::string> lex;
+            std::vector <tag> tags;
+        };
 
-class CV_EXPORTS TR_svt : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS TR_svt
 
-    static Ptr<TR_svt> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <TR_svt> create();
+    };
 
 //! @}
 

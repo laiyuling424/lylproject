@@ -27,13 +27,10 @@ import java.util.List;
 public class BannerViewPager extends ViewPager {
 
     private static final String TAG = "BannerViewPager";
-
-    // 1.字定义 BannerViewPager - 自定义的Adapter
-    private BannerAdapter mAdapter;
-
     // 2.实现自动轮播 - 发送消息的msgWhat
     private final int SCROLL_MSG = 0x0011;
-
+    // 1.字定义 BannerViewPager - 自定义的Adapter
+    private BannerAdapter mAdapter;
     // 2.实现自动轮播 - 页面切换间隔时间
     private int mCutDownTime = 3500;
 
@@ -50,6 +47,32 @@ public class BannerViewPager extends ViewPager {
 
     // 是否可以滚动
     private boolean mScrollAble = true;
+    /**
+     * 10.设置点击回调监听
+     */
+    private BannerItemClickListener mListener;
+    // 管理Activity的生命周期
+    private Application.ActivityLifecycleCallbacks mActivityLifecycleCallbacks =
+            new DefaultActivityLifecycleCallbacks() {
+                @Override
+                public void onActivityResumed(Activity activity) {
+                    // 是不是监听的当前Activity的生命周期
+                    // Log.e("TAG", "activity --> " + activity + "  context-->" + getContext());
+                    if (activity == mActivity) {
+                        // 开启轮播
+                        startRoll();
+                        // mHandler.sendEmptyMessageDelayed(mCutDownTime, SCROLL_MSG);
+                    }
+                }
+
+                @Override
+                public void onActivityPaused(Activity activity) {
+                    if (activity == mActivity) {
+                        // 停止轮播
+                        mHandler.removeMessages(SCROLL_MSG);
+                    }
+                }
+            };
 
     public BannerViewPager(Context context) {
         this(context, null);
@@ -154,6 +177,27 @@ public class BannerViewPager extends ViewPager {
     }
 
     /**
+     * 10.获取复用界面
+     */
+    public View getConvertView() {
+        for (int i = 0; i < mConvertViews.size(); i++) {
+            if (mConvertViews.get(i).getParent() == null) {
+                return mConvertViews.get(i);
+            }
+        }
+        return null;
+    }
+
+    public void setOnBannerItemClickListener(BannerItemClickListener listener) {
+        this.mListener = listener;
+    }
+
+    // 10.优化思想 点击回调监听
+    public interface BannerItemClickListener {
+        public void click(int position);
+    }
+
+    /**
      * 给ViewPager设置适配器
      */
     private class BannerPagerAdapter extends PagerAdapter {
@@ -201,53 +245,4 @@ public class BannerViewPager extends ViewPager {
             mConvertViews.add((View) object);
         }
     }
-
-    /**
-     * 10.获取复用界面
-     */
-    public View getConvertView() {
-        for (int i = 0; i < mConvertViews.size(); i++) {
-            if (mConvertViews.get(i).getParent() == null) {
-                return mConvertViews.get(i);
-            }
-        }
-        return null;
-    }
-
-    /**
-     * 10.设置点击回调监听
-     */
-    private BannerItemClickListener mListener;
-
-    public void setOnBannerItemClickListener(BannerItemClickListener listener) {
-        this.mListener = listener;
-    }
-
-    // 10.优化思想 点击回调监听
-    public interface BannerItemClickListener {
-        public void click(int position);
-    }
-
-    // 管理Activity的生命周期
-    private Application.ActivityLifecycleCallbacks mActivityLifecycleCallbacks =
-            new DefaultActivityLifecycleCallbacks() {
-                @Override
-                public void onActivityResumed(Activity activity) {
-                    // 是不是监听的当前Activity的生命周期
-                    // Log.e("TAG", "activity --> " + activity + "  context-->" + getContext());
-                    if (activity == mActivity) {
-                        // 开启轮播
-                        startRoll();
-                        // mHandler.sendEmptyMessageDelayed(mCutDownTime, SCROLL_MSG);
-                    }
-                }
-
-                @Override
-                public void onActivityPaused(Activity activity) {
-                    if (activity == mActivity) {
-                        // 停止轮播
-                        mHandler.removeMessages(SCROLL_MSG);
-                    }
-                }
-            };
 }

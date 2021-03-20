@@ -49,50 +49,49 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_or
 //! @{
-struct PascalPart: public Object
-{
-    std::string name;
-    int xmin;
-    int ymin;
-    int xmax;
-    int ymax;
-};
+        struct PascalPart : public Object {
+            std::string name;
+            int xmin;
+            int ymin;
+            int xmax;
+            int ymax;
+        };
 
-struct PascalObj: public PascalPart
-{
-    std::string pose;
-    bool truncated;
-    bool difficult;
-    bool occluded;
+        struct PascalObj : public PascalPart {
+            std::string pose;
+            bool truncated;
+            bool difficult;
+            bool occluded;
 
-    std::vector<PascalPart> parts;
-};
+            std::vector <PascalPart> parts;
+        };
 
-struct OR_pascalObj : public Object
-{
-    std::string filename;
+        struct OR_pascalObj : public Object {
+            std::string filename;
 
-    int width;
-    int height;
-    int depth;
+            int width;
+            int height;
+            int depth;
 
-    std::vector<PascalObj> objects;
-};
+            std::vector <PascalObj> objects;
+        };
 
-class CV_EXPORTS OR_pascal : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS OR_pascal
 
-    static Ptr<OR_pascal> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <OR_pascal> create();
+    };
 
 //! @}
 

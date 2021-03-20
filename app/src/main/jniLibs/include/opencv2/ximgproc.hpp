@@ -79,25 +79,23 @@ i.e. algorithms which somehow takes into account pixel affinities in natural ima
     @}
 */
 
-namespace cv
-{
-namespace ximgproc
-{
+namespace cv {
+    namespace ximgproc {
 
-enum ThinningTypes{
-    THINNING_ZHANGSUEN    = 0, // Thinning technique of Zhang-Suen
-    THINNING_GUOHALL      = 1  // Thinning technique of Guo-Hall
-};
+        enum ThinningTypes {
+            THINNING_ZHANGSUEN = 0, // Thinning technique of Zhang-Suen
+            THINNING_GUOHALL = 1  // Thinning technique of Guo-Hall
+        };
 
 /**
 * @brief Specifies the binarization method to use in cv::ximgproc::niBlackThreshold
 */
-enum LocalBinarizationMethods{
-	BINARIZATION_NIBLACK = 0, //!< Classic Niblack binarization. See @cite Niblack1985 .
-	BINARIZATION_SAUVOLA = 1, //!< Sauvola's technique. See @cite Sauvola1997 .
-	BINARIZATION_WOLF = 2,    //!< Wolf's technique. See @cite Wolf2004 .
-	BINARIZATION_NICK = 3     //!< NICK technique. See @cite Khurshid2009 .
-};
+        enum LocalBinarizationMethods {
+            BINARIZATION_NIBLACK = 0, //!< Classic Niblack binarization. See @cite Niblack1985 .
+            BINARIZATION_SAUVOLA = 1, //!< Sauvola's technique. See @cite Sauvola1997 .
+            BINARIZATION_WOLF = 2,    //!< Wolf's technique. See @cite Wolf2004 .
+            BINARIZATION_NICK = 3     //!< NICK technique. See @cite Khurshid2009 .
+        };
 
 //! @addtogroup ximgproc
 //! @{
@@ -133,9 +131,15 @@ Other techniques can be specified, see cv::ximgproc::LocalBinarizationMethods.
 
 @sa  threshold, adaptiveThreshold
  */
-CV_EXPORTS_W void niBlackThreshold( InputArray _src, OutputArray _dst,
-                                    double maxValue, int type,
-                                    int blockSize, double k, int binarizationMethod = BINARIZATION_NIBLACK );
+        CV_EXPORTS_W void niBlackThreshold(InputArray
+        _src,
+        OutputArray _dst,
+        double maxValue,
+        int type,
+        int blockSize,
+        double k,
+        int binarizationMethod = BINARIZATION_NIBLACK
+        );
 
 /** @brief Applies a binary blob thinning operation, to achieve a skeletization of the input image.
 
@@ -145,7 +149,11 @@ The function transforms a binary blob image into a skeletized form using the tec
 @param dst Destination image of the same size and the same type as src. The function can work in-place.
 @param thinningType Value that defines which thinning algorithm should be used. See cv::ximgproc::ThinningTypes
  */
-CV_EXPORTS_W void thinning( InputArray src, OutputArray dst, int thinningType = THINNING_ZHANGSUEN);
+        CV_EXPORTS_W void thinning(InputArray
+        src,
+        OutputArray dst,
+        int thinningType = THINNING_ZHANGSUEN
+        );
 
 /** @brief Performs anisotropic diffusian on an image.
 
@@ -167,11 +175,17 @@ CV_EXPORTS_W void thinning( InputArray src, OutputArray dst, int thinningType = 
  @param K sensitivity to the edges
  @param niters The number of iterations
 */
-CV_EXPORTS_W void anisotropicDiffusion(InputArray src, OutputArray dst, float alpha, float K, int niters );
+        CV_EXPORTS_W void anisotropicDiffusion(InputArray
+        src,
+        OutputArray dst,
+        float alpha,
+        float K,
+        int niters
+        );
 
 //! @}
 
-}
+    }
 }
 
 #endif // __OPENCV_XIMGPROC_HPP__

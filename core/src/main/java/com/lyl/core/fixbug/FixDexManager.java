@@ -34,6 +34,54 @@ public class FixDexManager {
         this.mDexDir = context.getDir("odex", Context.MODE_PRIVATE);
     }
 
+    /**
+     * 合并两个数组
+     *
+     * @param arrayLhs
+     * @param arrayRhs
+     * @return
+     */
+    private static Object combineArray(Object arrayLhs, Object arrayRhs) {
+        Class<?> localClass = arrayLhs.getClass().getComponentType();
+        int i = Array.getLength(arrayLhs);
+        int j = i + Array.getLength(arrayRhs);
+        Object result = Array.newInstance(localClass, j);
+        for (int k = 0; k < j; ++k) {
+            if (k < i) {
+                Array.set(result, k, Array.get(arrayLhs, k));
+            } else {
+                Array.set(result, k, Array.get(arrayRhs, k - i));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * copy file
+     *
+     * @param src  source file
+     * @param dest target file
+     * @throws IOException
+     */
+    public static void copyFile(File src, File dest) throws IOException {
+        FileChannel inChannel = null;
+        FileChannel outChannel = null;
+        try {
+            if (!dest.exists()) {
+                dest.createNewFile();
+            }
+            inChannel = new FileInputStream(src).getChannel();
+            outChannel = new FileOutputStream(dest).getChannel();
+            inChannel.transferTo(0, inChannel.size(), outChannel);
+        } finally {
+            if (inChannel != null) {
+                inChannel.close();
+            }
+            if (outChannel != null) {
+                outChannel.close();
+            }
+        }
+    }
 
     /**
      * 修复dex包
@@ -84,57 +132,6 @@ public class FixDexManager {
         dexElementsField.setAccessible(true);
 
         dexElementsField.set(pathList, dexElements);
-    }
-
-
-    /**
-     * 合并两个数组
-     *
-     * @param arrayLhs
-     * @param arrayRhs
-     * @return
-     */
-    private static Object combineArray(Object arrayLhs, Object arrayRhs) {
-        Class<?> localClass = arrayLhs.getClass().getComponentType();
-        int i = Array.getLength(arrayLhs);
-        int j = i + Array.getLength(arrayRhs);
-        Object result = Array.newInstance(localClass, j);
-        for (int k = 0; k < j; ++k) {
-            if (k < i) {
-                Array.set(result, k, Array.get(arrayLhs, k));
-            } else {
-                Array.set(result, k, Array.get(arrayRhs, k - i));
-            }
-        }
-        return result;
-    }
-
-
-    /**
-     * copy file
-     *
-     * @param src  source file
-     * @param dest target file
-     * @throws IOException
-     */
-    public static void copyFile(File src, File dest) throws IOException {
-        FileChannel inChannel = null;
-        FileChannel outChannel = null;
-        try {
-            if (!dest.exists()) {
-                dest.createNewFile();
-            }
-            inChannel = new FileInputStream(src).getChannel();
-            outChannel = new FileOutputStream(dest).getChannel();
-            inChannel.transferTo(0, inChannel.size(), outChannel);
-        } finally {
-            if (inChannel != null) {
-                inChannel.close();
-            }
-            if (outChannel != null) {
-                outChannel.close();
-            }
-        }
     }
 
     /**

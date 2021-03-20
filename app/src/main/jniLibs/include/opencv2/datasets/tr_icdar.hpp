@@ -49,35 +49,35 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_tr
 //! @{
 
-struct word
-{
-    std::string value;
-    int height, width, x, y;
-};
+        struct word {
+            std::string value;
+            int height, width, x, y;
+        };
 
-struct TR_icdarObj : public Object
-{
-    std::string fileName;
-    std::vector<std::string> lex100;
-    std::vector<std::string> lexFull;
-    std::vector<word> words;
-};
+        struct TR_icdarObj : public Object {
+            std::string fileName;
+            std::vector <std::string> lex100;
+            std::vector <std::string> lexFull;
+            std::vector <word> words;
+        };
 
-class CV_EXPORTS TR_icdar : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS TR_icdar
 
-    static Ptr<TR_icdar> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <TR_icdar> create();
+    };
 
 //! @}
 

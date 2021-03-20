@@ -180,7 +180,6 @@ public class SlideShowView extends FrameLayout {
 
     /**
      * 销毁ImageView资源，回收内存
-     *
      */
     private void destoryBitmaps() {
 
@@ -254,7 +253,6 @@ public class SlideShowView extends FrameLayout {
     /**
      * ViewPager的监听器
      * 当ViewPager中页面的状态发生改变时调用
-     *
      */
     private class MyPageChangeListener implements ViewPager.OnPageChangeListener {
 

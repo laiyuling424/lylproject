@@ -9,7 +9,7 @@
 
 
 namespace cv {
-namespace face {
+    namespace face {
 
 //! @addtogroup face
 //! @{
@@ -68,47 +68,46 @@ namespace face {
 
 */
 
-class CV_EXPORTS_W MACE : public cv::Algorithm
-{
-public:
-    /**
-    @brief optionally encrypt images with random convolution
-    @param passphrase a crc64 random seed will get generated from this
-    */
-    CV_WRAP virtual void salt(const cv::String &passphrase) = 0;
+        class CV_EXPORTS_W MACE : public cv::Algorithm {
+        public:
+            /**
+            @brief optionally encrypt images with random convolution
+            @param passphrase a crc64 random seed will get generated from this
+            */
+            CV_WRAP virtual void salt(const cv::String &passphrase) = 0;
 
-    /**
-    @brief train it on positive features
-       compute the mace filter: `h = D(-1) * X * (X(+) * D(-1) * X)(-1) * C`
-       also calculate a minimal threshold for this class, the smallest self-similarity from the train images
-    @param images  a vector<Mat> with the train images
-    */
-    CV_WRAP virtual void train(cv::InputArrayOfArrays images) = 0;
+            /**
+            @brief train it on positive features
+               compute the mace filter: `h = D(-1) * X * (X(+) * D(-1) * X)(-1) * C`
+               also calculate a minimal threshold for this class, the smallest self-similarity from the train images
+            @param images  a vector<Mat> with the train images
+            */
+            CV_WRAP virtual void train(cv::InputArrayOfArrays images) = 0;
 
-    /**
-    @brief correlate query img and threshold to min class value
-    @param query  a Mat with query image
-    */
-    CV_WRAP virtual bool same(cv::InputArray query) const = 0;
+            /**
+            @brief correlate query img and threshold to min class value
+            @param query  a Mat with query image
+            */
+            CV_WRAP virtual bool same(cv::InputArray query) const = 0;
 
 
-    /**
-    @brief constructor
-    @param filename  build a new MACE instance from a pre-serialized FileStorage
-    @param objname (optional) top-level node in the FileStorage
-    */
-    CV_WRAP static cv::Ptr<MACE> load(const String &filename, const String &objname=String());
+            /**
+            @brief constructor
+            @param filename  build a new MACE instance from a pre-serialized FileStorage
+            @param objname (optional) top-level node in the FileStorage
+            */
+            CV_WRAP static cv::Ptr<MACE> load(const String &filename, const String &objname = String());
 
-    /**
-    @brief constructor
-    @param IMGSIZE  images will get resized to this (should be an even number)
-    */
-    CV_WRAP static cv::Ptr<MACE> create(int IMGSIZE=64);
-};
+            /**
+            @brief constructor
+            @param IMGSIZE  images will get resized to this (should be an even number)
+            */
+            CV_WRAP static cv::Ptr<MACE> create(int IMGSIZE = 64);
+        };
 
 //! @}
 
-}/* namespace face */
+    }/* namespace face */
 }/* namespace cv */
 
 #endif // __mace_h_onboard__

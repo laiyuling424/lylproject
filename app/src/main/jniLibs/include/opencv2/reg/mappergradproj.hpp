@@ -41,7 +41,7 @@
 #include "mapper.hpp"
 
 namespace cv {
-namespace reg {
+    namespace reg {
 
 //! @addtogroup reg
 //! @{
@@ -49,19 +49,35 @@ namespace reg {
 /*!
  * Gradient mapper for a projective transformation
  */
-class CV_EXPORTS_W MapperGradProj: public Mapper
-{
-public:
-    CV_WRAP MapperGradProj();
-    ~MapperGradProj();
+        class CV_EXPORTS_W MapperGradProj
 
-    CV_WRAP virtual cv::Ptr<Map> calculate(InputArray img1, InputArray img2, cv::Ptr<Map> init = cv::Ptr<Map>()) const CV_OVERRIDE;
+        : public Mapper {
+        public:
 
-    CV_WRAP cv::Ptr<Map> getMap() const CV_OVERRIDE;
-};
+        CV_WRAP MapperGradProj();
+
+        ~
+
+        MapperGradProj();
+
+        CV_WRAP virtual cv::Ptr<Map>
+        calculate(InputArray
+        img1,
+        InputArray img2, cv::Ptr<Map>
+        init = cv::Ptr<Map>()
+        )
+        const CV_OVERRIDE;
+
+        CV_WRAP cv::Ptr<Map>
+
+        getMap() const
+
+        CV_OVERRIDE;
+    };
 
 //! @}
 
-}}  // namespace cv::reg
+}
+}  // namespace cv::reg
 
 #endif  // MAPPERGRADPROJ_H_

@@ -2,7 +2,6 @@ package com.lyl.mvptest.mvp.secondfragment.animation;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.lyl.mvptest.R;
 

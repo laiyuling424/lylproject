@@ -45,10 +45,8 @@
 
 #include "opencv2/features2d.hpp"
 
-namespace cv
-{
-namespace xfeatures2d
-{
+namespace cv {
+    namespace xfeatures2d {
 
 //! @addtogroup xfeatures2d_nonfree
 //! @{
@@ -56,33 +54,36 @@ namespace xfeatures2d
 /** @brief Class for extracting keypoints and computing descriptors using the Scale Invariant Feature Transform
 (SIFT) algorithm by D. Lowe @cite Lowe04 .
  */
-class CV_EXPORTS_W SIFT : public Feature2D
-{
-public:
-    /**
-    @param nfeatures The number of best features to retain. The features are ranked by their scores
-    (measured in SIFT algorithm as the local contrast)
+        class CV_EXPORTS_W SIFT
 
-    @param nOctaveLayers The number of layers in each octave. 3 is the value used in D. Lowe paper. The
-    number of octaves is computed automatically from the image resolution.
+        : public Feature2D {
+        public:
+        /**
+        @param nfeatures The number of best features to retain. The features are ranked by their scores
+        (measured in SIFT algorithm as the local contrast)
 
-    @param contrastThreshold The contrast threshold used to filter out weak features in semi-uniform
-    (low-contrast) regions. The larger the threshold, the less features are produced by the detector.
+        @param nOctaveLayers The number of layers in each octave. 3 is the value used in D. Lowe paper. The
+        number of octaves is computed automatically from the image resolution.
 
-    @param edgeThreshold The threshold used to filter out edge-like features. Note that the its meaning
-    is different from the contrastThreshold, i.e. the larger the edgeThreshold, the less features are
-    filtered out (more features are retained).
+        @param contrastThreshold The contrast threshold used to filter out weak features in semi-uniform
+        (low-contrast) regions. The larger the threshold, the less features are produced by the detector.
 
-    @param sigma The sigma of the Gaussian applied to the input image at the octave \#0. If your image
-    is captured with a weak camera with soft lenses, you might want to reduce the number.
-     */
-    CV_WRAP static Ptr<SIFT> create( int nfeatures = 0, int nOctaveLayers = 3,
-                                    double contrastThreshold = 0.04, double edgeThreshold = 10,
-                                    double sigma = 1.6);
-};
+        @param edgeThreshold The threshold used to filter out edge-like features. Note that the its meaning
+        is different from the contrastThreshold, i.e. the larger the edgeThreshold, the less features are
+        filtered out (more features are retained).
 
-typedef SIFT SiftFeatureDetector;
-typedef SIFT SiftDescriptorExtractor;
+        @param sigma The sigma of the Gaussian applied to the input image at the octave \#0. If your image
+        is captured with a weak camera with soft lenses, you might want to reduce the number.
+         */
+        CV_WRAP static Ptr<SIFT>
+
+        create(int nfeatures = 0, int nOctaveLayers = 3,
+               double contrastThreshold = 0.04, double edgeThreshold = 10,
+               double sigma = 1.6);
+    };
+
+    typedef SIFT SiftFeatureDetector;
+    typedef SIFT SiftDescriptorExtractor;
 
 /** @brief Class for extracting Speeded Up Robust Features from an image @cite Bay06 .
 
@@ -113,9 +114,10 @@ The number of images within each octave of a gaussian pyramid. It is set to 2 by
     -   Another example using the SURF feature detector, extractor and matcher can be found at
         opencv_source_code/samples/cpp/matcher_simple.cpp
  */
-class CV_EXPORTS_W SURF : public Feature2D
-{
-public:
+    class CV_EXPORTS_W SURF
+
+    : public Feature2D {
+    public:
     /**
     @param hessianThreshold Threshold for hessian keypoint detector used in SURF.
     @param nOctaves Number of pyramid octaves the keypoint detector will use.
@@ -125,23 +127,30 @@ public:
     @param upright Up-right or rotated features flag (true - do not compute orientation of features;
     false - compute orientation).
      */
-    CV_WRAP static Ptr<SURF> create(double hessianThreshold=100,
-                  int nOctaves = 4, int nOctaveLayers = 3,
-                  bool extended = false, bool upright = false);
+    CV_WRAP static Ptr<SURF>
+
+    create(double hessianThreshold = 100,
+           int nOctaves = 4, int nOctaveLayers = 3,
+           bool extended = false, bool upright = false);
 
     CV_WRAP virtual void setHessianThreshold(double hessianThreshold) = 0;
+
     CV_WRAP virtual double getHessianThreshold() const = 0;
 
     CV_WRAP virtual void setNOctaves(int nOctaves) = 0;
+
     CV_WRAP virtual int getNOctaves() const = 0;
 
     CV_WRAP virtual void setNOctaveLayers(int nOctaveLayers) = 0;
+
     CV_WRAP virtual int getNOctaveLayers() const = 0;
 
     CV_WRAP virtual void setExtended(bool extended) = 0;
+
     CV_WRAP virtual bool getExtended() const = 0;
 
     CV_WRAP virtual void setUpright(bool upright) = 0;
+
     CV_WRAP virtual bool getUpright() const = 0;
 };
 

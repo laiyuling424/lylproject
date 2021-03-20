@@ -49,44 +49,42 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_gr
 //! @{
 
-struct groundTruth
-{
-    int gestureID, initialFrame, lastFrame;
-};
+        struct groundTruth {
+            int gestureID, initialFrame, lastFrame;
+        };
 
-struct join
-{
-    double Wx, Wy, Wz, Rx, Ry, Rz, Rw, Px, Py;
-};
+        struct join {
+            double Wx, Wy, Wz, Rx, Ry, Rz, Rw, Px, Py;
+        };
 
-struct skeleton
-{
-    join s[20];
-};
+        struct skeleton {
+            join s[20];
+        };
 
-struct GR_chalearnObj : public Object
-{
-    std::string name, nameColor, nameDepth, nameUser;
-    int numFrames, fps, depth;
-    std::vector<groundTruth> groundTruths;
-    std::vector<skeleton> skeletons;
-};
+        struct GR_chalearnObj : public Object {
+            std::string name, nameColor, nameDepth, nameUser;
+            int numFrames, fps, depth;
+            std::vector <groundTruth> groundTruths;
+            std::vector <skeleton> skeletons;
+        };
 
-class CV_EXPORTS GR_chalearn : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS GR_chalearn
 
-    static Ptr<GR_chalearn> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <GR_chalearn> create();
+    };
 
 //! @}
 

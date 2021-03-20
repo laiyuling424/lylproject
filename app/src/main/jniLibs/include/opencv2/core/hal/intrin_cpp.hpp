@@ -50,11 +50,10 @@
 #include <algorithm>
 #include "opencv2/core/saturate.hpp"
 
-namespace cv
-{
+namespace cv {
 
 #ifndef CV_DOXYGEN
-CV_CPU_OPTIMIZATION_HAL_NAMESPACE_BEGIN
+    CV_CPU_OPTIMIZATION_HAL_NAMESPACE_BEGIN
 #endif
 
 /** @addtogroup core_hal_intrin
@@ -243,138 +242,161 @@ Floating point:
 
  @{ */
 
-template<typename _Tp, int n> struct v_reg
-{
+    template<typename _Tp, int n>
+    struct v_reg {
 //! @cond IGNORED
-    typedef _Tp lane_type;
-    enum { nlanes = n };
+        typedef _Tp lane_type;
+        enum {
+            nlanes = n
+        };
 // !@endcond
 
-    /** @brief Constructor
+        /** @brief Constructor
 
-    Initializes register with data from memory
-    @param ptr pointer to memory block with data for register */
-    explicit v_reg(const _Tp* ptr) { for( int i = 0; i < n; i++ ) s[i] = ptr[i]; }
+        Initializes register with data from memory
+        @param ptr pointer to memory block with data for register */
+        explicit v_reg(const _Tp *ptr) { for (int i = 0; i < n; i++) s[i] = ptr[i]; }
 
-    /** @brief Constructor
+        /** @brief Constructor
 
-    Initializes register with two 64-bit values */
-    v_reg(_Tp s0, _Tp s1) { s[0] = s0; s[1] = s1; }
+        Initializes register with two 64-bit values */
+        v_reg(_Tp s0, _Tp s1) {
+            s[0] = s0;
+            s[1] = s1;
+        }
 
-    /** @brief Constructor
+        /** @brief Constructor
 
-    Initializes register with four 32-bit values */
-    v_reg(_Tp s0, _Tp s1, _Tp s2, _Tp s3) { s[0] = s0; s[1] = s1; s[2] = s2; s[3] = s3; }
+        Initializes register with four 32-bit values */
+        v_reg(_Tp s0, _Tp s1, _Tp s2, _Tp s3) {
+            s[0] = s0;
+            s[1] = s1;
+            s[2] = s2;
+            s[3] = s3;
+        }
 
-    /** @brief Constructor
+        /** @brief Constructor
 
-    Initializes register with eight 16-bit values */
-    v_reg(_Tp s0, _Tp s1, _Tp s2, _Tp s3,
-           _Tp s4, _Tp s5, _Tp s6, _Tp s7)
-    {
-        s[0] = s0; s[1] = s1; s[2] = s2; s[3] = s3;
-        s[4] = s4; s[5] = s5; s[6] = s6; s[7] = s7;
-    }
+        Initializes register with eight 16-bit values */
+        v_reg(_Tp s0, _Tp s1, _Tp s2, _Tp s3,
+              _Tp s4, _Tp s5, _Tp s6, _Tp s7) {
+            s[0] = s0;
+            s[1] = s1;
+            s[2] = s2;
+            s[3] = s3;
+            s[4] = s4;
+            s[5] = s5;
+            s[6] = s6;
+            s[7] = s7;
+        }
 
-    /** @brief Constructor
+        /** @brief Constructor
 
-    Initializes register with sixteen 8-bit values */
-    v_reg(_Tp s0, _Tp s1, _Tp s2, _Tp s3,
-           _Tp s4, _Tp s5, _Tp s6, _Tp s7,
-           _Tp s8, _Tp s9, _Tp s10, _Tp s11,
-           _Tp s12, _Tp s13, _Tp s14, _Tp s15)
-    {
-        s[0] = s0; s[1] = s1; s[2] = s2; s[3] = s3;
-        s[4] = s4; s[5] = s5; s[6] = s6; s[7] = s7;
-        s[8] = s8; s[9] = s9; s[10] = s10; s[11] = s11;
-        s[12] = s12; s[13] = s13; s[14] = s14; s[15] = s15;
-    }
+        Initializes register with sixteen 8-bit values */
+        v_reg(_Tp s0, _Tp s1, _Tp s2, _Tp s3,
+              _Tp s4, _Tp s5, _Tp s6, _Tp s7,
+              _Tp s8, _Tp s9, _Tp s10, _Tp s11,
+              _Tp s12, _Tp s13, _Tp s14, _Tp s15) {
+            s[0] = s0;
+            s[1] = s1;
+            s[2] = s2;
+            s[3] = s3;
+            s[4] = s4;
+            s[5] = s5;
+            s[6] = s6;
+            s[7] = s7;
+            s[8] = s8;
+            s[9] = s9;
+            s[10] = s10;
+            s[11] = s11;
+            s[12] = s12;
+            s[13] = s13;
+            s[14] = s14;
+            s[15] = s15;
+        }
 
-    /** @brief Default constructor
+        /** @brief Default constructor
 
-    Does not initialize anything*/
-    v_reg() {}
+        Does not initialize anything*/
+        v_reg() {}
 
-    /** @brief Copy constructor */
-    v_reg(const v_reg<_Tp, n> & r)
-    {
-        for( int i = 0; i < n; i++ )
-            s[i] = r.s[i];
-    }
-    /** @brief Access first value
+        /** @brief Copy constructor */
+        v_reg(const v_reg<_Tp, n> &r) {
+            for (int i = 0; i < n; i++)
+                s[i] = r.s[i];
+        }
 
-    Returns value of the first lane according to register type, for example:
-    @code{.cpp}
-    v_int32x4 r(1, 2, 3, 4);
-    int v = r.get0(); // returns 1
-    v_uint64x2 r(1, 2);
-    uint64_t v = r.get0(); // returns 1
-    @endcode
-    */
-    _Tp get0() const { return s[0]; }
+        /** @brief Access first value
+
+        Returns value of the first lane according to register type, for example:
+        @code{.cpp}
+        v_int32x4 r(1, 2, 3, 4);
+        int v = r.get0(); // returns 1
+        v_uint64x2 r(1, 2);
+        uint64_t v = r.get0(); // returns 1
+        @endcode
+        */
+        _Tp get0() const { return s[0]; }
 
 //! @cond IGNORED
-    _Tp get(const int i) const { return s[i]; }
-    v_reg<_Tp, n> high() const
-    {
-        v_reg<_Tp, n> c;
-        int i;
-        for( i = 0; i < n/2; i++ )
-        {
-            c.s[i] = s[i+(n/2)];
-            c.s[i+(n/2)] = 0;
+        _Tp get(const int i) const { return s[i]; }
+
+        v_reg<_Tp, n> high() const {
+            v_reg<_Tp, n> c;
+            int i;
+            for (i = 0; i < n / 2; i++) {
+                c.s[i] = s[i + (n / 2)];
+                c.s[i + (n / 2)] = 0;
+            }
+            return c;
         }
-        return c;
-    }
 
-    static v_reg<_Tp, n> zero()
-    {
-        v_reg<_Tp, n> c;
-        for( int i = 0; i < n; i++ )
-            c.s[i] = (_Tp)0;
-        return c;
-    }
+        static v_reg<_Tp, n> zero() {
+            v_reg<_Tp, n> c;
+            for (int i = 0; i < n; i++)
+                c.s[i] = (_Tp) 0;
+            return c;
+        }
 
-    static v_reg<_Tp, n> all(_Tp s)
-    {
-        v_reg<_Tp, n> c;
-        for( int i = 0; i < n; i++ )
-            c.s[i] = s;
-        return c;
-    }
+        static v_reg<_Tp, n> all(_Tp s) {
+            v_reg<_Tp, n> c;
+            for (int i = 0; i < n; i++)
+                c.s[i] = s;
+            return c;
+        }
 
-    template<typename _Tp2, int n2> v_reg<_Tp2, n2> reinterpret_as() const
-    {
-        size_t bytes = std::min(sizeof(_Tp2)*n2, sizeof(_Tp)*n);
-        v_reg<_Tp2, n2> c;
-        std::memcpy(&c.s[0], &s[0], bytes);
-        return c;
-    }
+        template<typename _Tp2, int n2>
+        v_reg<_Tp2, n2> reinterpret_as() const {
+            size_t bytes = std::min(sizeof(_Tp2) * n2, sizeof(_Tp) * n);
+            v_reg<_Tp2, n2> c;
+            std::memcpy(&c.s[0], &s[0], bytes);
+            return c;
+        }
 
-    _Tp s[n];
+        _Tp s[n];
 //! @endcond
-};
+    };
 
 /** @brief Sixteen 8-bit unsigned integer values */
-typedef v_reg<uchar, 16> v_uint8x16;
+    typedef v_reg<uchar, 16> v_uint8x16;
 /** @brief Sixteen 8-bit signed integer values */
-typedef v_reg<schar, 16> v_int8x16;
+    typedef v_reg<schar, 16> v_int8x16;
 /** @brief Eight 16-bit unsigned integer values */
-typedef v_reg<ushort, 8> v_uint16x8;
+    typedef v_reg<ushort, 8> v_uint16x8;
 /** @brief Eight 16-bit signed integer values */
-typedef v_reg<short, 8> v_int16x8;
+    typedef v_reg<short, 8> v_int16x8;
 /** @brief Four 32-bit unsigned integer values */
-typedef v_reg<unsigned, 4> v_uint32x4;
+    typedef v_reg<unsigned, 4> v_uint32x4;
 /** @brief Four 32-bit signed integer values */
-typedef v_reg<int, 4> v_int32x4;
+    typedef v_reg<int, 4> v_int32x4;
 /** @brief Four 32-bit floating point values (single precision) */
-typedef v_reg<float, 4> v_float32x4;
+    typedef v_reg<float, 4> v_float32x4;
 /** @brief Two 64-bit floating point values (double precision) */
-typedef v_reg<double, 2> v_float64x2;
+    typedef v_reg<double, 2> v_float64x2;
 /** @brief Two 64-bit unsigned integer values */
-typedef v_reg<uint64, 2> v_uint64x2;
+    typedef v_reg<uint64, 2> v_uint64x2;
 /** @brief Two 64-bit signed integer values */
-typedef v_reg<int64, 2> v_int64x2;
+    typedef v_reg<int64, 2> v_int64x2;
 
 //! @brief Helper macro
 //! @ingroup core_hal_intrin_impl
@@ -398,22 +420,22 @@ template<typename _Tp, int n> inline v_reg<_Tp, n>& \
 /** @brief Add values
 
 For all types. */
-OPENCV_HAL_IMPL_BIN_OP(+)
+    OPENCV_HAL_IMPL_BIN_OP(+)
 
 /** @brief Subtract values
 
 For all types. */
-OPENCV_HAL_IMPL_BIN_OP(-)
+    OPENCV_HAL_IMPL_BIN_OP(-)
 
 /** @brief Multiply values
 
 For 16- and 32-bit integer types and floating types. */
-OPENCV_HAL_IMPL_BIN_OP(*)
+    OPENCV_HAL_IMPL_BIN_OP(*)
 
 /** @brief Divide values
 
 For floating types only. */
-OPENCV_HAL_IMPL_BIN_OP(/)
+    OPENCV_HAL_IMPL_BIN_OP(/)
 
 //! @brief Helper macro
 //! @ingroup core_hal_intrin_impl
@@ -441,30 +463,29 @@ template<typename _Tp, int n> inline v_reg<_Tp, n>& operator \
 /** @brief Bitwise AND
 
 Only for integer types. */
-OPENCV_HAL_IMPL_BIT_OP(&)
+    OPENCV_HAL_IMPL_BIT_OP(&)
 
 /** @brief Bitwise OR
 
 Only for integer types. */
-OPENCV_HAL_IMPL_BIT_OP(|)
+    OPENCV_HAL_IMPL_BIT_OP(|)
 
 /** @brief Bitwise XOR
 
 Only for integer types.*/
-OPENCV_HAL_IMPL_BIT_OP(^)
+    OPENCV_HAL_IMPL_BIT_OP(^)
 
 /** @brief Bitwise NOT
 
 Only for integer types.*/
-template<typename _Tp, int n> inline v_reg<_Tp, n> operator ~ (const v_reg<_Tp, n>& a)
-{
-    v_reg<_Tp, n> c;
-    for( int i = 0; i < n; i++ )
-    {
-        c.s[i] = V_TypeTraits<_Tp>::reinterpret_from_int(~V_TypeTraits<_Tp>::reinterpret_int(a.s[i]));
+    template<typename _Tp, int n>
+    inline v_reg<_Tp, n> operator~(const v_reg<_Tp, n> &a) {
+        v_reg<_Tp, n> c;
+        for (int i = 0; i < n; i++) {
+            c.s[i] = V_TypeTraits<_Tp>::reinterpret_from_int(~V_TypeTraits<_Tp>::reinterpret_int(a.s[i]));
+        }
+        return c;
     }
-    return c;
-}
 
 //! @brief Helper macro
 //! @ingroup core_hal_intrin_impl
@@ -480,40 +501,43 @@ template<typename _Tp, int n> inline v_reg<_Tp2, n> func(const v_reg<_Tp, n>& a)
 /** @brief Square root of elements
 
 Only for floating point types.*/
-OPENCV_HAL_IMPL_MATH_FUNC(v_sqrt, std::sqrt, _Tp)
+    OPENCV_HAL_IMPL_MATH_FUNC(v_sqrt, std::sqrt, _Tp)
 
 //! @cond IGNORED
-OPENCV_HAL_IMPL_MATH_FUNC(v_sin, std::sin, _Tp)
-OPENCV_HAL_IMPL_MATH_FUNC(v_cos, std::cos, _Tp)
-OPENCV_HAL_IMPL_MATH_FUNC(v_exp, std::exp, _Tp)
-OPENCV_HAL_IMPL_MATH_FUNC(v_log, std::log, _Tp)
+    OPENCV_HAL_IMPL_MATH_FUNC(v_sin, std::sin, _Tp)
+
+    OPENCV_HAL_IMPL_MATH_FUNC(v_cos, std::cos, _Tp)
+
+    OPENCV_HAL_IMPL_MATH_FUNC(v_exp, std::exp, _Tp)
+
+    OPENCV_HAL_IMPL_MATH_FUNC(v_log, std::log, _Tp)
 //! @endcond
 
 /** @brief Absolute value of elements
 
 Only for floating point types.*/
-OPENCV_HAL_IMPL_MATH_FUNC(v_abs, (typename V_TypeTraits<_Tp>::abs_type)std::abs,
-                          typename V_TypeTraits<_Tp>::abs_type)
+    OPENCV_HAL_IMPL_MATH_FUNC(v_abs, (typename V_TypeTraits<_Tp>::abs_type) std::abs,
+                              typename V_TypeTraits<_Tp>::abs_type)
 
 /** @brief Round elements
 
 Only for floating point types.*/
-OPENCV_HAL_IMPL_MATH_FUNC(v_round, cvRound, int)
+    OPENCV_HAL_IMPL_MATH_FUNC(v_round, cvRound, int)
 
 /** @brief Floor elements
 
 Only for floating point types.*/
-OPENCV_HAL_IMPL_MATH_FUNC(v_floor, cvFloor, int)
+    OPENCV_HAL_IMPL_MATH_FUNC(v_floor, cvFloor, int)
 
 /** @brief Ceil elements
 
 Only for floating point types.*/
-OPENCV_HAL_IMPL_MATH_FUNC(v_ceil, cvCeil, int)
+    OPENCV_HAL_IMPL_MATH_FUNC(v_ceil, cvCeil, int)
 
 /** @brief Truncate elements
 
 Only for floating point types.*/
-OPENCV_HAL_IMPL_MATH_FUNC(v_trunc, int, int)
+    OPENCV_HAL_IMPL_MATH_FUNC(v_trunc, int, int)
 
 //! @brief Helper macro
 //! @ingroup core_hal_intrin_impl
@@ -547,7 +571,7 @@ Scheme:
 {min(A1,B1) min(A2,B2) ...}
 @endcode
 For all types except 64-bit integer. */
-OPENCV_HAL_IMPL_MINMAX_FUNC(v_min, std::min)
+    OPENCV_HAL_IMPL_MINMAX_FUNC(v_min, std::min)
 
 /** @brief Choose max values for each pair
 
@@ -559,7 +583,7 @@ Scheme:
 {max(A1,B1) max(A2,B2) ...}
 @endcode
 For all types except 64-bit integer. */
-OPENCV_HAL_IMPL_MINMAX_FUNC(v_max, std::max)
+    OPENCV_HAL_IMPL_MINMAX_FUNC(v_max, std::max)
 
 /** @brief Find one min value
 
@@ -568,7 +592,7 @@ Scheme:
 {A1 A2 A3 ...} => min(A1,A2,A3,...)
 @endcode
 For 32-bit integer and 32-bit floating point types. */
-OPENCV_HAL_IMPL_REDUCE_MINMAX_FUNC(v_reduce_min, std::min)
+    OPENCV_HAL_IMPL_REDUCE_MINMAX_FUNC(v_reduce_min, std::min)
 
 /** @brief Find one max value
 
@@ -577,27 +601,28 @@ Scheme:
 {A1 A2 A3 ...} => max(A1,A2,A3,...)
 @endcode
 For 32-bit integer and 32-bit floating point types. */
-OPENCV_HAL_IMPL_REDUCE_MINMAX_FUNC(v_reduce_max, std::max)
+    OPENCV_HAL_IMPL_REDUCE_MINMAX_FUNC(v_reduce_max, std::max)
 
-static const unsigned char popCountTable[] =
-{
-    0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4,
-    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
-    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
-    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
-    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
-    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
-    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
-    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
-    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
-    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
-    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
-    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
-    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
-    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
-    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
-    4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8,
-};
+    static const unsigned char popCountTable[] =
+            {
+                    0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4,
+                    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+                    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+                    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+                    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+                    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+                    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+                    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+                    1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
+                    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+                    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+                    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+                    2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
+                    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+                    3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
+                    4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8,
+            };
+
 /** @brief Count the 1 bits in the vector and return 4 values
 
 Scheme:
@@ -605,34 +630,30 @@ Scheme:
 {A1 A2 A3 ...} => popcount(A1)
 @endcode
 Any types but result will be in v_uint32x4*/
-template<typename _Tp, int n> inline v_uint32x4 v_popcount(const v_reg<_Tp, n>& a)
-{
-    v_uint8x16 b;
-    b = v_reinterpret_as_u8(a);
-    for( int i = 0; i < v_uint8x16::nlanes; i++ )
-    {
-        b.s[i] = popCountTable[b.s[i]];
+    template<typename _Tp, int n>
+    inline v_uint32x4 v_popcount(const v_reg<_Tp, n> &a) {
+        v_uint8x16 b;
+        b = v_reinterpret_as_u8(a);
+        for (int i = 0; i < v_uint8x16::nlanes; i++) {
+            b.s[i] = popCountTable[b.s[i]];
+        }
+        v_uint32x4 c;
+        for (int i = 0; i < v_uint32x4::nlanes; i++) {
+            c.s[i] = b.s[i * 4] + b.s[i * 4 + 1] + b.s[i * 4 + 2] + b.s[i * 4 + 3];
+        }
+        return c;
     }
-    v_uint32x4 c;
-    for( int i = 0; i < v_uint32x4::nlanes; i++ )
-    {
-        c.s[i] = b.s[i*4] + b.s[i*4+1] + b.s[i*4+2] + b.s[i*4+3];
-    }
-    return c;
-}
 
 
 //! @cond IGNORED
-template<typename _Tp, int n>
-inline void v_minmax( const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b,
-                      v_reg<_Tp, n>& minval, v_reg<_Tp, n>& maxval )
-{
-    for( int i = 0; i < n; i++ )
-    {
-        minval.s[i] = std::min(a.s[i], b.s[i]);
-        maxval.s[i] = std::max(a.s[i], b.s[i]);
+    template<typename _Tp, int n>
+    inline void v_minmax(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b,
+                         v_reg<_Tp, n> &minval, v_reg<_Tp, n> &maxval) {
+        for (int i = 0; i < n; i++) {
+            minval.s[i] = std::min(a.s[i], b.s[i]);
+            maxval.s[i] = std::max(a.s[i], b.s[i]);
+        }
     }
-}
 //! @endcond
 
 //! @brief Helper macro
@@ -651,32 +672,32 @@ inline v_reg<_Tp, n> operator cmp_op(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>
 /** @brief Less-than comparison
 
 For all types except 64-bit integer values. */
-OPENCV_HAL_IMPL_CMP_OP(<)
+    OPENCV_HAL_IMPL_CMP_OP(<)
 
 /** @brief Greater-than comparison
 
 For all types except 64-bit integer values. */
-OPENCV_HAL_IMPL_CMP_OP(>)
+    OPENCV_HAL_IMPL_CMP_OP(>)
 
 /** @brief Less-than or equal comparison
 
 For all types except 64-bit integer values. */
-OPENCV_HAL_IMPL_CMP_OP(<=)
+    OPENCV_HAL_IMPL_CMP_OP(<=)
 
 /** @brief Greater-than or equal comparison
 
 For all types except 64-bit integer values. */
-OPENCV_HAL_IMPL_CMP_OP(>=)
+    OPENCV_HAL_IMPL_CMP_OP(>=)
 
 /** @brief Equal comparison
 
 For all types except 64-bit integer values. */
-OPENCV_HAL_IMPL_CMP_OP(==)
+    OPENCV_HAL_IMPL_CMP_OP(==)
 
 /** @brief Not equal comparison
 
 For all types except 64-bit integer values. */
-OPENCV_HAL_IMPL_CMP_OP(!=)
+    OPENCV_HAL_IMPL_CMP_OP(!=)
 
 //! @brief Helper macro
 //! @ingroup core_hal_intrin_impl
@@ -694,18 +715,18 @@ inline v_reg<_Tp2, n> func(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b) \
 /** @brief Add values without saturation
 
 For 8- and 16-bit integer values. */
-OPENCV_HAL_IMPL_ADD_SUB_OP(v_add_wrap, +, (_Tp), _Tp)
+    OPENCV_HAL_IMPL_ADD_SUB_OP(v_add_wrap, +, (_Tp), _Tp)
 
 /** @brief Subtract values without saturation
 
 For 8- and 16-bit integer values. */
-OPENCV_HAL_IMPL_ADD_SUB_OP(v_sub_wrap, -, (_Tp), _Tp)
+    OPENCV_HAL_IMPL_ADD_SUB_OP(v_sub_wrap, -, (_Tp), _Tp)
 
 //! @cond IGNORED
-template<typename T> inline T _absdiff(T a, T b)
-{
-    return a > b ? a - b : b - a;
-}
+    template<typename T>
+    inline T _absdiff(T a, T b) {
+        return a > b ? a - b : b - a;
+    }
 //! @endcond
 
 /** @brief Absolute difference
@@ -717,103 +738,94 @@ v_int32x4 a, b; // {1, 2, 3, 4} and {4, 3, 2, 1}
 v_uint32x4 c = v_absdiff(a, b); // result is {3, 1, 1, 3}
 @endcode
 For 8-, 16-, 32-bit integer source types. */
-template<typename _Tp, int n>
-inline v_reg<typename V_TypeTraits<_Tp>::abs_type, n> v_absdiff(const v_reg<_Tp, n>& a, const v_reg<_Tp, n> & b)
-{
-    typedef typename V_TypeTraits<_Tp>::abs_type rtype;
-    v_reg<rtype, n> c;
-    const rtype mask = (rtype)(std::numeric_limits<_Tp>::is_signed ? (1 << (sizeof(rtype)*8 - 1)) : 0);
-    for( int i = 0; i < n; i++ )
-    {
-        rtype ua = a.s[i] ^ mask;
-        rtype ub = b.s[i] ^ mask;
-        c.s[i] = _absdiff(ua, ub);
+    template<typename _Tp, int n>
+    inline v_reg<typename V_TypeTraits<_Tp>::abs_type, n> v_absdiff(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b) {
+        typedef typename V_TypeTraits<_Tp>::abs_type rtype;
+        v_reg<rtype, n> c;
+        const rtype mask = (rtype) (std::numeric_limits<_Tp>::is_signed ? (1 << (sizeof(rtype) * 8 - 1)) : 0);
+        for (int i = 0; i < n; i++) {
+            rtype ua = a.s[i] ^mask;
+            rtype ub = b.s[i] ^mask;
+            c.s[i] = _absdiff(ua, ub);
+        }
+        return c;
     }
-    return c;
-}
 
 /** @overload
 
 For 32-bit floating point values */
-inline v_float32x4 v_absdiff(const v_float32x4& a, const v_float32x4& b)
-{
-    v_float32x4 c;
-    for( int i = 0; i < c.nlanes; i++ )
-        c.s[i] = _absdiff(a.s[i], b.s[i]);
-    return c;
-}
+    inline v_float32x4 v_absdiff(const v_float32x4 &a, const v_float32x4 &b) {
+        v_float32x4 c;
+        for (int i = 0; i < c.nlanes; i++)
+            c.s[i] = _absdiff(a.s[i], b.s[i]);
+        return c;
+    }
 
 /** @overload
 
 For 64-bit floating point values */
-inline v_float64x2 v_absdiff(const v_float64x2& a, const v_float64x2& b)
-{
-    v_float64x2 c;
-    for( int i = 0; i < c.nlanes; i++ )
-        c.s[i] = _absdiff(a.s[i], b.s[i]);
-    return c;
-}
+    inline v_float64x2 v_absdiff(const v_float64x2 &a, const v_float64x2 &b) {
+        v_float64x2 c;
+        for (int i = 0; i < c.nlanes; i++)
+            c.s[i] = _absdiff(a.s[i], b.s[i]);
+        return c;
+    }
 
 /** @brief Inversed square root
 
 Returns \f$ 1/sqrt(a) \f$
 For floating point types only. */
-template<typename _Tp, int n>
-inline v_reg<_Tp, n> v_invsqrt(const v_reg<_Tp, n>& a)
-{
-    v_reg<_Tp, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = 1.f/std::sqrt(a.s[i]);
-    return c;
-}
+    template<typename _Tp, int n>
+    inline v_reg<_Tp, n> v_invsqrt(const v_reg<_Tp, n> &a) {
+        v_reg<_Tp, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = 1.f / std::sqrt(a.s[i]);
+        return c;
+    }
 
 /** @brief Magnitude
 
 Returns \f$ sqrt(a^2 + b^2) \f$
 For floating point types only. */
-template<typename _Tp, int n>
-inline v_reg<_Tp, n> v_magnitude(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b)
-{
-    v_reg<_Tp, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = std::sqrt(a.s[i]*a.s[i] + b.s[i]*b.s[i]);
-    return c;
-}
+    template<typename _Tp, int n>
+    inline v_reg<_Tp, n> v_magnitude(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b) {
+        v_reg<_Tp, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = std::sqrt(a.s[i] * a.s[i] + b.s[i] * b.s[i]);
+        return c;
+    }
 
 /** @brief Square of the magnitude
 
 Returns \f$ a^2 + b^2 \f$
 For floating point types only. */
-template<typename _Tp, int n>
-inline v_reg<_Tp, n> v_sqr_magnitude(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b)
-{
-    v_reg<_Tp, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = a.s[i]*a.s[i] + b.s[i]*b.s[i];
-    return c;
-}
+    template<typename _Tp, int n>
+    inline v_reg<_Tp, n> v_sqr_magnitude(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b) {
+        v_reg<_Tp, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = a.s[i] * a.s[i] + b.s[i] * b.s[i];
+        return c;
+    }
 
 /** @brief Multiply and add
 
  Returns \f$ a*b + c \f$
  For floating point types and signed 32bit int only. */
-template<typename _Tp, int n>
-inline v_reg<_Tp, n> v_fma(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b,
-                           const v_reg<_Tp, n>& c)
-{
-    v_reg<_Tp, n> d;
-    for( int i = 0; i < n; i++ )
-        d.s[i] = a.s[i]*b.s[i] + c.s[i];
-    return d;
-}
+    template<typename _Tp, int n>
+    inline v_reg<_Tp, n> v_fma(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b,
+                               const v_reg<_Tp, n> &c) {
+        v_reg<_Tp, n> d;
+        for (int i = 0; i < n; i++)
+            d.s[i] = a.s[i] * b.s[i] + c.s[i];
+        return d;
+    }
 
 /** @brief A synonym for v_fma */
-template<typename _Tp, int n>
-inline v_reg<_Tp, n> v_muladd(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b,
-                              const v_reg<_Tp, n>& c)
-{
-    return v_fma(a, b, c);
-}
+    template<typename _Tp, int n>
+    inline v_reg<_Tp, n> v_muladd(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b,
+                                  const v_reg<_Tp, n> &c) {
+        return v_fma(a, b, c);
+    }
 
 /** @brief Dot product of elements
 
@@ -827,15 +839,15 @@ x {B1 B2 ...} // 16-bit
 @endcode
 Implemented only for 16-bit signed source type (v_int16x8).
 */
-template<typename _Tp, int n> inline v_reg<typename V_TypeTraits<_Tp>::w_type, n/2>
-    v_dotprod(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b)
-{
-    typedef typename V_TypeTraits<_Tp>::w_type w_type;
-    v_reg<w_type, n/2> c;
-    for( int i = 0; i < (n/2); i++ )
-        c.s[i] = (w_type)a.s[i*2]*b.s[i*2] + (w_type)a.s[i*2+1]*b.s[i*2+1];
-    return c;
-}
+    template<typename _Tp, int n>
+    inline v_reg<typename V_TypeTraits<_Tp>::w_type, n / 2>
+    v_dotprod(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b) {
+        typedef typename V_TypeTraits<_Tp>::w_type w_type;
+        v_reg<w_type, n / 2> c;
+        for (int i = 0; i < (n / 2); i++)
+            c.s[i] = (w_type) a.s[i * 2] * b.s[i * 2] + (w_type) a.s[i * 2 + 1] * b.s[i * 2 + 1];
+        return c;
+    }
 
 /** @brief Dot product of elements
 
@@ -850,15 +862,15 @@ x {B1 B2 ...} // 16-bit
 @endcode
 Implemented only for 16-bit signed source type (v_int16x8).
 */
-template<typename _Tp, int n> inline v_reg<typename V_TypeTraits<_Tp>::w_type, n/2>
-    v_dotprod(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b, const v_reg<typename V_TypeTraits<_Tp>::w_type, n / 2>& c)
-{
-    typedef typename V_TypeTraits<_Tp>::w_type w_type;
-    v_reg<w_type, n/2> s;
-    for( int i = 0; i < (n/2); i++ )
-        s.s[i] = (w_type)a.s[i*2]*b.s[i*2] + (w_type)a.s[i*2+1]*b.s[i*2+1] + c.s[i];
-    return s;
-}
+    template<typename _Tp, int n>
+    inline v_reg<typename V_TypeTraits<_Tp>::w_type, n / 2>
+    v_dotprod(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b, const v_reg<typename V_TypeTraits<_Tp>::w_type, n / 2> &c) {
+        typedef typename V_TypeTraits<_Tp>::w_type w_type;
+        v_reg<w_type, n / 2> s;
+        for (int i = 0; i < (n / 2); i++)
+            s.s[i] = (w_type) a.s[i * 2] * b.s[i * 2] + (w_type) a.s[i * 2 + 1] * b.s[i * 2 + 1] + c.s[i];
+        return s;
+    }
 
 /** @brief Multiply and expand
 
@@ -879,28 +891,26 @@ v_mul_expand(a, b, c, d); // c, d = {2,4}, {6, 8}
 @endcode
 Implemented only for 16- and unsigned 32-bit source types (v_int16x8, v_uint16x8, v_uint32x4).
 */
-template<typename _Tp, int n> inline void v_mul_expand(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b,
-                                                       v_reg<typename V_TypeTraits<_Tp>::w_type, n/2>& c,
-                                                       v_reg<typename V_TypeTraits<_Tp>::w_type, n/2>& d)
-{
-    typedef typename V_TypeTraits<_Tp>::w_type w_type;
-    for( int i = 0; i < (n/2); i++ )
-    {
-        c.s[i] = (w_type)a.s[i]*b.s[i];
-        d.s[i] = (w_type)a.s[i+(n/2)]*b.s[i+(n/2)];
+    template<typename _Tp, int n>
+    inline void v_mul_expand(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b,
+                             v_reg<typename V_TypeTraits<_Tp>::w_type, n / 2> &c,
+                             v_reg<typename V_TypeTraits<_Tp>::w_type, n / 2> &d) {
+        typedef typename V_TypeTraits<_Tp>::w_type w_type;
+        for (int i = 0; i < (n / 2); i++) {
+            c.s[i] = (w_type) a.s[i] * b.s[i];
+            d.s[i] = (w_type) a.s[i + (n / 2)] * b.s[i + (n / 2)];
+        }
     }
-}
 
 //! @cond IGNORED
-template<typename _Tp, int n> inline void v_hsum(const v_reg<_Tp, n>& a,
-                                                 v_reg<typename V_TypeTraits<_Tp>::w_type, n/2>& c)
-{
-    typedef typename V_TypeTraits<_Tp>::w_type w_type;
-    for( int i = 0; i < (n/2); i++ )
-    {
-        c.s[i] = (w_type)a.s[i*2] + a.s[i*2+1];
+    template<typename _Tp, int n>
+    inline void v_hsum(const v_reg<_Tp, n> &a,
+                       v_reg<typename V_TypeTraits<_Tp>::w_type, n / 2> &c) {
+        typedef typename V_TypeTraits<_Tp>::w_type w_type;
+        for (int i = 0; i < (n / 2); i++) {
+            c.s[i] = (w_type) a.s[i * 2] + a.s[i * 2 + 1];
+        }
     }
-}
 //! @endcond
 
 //! @brief Helper macro
@@ -917,17 +927,17 @@ template<typename _Tp, int n> inline v_reg<_Tp, n> operator shift_op(const v_reg
 /** @brief Bitwise shift left
 
 For 16-, 32- and 64-bit integer values. */
-OPENCV_HAL_IMPL_SHIFT_OP(<< )
+    OPENCV_HAL_IMPL_SHIFT_OP(<<)
 
 /** @brief Bitwise shift right
 
 For 16-, 32- and 64-bit integer values. */
-OPENCV_HAL_IMPL_SHIFT_OP(>> )
+    OPENCV_HAL_IMPL_SHIFT_OP(>>)
 
 /** @brief Element shift left among vector
 
 For all type */
-#define OPENCV_HAL_IMPL_ROTATE_SHIFT_OP(suffix,opA,opB) \
+#define OPENCV_HAL_IMPL_ROTATE_SHIFT_OP(suffix, opA, opB) \
 template<int imm, typename _Tp, int n> inline v_reg<_Tp, n> v_rotate_##suffix(const v_reg<_Tp, n>& a) \
 { \
     v_reg<_Tp, n> b; \
@@ -968,8 +978,9 @@ template<int imm, typename _Tp, int n> inline v_reg<_Tp, n> v_rotate_##suffix(co
     return c; \
 }
 
-OPENCV_HAL_IMPL_ROTATE_SHIFT_OP(left,  -, +)
-OPENCV_HAL_IMPL_ROTATE_SHIFT_OP(right, +, -)
+    OPENCV_HAL_IMPL_ROTATE_SHIFT_OP(left, -, +)
+
+    OPENCV_HAL_IMPL_ROTATE_SHIFT_OP(right, +, -)
 
 /** @brief Sum packed values
 
@@ -978,13 +989,13 @@ Scheme:
 {A1 A2 A3 ...} => sum{A1,A2,A3,...}
 @endcode
 For 32-bit integer and 32-bit floating point types.*/
-template<typename _Tp, int n> inline typename V_TypeTraits<_Tp>::sum_type v_reduce_sum(const v_reg<_Tp, n>& a)
-{
-    typename V_TypeTraits<_Tp>::sum_type c = a.s[0];
-    for( int i = 1; i < n; i++ )
-        c += a.s[i];
-    return c;
-}
+    template<typename _Tp, int n>
+    inline typename V_TypeTraits<_Tp>::sum_type v_reduce_sum(const v_reg<_Tp, n> &a) {
+        typename V_TypeTraits<_Tp>::sum_type c = a.s[0];
+        for (int i = 1; i < n; i++)
+            c += a.s[i];
+        return c;
+    }
 
 /** @brief Sums all elements of each input vector, returns the vector of sums
 
@@ -996,16 +1007,15 @@ template<typename _Tp, int n> inline typename V_TypeTraits<_Tp>::sum_type v_redu
  result[3] = d[0] + d[1] + d[2] + d[3]
  @endcode
 */
-inline v_float32x4 v_reduce_sum4(const v_float32x4& a, const v_float32x4& b,
-                                 const v_float32x4& c, const v_float32x4& d)
-{
-    v_float32x4 r;
-    r.s[0] = a.s[0] + a.s[1] + a.s[2] + a.s[3];
-    r.s[1] = b.s[0] + b.s[1] + b.s[2] + b.s[3];
-    r.s[2] = c.s[0] + c.s[1] + c.s[2] + c.s[3];
-    r.s[3] = d.s[0] + d.s[1] + d.s[2] + d.s[3];
-    return r;
-}
+    inline v_float32x4 v_reduce_sum4(const v_float32x4 &a, const v_float32x4 &b,
+                                     const v_float32x4 &c, const v_float32x4 &d) {
+        v_float32x4 r;
+        r.s[0] = a.s[0] + a.s[1] + a.s[2] + a.s[3];
+        r.s[1] = b.s[0] + b.s[1] + b.s[2] + b.s[3];
+        r.s[2] = c.s[0] + c.s[1] + c.s[2] + c.s[3];
+        r.s[3] = d.s[0] + d.s[1] + d.s[2] + d.s[3];
+        return r;
+    }
 
 /** @brief Get negative values mask
 
@@ -1016,37 +1026,37 @@ v_int32x4 r; // set to {-1, -1, 1, 1}
 int mask = v_signmask(r); // mask = 3 <== 00000000 00000000 00000000 00000011
 @endcode
 For all types except 64-bit. */
-template<typename _Tp, int n> inline int v_signmask(const v_reg<_Tp, n>& a)
-{
-    int mask = 0;
-    for( int i = 0; i < n; i++ )
-        mask |= (V_TypeTraits<_Tp>::reinterpret_int(a.s[i]) < 0) << i;
-    return mask;
-}
+    template<typename _Tp, int n>
+    inline int v_signmask(const v_reg<_Tp, n> &a) {
+        int mask = 0;
+        for (int i = 0; i < n; i++)
+            mask |= (V_TypeTraits<_Tp>::reinterpret_int(a.s[i]) < 0) << i;
+        return mask;
+    }
 
 /** @brief Check if all packed values are less than zero
 
 Unsigned values will be casted to signed: `uchar 254 => char -2`.
 For all types except 64-bit. */
-template<typename _Tp, int n> inline bool v_check_all(const v_reg<_Tp, n>& a)
-{
-    for( int i = 0; i < n; i++ )
-        if( V_TypeTraits<_Tp>::reinterpret_int(a.s[i]) >= 0 )
-            return false;
-    return true;
-}
+    template<typename _Tp, int n>
+    inline bool v_check_all(const v_reg<_Tp, n> &a) {
+        for (int i = 0; i < n; i++)
+            if (V_TypeTraits<_Tp>::reinterpret_int(a.s[i]) >= 0)
+                return false;
+        return true;
+    }
 
 /** @brief Check if any of packed values is less than zero
 
 Unsigned values will be casted to signed: `uchar 254 => char -2`.
 For all types except 64-bit. */
-template<typename _Tp, int n> inline bool v_check_any(const v_reg<_Tp, n>& a)
-{
-    for( int i = 0; i < n; i++ )
-        if( V_TypeTraits<_Tp>::reinterpret_int(a.s[i]) < 0 )
-            return true;
-    return false;
-}
+    template<typename _Tp, int n>
+    inline bool v_check_any(const v_reg<_Tp, n> &a) {
+        for (int i = 0; i < n; i++)
+            if (V_TypeTraits<_Tp>::reinterpret_int(a.s[i]) < 0)
+                return true;
+        return false;
+    }
 
 /** @brief Per-element select (blend operation)
 
@@ -1058,20 +1068,19 @@ Return value will be built by combining values _a_ and _b_ using the following s
 - 0xff/0xffff/etc: select element from _a_
 (fully compatible with bitwise-based operator)
 */
-template<typename _Tp, int n> inline v_reg<_Tp, n> v_select(const v_reg<_Tp, n>& mask,
-                                                           const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b)
-{
-    typedef V_TypeTraits<_Tp> Traits;
-    typedef typename Traits::int_type int_type;
-    v_reg<_Tp, n> c;
-    for( int i = 0; i < n; i++ )
-    {
-        int_type m = Traits::reinterpret_int(mask.s[i]);
-        CV_DbgAssert(m == 0 || m == (~(int_type)0));  // restrict mask values: 0 or 0xff/0xffff/etc
-        c.s[i] = m ? a.s[i] : b.s[i];
+    template<typename _Tp, int n>
+    inline v_reg<_Tp, n> v_select(const v_reg<_Tp, n> &mask,
+                                  const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b) {
+        typedef V_TypeTraits <_Tp> Traits;
+        typedef typename Traits::int_type int_type;
+        v_reg<_Tp, n> c;
+        for (int i = 0; i < n; i++) {
+            int_type m = Traits::reinterpret_int(mask.s[i]);
+            CV_DbgAssert(m == 0 || m == (~(int_type) 0));  // restrict mask values: 0 or 0xff/0xffff/etc
+            c.s[i] = m ? a.s[i] : b.s[i];
+        }
+        return c;
     }
-    return c;
-}
 
 /** @brief Expand values to the wider pack type
 
@@ -1081,35 +1090,34 @@ Scheme:
  int32x4     int64x2 int64x2
 {A B C D} ==> {A B} , {C D}
 @endcode */
-template<typename _Tp, int n> inline void v_expand(const v_reg<_Tp, n>& a,
-                            v_reg<typename V_TypeTraits<_Tp>::w_type, n/2>& b0,
-                            v_reg<typename V_TypeTraits<_Tp>::w_type, n/2>& b1)
-{
-    for( int i = 0; i < (n/2); i++ )
-    {
-        b0.s[i] = a.s[i];
-        b1.s[i] = a.s[i+(n/2)];
+    template<typename _Tp, int n>
+    inline void v_expand(const v_reg<_Tp, n> &a,
+                         v_reg<typename V_TypeTraits<_Tp>::w_type, n / 2> &b0,
+                         v_reg<typename V_TypeTraits<_Tp>::w_type, n / 2> &b1) {
+        for (int i = 0; i < (n / 2); i++) {
+            b0.s[i] = a.s[i];
+            b1.s[i] = a.s[i + (n / 2)];
+        }
     }
-}
 
 //! @cond IGNORED
-template<typename _Tp, int n> inline v_reg<typename V_TypeTraits<_Tp>::int_type, n>
-    v_reinterpret_as_int(const v_reg<_Tp, n>& a)
-{
-    v_reg<typename V_TypeTraits<_Tp>::int_type, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = V_TypeTraits<_Tp>::reinterpret_int(a.s[i]);
-    return c;
-}
+    template<typename _Tp, int n>
+    inline v_reg<typename V_TypeTraits<_Tp>::int_type, n>
+    v_reinterpret_as_int(const v_reg<_Tp, n> &a) {
+        v_reg<typename V_TypeTraits<_Tp>::int_type, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = V_TypeTraits<_Tp>::reinterpret_int(a.s[i]);
+        return c;
+    }
 
-template<typename _Tp, int n> inline v_reg<typename V_TypeTraits<_Tp>::uint_type, n>
-    v_reinterpret_as_uint(const v_reg<_Tp, n>& a)
-{
-    v_reg<typename V_TypeTraits<_Tp>::uint_type, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = V_TypeTraits<_Tp>::reinterpret_uint(a.s[i]);
-    return c;
-}
+    template<typename _Tp, int n>
+    inline v_reg<typename V_TypeTraits<_Tp>::uint_type, n>
+    v_reinterpret_as_uint(const v_reg<_Tp, n> &a) {
+        v_reg<typename V_TypeTraits<_Tp>::uint_type, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = V_TypeTraits<_Tp>::reinterpret_uint(a.s[i]);
+        return c;
+    }
 //! @endcond
 
 /** @brief Interleave two vectors
@@ -1123,21 +1131,19 @@ Scheme:
 @endcode
 For all types except 64-bit.
 */
-template<typename _Tp, int n> inline void v_zip( const v_reg<_Tp, n>& a0, const v_reg<_Tp, n>& a1,
-                                               v_reg<_Tp, n>& b0, v_reg<_Tp, n>& b1 )
-{
-    int i;
-    for( i = 0; i < n/2; i++ )
-    {
-        b0.s[i*2] = a0.s[i];
-        b0.s[i*2+1] = a1.s[i];
+    template<typename _Tp, int n>
+    inline void v_zip(const v_reg<_Tp, n> &a0, const v_reg<_Tp, n> &a1,
+                      v_reg<_Tp, n> &b0, v_reg<_Tp, n> &b1) {
+        int i;
+        for (i = 0; i < n / 2; i++) {
+            b0.s[i * 2] = a0.s[i];
+            b0.s[i * 2 + 1] = a1.s[i];
+        }
+        for (; i < n; i++) {
+            b1.s[i * 2 - n] = a0.s[i];
+            b1.s[i * 2 - n + 1] = a1.s[i];
+        }
     }
-    for( ; i < n; i++ )
-    {
-        b1.s[i*2-n] = a0.s[i];
-        b1.s[i*2-n+1] = a1.s[i];
-    }
-}
 
 /** @brief Load register contents from memory
 
@@ -1146,21 +1152,19 @@ template<typename _Tp, int n> inline void v_zip( const v_reg<_Tp, n>& a0, const 
 
 @note Returned type will be detected from passed pointer type, for example uchar ==> cv::v_uint8x16, int ==> cv::v_int32x4, etc.
  */
-template<typename _Tp>
-inline v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128> v_load(const _Tp* ptr)
-{
-    return v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128>(ptr);
-}
+    template<typename _Tp>
+    inline v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128> v_load(const _Tp *ptr) {
+        return v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128>(ptr);
+    }
 
 /** @brief Load register contents from memory (aligned)
 
 similar to cv::v_load, but source memory block should be aligned (to 16-byte boundary)
  */
-template<typename _Tp>
-inline v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128> v_load_aligned(const _Tp* ptr)
-{
-    return v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128>(ptr);
-}
+    template<typename _Tp>
+    inline v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128> v_load_aligned(const _Tp *ptr) {
+        return v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128>(ptr);
+    }
 
 /** @brief Load 64-bits of data to lower part (high part is undefined).
 
@@ -1171,16 +1175,14 @@ int lo[2] = { 1, 2 };
 v_int32x4 r = v_load_low(lo);
 @endcode
  */
-template<typename _Tp>
-inline v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128> v_load_low(const _Tp* ptr)
-{
-    v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128> c;
-    for( int i = 0; i < c.nlanes/2; i++ )
-    {
-        c.s[i] = ptr[i];
+    template<typename _Tp>
+    inline v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128> v_load_low(const _Tp *ptr) {
+        v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128> c;
+        for (int i = 0; i < c.nlanes / 2; i++) {
+            c.s[i] = ptr[i];
+        }
+        return c;
     }
-    return c;
-}
 
 /** @brief Load register contents from two memory blocks
 
@@ -1192,17 +1194,15 @@ int lo[2] = { 1, 2 }, hi[2] = { 3, 4 };
 v_int32x4 r = v_load_halves(lo, hi);
 @endcode
  */
-template<typename _Tp>
-inline v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128> v_load_halves(const _Tp* loptr, const _Tp* hiptr)
-{
-    v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128> c;
-    for( int i = 0; i < c.nlanes/2; i++ )
-    {
-        c.s[i] = loptr[i];
-        c.s[i+c.nlanes/2] = hiptr[i];
+    template<typename _Tp>
+    inline v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128> v_load_halves(const _Tp *loptr, const _Tp *hiptr) {
+        v_reg<_Tp, V_TypeTraits<_Tp>::nlanes128> c;
+        for (int i = 0; i < c.nlanes / 2; i++) {
+            c.s[i] = loptr[i];
+            c.s[i + c.nlanes / 2] = hiptr[i];
+        }
+        return c;
     }
-    return c;
-}
 
 /** @brief Load register contents from memory with double expand
 
@@ -1213,18 +1213,16 @@ short buf[4] = {1, 2, 3, 4}; // type is int16
 v_int32x4 r = v_load_expand(buf); // r = {1, 2, 3, 4} - type is int32
 @endcode
 For 8-, 16-, 32-bit integer source types. */
-template<typename _Tp>
-inline v_reg<typename V_TypeTraits<_Tp>::w_type, V_TypeTraits<_Tp>::nlanes128 / 2>
-v_load_expand(const _Tp* ptr)
-{
-    typedef typename V_TypeTraits<_Tp>::w_type w_type;
-    v_reg<w_type, V_TypeTraits<w_type>::nlanes128> c;
-    for( int i = 0; i < c.nlanes; i++ )
-    {
-        c.s[i] = ptr[i];
+    template<typename _Tp>
+    inline v_reg<typename V_TypeTraits<_Tp>::w_type, V_TypeTraits<_Tp>::nlanes128 / 2>
+    v_load_expand(const _Tp *ptr) {
+        typedef typename V_TypeTraits<_Tp>::w_type w_type;
+        v_reg<w_type, V_TypeTraits<w_type>::nlanes128> c;
+        for (int i = 0; i < c.nlanes; i++) {
+            c.s[i] = ptr[i];
+        }
+        return c;
     }
-    return c;
-}
 
 /** @brief Load register contents from memory with quad expand
 
@@ -1234,18 +1232,16 @@ char buf[4] = {1, 2, 3, 4}; // type is int8
 v_int32x4 r = v_load_q(buf); // r = {1, 2, 3, 4} - type is int32
 @endcode
 For 8-bit integer source types. */
-template<typename _Tp>
-inline v_reg<typename V_TypeTraits<_Tp>::q_type, V_TypeTraits<_Tp>::nlanes128 / 4>
-v_load_expand_q(const _Tp* ptr)
-{
-    typedef typename V_TypeTraits<_Tp>::q_type q_type;
-    v_reg<q_type, V_TypeTraits<q_type>::nlanes128> c;
-    for( int i = 0; i < c.nlanes; i++ )
-    {
-        c.s[i] = ptr[i];
+    template<typename _Tp>
+    inline v_reg<typename V_TypeTraits<_Tp>::q_type, V_TypeTraits<_Tp>::nlanes128 / 4>
+    v_load_expand_q(const _Tp *ptr) {
+        typedef typename V_TypeTraits<_Tp>::q_type q_type;
+        v_reg<q_type, V_TypeTraits<q_type>::nlanes128> c;
+        for (int i = 0; i < c.nlanes; i++) {
+            c.s[i] = ptr[i];
+        }
+        return c;
     }
-    return c;
-}
 
 /** @brief Load and deinterleave (2 channels)
 
@@ -1255,16 +1251,15 @@ Scheme:
 {A1 B1 A2 B2 ...} ==> {A1 A2 ...}, {B1 B2 ...}
 @endcode
 For all types except 64-bit. */
-template<typename _Tp, int n> inline void v_load_deinterleave(const _Tp* ptr, v_reg<_Tp, n>& a,
-                                                            v_reg<_Tp, n>& b)
-{
-    int i, i2;
-    for( i = i2 = 0; i < n; i++, i2 += 2 )
-    {
-        a.s[i] = ptr[i2];
-        b.s[i] = ptr[i2+1];
+    template<typename _Tp, int n>
+    inline void v_load_deinterleave(const _Tp *ptr, v_reg<_Tp, n> &a,
+                                    v_reg<_Tp, n> &b) {
+        int i, i2;
+        for (i = i2 = 0; i < n; i++, i2 += 2) {
+            a.s[i] = ptr[i2];
+            b.s[i] = ptr[i2 + 1];
+        }
     }
-}
 
 /** @brief Load and deinterleave (3 channels)
 
@@ -1274,17 +1269,16 @@ Scheme:
 {A1 B1 C1 A2 B2 C2 ...} ==> {A1 A2 ...}, {B1 B2 ...}, {C1 C2 ...}
 @endcode
 For all types except 64-bit. */
-template<typename _Tp, int n> inline void v_load_deinterleave(const _Tp* ptr, v_reg<_Tp, n>& a,
-                                                            v_reg<_Tp, n>& b, v_reg<_Tp, n>& c)
-{
-    int i, i3;
-    for( i = i3 = 0; i < n; i++, i3 += 3 )
-    {
-        a.s[i] = ptr[i3];
-        b.s[i] = ptr[i3+1];
-        c.s[i] = ptr[i3+2];
+    template<typename _Tp, int n>
+    inline void v_load_deinterleave(const _Tp *ptr, v_reg<_Tp, n> &a,
+                                    v_reg<_Tp, n> &b, v_reg<_Tp, n> &c) {
+        int i, i3;
+        for (i = i3 = 0; i < n; i++, i3 += 3) {
+            a.s[i] = ptr[i3];
+            b.s[i] = ptr[i3 + 1];
+            c.s[i] = ptr[i3 + 2];
+        }
     }
-}
 
 /** @brief Load and deinterleave (4 channels)
 
@@ -1294,20 +1288,18 @@ Scheme:
 {A1 B1 C1 D1 A2 B2 C2 D2 ...} ==> {A1 A2 ...}, {B1 B2 ...}, {C1 C2 ...}, {D1 D2 ...}
 @endcode
 For all types except 64-bit. */
-template<typename _Tp, int n>
-inline void v_load_deinterleave(const _Tp* ptr, v_reg<_Tp, n>& a,
-                                v_reg<_Tp, n>& b, v_reg<_Tp, n>& c,
-                                v_reg<_Tp, n>& d)
-{
-    int i, i4;
-    for( i = i4 = 0; i < n; i++, i4 += 4 )
-    {
-        a.s[i] = ptr[i4];
-        b.s[i] = ptr[i4+1];
-        c.s[i] = ptr[i4+2];
-        d.s[i] = ptr[i4+3];
+    template<typename _Tp, int n>
+    inline void v_load_deinterleave(const _Tp *ptr, v_reg<_Tp, n> &a,
+                                    v_reg<_Tp, n> &b, v_reg<_Tp, n> &c,
+                                    v_reg<_Tp, n> &d) {
+        int i, i4;
+        for (i = i4 = 0; i < n; i++, i4 += 4) {
+            a.s[i] = ptr[i4];
+            b.s[i] = ptr[i4 + 1];
+            c.s[i] = ptr[i4 + 2];
+            d.s[i] = ptr[i4 + 3];
+        }
     }
-}
 
 /** @brief Interleave and store (2 channels)
 
@@ -1317,17 +1309,15 @@ Scheme:
 {A1 A2 ...}, {B1 B2 ...} ==> {A1 B1 A2 B2 ...}
 @endcode
 For all types except 64-bit. */
-template<typename _Tp, int n>
-inline void v_store_interleave( _Tp* ptr, const v_reg<_Tp, n>& a,
-                               const v_reg<_Tp, n>& b)
-{
-    int i, i2;
-    for( i = i2 = 0; i < n; i++, i2 += 2 )
-    {
-        ptr[i2] = a.s[i];
-        ptr[i2+1] = b.s[i];
+    template<typename _Tp, int n>
+    inline void v_store_interleave(_Tp *ptr, const v_reg<_Tp, n> &a,
+                                   const v_reg<_Tp, n> &b) {
+        int i, i2;
+        for (i = i2 = 0; i < n; i++, i2 += 2) {
+            ptr[i2] = a.s[i];
+            ptr[i2 + 1] = b.s[i];
+        }
     }
-}
 
 /** @brief Interleave and store (3 channels)
 
@@ -1337,18 +1327,16 @@ Scheme:
 {A1 A2 ...}, {B1 B2 ...}, {C1 C2 ...} ==> {A1 B1 C1 A2 B2 C2 ...}
 @endcode
 For all types except 64-bit. */
-template<typename _Tp, int n>
-inline void v_store_interleave( _Tp* ptr, const v_reg<_Tp, n>& a,
-                                const v_reg<_Tp, n>& b, const v_reg<_Tp, n>& c)
-{
-    int i, i3;
-    for( i = i3 = 0; i < n; i++, i3 += 3 )
-    {
-        ptr[i3] = a.s[i];
-        ptr[i3+1] = b.s[i];
-        ptr[i3+2] = c.s[i];
+    template<typename _Tp, int n>
+    inline void v_store_interleave(_Tp *ptr, const v_reg<_Tp, n> &a,
+                                   const v_reg<_Tp, n> &b, const v_reg<_Tp, n> &c) {
+        int i, i3;
+        for (i = i3 = 0; i < n; i++, i3 += 3) {
+            ptr[i3] = a.s[i];
+            ptr[i3 + 1] = b.s[i];
+            ptr[i3 + 2] = c.s[i];
+        }
     }
-}
 
 /** @brief Interleave and store (4 channels)
 
@@ -1358,19 +1346,18 @@ Scheme:
 {A1 A2 ...}, {B1 B2 ...}, {C1 C2 ...}, {D1 D2 ...} ==> {A1 B1 C1 D1 A2 B2 C2 D2 ...}
 @endcode
 For all types except 64-bit. */
-template<typename _Tp, int n> inline void v_store_interleave( _Tp* ptr, const v_reg<_Tp, n>& a,
-                                                            const v_reg<_Tp, n>& b, const v_reg<_Tp, n>& c,
-                                                            const v_reg<_Tp, n>& d)
-{
-    int i, i4;
-    for( i = i4 = 0; i < n; i++, i4 += 4 )
-    {
-        ptr[i4] = a.s[i];
-        ptr[i4+1] = b.s[i];
-        ptr[i4+2] = c.s[i];
-        ptr[i4+3] = d.s[i];
+    template<typename _Tp, int n>
+    inline void v_store_interleave(_Tp *ptr, const v_reg<_Tp, n> &a,
+                                   const v_reg<_Tp, n> &b, const v_reg<_Tp, n> &c,
+                                   const v_reg<_Tp, n> &d) {
+        int i, i4;
+        for (i = i4 = 0; i < n; i++, i4 += 4) {
+            ptr[i4] = a.s[i];
+            ptr[i4 + 1] = b.s[i];
+            ptr[i4 + 2] = c.s[i];
+            ptr[i4 + 3] = d.s[i];
+        }
     }
-}
 
 /** @brief Store data to memory
 
@@ -1380,12 +1367,11 @@ Scheme:
   REG {A B C D} ==> MEM {A B C D}
 @endcode
 Pointer can be unaligned. */
-template<typename _Tp, int n>
-inline void v_store(_Tp* ptr, const v_reg<_Tp, n>& a)
-{
-    for( int i = 0; i < n; i++ )
-        ptr[i] = a.s[i];
-}
+    template<typename _Tp, int n>
+    inline void v_store(_Tp *ptr, const v_reg<_Tp, n> &a) {
+        for (int i = 0; i < n; i++)
+            ptr[i] = a.s[i];
+    }
 
 /** @brief Store data to memory (lower half)
 
@@ -1394,12 +1380,11 @@ Scheme:
 @code
   REG {A B C D} ==> MEM {A B}
 @endcode */
-template<typename _Tp, int n>
-inline void v_store_low(_Tp* ptr, const v_reg<_Tp, n>& a)
-{
-    for( int i = 0; i < (n/2); i++ )
-        ptr[i] = a.s[i];
-}
+    template<typename _Tp, int n>
+    inline void v_store_low(_Tp *ptr, const v_reg<_Tp, n> &a) {
+        for (int i = 0; i < (n / 2); i++)
+            ptr[i] = a.s[i];
+    }
 
 /** @brief Store data to memory (higher half)
 
@@ -1408,12 +1393,11 @@ Scheme:
 @code
   REG {A B C D} ==> MEM {C D}
 @endcode */
-template<typename _Tp, int n>
-inline void v_store_high(_Tp* ptr, const v_reg<_Tp, n>& a)
-{
-    for( int i = 0; i < (n/2); i++ )
-        ptr[i] = a.s[i+(n/2)];
-}
+    template<typename _Tp, int n>
+    inline void v_store_high(_Tp *ptr, const v_reg<_Tp, n> &a) {
+        for (int i = 0; i < (n / 2); i++)
+            ptr[i] = a.s[i + (n / 2)];
+    }
 
 /** @brief Store data to memory (aligned)
 
@@ -1423,12 +1407,11 @@ Scheme:
   REG {A B C D} ==> MEM {A B C D}
 @endcode
 Pointer __should__ be aligned by 16-byte boundary. */
-template<typename _Tp, int n>
-inline void v_store_aligned(_Tp* ptr, const v_reg<_Tp, n>& a)
-{
-    for( int i = 0; i < n; i++ )
-        ptr[i] = a.s[i];
-}
+    template<typename _Tp, int n>
+    inline void v_store_aligned(_Tp *ptr, const v_reg<_Tp, n> &a) {
+        for (int i = 0; i < n; i++)
+            ptr[i] = a.s[i];
+    }
 
 /** @brief Combine vector from first elements of two vectors
 
@@ -1440,17 +1423,15 @@ Scheme:
   {A1 A2 B1 B2}
 @endcode
 For all types except 64-bit. */
-template<typename _Tp, int n>
-inline v_reg<_Tp, n> v_combine_low(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b)
-{
-    v_reg<_Tp, n> c;
-    for( int i = 0; i < (n/2); i++ )
-    {
-        c.s[i] = a.s[i];
-        c.s[i+(n/2)] = b.s[i];
+    template<typename _Tp, int n>
+    inline v_reg<_Tp, n> v_combine_low(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b) {
+        v_reg<_Tp, n> c;
+        for (int i = 0; i < (n / 2); i++) {
+            c.s[i] = a.s[i];
+            c.s[i + (n / 2)] = b.s[i];
+        }
+        return c;
     }
-    return c;
-}
 
 /** @brief Combine vector from last elements of two vectors
 
@@ -1462,17 +1443,15 @@ Scheme:
   {A3 A4 B3 B4}
 @endcode
 For all types except 64-bit. */
-template<typename _Tp, int n>
-inline v_reg<_Tp, n> v_combine_high(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b)
-{
-    v_reg<_Tp, n> c;
-    for( int i = 0; i < (n/2); i++ )
-    {
-        c.s[i] = a.s[i+(n/2)];
-        c.s[i+(n/2)] = b.s[i+(n/2)];
+    template<typename _Tp, int n>
+    inline v_reg<_Tp, n> v_combine_high(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b) {
+        v_reg<_Tp, n> c;
+        for (int i = 0; i < (n / 2); i++) {
+            c.s[i] = a.s[i + (n / 2)];
+            c.s[i + (n / 2)] = b.s[i + (n / 2)];
+        }
+        return c;
     }
-    return c;
-}
 
 /** @brief Combine two vectors from lower and higher parts of two other vectors
 
@@ -1480,18 +1459,16 @@ inline v_reg<_Tp, n> v_combine_high(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>&
 low = cv::v_combine_low(a, b);
 high = cv::v_combine_high(a, b);
 @endcode */
-template<typename _Tp, int n>
-inline void v_recombine(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b,
-                        v_reg<_Tp, n>& low, v_reg<_Tp, n>& high)
-{
-    for( int i = 0; i < (n/2); i++ )
-    {
-        low.s[i] = a.s[i];
-        low.s[i+(n/2)] = b.s[i];
-        high.s[i] = a.s[i+(n/2)];
-        high.s[i+(n/2)] = b.s[i+(n/2)];
+    template<typename _Tp, int n>
+    inline void v_recombine(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b,
+                            v_reg<_Tp, n> &low, v_reg<_Tp, n> &high) {
+        for (int i = 0; i < (n / 2); i++) {
+            low.s[i] = a.s[i];
+            low.s[i + (n / 2)] = b.s[i];
+            high.s[i] = a.s[i + (n / 2)];
+            high.s[i + (n / 2)] = b.s[i + (n / 2)];
+        }
     }
-}
 
 /** @brief Vector extract
 
@@ -1512,200 +1489,192 @@ v_int32x4 a, b, c;
 c = v_extract<2>(a, b);
 @endcode
 For all types. */
-template<int s, typename _Tp, int n>
-inline v_reg<_Tp, n> v_extract(const v_reg<_Tp, n>& a, const v_reg<_Tp, n>& b)
-{
-    v_reg<_Tp, n> r;
-    const int shift = n - s;
-    int i = 0;
-    for (; i < shift; ++i)
-        r.s[i] = a.s[i+s];
-    for (; i < n; ++i)
-        r.s[i] = b.s[i-shift];
-    return r;
-}
+    template<int s, typename _Tp, int n>
+    inline v_reg<_Tp, n> v_extract(const v_reg<_Tp, n> &a, const v_reg<_Tp, n> &b) {
+        v_reg<_Tp, n> r;
+        const int shift = n - s;
+        int i = 0;
+        for (; i < shift; ++i)
+            r.s[i] = a.s[i + s];
+        for (; i < n; ++i)
+            r.s[i] = b.s[i - shift];
+        return r;
+    }
 
 /** @brief Round
 
 Rounds each value. Input type is float vector ==> output type is int vector.*/
-template<int n> inline v_reg<int, n> v_round(const v_reg<float, n>& a)
-{
-    v_reg<int, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = cvRound(a.s[i]);
-    return c;
-}
+    template<int n>
+    inline v_reg<int, n> v_round(const v_reg<float, n> &a) {
+        v_reg<int, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = cvRound(a.s[i]);
+        return c;
+    }
 
 /** @brief Floor
 
 Floor each value. Input type is float vector ==> output type is int vector.*/
-template<int n> inline v_reg<int, n> v_floor(const v_reg<float, n>& a)
-{
-    v_reg<int, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = cvFloor(a.s[i]);
-    return c;
-}
+    template<int n>
+    inline v_reg<int, n> v_floor(const v_reg<float, n> &a) {
+        v_reg<int, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = cvFloor(a.s[i]);
+        return c;
+    }
 
 /** @brief Ceil
 
 Ceil each value. Input type is float vector ==> output type is int vector.*/
-template<int n> inline v_reg<int, n> v_ceil(const v_reg<float, n>& a)
-{
-    v_reg<int, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = cvCeil(a.s[i]);
-    return c;
-}
+    template<int n>
+    inline v_reg<int, n> v_ceil(const v_reg<float, n> &a) {
+        v_reg<int, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = cvCeil(a.s[i]);
+        return c;
+    }
 
 /** @brief Trunc
 
 Truncate each value. Input type is float vector ==> output type is int vector.*/
-template<int n> inline v_reg<int, n> v_trunc(const v_reg<float, n>& a)
-{
-    v_reg<int, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = (int)(a.s[i]);
-    return c;
-}
+    template<int n>
+    inline v_reg<int, n> v_trunc(const v_reg<float, n> &a) {
+        v_reg<int, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = (int) (a.s[i]);
+        return c;
+    }
 
 /** @overload */
-template<int n> inline v_reg<int, n*2> v_round(const v_reg<double, n>& a)
-{
-    v_reg<int, n*2> c;
-    for( int i = 0; i < n; i++ )
-    {
-        c.s[i] = cvRound(a.s[i]);
-        c.s[i+n] = 0;
+    template<int n>
+    inline v_reg<int, n * 2> v_round(const v_reg<double, n> &a) {
+        v_reg<int, n * 2> c;
+        for (int i = 0; i < n; i++) {
+            c.s[i] = cvRound(a.s[i]);
+            c.s[i + n] = 0;
+        }
+        return c;
     }
-    return c;
-}
 
 /** @overload */
-template<int n> inline v_reg<int, n*2> v_floor(const v_reg<double, n>& a)
-{
-    v_reg<int, n> c;
-    for( int i = 0; i < n; i++ )
-    {
-        c.s[i] = cvFloor(a.s[i]);
-        c.s[i+n] = 0;
+    template<int n>
+    inline v_reg<int, n * 2> v_floor(const v_reg<double, n> &a) {
+        v_reg<int, n> c;
+        for (int i = 0; i < n; i++) {
+            c.s[i] = cvFloor(a.s[i]);
+            c.s[i + n] = 0;
+        }
+        return c;
     }
-    return c;
-}
 
 /** @overload */
-template<int n> inline v_reg<int, n*2> v_ceil(const v_reg<double, n>& a)
-{
-    v_reg<int, n> c;
-    for( int i = 0; i < n; i++ )
-    {
-        c.s[i] = cvCeil(a.s[i]);
-        c.s[i+n] = 0;
+    template<int n>
+    inline v_reg<int, n * 2> v_ceil(const v_reg<double, n> &a) {
+        v_reg<int, n> c;
+        for (int i = 0; i < n; i++) {
+            c.s[i] = cvCeil(a.s[i]);
+            c.s[i + n] = 0;
+        }
+        return c;
     }
-    return c;
-}
 
 /** @overload */
-template<int n> inline v_reg<int, n*2> v_trunc(const v_reg<double, n>& a)
-{
-    v_reg<int, n> c;
-    for( int i = 0; i < n; i++ )
-    {
-        c.s[i] = cvCeil(a.s[i]);
-        c.s[i+n] = 0;
+    template<int n>
+    inline v_reg<int, n * 2> v_trunc(const v_reg<double, n> &a) {
+        v_reg<int, n> c;
+        for (int i = 0; i < n; i++) {
+            c.s[i] = cvCeil(a.s[i]);
+            c.s[i + n] = 0;
+        }
+        return c;
     }
-    return c;
-}
 
 /** @brief Convert to float
 
 Supported input type is cv::v_int32x4. */
-template<int n> inline v_reg<float, n> v_cvt_f32(const v_reg<int, n>& a)
-{
-    v_reg<float, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = (float)a.s[i];
-    return c;
-}
-
-template<int n> inline v_reg<float, n*2> v_cvt_f32(const v_reg<double, n>& a, const v_reg<double, n>& b)
-{
-    v_reg<float, n*2> c;
-    for( int i = 0; i < n; i++ )
-    {
-        c.s[i] = (float)a.s[i];
-        c.s[i+n] = (float)b.s[i];
+    template<int n>
+    inline v_reg<float, n> v_cvt_f32(const v_reg<int, n> &a) {
+        v_reg<float, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = (float) a.s[i];
+        return c;
     }
-    return c;
-}
+
+    template<int n>
+    inline v_reg<float, n * 2> v_cvt_f32(const v_reg<double, n> &a, const v_reg<double, n> &b) {
+        v_reg<float, n * 2> c;
+        for (int i = 0; i < n; i++) {
+            c.s[i] = (float) a.s[i];
+            c.s[i + n] = (float) b.s[i];
+        }
+        return c;
+    }
 
 /** @brief Convert to double
 
 Supported input type is cv::v_int32x4. */
-template<int n> inline v_reg<double, n> v_cvt_f64(const v_reg<int, n*2>& a)
-{
-    v_reg<double, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = (double)a.s[i];
-    return c;
-}
+    template<int n>
+    inline v_reg<double, n> v_cvt_f64(const v_reg<int, n * 2> &a) {
+        v_reg<double, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = (double) a.s[i];
+        return c;
+    }
 
 /** @brief Convert to double
 
 Supported input type is cv::v_float32x4. */
-template<int n> inline v_reg<double, n> v_cvt_f64(const v_reg<float, n*2>& a)
-{
-    v_reg<double, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = (double)a.s[i];
-    return c;
-}
-
-template<int n> inline v_reg<int, n> v_lut(const int* tab, const v_reg<int, n>& idx)
-{
-    v_reg<int, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = tab[idx.s[i]];
-    return c;
-}
-
-template<int n> inline v_reg<float, n> v_lut(const float* tab, const v_reg<int, n>& idx)
-{
-    v_reg<float, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = tab[idx.s[i]];
-    return c;
-}
-
-template<int n> inline v_reg<double, n> v_lut(const double* tab, const v_reg<int, n*2>& idx)
-{
-    v_reg<double, n> c;
-    for( int i = 0; i < n; i++ )
-        c.s[i] = tab[idx.s[i]];
-    return c;
-}
-
-template<int n> inline void v_lut_deinterleave(const float* tab, const v_reg<int, n>& idx,
-                                               v_reg<float, n>& x, v_reg<float, n>& y)
-{
-    for( int i = 0; i < n; i++ )
-    {
-        int j = idx.s[i];
-        x.s[i] = tab[j];
-        y.s[i] = tab[j+1];
+    template<int n>
+    inline v_reg<double, n> v_cvt_f64(const v_reg<float, n * 2> &a) {
+        v_reg<double, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = (double) a.s[i];
+        return c;
     }
-}
 
-template<int n> inline void v_lut_deinterleave(const double* tab, const v_reg<int, n*2>& idx,
-                                               v_reg<double, n>& x, v_reg<double, n>& y)
-{
-    for( int i = 0; i < n; i++ )
-    {
-        int j = idx.s[i];
-        x.s[i] = tab[j];
-        y.s[i] = tab[j+1];
+    template<int n>
+    inline v_reg<int, n> v_lut(const int *tab, const v_reg<int, n> &idx) {
+        v_reg<int, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = tab[idx.s[i]];
+        return c;
     }
-}
+
+    template<int n>
+    inline v_reg<float, n> v_lut(const float *tab, const v_reg<int, n> &idx) {
+        v_reg<float, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = tab[idx.s[i]];
+        return c;
+    }
+
+    template<int n>
+    inline v_reg<double, n> v_lut(const double *tab, const v_reg<int, n * 2> &idx) {
+        v_reg<double, n> c;
+        for (int i = 0; i < n; i++)
+            c.s[i] = tab[idx.s[i]];
+        return c;
+    }
+
+    template<int n>
+    inline void v_lut_deinterleave(const float *tab, const v_reg<int, n> &idx,
+                                   v_reg<float, n> &x, v_reg<float, n> &y) {
+        for (int i = 0; i < n; i++) {
+            int j = idx.s[i];
+            x.s[i] = tab[j];
+            y.s[i] = tab[j + 1];
+        }
+    }
+
+    template<int n>
+    inline void v_lut_deinterleave(const double *tab, const v_reg<int, n * 2> &idx,
+                                   v_reg<double, n> &x, v_reg<double, n> &y) {
+        for (int i = 0; i < n; i++) {
+            int j = idx.s[i];
+            x.s[i] = tab[j];
+            y.s[i] = tab[j + 1];
+        }
+    }
 
 /** @brief Transpose 4x4 matrix
 
@@ -1722,17 +1691,16 @@ b2  {A3 B3 C3 D3}
 b3  {A4 B4 C4 D4}
 @endcode
 */
-template<typename _Tp>
-inline void v_transpose4x4( v_reg<_Tp, 4>& a0, const v_reg<_Tp, 4>& a1,
-                            const v_reg<_Tp, 4>& a2, const v_reg<_Tp, 4>& a3,
-                            v_reg<_Tp, 4>& b0, v_reg<_Tp, 4>& b1,
-                            v_reg<_Tp, 4>& b2, v_reg<_Tp, 4>& b3 )
-{
-    b0 = v_reg<_Tp, 4>(a0.s[0], a1.s[0], a2.s[0], a3.s[0]);
-    b1 = v_reg<_Tp, 4>(a0.s[1], a1.s[1], a2.s[1], a3.s[1]);
-    b2 = v_reg<_Tp, 4>(a0.s[2], a1.s[2], a2.s[2], a3.s[2]);
-    b3 = v_reg<_Tp, 4>(a0.s[3], a1.s[3], a2.s[3], a3.s[3]);
-}
+    template<typename _Tp>
+    inline void v_transpose4x4(v_reg<_Tp, 4> &a0, const v_reg<_Tp, 4> &a1,
+                               const v_reg<_Tp, 4> &a2, const v_reg<_Tp, 4> &a3,
+                               v_reg<_Tp, 4> &b0, v_reg<_Tp, 4> &b1,
+                               v_reg<_Tp, 4> &b2, v_reg<_Tp, 4> &b3) {
+        b0 = v_reg<_Tp, 4>(a0.s[0], a1.s[0], a2.s[0], a3.s[0]);
+        b1 = v_reg<_Tp, 4>(a0.s[1], a1.s[1], a2.s[1], a3.s[1]);
+        b2 = v_reg<_Tp, 4>(a0.s[2], a1.s[2], a2.s[2], a3.s[2]);
+        b3 = v_reg<_Tp, 4>(a0.s[3], a1.s[3], a2.s[3], a3.s[3]);
+    }
 
 //! @brief Helper macro
 //! @ingroup core_hal_intrin_impl
@@ -1742,16 +1710,25 @@ inline _Tpvec v_setzero_##suffix() { return _Tpvec::zero(); }
 //! @name Init with zero
 //! @{
 //! @brief Create new vector with zero elements
-OPENCV_HAL_IMPL_C_INIT_ZERO(v_uint8x16, uchar, u8)
-OPENCV_HAL_IMPL_C_INIT_ZERO(v_int8x16, schar, s8)
-OPENCV_HAL_IMPL_C_INIT_ZERO(v_uint16x8, ushort, u16)
-OPENCV_HAL_IMPL_C_INIT_ZERO(v_int16x8, short, s16)
-OPENCV_HAL_IMPL_C_INIT_ZERO(v_uint32x4, unsigned, u32)
-OPENCV_HAL_IMPL_C_INIT_ZERO(v_int32x4, int, s32)
-OPENCV_HAL_IMPL_C_INIT_ZERO(v_float32x4, float, f32)
-OPENCV_HAL_IMPL_C_INIT_ZERO(v_float64x2, double, f64)
-OPENCV_HAL_IMPL_C_INIT_ZERO(v_uint64x2, uint64, u64)
-OPENCV_HAL_IMPL_C_INIT_ZERO(v_int64x2, int64, s64)
+    OPENCV_HAL_IMPL_C_INIT_ZERO(v_uint8x16, uchar, u8)
+
+    OPENCV_HAL_IMPL_C_INIT_ZERO(v_int8x16, schar, s8)
+
+    OPENCV_HAL_IMPL_C_INIT_ZERO(v_uint16x8, ushort, u16)
+
+    OPENCV_HAL_IMPL_C_INIT_ZERO(v_int16x8, short, s16)
+
+    OPENCV_HAL_IMPL_C_INIT_ZERO(v_uint32x4, unsigned, u32)
+
+    OPENCV_HAL_IMPL_C_INIT_ZERO(v_int32x4, int, s32)
+
+    OPENCV_HAL_IMPL_C_INIT_ZERO(v_float32x4, float, f32)
+
+    OPENCV_HAL_IMPL_C_INIT_ZERO(v_float64x2, double, f64)
+
+    OPENCV_HAL_IMPL_C_INIT_ZERO(v_uint64x2, uint64, u64)
+
+    OPENCV_HAL_IMPL_C_INIT_ZERO(v_int64x2, int64, s64)
 //! @}
 
 //! @brief Helper macro
@@ -1762,16 +1739,25 @@ inline _Tpvec v_setall_##suffix(_Tp val) { return _Tpvec::all(val); }
 //! @name Init with value
 //! @{
 //! @brief Create new vector with elements set to a specific value
-OPENCV_HAL_IMPL_C_INIT_VAL(v_uint8x16, uchar, u8)
-OPENCV_HAL_IMPL_C_INIT_VAL(v_int8x16, schar, s8)
-OPENCV_HAL_IMPL_C_INIT_VAL(v_uint16x8, ushort, u16)
-OPENCV_HAL_IMPL_C_INIT_VAL(v_int16x8, short, s16)
-OPENCV_HAL_IMPL_C_INIT_VAL(v_uint32x4, unsigned, u32)
-OPENCV_HAL_IMPL_C_INIT_VAL(v_int32x4, int, s32)
-OPENCV_HAL_IMPL_C_INIT_VAL(v_float32x4, float, f32)
-OPENCV_HAL_IMPL_C_INIT_VAL(v_float64x2, double, f64)
-OPENCV_HAL_IMPL_C_INIT_VAL(v_uint64x2, uint64, u64)
-OPENCV_HAL_IMPL_C_INIT_VAL(v_int64x2, int64, s64)
+    OPENCV_HAL_IMPL_C_INIT_VAL(v_uint8x16, uchar, u8)
+
+    OPENCV_HAL_IMPL_C_INIT_VAL(v_int8x16, schar, s8)
+
+    OPENCV_HAL_IMPL_C_INIT_VAL(v_uint16x8, ushort, u16)
+
+    OPENCV_HAL_IMPL_C_INIT_VAL(v_int16x8, short, s16)
+
+    OPENCV_HAL_IMPL_C_INIT_VAL(v_uint32x4, unsigned, u32)
+
+    OPENCV_HAL_IMPL_C_INIT_VAL(v_int32x4, int, s32)
+
+    OPENCV_HAL_IMPL_C_INIT_VAL(v_float32x4, float, f32)
+
+    OPENCV_HAL_IMPL_C_INIT_VAL(v_float64x2, double, f64)
+
+    OPENCV_HAL_IMPL_C_INIT_VAL(v_uint64x2, uint64, u64)
+
+    OPENCV_HAL_IMPL_C_INIT_VAL(v_int64x2, int64, s64)
 //! @}
 
 //! @brief Helper macro
@@ -1784,16 +1770,25 @@ template<typename _Tp0, int n0> inline _Tpvec \
 //! @name Reinterpret
 //! @{
 //! @brief Convert vector to different type without modifying underlying data.
-OPENCV_HAL_IMPL_C_REINTERPRET(v_uint8x16, uchar, u8)
-OPENCV_HAL_IMPL_C_REINTERPRET(v_int8x16, schar, s8)
-OPENCV_HAL_IMPL_C_REINTERPRET(v_uint16x8, ushort, u16)
-OPENCV_HAL_IMPL_C_REINTERPRET(v_int16x8, short, s16)
-OPENCV_HAL_IMPL_C_REINTERPRET(v_uint32x4, unsigned, u32)
-OPENCV_HAL_IMPL_C_REINTERPRET(v_int32x4, int, s32)
-OPENCV_HAL_IMPL_C_REINTERPRET(v_float32x4, float, f32)
-OPENCV_HAL_IMPL_C_REINTERPRET(v_float64x2, double, f64)
-OPENCV_HAL_IMPL_C_REINTERPRET(v_uint64x2, uint64, u64)
-OPENCV_HAL_IMPL_C_REINTERPRET(v_int64x2, int64, s64)
+    OPENCV_HAL_IMPL_C_REINTERPRET(v_uint8x16, uchar, u8)
+
+    OPENCV_HAL_IMPL_C_REINTERPRET(v_int8x16, schar, s8)
+
+    OPENCV_HAL_IMPL_C_REINTERPRET(v_uint16x8, ushort, u16)
+
+    OPENCV_HAL_IMPL_C_REINTERPRET(v_int16x8, short, s16)
+
+    OPENCV_HAL_IMPL_C_REINTERPRET(v_uint32x4, unsigned, u32)
+
+    OPENCV_HAL_IMPL_C_REINTERPRET(v_int32x4, int, s32)
+
+    OPENCV_HAL_IMPL_C_REINTERPRET(v_float32x4, float, f32)
+
+    OPENCV_HAL_IMPL_C_REINTERPRET(v_float64x2, double, f64)
+
+    OPENCV_HAL_IMPL_C_REINTERPRET(v_uint64x2, uint64, u64)
+
+    OPENCV_HAL_IMPL_C_REINTERPRET(v_int64x2, int64, s64)
 //! @}
 
 //! @brief Helper macro
@@ -1805,12 +1800,17 @@ template<int n> inline _Tpvec v_shl(const _Tpvec& a) \
 //! @name Left shift
 //! @{
 //! @brief Shift left
-OPENCV_HAL_IMPL_C_SHIFTL(v_uint16x8, ushort)
-OPENCV_HAL_IMPL_C_SHIFTL(v_int16x8, short)
-OPENCV_HAL_IMPL_C_SHIFTL(v_uint32x4, unsigned)
-OPENCV_HAL_IMPL_C_SHIFTL(v_int32x4, int)
-OPENCV_HAL_IMPL_C_SHIFTL(v_uint64x2, uint64)
-OPENCV_HAL_IMPL_C_SHIFTL(v_int64x2, int64)
+    OPENCV_HAL_IMPL_C_SHIFTL(v_uint16x8, ushort)
+
+    OPENCV_HAL_IMPL_C_SHIFTL(v_int16x8, short)
+
+    OPENCV_HAL_IMPL_C_SHIFTL(v_uint32x4, unsigned)
+
+    OPENCV_HAL_IMPL_C_SHIFTL(v_int32x4, int)
+
+    OPENCV_HAL_IMPL_C_SHIFTL(v_uint64x2, uint64)
+
+    OPENCV_HAL_IMPL_C_SHIFTL(v_int64x2, int64)
 //! @}
 
 //! @brief Helper macro
@@ -1822,12 +1822,17 @@ template<int n> inline _Tpvec v_shr(const _Tpvec& a) \
 //! @name Right shift
 //! @{
 //! @brief Shift right
-OPENCV_HAL_IMPL_C_SHIFTR(v_uint16x8, ushort)
-OPENCV_HAL_IMPL_C_SHIFTR(v_int16x8, short)
-OPENCV_HAL_IMPL_C_SHIFTR(v_uint32x4, unsigned)
-OPENCV_HAL_IMPL_C_SHIFTR(v_int32x4, int)
-OPENCV_HAL_IMPL_C_SHIFTR(v_uint64x2, uint64)
-OPENCV_HAL_IMPL_C_SHIFTR(v_int64x2, int64)
+    OPENCV_HAL_IMPL_C_SHIFTR(v_uint16x8, ushort)
+
+    OPENCV_HAL_IMPL_C_SHIFTR(v_int16x8, short)
+
+    OPENCV_HAL_IMPL_C_SHIFTR(v_uint32x4, unsigned)
+
+    OPENCV_HAL_IMPL_C_SHIFTR(v_int32x4, int)
+
+    OPENCV_HAL_IMPL_C_SHIFTR(v_uint64x2, uint64)
+
+    OPENCV_HAL_IMPL_C_SHIFTR(v_int64x2, int64)
 //! @}
 
 //! @brief Helper macro
@@ -1844,12 +1849,17 @@ template<int n> inline _Tpvec v_rshr(const _Tpvec& a) \
 //! @name Rounding shift
 //! @{
 //! @brief Rounding shift right
-OPENCV_HAL_IMPL_C_RSHIFTR(v_uint16x8, ushort)
-OPENCV_HAL_IMPL_C_RSHIFTR(v_int16x8, short)
-OPENCV_HAL_IMPL_C_RSHIFTR(v_uint32x4, unsigned)
-OPENCV_HAL_IMPL_C_RSHIFTR(v_int32x4, int)
-OPENCV_HAL_IMPL_C_RSHIFTR(v_uint64x2, uint64)
-OPENCV_HAL_IMPL_C_RSHIFTR(v_int64x2, int64)
+    OPENCV_HAL_IMPL_C_RSHIFTR(v_uint16x8, ushort)
+
+    OPENCV_HAL_IMPL_C_RSHIFTR(v_int16x8, short)
+
+    OPENCV_HAL_IMPL_C_RSHIFTR(v_uint32x4, unsigned)
+
+    OPENCV_HAL_IMPL_C_RSHIFTR(v_int32x4, int)
+
+    OPENCV_HAL_IMPL_C_RSHIFTR(v_uint64x2, uint64)
+
+    OPENCV_HAL_IMPL_C_RSHIFTR(v_int64x2, int64)
 //! @}
 
 //! @brief Helper macro
@@ -1877,14 +1887,21 @@ inline _Tpnvec v_##pack_suffix(const _Tpvec& a, const _Tpvec& b) \
 //! - pack_u: for 16- and 32-bit signed integer input types
 //!
 //! @note All variants except 64-bit use saturation.
-OPENCV_HAL_IMPL_C_PACK(v_uint16x8, v_uint8x16, uchar, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_PACK(v_int16x8, v_int8x16, schar, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_PACK(v_uint32x4, v_uint16x8, ushort, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_PACK(v_int32x4, v_int16x8, short, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_PACK(v_uint64x2, v_uint32x4, unsigned, pack, static_cast)
-OPENCV_HAL_IMPL_C_PACK(v_int64x2, v_int32x4, int, pack, static_cast)
-OPENCV_HAL_IMPL_C_PACK(v_int16x8, v_uint8x16, uchar, pack_u, saturate_cast)
-OPENCV_HAL_IMPL_C_PACK(v_int32x4, v_uint16x8, ushort, pack_u, saturate_cast)
+    OPENCV_HAL_IMPL_C_PACK(v_uint16x8, v_uint8x16, uchar, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_PACK(v_int16x8, v_int8x16, schar, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_PACK(v_uint32x4, v_uint16x8, ushort, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_PACK(v_int32x4, v_int16x8, short, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_PACK(v_uint64x2, v_uint32x4, unsigned, pack, static_cast)
+
+    OPENCV_HAL_IMPL_C_PACK(v_int64x2, v_int32x4, int, pack, static_cast)
+
+    OPENCV_HAL_IMPL_C_PACK(v_int16x8, v_uint8x16, uchar, pack_u, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_PACK(v_int32x4, v_uint16x8, ushort, pack_u, saturate_cast)
 //! @}
 
 //! @brief Helper macro
@@ -1912,14 +1929,21 @@ template<int n> inline _Tpnvec v_rshr_##pack_suffix(const _Tpvec& a, const _Tpve
 //! - pack_u: for 16- and 32-bit signed integer input types
 //!
 //! @note All variants except 64-bit use saturation.
-OPENCV_HAL_IMPL_C_RSHR_PACK(v_uint16x8, ushort, v_uint8x16, uchar, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK(v_int16x8, short, v_int8x16, schar, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK(v_uint32x4, unsigned, v_uint16x8, ushort, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK(v_int32x4, int, v_int16x8, short, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK(v_uint64x2, uint64, v_uint32x4, unsigned, pack, static_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK(v_int64x2, int64, v_int32x4, int, pack, static_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK(v_int16x8, short, v_uint8x16, uchar, pack_u, saturate_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK(v_int32x4, int, v_uint16x8, ushort, pack_u, saturate_cast)
+    OPENCV_HAL_IMPL_C_RSHR_PACK(v_uint16x8, ushort, v_uint8x16, uchar, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK(v_int16x8, short, v_int8x16, schar, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK(v_uint32x4, unsigned, v_uint16x8, ushort, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK(v_int32x4, int, v_int16x8, short, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK(v_uint64x2, uint64, v_uint32x4, unsigned, pack, static_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK(v_int64x2, int64, v_int32x4, int, pack, static_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK(v_int16x8, short, v_uint8x16, uchar, pack_u, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK(v_int32x4, int, v_uint16x8, ushort, pack_u, saturate_cast)
 //! @}
 
 //! @brief Helper macro
@@ -1942,14 +1966,21 @@ inline void v_##pack_suffix##_store(_Tpn* ptr, const _Tpvec& a) \
 //! - pack_u: for 16- and 32-bit signed integer input types
 //!
 //! @note All variants except 64-bit use saturation.
-OPENCV_HAL_IMPL_C_PACK_STORE(v_uint16x8, ushort, v_uint8x16, uchar, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_PACK_STORE(v_int16x8, short, v_int8x16, schar, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_PACK_STORE(v_uint32x4, unsigned, v_uint16x8, ushort, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_PACK_STORE(v_int32x4, int, v_int16x8, short, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_PACK_STORE(v_uint64x2, uint64, v_uint32x4, unsigned, pack, static_cast)
-OPENCV_HAL_IMPL_C_PACK_STORE(v_int64x2, int64, v_int32x4, int, pack, static_cast)
-OPENCV_HAL_IMPL_C_PACK_STORE(v_int16x8, short, v_uint8x16, uchar, pack_u, saturate_cast)
-OPENCV_HAL_IMPL_C_PACK_STORE(v_int32x4, int, v_uint16x8, ushort, pack_u, saturate_cast)
+    OPENCV_HAL_IMPL_C_PACK_STORE(v_uint16x8, ushort, v_uint8x16, uchar, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_PACK_STORE(v_int16x8, short, v_int8x16, schar, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_PACK_STORE(v_uint32x4, unsigned, v_uint16x8, ushort, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_PACK_STORE(v_int32x4, int, v_int16x8, short, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_PACK_STORE(v_uint64x2, uint64, v_uint32x4, unsigned, pack, static_cast)
+
+    OPENCV_HAL_IMPL_C_PACK_STORE(v_int64x2, int64, v_int32x4, int, pack, static_cast)
+
+    OPENCV_HAL_IMPL_C_PACK_STORE(v_int16x8, short, v_uint8x16, uchar, pack_u, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_PACK_STORE(v_int32x4, int, v_uint16x8, ushort, pack_u, saturate_cast)
 //! @}
 
 //! @brief Helper macro
@@ -1972,14 +2003,21 @@ template<int n> inline void v_rshr_##pack_suffix##_store(_Tpn* ptr, const _Tpvec
 //! - pack_u: for 16- and 32-bit signed integer input types
 //!
 //! @note All variants except 64-bit use saturation.
-OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_uint16x8, ushort, v_uint8x16, uchar, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_int16x8, short, v_int8x16, schar, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_uint32x4, unsigned, v_uint16x8, ushort, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_int32x4, int, v_int16x8, short, pack, saturate_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_uint64x2, uint64, v_uint32x4, unsigned, pack, static_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_int64x2, int64, v_int32x4, int, pack, static_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_int16x8, short, v_uint8x16, uchar, pack_u, saturate_cast)
-OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_int32x4, int, v_uint16x8, ushort, pack_u, saturate_cast)
+    OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_uint16x8, ushort, v_uint8x16, uchar, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_int16x8, short, v_int8x16, schar, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_uint32x4, unsigned, v_uint16x8, ushort, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_int32x4, int, v_int16x8, short, pack, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_uint64x2, uint64, v_uint32x4, unsigned, pack, static_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_int64x2, int64, v_int32x4, int, pack, static_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_int16x8, short, v_uint8x16, uchar, pack_u, saturate_cast)
+
+    OPENCV_HAL_IMPL_C_RSHR_PACK_STORE(v_int32x4, int, v_uint16x8, ushort, pack_u, saturate_cast)
 //! @}
 
 /** @brief Matrix multiplication
@@ -1997,15 +2035,14 @@ R1 = B0V0 + B1V1 + B2V2 + B3V3
 ...
 @endcode
 */
-inline v_float32x4 v_matmul(const v_float32x4& v, const v_float32x4& m0,
-                            const v_float32x4& m1, const v_float32x4& m2,
-                            const v_float32x4& m3)
-{
-    return v_float32x4(v.s[0]*m0.s[0] + v.s[1]*m1.s[0] + v.s[2]*m2.s[0] + v.s[3]*m3.s[0],
-                       v.s[0]*m0.s[1] + v.s[1]*m1.s[1] + v.s[2]*m2.s[1] + v.s[3]*m3.s[1],
-                       v.s[0]*m0.s[2] + v.s[1]*m1.s[2] + v.s[2]*m2.s[2] + v.s[3]*m3.s[2],
-                       v.s[0]*m0.s[3] + v.s[1]*m1.s[3] + v.s[2]*m2.s[3] + v.s[3]*m3.s[3]);
-}
+    inline v_float32x4 v_matmul(const v_float32x4 &v, const v_float32x4 &m0,
+                                const v_float32x4 &m1, const v_float32x4 &m2,
+                                const v_float32x4 &m3) {
+        return v_float32x4(v.s[0] * m0.s[0] + v.s[1] * m1.s[0] + v.s[2] * m2.s[0] + v.s[3] * m3.s[0],
+                           v.s[0] * m0.s[1] + v.s[1] * m1.s[1] + v.s[2] * m2.s[1] + v.s[3] * m3.s[1],
+                           v.s[0] * m0.s[2] + v.s[1] * m1.s[2] + v.s[2] * m2.s[2] + v.s[3] * m3.s[2],
+                           v.s[0] * m0.s[3] + v.s[1] * m1.s[3] + v.s[2] * m2.s[3] + v.s[3] * m3.s[3]);
+    }
 
 /** @brief Matrix multiplication and add
 
@@ -2021,32 +2058,30 @@ R1 = B0V0 + B1V1 + B2V2 + D1
 ...
 @endcode
 */
-inline v_float32x4 v_matmuladd(const v_float32x4& v, const v_float32x4& m0,
-                               const v_float32x4& m1, const v_float32x4& m2,
-                               const v_float32x4& m3)
-{
-    return v_float32x4(v.s[0]*m0.s[0] + v.s[1]*m1.s[0] + v.s[2]*m2.s[0] + m3.s[0],
-                       v.s[0]*m0.s[1] + v.s[1]*m1.s[1] + v.s[2]*m2.s[1] + m3.s[1],
-                       v.s[0]*m0.s[2] + v.s[1]*m1.s[2] + v.s[2]*m2.s[2] + m3.s[2],
-                       v.s[0]*m0.s[3] + v.s[1]*m1.s[3] + v.s[2]*m2.s[3] + m3.s[3]);
-}
+    inline v_float32x4 v_matmuladd(const v_float32x4 &v, const v_float32x4 &m0,
+                                   const v_float32x4 &m1, const v_float32x4 &m2,
+                                   const v_float32x4 &m3) {
+        return v_float32x4(v.s[0] * m0.s[0] + v.s[1] * m1.s[0] + v.s[2] * m2.s[0] + m3.s[0],
+                           v.s[0] * m0.s[1] + v.s[1] * m1.s[1] + v.s[2] * m2.s[1] + m3.s[1],
+                           v.s[0] * m0.s[2] + v.s[1] * m1.s[2] + v.s[2] * m2.s[2] + m3.s[2],
+                           v.s[0] * m0.s[3] + v.s[1] * m1.s[3] + v.s[2] * m2.s[3] + m3.s[3]);
+    }
 
-inline void v_cleanup() {}
+    inline void v_cleanup() {}
 
 //! @}
 
 //! @name Check SIMD support
 //! @{
 //! @brief Check CPU capability of SIMD operation
-static inline bool hasSIMD128()
-{
-    return false;
-}
+    static inline bool hasSIMD128() {
+        return false;
+    }
 
 //! @}
 
 #ifndef CV_DOXYGEN
-CV_CPU_OPTIMIZATION_HAL_NAMESPACE_END
+    CV_CPU_OPTIMIZATION_HAL_NAMESPACE_END
 #endif
 }
 

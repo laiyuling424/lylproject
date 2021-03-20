@@ -49,35 +49,35 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace datasets
-{
+namespace cv {
+    namespace datasets {
 
 //! @addtogroup datasets_slam
 //! @{
 
-enum imageType
-{
-    LEFT = 0,
-    RIGHT,
-    LADYBUG
-};
+        enum imageType {
+            LEFT = 0,
+            RIGHT,
+            LADYBUG
+        };
 
-struct SLAM_tumindoorObj : public Object
-{
-    std::string name;
-    Matx44d transformMat;
-    imageType type;
-};
+        struct SLAM_tumindoorObj : public Object {
+            std::string name;
+            Matx44d transformMat;
+            imageType type;
+        };
 
-class CV_EXPORTS SLAM_tumindoor : public Dataset
-{
-public:
-    virtual void load(const std::string &path) CV_OVERRIDE = 0;
+        class CV_EXPORTS SLAM_tumindoor
 
-    static Ptr<SLAM_tumindoor> create();
-};
+        : public Dataset {
+        public:
+
+        virtual void load(const std::string &path)
+
+        CV_OVERRIDE = 0;
+
+        static Ptr <SLAM_tumindoor> create();
+    };
 
 //! @}
 

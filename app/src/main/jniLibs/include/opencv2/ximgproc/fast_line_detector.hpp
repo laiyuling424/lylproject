@@ -7,10 +7,8 @@
 
 #include <opencv2/core.hpp>
 
-namespace cv
-{
-namespace ximgproc
-{
+namespace cv {
+    namespace ximgproc {
 
 //! @addtogroup ximgproc_fast_line_detector
 //! @{
@@ -21,39 +19,42 @@ in @cite Lee14 .
 
 //! @include samples/fld_lines.cpp
 
-class CV_EXPORTS_W FastLineDetector : public Algorithm
-{
-public:
-    /** @example fld_lines.cpp
-      An example using the FastLineDetector
-      */
-    /** @brief Finds lines in the input image.
-      This is the output of the default parameters of the algorithm on the above
-      shown image.
+        class CV_EXPORTS_W FastLineDetector
 
-      ![image](pics/corridor_fld.jpg)
+        : public Algorithm {
+        public:
+        /** @example fld_lines.cpp
+          An example using the FastLineDetector
+          */
+        /** @brief Finds lines in the input image.
+          This is the output of the default parameters of the algorithm on the above
+          shown image.
 
-      @param _image A grayscale (CV_8UC1) input image. If only a roi needs to be
-      selected, use: `fld_ptr-\>detect(image(roi), lines, ...);
-      lines += Scalar(roi.x, roi.y, roi.x, roi.y);`
-      @param _lines A vector of Vec4f elements specifying the beginning
-      and ending point of a line.  Where Vec4f is (x1, y1, x2, y2), point
-      1 is the start, point 2 - end. Returned lines are directed so that the
-      brighter side is on their left.
-      */
-    CV_WRAP virtual void detect(InputArray _image, OutputArray _lines) = 0;
+          ![image](pics/corridor_fld.jpg)
 
-    /** @brief Draws the line segments on a given image.
-      @param _image The image, where the lines will be drawn. Should be bigger
-      or equal to the image, where the lines were found.
-      @param lines A vector of the lines that needed to be drawn.
-      @param draw_arrow If true, arrow heads will be drawn.
-    */
-    CV_WRAP virtual void drawSegments(InputOutputArray _image, InputArray lines,
-            bool draw_arrow = false) = 0;
+          @param _image A grayscale (CV_8UC1) input image. If only a roi needs to be
+          selected, use: `fld_ptr-\>detect(image(roi), lines, ...);
+          lines += Scalar(roi.x, roi.y, roi.x, roi.y);`
+          @param _lines A vector of Vec4f elements specifying the beginning
+          and ending point of a line.  Where Vec4f is (x1, y1, x2, y2), point
+          1 is the start, point 2 - end. Returned lines are directed so that the
+          brighter side is on their left.
+          */
+        CV_WRAP virtual void detect(InputArray _image, OutputArray _lines) = 0;
 
-    virtual ~FastLineDetector() { }
-};
+        /** @brief Draws the line segments on a given image.
+          @param _image The image, where the lines will be drawn. Should be bigger
+          or equal to the image, where the lines were found.
+          @param lines A vector of the lines that needed to be drawn.
+          @param draw_arrow If true, arrow heads will be drawn.
+        */
+        CV_WRAP virtual void drawSegments(InputOutputArray _image, InputArray lines,
+                                          bool draw_arrow = false) = 0;
+
+        virtual ~
+
+        FastLineDetector() {}
+    };
 
 /** @brief Creates a smart pointer to a FastLineDetector object and initializes it
 
@@ -70,10 +71,12 @@ public:
 @param _do_merge            false      - If true, incremental merging of segments
                                          will be perfomred
 */
-CV_EXPORTS_W Ptr<FastLineDetector> createFastLineDetector(
-        int _length_threshold = 10, float _distance_threshold = 1.414213562f,
-        double _canny_th1 = 50.0, double _canny_th2 = 50.0, int _canny_aperture_size = 3,
-        bool _do_merge = false);
+    CV_EXPORTS_W Ptr<FastLineDetector>
+
+    createFastLineDetector(
+            int _length_threshold = 10, float _distance_threshold = 1.414213562f,
+            double _canny_th1 = 50.0, double _canny_th2 = 50.0, int _canny_aperture_size = 3,
+            bool _do_merge = false);
 
 //! @} ximgproc_fast_line_detector
 }
