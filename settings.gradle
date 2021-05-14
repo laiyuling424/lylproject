@@ -1,3 +1,4 @@
+include ':db'
 include ':testapp'
 include ':secondtheory'
 include ':app', ':wanandroid', ':httpapp', ':baselibrary', ':utils', ':lylrecycleview', ':view', ':core'
