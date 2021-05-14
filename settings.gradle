@@ -1,3 +1,4 @@
+include ':mvvm'
 include ':db'
 include ':testapp'
 include ':secondtheory'
