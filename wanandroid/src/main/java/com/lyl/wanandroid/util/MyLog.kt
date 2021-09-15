@@ -12,14 +12,20 @@ import com.lyl.wanandroid.config.Config
 object MyLog {
     var TAG = "lyll"
 
-    //
+    fun Logv(msg: Any?) {
+        Logv(TAG, msg)
+    }
+
     fun Logv(TAG: String, msg: Any?) {
         if (Config.outputLog && msg != null) {
             Log.v(TAG, msg.toString())
         }
     }
 
-    //提示
+    fun Logi(msg: Any?) {
+        Logi(TAG, msg)
+    }
+
     fun Logi(TAG: String, msg: Any?) {
         if (Config.outputLog && msg != null) {
             Log.i(TAG, msg.toString())
@@ -33,14 +39,20 @@ object MyLog {
         }
     }
 
-    //警告
+    fun Logw(msg: Any?) {
+        Logw(TAG, msg)
+    }
+
     fun Logw(TAG: String, msg: Any?) {
         if (Config.outputLog && msg != null) {
             Log.w(TAG, msg.toString())
         }
     }
 
-    //错误
+    fun Loge(msg: Any?) {
+        Loge(TAG, msg)
+    }
+
     fun Loge(TAG: String, msg: Any?) {
         if (Config.outputLog && msg != null) {
             Log.e(TAG, msg.toString())

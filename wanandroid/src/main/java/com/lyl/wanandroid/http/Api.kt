@@ -17,6 +17,7 @@ import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatContentListBean
 import com.lyl.wanandroid.ui.fragment.wechatpublic.WeChatPublicListBeanResponse
 import io.reactivex.Observable
 import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -31,6 +32,10 @@ interface Api {
     //公众号列表
     @GET("wxarticle/chapters/json")
     fun getWeChatPublicList(): Observable<WeChatPublicListBeanResponse>
+
+    //公众号列表
+    @GET("wxarticle/chapters/json")
+    fun getWeChatPublicListt(): Call<WeChatPublicListBeanResponse>
 
     //某个公众号历史数据
     /**

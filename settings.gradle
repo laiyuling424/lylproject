@@ -1,3 +1,4 @@
+include ':AppMonitor'
 include ':mvvm'
 include ':db'
 include ':testapp'
